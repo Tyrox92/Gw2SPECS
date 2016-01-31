@@ -6,6 +6,7 @@
 #include <QtDebug>
 #include "screenrecorder.h"
 #include "settings.h"
+#include "global.h"
 
 using namespace GW2;
 
@@ -56,7 +57,144 @@ MainWindow::MainWindow(QWidget *parent) :
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
+
+    socket = new QTcpSocket(this);
+
+
+    connect(socket, SIGNAL(connected()),this, SLOT(connected()));
+    connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
+    connect(socket, SIGNAL(readyRead()),this, SLOT(ready2Read()));
+
+    connect(dmgMeter, SIGNAL(RequestNetWrite(char*)), this, SLOT(netWrite(char*)));
+
+    qDebug() << "connecting to : " << HostIP << ":" << HostPort;
+
+    // this is not blocking call
+
+    // IP should be yours
+    MyClientSlot=10; //no semi-handshake yet
+    CurrentMeta=0;CurrentPos=0;
+    int i;
+    for (i=0;i<10;i++)
+    {
+    SlotDmg[i]=0;
+    SlotDPS[i]=0;
+    SlotAct[i]=0;
+    SlotName[i][0]='\0';
+    }
+
+
+    socket->connectToHost(HostIP, HostPort);
+
+    // we need to wait...
+    if(!socket->waitForConnected(5000))
+    {
+
+        qDebug() << "Error: " << socket->errorString();
+
+    }
+
+
+
+
+
 }
+
+
+void MainWindow::ready2Read()
+{
+
+    int c,i,j;
+    long k;
+
+
+    incData = socket->readAll();
+    incDataSize = incData.size();
+    memcpy(incData2, incData.data(), incDataSize);
+
+
+    i=0;
+
+    if (MyClientSlot==10)
+        {
+        if ((incDataSize==4) && (incData2[0]=='*') && (incData2[1]=='*') && (incData2[2]=='*'))
+            {
+             MyClientSlot= incData2[3]-48;
+
+            }
+        }
+    else
+       {
+        while (i<incDataSize)
+            {
+             if ((incData2[i]=='*') && (incData2[i+3]=='#'))
+                 {
+
+                 if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<53))
+                     {
+                        CurrentPos=incData2[i+1]-48;
+                        CurrentMeta=incData2[i+2]-48;
+                        i+=3;
+                     }
+
+                 }
+             else if (incData2[i]=='#')
+                 {
+                 if (CurrentMeta==1)
+                      {
+
+                         j=i+1;
+                         while ((j-i-1<11) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
+                         if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
+                         i=j;
+
+                       }else
+                     {
+
+                         j=i+1;k=0;
+                         while ((j-i-1<11) && (j<incDataSize) && (incData2[j]!='*')) { k=k*10+incData2[j]-48;j++; }
+                         if  (incData2[j]=='*')
+                          {
+
+                             if  (CurrentMeta==2) SlotDPS[CurrentPos]=k;
+                             if  (CurrentMeta==3) SlotDmg[CurrentPos]=k;
+                             if  (CurrentMeta==4) SlotAct[CurrentPos]=k;
+                         }
+                         i=j;
+                     }
+                 }
+             else { i++; while((i<incDataSize) && (incData2[i])!='*') i++; }
+
+            }
+
+       }
+
+
+}
+
+
+void MainWindow::connected()
+{
+    qDebug() << "connected...";
+    MyClientSlot=10;  //no handshake yet
+}
+
+void MainWindow::disconnected()
+{
+    qDebug() << "disconnected...";
+    //set all data to 0
+
+}
+
+
+void MainWindow::netWrite(char* c)
+{
+    socket->write(c);
+}
+
+
+
+
 
 MainWindow::~MainWindow()
 {
@@ -86,7 +224,7 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 
 void MainWindow::LinkToWebsite()
 {
-    QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
+    //QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -118,6 +256,11 @@ void MainWindow::UpdateDmg(unsigned long long dmg)
 
 void MainWindow::UpdateDps(int dps)
 {
+    QLabel* Label1;
+    QProgressBar* Bar1;
+    int i,j,k;
+
+
     QLabel* dpsLabel = ui->labelDpsValue;
     dpsLabel->setText(QString::number(dps));
     if (dps > DMGMETER_HIGH_DPS_LIMIT)
@@ -136,6 +279,187 @@ void MainWindow::UpdateDps(int dps)
     {
         dpsLabel->setStyleSheet(DmgMeter::s_LowStyle);
     }
+
+    AllDamageDone=0;
+    for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
+    for (j=0;j<10;j++)
+        {
+        PosDmg[j]=SlotDmg[j];
+        PosDPS[j]=SlotDPS[j];
+        PosAct[j]=SlotAct[j];
+        strcpy(PosName[j],SlotName[j]);
+        }
+    k=0;
+    for (i=0;i<10;i++)
+        {
+         for (j=i+1;j<10;j++)
+             {
+                if (PosDmg[j]>PosDmg[i])
+                    {
+                        k=PosDmg[i];
+                        PosDmg[i]=PosDmg[j];
+                        PosDmg[j]=k;
+                        k=PosDPS[i];
+                        PosDPS[i]=PosDPS[j];
+                        PosDPS[j]=k;
+                        k=PosAct[i];
+                        PosAct[i]=PosAct[j];
+                        PosAct[j]=k;
+                        strcpy(tmp1,PosName[i]);
+                        strcpy(PosName[i],PosName[j]);
+                        strcpy(PosName[j],tmp1);
+                    }
+             }
+        }
+
+    if (PosDmg[0]>0)
+    {
+        Label1 = ui->Dmg_1;
+        Label1->setText(QString::number(PosDmg[0]));
+        Label1 = ui->Dps_1;
+        Label1->setText(QString::number(PosDPS[0]));
+        Label1 = ui->Act_1;
+        Label1->setText(QString::number(PosAct[0]));
+        Label1 = ui->Pos_1;
+        Label1->setText(PosName[0]);
+        i=PosDmg[0]*100.0/AllDamageDone;
+        Bar1 = ui->progressBar_1;
+        Bar1->setValue(i);
+    }
+
+    if (PosDmg[1]>0)
+    {
+        Label1 = ui->Dmg_2;
+        Label1->setText(QString::number(PosDmg[1]));
+        Label1 = ui->Dps_2;
+        Label1->setText(QString::number(PosDPS[1]));
+        Label1 = ui->Act_2;
+        Label1->setText(QString::number(PosAct[1]));
+        Label1 = ui->Pos_2;
+        Label1->setText(PosName[1]);
+        i=PosDmg[1]*100/AllDamageDone;
+        Bar1 = ui->progressBar_2;
+        Bar1->setValue(i);
+    }
+    if (PosDmg[2]>0)
+    {
+        Label1 = ui->Dmg_3;
+        Label1->setText(QString::number(PosDmg[2]));
+        Label1 = ui->Dps_3;
+        Label1->setText(QString::number(PosDPS[2]));
+        Label1 = ui->Act_3;
+        Label1->setText(QString::number(PosAct[2]));
+        Label1 = ui->Pos_3;
+        Label1->setText(PosName[2]);
+        i=PosDmg[2]*100/AllDamageDone;
+        Bar1 = ui->progressBar_3;
+        Bar1->setValue(i);
+    }
+    if (PosDmg[3]>0)
+    {
+        Label1 = ui->Dmg_4;
+        Label1->setText(QString::number(PosDmg[3]));
+        Label1 = ui->Dps_4;
+        Label1->setText(QString::number(PosDPS[3]));
+        Label1 = ui->Act_4;
+        Label1->setText(QString::number(PosAct[3]));
+        Label1 = ui->Pos_4;
+        Label1->setText(PosName[3]);
+        i=PosDmg[3]*100/AllDamageDone;
+        Bar1 = ui->progressBar_4;
+        Bar1->setValue(i);
+    }
+    if (PosDmg[4]>0)
+    {
+        Label1 = ui->Dmg_5;
+        Label1->setText(QString::number(PosDmg[4]));
+        Label1 = ui->Dps_5;
+        Label1->setText(QString::number(PosDPS[4]));
+        Label1 = ui->Act_5;
+        Label1->setText(QString::number(PosAct[4]));
+        Label1 = ui->Pos_5;
+        Label1->setText(PosName[4]);
+        i=PosDmg[4]*100/AllDamageDone;
+        Bar1 = ui->progressBar_5;
+        Bar1->setValue(i);
+    }
+
+    if (PosDmg[5]>0)
+    {
+        Label1 = ui->Dmg_6;
+        Label1->setText(QString::number(PosDmg[5]));
+        Label1 = ui->Dps_6;
+        Label1->setText(QString::number(PosDPS[5]));
+        Label1 = ui->Act_6;
+        Label1->setText(QString::number(PosAct[5]));
+        Label1 = ui->Pos_6;
+        Label1->setText(PosName[5]);
+        i=PosDmg[5]*100/AllDamageDone;
+        Bar1 = ui->progressBar_6;
+        Bar1->setValue(i);
+    }
+
+    if (PosDmg[6]>0)
+    {
+        Label1 = ui->Dmg_7;
+        Label1->setText(QString::number(PosDmg[6]));
+        Label1 = ui->Dps_7;
+        Label1->setText(QString::number(PosDPS[6]));
+        Label1 = ui->Act_7;
+        Label1->setText(QString::number(PosAct[6]));
+        Label1 = ui->Pos_7;
+        Label1->setText(PosName[6]);
+        i=PosDmg[6]*100/AllDamageDone;
+        Bar1 = ui->progressBar_7;
+        Bar1->setValue(i);
+    }
+
+    if (PosDmg[7]>0)
+    {
+        Label1 = ui->Dmg_8;
+        Label1->setText(QString::number(PosDmg[7]));
+        Label1 = ui->Dps_8;
+        Label1->setText(QString::number(PosDPS[7]));
+        Label1 = ui->Act_8;
+        Label1->setText(QString::number(PosAct[7]));
+        Label1 = ui->Pos_8;
+        Label1->setText(PosName[7]);
+        i=PosDmg[7]*100/AllDamageDone;
+        Bar1 = ui->progressBar_8;
+        Bar1->setValue(i);
+    }
+
+    if (PosDmg[8]>0)
+    {
+        Label1 = ui->Dmg_9;
+        Label1->setText(QString::number(PosDmg[8]));
+        Label1 = ui->Dps_9;
+        Label1->setText(QString::number(PosDPS[8]));
+        Label1 = ui->Act_9;
+        Label1->setText(QString::number(PosAct[8]));
+        Label1 = ui->Pos_9;
+        Label1->setText(PosName[8]);
+        i=PosDmg[8]*100/AllDamageDone;
+        Bar1 = ui->progressBar_9;
+        Bar1->setValue(i);
+    }
+
+    if (PosDmg[9]>0)
+    {
+        Label1 = ui->Dmg_10;
+        Label1->setText(QString::number(PosDmg[9]));
+        Label1 = ui->Dps_10;
+        Label1->setText(QString::number(PosDPS[9]));
+        Label1 = ui->Act_10;
+        Label1->setText(QString::number(PosAct[9]));
+        Label1 = ui->Pos_10;
+        Label1->setText(PosName[9]);
+        i=PosDmg[9]*100/AllDamageDone;
+        Bar1 = ui->progressBar_10;
+        Bar1->setValue(i);
+    }
+
+
 }
 
 void MainWindow::UpdateMaxDmg(int maxDmg)

@@ -11,7 +11,7 @@ Configurator::Configurator(QWidget *parent) :
     ui->setupUi(this);
 
     // Set version
-    ui->labelVersion->setText(Settings::s_Version);
+    ui->labelVersion->setText(Settings::s_Product);
 
     Settings::ReadSettings(ui->comboBoxScreenshots);
     Settings::ReadSettings(ui->comboBoxUpdates);

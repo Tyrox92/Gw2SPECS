@@ -25,7 +25,6 @@ SOURCES += main.cpp\
     dmgmeter.cpp \
     configurator.cpp \
     settings.cpp \
-    mytcpsocket.cpp \
     mydialog.cpp \
     global.cpp
 
@@ -39,7 +38,6 @@ HEADERS  += mainwindow.h \
     configurator.h \
     settings.h \
     global.h \
-    mytcpsocket.h \
     mydialog.h
 
 FORMS    += mainwindow.ui \
