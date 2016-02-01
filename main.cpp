@@ -14,6 +14,7 @@ QString MyName;
 QString HostIP;
 int MyClientSlot;
 int HostPort;
+<<<<<<< HEAD
 int m_Dps;
 unsigned long m_Dmg;
 unsigned long m_Activity;
@@ -23,6 +24,8 @@ long critCounter;
 int critChance;
 long condiDmg;
 
+=======
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
 
 
 int main(int argc, char *argv[])

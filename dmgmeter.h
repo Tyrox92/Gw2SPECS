@@ -72,10 +72,17 @@ namespace GW2
 
         ImageReader m_Reader;
         int OffCombatTimeInMsec;
+<<<<<<< HEAD
         //int m_Activity;
         int m_ElapsedTimeSinceCombatInMsec;
         //int m_Dps;
         //unsigned long m_Dmg;
+=======
+        int m_Activity;
+        int m_ElapsedTimeSinceCombatInMsec;
+        int m_Dps;
+        unsigned long m_Dmg;
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
         int m_MaxDmg;
         int m_TimeoutInMsec;
         int m_SecsInCombat;

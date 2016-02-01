@@ -7,7 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>340</width>
+<<<<<<< HEAD
     <height>390</height>
+=======
+    <height>340</height>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,7 +29,11 @@
   <property name="maximumSize">
    <size>
     <width>340</width>
+<<<<<<< HEAD
     <height>390</height>
+=======
+    <height>340</height>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
    </size>
   </property>
   <property name="palette">
@@ -478,7 +486,11 @@ background-color: rgb(32, 43, 47);</string>
     <property name="geometry">
      <rect>
       <x>270</x>
+<<<<<<< HEAD
       <y>10</y>
+=======
+      <y>20</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>51</width>
       <height>21</height>
      </rect>
@@ -563,8 +575,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>110</y>
+=======
+      <x>10</x>
+      <y>60</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>21</width>
       <height>16</height>
      </rect>
@@ -585,8 +602,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>110</y>
+=======
+      <x>40</x>
+      <y>60</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>47</width>
       <height>16</height>
      </rect>
@@ -607,8 +629,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>151</x>
       <y>110</y>
+=======
+      <x>150</x>
+      <y>60</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -629,8 +656,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>251</x>
       <y>110</y>
+=======
+      <x>250</x>
+      <y>60</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>31</width>
       <height>16</height>
      </rect>
@@ -651,8 +683,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>291</x>
       <y>110</y>
+=======
+      <x>290</x>
+      <y>60</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>50</width>
       <height>16</height>
      </rect>
@@ -673,8 +710,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>140</y>
+=======
+      <x>10</x>
+      <y>90</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -698,8 +740,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>160</y>
+=======
+      <x>10</x>
+      <y>110</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -723,8 +770,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>180</y>
+=======
+      <x>10</x>
+      <y>130</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -748,8 +800,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>200</y>
+=======
+      <x>10</x>
+      <y>150</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -773,8 +830,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>220</y>
+=======
+      <x>10</x>
+      <y>170</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -798,8 +860,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>240</y>
+=======
+      <x>10</x>
+      <y>190</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -823,8 +890,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>260</y>
+=======
+      <x>10</x>
+      <y>210</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -848,8 +920,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>280</y>
+=======
+      <x>10</x>
+      <y>230</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -873,8 +950,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>300</y>
+=======
+      <x>10</x>
+      <y>250</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -898,8 +980,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="label_15">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>11</x>
       <y>320</y>
+=======
+      <x>10</x>
+      <y>270</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>16</width>
       <height>16</height>
      </rect>
@@ -923,8 +1010,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_1">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>140</y>
+=======
+      <x>40</x>
+      <y>90</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -948,8 +1040,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_2">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>160</y>
+=======
+      <x>40</x>
+      <y>110</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -973,8 +1070,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_3">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>180</y>
+=======
+      <x>40</x>
+      <y>130</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -998,8 +1100,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_4">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>200</y>
+=======
+      <x>40</x>
+      <y>150</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1023,8 +1130,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_5">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>220</y>
+=======
+      <x>40</x>
+      <y>170</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1048,8 +1160,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_6">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>240</y>
+=======
+      <x>40</x>
+      <y>190</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1073,8 +1190,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_7">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>260</y>
+=======
+      <x>40</x>
+      <y>210</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1098,8 +1220,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_8">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>280</y>
+=======
+      <x>40</x>
+      <y>230</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1123,8 +1250,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_9">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>300</y>
+=======
+      <x>40</x>
+      <y>250</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1148,8 +1280,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QProgressBar" name="progressBar_10">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>41</x>
       <y>320</y>
+=======
+      <x>40</x>
+      <y>270</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>118</width>
       <height>16</height>
      </rect>
@@ -1173,8 +1310,13 @@ background-color: rgb(32, 43, 47);</string>
    <widget class="QLabel" name="Pos_1">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>140</y>
+=======
+      <x>42</x>
+      <y>90</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1196,8 +1338,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_2">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>160</y>
+=======
+      <x>42</x>
+      <y>110</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1219,8 +1366,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_3">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>180</y>
+=======
+      <x>42</x>
+      <y>130</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1242,8 +1394,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_4">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>200</y>
+=======
+      <x>42</x>
+      <y>150</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1265,8 +1422,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_5">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>220</y>
+=======
+      <x>42</x>
+      <y>170</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1288,8 +1450,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_6">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>240</y>
+=======
+      <x>42</x>
+      <y>190</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1311,8 +1478,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_7">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>260</y>
+=======
+      <x>42</x>
+      <y>210</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1334,8 +1506,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_8">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>280</y>
+=======
+      <x>42</x>
+      <y>230</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1357,8 +1534,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_9">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>300</y>
+=======
+      <x>42</x>
+      <y>250</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1380,8 +1562,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Pos_10">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>43</x>
       <y>320</y>
+=======
+      <x>42</x>
+      <y>270</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>80</width>
       <height>16</height>
      </rect>
@@ -1403,8 +1590,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_1">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>140</y>
+=======
+      <x>160</x>
+      <y>90</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1428,8 +1620,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_2">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>160</y>
+=======
+      <x>160</x>
+      <y>110</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1453,8 +1650,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_3">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>180</y>
+=======
+      <x>160</x>
+      <y>130</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1478,8 +1680,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_4">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>200</y>
+=======
+      <x>160</x>
+      <y>150</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1503,8 +1710,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_5">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>220</y>
+=======
+      <x>160</x>
+      <y>170</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1528,8 +1740,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_6">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>240</y>
+=======
+      <x>160</x>
+      <y>190</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1553,8 +1770,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_7">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>260</y>
+=======
+      <x>160</x>
+      <y>210</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1578,8 +1800,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_8">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>280</y>
+=======
+      <x>160</x>
+      <y>230</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1603,8 +1830,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_9">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>300</y>
+=======
+      <x>160</x>
+      <y>250</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1628,8 +1860,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dmg_10">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>161</x>
       <y>320</y>
+=======
+      <x>160</x>
+      <y>270</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>61</width>
       <height>16</height>
      </rect>
@@ -1653,8 +1890,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_1">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>140</y>
+=======
+      <x>240</x>
+      <y>90</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1678,8 +1920,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_2">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>160</y>
+=======
+      <x>240</x>
+      <y>110</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1703,8 +1950,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_3">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>180</y>
+=======
+      <x>240</x>
+      <y>130</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1728,8 +1980,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_4">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>200</y>
+=======
+      <x>240</x>
+      <y>150</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1753,8 +2010,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_5">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>220</y>
+=======
+      <x>240</x>
+      <y>170</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1778,8 +2040,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_6">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>240</y>
+=======
+      <x>240</x>
+      <y>190</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1803,8 +2070,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_7">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>260</y>
+=======
+      <x>240</x>
+      <y>210</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1828,8 +2100,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_8">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>280</y>
+=======
+      <x>240</x>
+      <y>230</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1853,8 +2130,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_9">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>300</y>
+=======
+      <x>240</x>
+      <y>250</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1878,8 +2160,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Dps_10">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>241</x>
       <y>320</y>
+=======
+      <x>240</x>
+      <y>270</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>41</width>
       <height>16</height>
      </rect>
@@ -1903,8 +2190,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_1">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>140</y>
+=======
+      <x>300</x>
+      <y>90</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -1928,8 +2220,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_2">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>160</y>
+=======
+      <x>300</x>
+      <y>110</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -1953,8 +2250,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_3">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>180</y>
+=======
+      <x>300</x>
+      <y>130</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -1978,8 +2280,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_4">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>200</y>
+=======
+      <x>300</x>
+      <y>150</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2003,8 +2310,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_5">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>220</y>
+=======
+      <x>300</x>
+      <y>170</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2028,8 +2340,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_6">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>240</y>
+=======
+      <x>300</x>
+      <y>190</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2053,8 +2370,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_7">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>260</y>
+=======
+      <x>300</x>
+      <y>210</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2078,8 +2400,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_8">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>280</y>
+=======
+      <x>300</x>
+      <y>230</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2103,8 +2430,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_9">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>300</y>
+=======
+      <x>300</x>
+      <y>250</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2128,8 +2460,13 @@ background-color: rgba(255, 255, 255,0%);</string>
    <widget class="QLabel" name="Act_10">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>301</x>
       <y>320</y>
+=======
+      <x>300</x>
+      <y>270</y>
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
       <width>30</width>
       <height>16</height>
      </rect>
@@ -2150,6 +2487,7 @@ background-color: rgba(255, 255, 255,0%);</string>
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
+<<<<<<< HEAD
    <widget class="QLabel" name="labelDmg_2">
     <property name="geometry">
      <rect>
@@ -2479,6 +2817,8 @@ background-color: rgba(255, 255, 255,0%);</string>
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
+=======
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="minimumSize">
