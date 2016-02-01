@@ -72,6 +72,11 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
 
 void DmgMeter::Reset(bool emitSignals)
 {
+    hitCounter=0;
+    critCounter=0;
+    condiDmg=0;
+    LastColor=0;
+    critChance=0;
     m_Dmg = 0;
     m_Dps = 0;
     m_MaxDmg = 0;
@@ -101,8 +106,8 @@ void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
 DmgMeter::DmgMeter() :
     m_Timer(this),
     m_ElapsedTimeSinceCombatInMsec(0),
-    m_Dps(0),
-    m_Dmg(0),
+    //m_Dps(0),
+    //m_Dmg(0),
     m_MaxDmg(0),
     m_TimeoutInMsec(0),
     m_SecsInCombat(0),
@@ -134,6 +139,10 @@ void DmgMeter::ComputeDps()
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
     emit RequestDpsUpdate(m_Dps);
     m_Activity=100*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat);
+<<<<<<< HEAD
+    /*
+=======
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
     tmp1 = MyName.toLatin1();
     tmp2 = tmp1.data();
     if (MyClientSlot!=10)  //connected and semi-handshaked
@@ -142,6 +151,10 @@ void DmgMeter::ComputeDps()
 
     emit RequestNetWrite(writeBuff);
     }
+<<<<<<< HEAD
+    */
+=======
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
     if (elapsedSecsSinceEvaluation >= m_SecsInCombat)
     {
         // No data received since m_SecsInCombat. End evaluation
@@ -160,6 +173,24 @@ void DmgMeter::ComputeDps()
 void DmgMeter::EvaluateLine(const QString& params)
 {
     const int dmg = ComputeDmg(params);
+
+    if (LastColor>0)
+        {
+        if (LastColor==1)
+            {
+            hitCounter++;
+            critCounter++;
+            critChance=critCounter*100/hitCounter;
+            }
+        if (LastColor==2)
+            {
+             hitCounter++;
+            }
+        if (LastColor==3)
+            {
+            condiDmg+=dmg;
+            }
+    }
     if (dmg > m_MaxDmg)
     {
         // New max dmg found, set it as max dmg
@@ -214,7 +245,7 @@ void DmgMeter::StartEvaluation()
     m_TimeSinceCombat.start();
     OffCombatTimeInMsec+=OffCombatTime.elapsed();
     m_Timer.start(m_TimeoutInMsec);
-    m_Dps = m_Dmg;
+    //m_Dps = m_Dmg;
 }
 
 

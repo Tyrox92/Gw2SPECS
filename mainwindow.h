@@ -8,6 +8,11 @@
 #include "configurator.h"
 #include <QTcpSocket>
 #include <QAbstractSocket>
+<<<<<<< HEAD
+#include <QTimer>
+#include <QTime>
+=======
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
 
 
 namespace Ui
@@ -64,20 +69,41 @@ namespace GW2
         int SlotAct[10];
 
         long AllDamageDone;
+<<<<<<< HEAD
+        int GrpDPS;
+        int AvgDPS;
+
+        QByteArray incData;
+        int incDataSize;
+        char incData2[800];
+=======
 
         QByteArray incData;
         int incDataSize;
         char incData2[512];
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
 
         int CurrentPos;
         int CurrentMeta;
 
+<<<<<<< HEAD
+        char writeBuff[128];
+        QByteArray tmp3;
+        const char* tmp4;
+
+
+        char tmp1[20];
+        QTimer update_Timer;
+private slots:
+        void UpdateLabels();
+=======
 
         char tmp1[20];
 
+>>>>>>> 148326b2e6c81462786bb00b4baa7f140532c62c
 
     };
-    extern int m_Dps;
+
 }
 
 
