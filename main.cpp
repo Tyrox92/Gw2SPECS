@@ -6,14 +6,25 @@
 #include "dmgmeter.cpp"
 #include <sstream>
 #include "global.h"
-#include "mytcpsocket.h"
 #include "mydialog.h"
-
 
 using namespace std;
 
-QString myVar;
-QString myIP;
+QString MyName;
+QString HostIP;
+int MyClientSlot;
+int HostPort;
+int m_Dps;
+unsigned long m_Dmg;
+unsigned long m_Activity;
+int LastColor;
+long hitCounter;
+long critCounter;
+int critChance;
+long condiDmg;
+
+
+
 int main(int argc, char *argv[])
 {
 
@@ -24,22 +35,19 @@ int main(int argc, char *argv[])
 
     MyDialog mDialog;
     mDialog.setModal(true);
+
+
     mDialog.exec();
 
-    QString DMGNAME = mDialog.getName();
-    QString MYSEXYIP = mDialog.getIP();
-    //QString myVar = DMGNAME;
-    myVar = DMGNAME;
-    myIP = MYSEXYIP;
-
-    qDebug() << DMGNAME;
-    qDebug() << MYSEXYIP;
-
+    MyName=mDialog.getName();
+    HostIP = mDialog.getIP();
+    HostPort=mDialog.getPort();
 
     GW2::MainWindow w;
     w.show();
 
-    //qDebug() << "hello: " << SocketDescriptor;
+
+
     return a.exec();
 }
 

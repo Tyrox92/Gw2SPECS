@@ -54,13 +54,8 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
-     <item>
-      <property name="text">
-       <string>10</string>
-      </property>
-     </item>
      <item>
       <property name="text">
        <string>15</string>
@@ -74,11 +69,6 @@
      <item>
       <property name="text">
        <string>25</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>max</string>
       </property>
      </item>
     </widget>
@@ -121,26 +111,6 @@
        <string>1</string>
       </property>
      </item>
-     <item>
-      <property name="text">
-       <string>2</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>3</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>4</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>max</string>
-      </property>
-     </item>
     </widget>
    </item>
    <item row="3" column="0">
@@ -174,21 +144,11 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <item>
       <property name="text">
-       <string>3</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>2</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>1</string>
       </property>
      </item>
     </widget>
@@ -224,18 +184,8 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
-     <item>
-      <property name="text">
-       <string>8</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>12</string>
-      </property>
-     </item>
      <item>
       <property name="text">
        <string>16</string>
@@ -249,11 +199,6 @@
      <item>
       <property name="text">
        <string>24</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>27</string>
       </property>
      </item>
     </widget>

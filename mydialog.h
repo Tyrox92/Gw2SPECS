@@ -19,6 +19,8 @@ public:
     ~MyDialog();
      QString getName();
      QString getIP();
+     int getPort();
+
 private slots:
     void on_pushButton_clicked();
 

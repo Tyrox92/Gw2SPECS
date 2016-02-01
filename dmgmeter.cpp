@@ -1,8 +1,8 @@
 #include "dmgmeter.h"
 #include <QString>
-#include "mytcpsocket.h"
 #include "global.h"
 #include "mydialog.h"
+
 
 using namespace GW2;
 
@@ -12,14 +12,7 @@ const QString DmgMeter::s_HighStyle = "color: rgb(255, 165, 0);";
 const QString DmgMeter::s_UltraStyle = "color: rgb(255, 128, 128);";
 
 
-MyTcpSocket s;
-int acdc = 1;
 
-
-void DmgMeter::connectMe(){
-    QTcpSocket *newSocketCon = new QTcpSocket();
-    newSocketCon->connectToHost("127.0.0.1", 1234);
-}
 
 void DmgMeter::SetUpdatesPerSecond(const QString& updatesPerSecond)
 {
@@ -79,11 +72,18 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
 
 void DmgMeter::Reset(bool emitSignals)
 {
+    hitCounter=0;
+    critCounter=0;
+    condiDmg=0;
+    LastColor=0;
+    critChance=0;
     m_Dmg = 0;
     m_Dps = 0;
     m_MaxDmg = 0;
     m_ElapsedTimeSinceCombatInMsec = 0;
+    OffCombatTimeInMsec=0;
     m_TimeSinceCombat.start();
+    OffCombatTime.start();
     if (emitSignals)
     {
         emit RequestTimeUpdate(0);
@@ -106,20 +106,17 @@ void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
 DmgMeter::DmgMeter() :
     m_Timer(this),
     m_ElapsedTimeSinceCombatInMsec(0),
-    m_Dps(0),
-    m_Dmg(0),
+    //m_Dps(0),
+    //m_Dmg(0),
     m_MaxDmg(0),
     m_TimeoutInMsec(0),
     m_SecsInCombat(0),
     m_IsActive(false),
-    m_IsAutoResetting(false)
+    m_IsAutoResetting(false),
+    OffCombatTimeInMsec(0)
+
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
-
-   // newSocketCon->connectToHost("127.0.0.1", 1234);
-
-
-
 
 //    ImageAttributes a;
 //    QImage image("../../Screenshots/screen2png.png");
@@ -136,42 +133,22 @@ DmgMeter::~DmgMeter()
 
 void DmgMeter::ComputeDps()
 {
-    const double elapsedSecsSinceCombat = (m_ElapsedTimeSinceCombatInMsec + m_TimeSinceCombat.elapsed()) / 1000.0f;
+    const double elapsedTimeSinceCombat = (m_ElapsedTimeSinceCombatInMsec + m_TimeSinceCombat.elapsed()) ;
+    const double elapsedSecsSinceCombat = elapsedTimeSinceCombat / 1000.0f;
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
     emit RequestDpsUpdate(m_Dps);
-
-   // MyTcpSocket::connected(socket);
-
-
-    if(acdc == 1){
-        s.doConnect();
-        acdc++;
-        qDebug() << acdc;
-    }else{
-
-    }
+    m_Activity=100*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat);
     /*
-    if(acdc == 42){
-        QTcpSocket *newSocketCon = new QTcpSocket();
-        newSocketCon->connectToHost("127.0.0.1", 1234);
-        qDebug()<< "ACDC IS: " << acdc;
-        acdc++;
-    }else{
-        newSocketCon->write("Hallo Roman ist geil");
-        qDebug()<< "paradise city"<< acdc;
-        acdc++;
+    tmp1 = MyName.toLatin1();
+    tmp2 = tmp1.data();
+    if (MyClientSlot!=10)  //connected and semi-handshaked
+    {
+    sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
+
+    emit RequestNetWrite(writeBuff);
     }
-*/
-
-
-    //convert int value of m_Dps in a string
-    char buf[5];
-    sprintf(buf, "%d", m_Dps);
-
-    //newSocketCon->write("hi");
-    s.sendDmg(buf);
-
+    */
     if (elapsedSecsSinceEvaluation >= m_SecsInCombat)
     {
         // No data received since m_SecsInCombat. End evaluation
@@ -179,6 +156,7 @@ void DmgMeter::ComputeDps()
         m_ElapsedTimeSinceCombatInMsec += m_TimeSinceCombat.elapsed();
         emit RequestTimeUpdate(m_ElapsedTimeSinceCombatInMsec);
         m_IsActive = false;
+        OffCombatTime.start();
         if (m_IsAutoResetting)
         {
             Reset(false);
@@ -189,6 +167,24 @@ void DmgMeter::ComputeDps()
 void DmgMeter::EvaluateLine(const QString& params)
 {
     const int dmg = ComputeDmg(params);
+
+    if (LastColor>0)
+        {
+        if (LastColor==1)
+            {
+            hitCounter++;
+            critCounter++;
+            critChance=critCounter*100/hitCounter;
+            }
+        if (LastColor==2)
+            {
+             hitCounter++;
+            }
+        if (LastColor==3)
+            {
+            condiDmg+=dmg;
+            }
+    }
     if (dmg > m_MaxDmg)
     {
         // New max dmg found, set it as max dmg
@@ -241,8 +237,9 @@ void DmgMeter::StartEvaluation()
 {
     m_IsActive = true;
     m_TimeSinceCombat.start();
+    OffCombatTimeInMsec+=OffCombatTime.elapsed();
     m_Timer.start(m_TimeoutInMsec);
-    m_Dps = m_Dmg;
+    //m_Dps = m_Dmg;
 }
 
 

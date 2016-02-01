@@ -2,6 +2,7 @@
 #include <QColor>
 #include <QImage>
 #include <QtDebug>
+#include <global.h>
 
 using namespace GW2;
 
@@ -91,6 +92,13 @@ QString ImageReader::ReadLineFromBottom(const QImage& image, const ImageAttribut
         {
             lastValidX = x;
             numbers += number;
+            QRgb lastRgb = image.pixel(x, y);
+            int lred = qRed(lastRgb);
+            int lgreen = qGreen(lastRgb);
+            int lblue = qBlue(lastRgb);
+            if ((lred>150)&& (lgreen<60) && (lblue<60)) LastColor=1;
+            if ((lred>100)&& (lgreen>70) && (lblue<40)) LastColor=2;
+            if ((lred>100)&& (lgreen<80) && (lblue>100)) LastColor=3;
             x = qMax(x, m_CharacterGrid.GetXOffset() + offsetAdd + imageAttributes.GetCharacterWidth() - 1);
         }
     }
