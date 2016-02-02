@@ -297,7 +297,8 @@ background-color: rgba(32, 43, 47, 3%);</string>
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);</string>
+       <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(255, 255, 255, 0%);</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::South</enum>
@@ -2495,6 +2496,9 @@ background-color: rgba(255, 255, 255,0%);</string>
         <width>340</width>
         <height>40</height>
        </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 0%);</string>
       </property>
       <property name="title">
        <string/>
