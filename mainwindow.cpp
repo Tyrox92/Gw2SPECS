@@ -19,13 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateLabels()));
     ui->setupUi(this);
-    ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    //ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
 
-    QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
-    QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
-    QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
+    QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
+    QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
+    QObject::connect(ui->btnConfig, SIGNAL(clicked()), &m_Configurator, SLOT(exec()));
 
     ScreenRecorder* screenRecorder = new ScreenRecorder;
     DmgMeter* dmgMeter = &screenRecorder->GetDmgMeter();
@@ -41,8 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(unsigned long long)), this, SLOT(UpdateDmg(unsigned long long)));
     QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(int)), this, SLOT(UpdateDps(int)));
     QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
-    QObject::connect(ui->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
-    QObject::connect(ui->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
+    QObject::connect(ui->btnReset, SIGNAL(clicked()), dmgMeter, SLOT(Reset()));
+    QObject::connect(ui->btnAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
@@ -81,10 +81,10 @@ MainWindow::MainWindow(QWidget *parent) :
     int i;
     for (i=0;i<10;i++)
     {
-    SlotDmg[i]=0;
-    SlotDPS[i]=0;
-    SlotAct[i]=0;
-    SlotName[i][0]='\0';
+        SlotDmg[i]=0;
+        SlotDPS[i]=0;
+        SlotAct[i]=0;
+        SlotName[i][0]='\0';
     }
     AllDamageDone=0;
     hitCounter=0;
@@ -98,15 +98,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // we need to wait...
     if(!socket->waitForConnected(5000))
     {
-
         qDebug() << "Error: " << socket->errorString();
-
     }
     m_Dps=0;m_Dmg=0;m_Activity=0;
     update_Timer.start(1000);
-
-
-
 }
 
 void MainWindow::UpdateLabels()
@@ -115,50 +110,46 @@ void MainWindow::UpdateLabels()
     QProgressBar* Bar1;
     long i,j,k;
 
-
-
-tmp3 = MyName.toLatin1();
-tmp4 = tmp3.data();
-if (MyClientSlot!=10)  //connected and semi-handshaked
-{
-sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp4 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
-
-socket->write(writeBuff);
-Label1 = ui->critChance;
-Label1->setText(QString::number(critChance));
-if (m_Dmg>0) i=condiDmg*m_Dps/m_Dmg; else i=0;
-Label1 = ui->condiDPS;
-Label1->setText(QString::number(i));
-AllDamageDone=0;
-for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
-Label1 = ui->grp_Dmg;
-Label1->setText(QString::number(AllDamageDone));
-GrpDPS=0;
-for (j=0;j<10;j++) GrpDPS+=SlotDPS[j];
-Label1 = ui->grp_DPS;
-Label1->setText(QString::number(GrpDPS));
-i=0;
-for (j=0;j<10;j++) if (SlotDPS[j]>0) i++;
-if (i>0) AvgDPS=GrpDPS/i; else AvgDPS=0;
-Label1 = ui->avg_DPS;
-Label1->setText(QString::number(AvgDPS));
-
-
-for (j=0;j<10;j++)
+    tmp3 = MyName.toLatin1();
+    tmp4 = tmp3.data();
+    if (MyClientSlot!=10)  //connected and semi-handshaked
     {
-    PosDmg[j]=SlotDmg[j];
-    PosDPS[j]=SlotDPS[j];
-    PosAct[j]=SlotAct[j];
-    strcpy(PosName[j],SlotName[j]);
-    }
+        sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp4 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
 
+        socket->write(writeBuff);
+        Label1 = ui->critChance;
+        Label1->setText(QString::number(critChance));
+        if (m_Dmg>0) i=condiDmg*m_Dps/m_Dmg; else i=0;
+        Label1 = ui->condiDPS;
+        Label1->setText(QString::number(i));
+        AllDamageDone=0;
+        for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
+        Label1 = ui->grp_Dmg;
+        Label1->setText(QString::number(AllDamageDone));
+        GrpDPS=0;
+        for (j=0;j<10;j++) GrpDPS+=SlotDPS[j];
+        Label1 = ui->grp_DPS;
+        Label1->setText(QString::number(GrpDPS));
+        i=0;
+        for (j=0;j<10;j++) if (SlotDPS[j]>0) i++;
+        if (i>0) AvgDPS=GrpDPS/i; else AvgDPS=0;
+        Label1 = ui->avg_DPS;
+        Label1->setText(QString::number(AvgDPS));
 
-k=0;
-for (i=0;i<9;i++)
-    {
-     for (j=i+1;j<10;j++)
-         {
-            if (PosDmg[j]>PosDmg[i])
+        for (j=0;j<10;j++)
+        {
+            PosDmg[j]=SlotDmg[j];
+            PosDPS[j]=SlotDPS[j];
+            PosAct[j]=SlotAct[j];
+            strcpy(PosName[j],SlotName[j]);
+        }
+
+        k=0;
+        for (i=0;i<9;i++)
+        {
+            for (j=i+1;j<10;j++)
+            {
+                if (PosDmg[j]>PosDmg[i])
                 {
                     k=PosDmg[i];
                     PosDmg[i]=PosDmg[j];
@@ -173,159 +164,156 @@ for (i=0;i<9;i++)
                     strcpy(PosName[i],PosName[j]);
                     strcpy(PosName[j],tmp1);
                 }
-         }
+            }
+        }
+
+        if (PosName[0][0]!=0)
+        {
+            Label1 = ui->Dmg_1;
+            Label1->setText(QString::number(PosDmg[0]));
+            Label1 = ui->Dps_1;
+            Label1->setText(QString::number(PosDPS[0]));
+            Label1 = ui->Act_1;
+            Label1->setText(QString::number(PosAct[0]));
+            Label1 = ui->Pos_1;
+            Label1->setText(PosName[0]);
+            if (AllDamageDone>0 )i=PosDmg[0]*100.0/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_1;
+            Bar1->setValue(i);
+        }
+
+        if (PosName[1][0]!=0)
+        {
+            Label1 = ui->Dmg_2;
+            Label1->setText(QString::number(PosDmg[1]));
+            Label1 = ui->Dps_2;
+            Label1->setText(QString::number(PosDPS[1]));
+            Label1 = ui->Act_2;
+            Label1->setText(QString::number(PosAct[1]));
+            Label1 = ui->Pos_2;
+            Label1->setText(PosName[1]);
+            if (AllDamageDone>0 )i=PosDmg[1]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_2;
+            Bar1->setValue(i);
+        }
+        if (PosName[2][0]!=0)
+        {
+            Label1 = ui->Dmg_3;
+            Label1->setText(QString::number(PosDmg[2]));
+            Label1 = ui->Dps_3;
+            Label1->setText(QString::number(PosDPS[2]));
+            Label1 = ui->Act_3;
+            Label1->setText(QString::number(PosAct[2]));
+            Label1 = ui->Pos_3;
+            Label1->setText(PosName[2]);
+            if (AllDamageDone>0 )i=PosDmg[2]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_3;
+            Bar1->setValue(i);
+        }
+        if (PosName[3][0]!=0)
+        {
+            Label1 = ui->Dmg_4;
+            Label1->setText(QString::number(PosDmg[3]));
+            Label1 = ui->Dps_4;
+            Label1->setText(QString::number(PosDPS[3]));
+            Label1 = ui->Act_4;
+            Label1->setText(QString::number(PosAct[3]));
+            Label1 = ui->Pos_4;
+            Label1->setText(PosName[3]);
+            if (AllDamageDone>0 )i=PosDmg[3]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_4;
+            Bar1->setValue(i);
+        }
+        if (PosName[4][0]!=0)
+        {
+            Label1 = ui->Dmg_5;
+            Label1->setText(QString::number(PosDmg[4]));
+            Label1 = ui->Dps_5;
+            Label1->setText(QString::number(PosDPS[4]));
+            Label1 = ui->Act_5;
+            Label1->setText(QString::number(PosAct[4]));
+            Label1 = ui->Pos_5;
+            Label1->setText(PosName[4]);
+            if (AllDamageDone>0 )i=PosDmg[4]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_5;
+            Bar1->setValue(i);
+        }
+
+        if (PosName[5][0]!=0)
+        {
+            Label1 = ui->Dmg_6;
+            Label1->setText(QString::number(PosDmg[5]));
+            Label1 = ui->Dps_6;
+            Label1->setText(QString::number(PosDPS[5]));
+            Label1 = ui->Act_6;
+            Label1->setText(QString::number(PosAct[5]));
+            Label1 = ui->Pos_6;
+            Label1->setText(PosName[5]);
+            if (AllDamageDone>0 )i=PosDmg[5]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_6;
+            Bar1->setValue(i);
+        }
+
+        if (PosName[6][0]!=0)
+        {
+            Label1 = ui->Dmg_7;
+            Label1->setText(QString::number(PosDmg[6]));
+            Label1 = ui->Dps_7;
+            Label1->setText(QString::number(PosDPS[6]));
+            Label1 = ui->Act_7;
+            Label1->setText(QString::number(PosAct[6]));
+            Label1 = ui->Pos_7;
+            Label1->setText(PosName[6]);
+            if (AllDamageDone>0 )i=PosDmg[6]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_7;
+            Bar1->setValue(i);
+        }
+
+        if (PosName[7][0]!=0)
+        {
+            Label1 = ui->Dmg_8;
+            Label1->setText(QString::number(PosDmg[7]));
+            Label1 = ui->Dps_8;
+            Label1->setText(QString::number(PosDPS[7]));
+            Label1 = ui->Act_8;
+            Label1->setText(QString::number(PosAct[7]));
+            Label1 = ui->Pos_8;
+            Label1->setText(PosName[7]);
+            if (AllDamageDone>0 )i=PosDmg[7]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_8;
+            Bar1->setValue(i);
+        }
+
+        if (PosName[8][0]!=0)
+        {
+            Label1 = ui->Dmg_9;
+            Label1->setText(QString::number(PosDmg[8]));
+            Label1 = ui->Dps_9;
+            Label1->setText(QString::number(PosDPS[8]));
+            Label1 = ui->Act_9;
+            Label1->setText(QString::number(PosAct[8]));
+            Label1 = ui->Pos_9;
+            Label1->setText(PosName[8]);
+            if (AllDamageDone>0 )i=PosDmg[8]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_9;
+            Bar1->setValue(i);
+        }
+
+        if (PosName[9][0]!=0)
+        {
+            Label1 = ui->Dmg_10;
+            Label1->setText(QString::number(PosDmg[9]));
+            Label1 = ui->Dps_10;
+            Label1->setText(QString::number(PosDPS[9]));
+            Label1 = ui->Act_10;
+            Label1->setText(QString::number(PosAct[9]));
+            Label1 = ui->Pos_10;
+            Label1->setText(PosName[9]);
+            if (AllDamageDone>0 )i=PosDmg[9]*100/AllDamageDone;else i=0;
+            Bar1 = ui->progressBar_10;
+            Bar1->setValue(i);
+        }
     }
-
-if (PosName[0][0]!=0)
-{
-    Label1 = ui->Dmg_1;
-    Label1->setText(QString::number(PosDmg[0]));
-    Label1 = ui->Dps_1;
-    Label1->setText(QString::number(PosDPS[0]));
-    Label1 = ui->Act_1;
-    Label1->setText(QString::number(PosAct[0]));
-    Label1 = ui->Pos_1;
-    Label1->setText(PosName[0]);
-    if (AllDamageDone>0 )i=PosDmg[0]*100.0/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_1;
-    Bar1->setValue(i);
-}
-
-if (PosName[1][0]!=0)
-{
-    Label1 = ui->Dmg_2;
-    Label1->setText(QString::number(PosDmg[1]));
-    Label1 = ui->Dps_2;
-    Label1->setText(QString::number(PosDPS[1]));
-    Label1 = ui->Act_2;
-    Label1->setText(QString::number(PosAct[1]));
-    Label1 = ui->Pos_2;
-    Label1->setText(PosName[1]);
-    if (AllDamageDone>0 )i=PosDmg[1]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_2;
-    Bar1->setValue(i);
-}
-if (PosName[2][0]!=0)
-{
-    Label1 = ui->Dmg_3;
-    Label1->setText(QString::number(PosDmg[2]));
-    Label1 = ui->Dps_3;
-    Label1->setText(QString::number(PosDPS[2]));
-    Label1 = ui->Act_3;
-    Label1->setText(QString::number(PosAct[2]));
-    Label1 = ui->Pos_3;
-    Label1->setText(PosName[2]);
-    if (AllDamageDone>0 )i=PosDmg[2]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_3;
-    Bar1->setValue(i);
-}
-if (PosName[3][0]!=0)
-{
-    Label1 = ui->Dmg_4;
-    Label1->setText(QString::number(PosDmg[3]));
-    Label1 = ui->Dps_4;
-    Label1->setText(QString::number(PosDPS[3]));
-    Label1 = ui->Act_4;
-    Label1->setText(QString::number(PosAct[3]));
-    Label1 = ui->Pos_4;
-    Label1->setText(PosName[3]);
-    if (AllDamageDone>0 )i=PosDmg[3]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_4;
-    Bar1->setValue(i);
-}
-if (PosName[4][0]!=0)
-{
-    Label1 = ui->Dmg_5;
-    Label1->setText(QString::number(PosDmg[4]));
-    Label1 = ui->Dps_5;
-    Label1->setText(QString::number(PosDPS[4]));
-    Label1 = ui->Act_5;
-    Label1->setText(QString::number(PosAct[4]));
-    Label1 = ui->Pos_5;
-    Label1->setText(PosName[4]);
-    if (AllDamageDone>0 )i=PosDmg[4]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_5;
-    Bar1->setValue(i);
-}
-
-if (PosName[5][0]!=0)
-{
-    Label1 = ui->Dmg_6;
-    Label1->setText(QString::number(PosDmg[5]));
-    Label1 = ui->Dps_6;
-    Label1->setText(QString::number(PosDPS[5]));
-    Label1 = ui->Act_6;
-    Label1->setText(QString::number(PosAct[5]));
-    Label1 = ui->Pos_6;
-    Label1->setText(PosName[5]);
-    if (AllDamageDone>0 )i=PosDmg[5]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_6;
-    Bar1->setValue(i);
-}
-
-if (PosName[6][0]!=0)
-{
-    Label1 = ui->Dmg_7;
-    Label1->setText(QString::number(PosDmg[6]));
-    Label1 = ui->Dps_7;
-    Label1->setText(QString::number(PosDPS[6]));
-    Label1 = ui->Act_7;
-    Label1->setText(QString::number(PosAct[6]));
-    Label1 = ui->Pos_7;
-    Label1->setText(PosName[6]);
-    if (AllDamageDone>0 )i=PosDmg[6]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_7;
-    Bar1->setValue(i);
-}
-
-if (PosName[7][0]!=0)
-{
-    Label1 = ui->Dmg_8;
-    Label1->setText(QString::number(PosDmg[7]));
-    Label1 = ui->Dps_8;
-    Label1->setText(QString::number(PosDPS[7]));
-    Label1 = ui->Act_8;
-    Label1->setText(QString::number(PosAct[7]));
-    Label1 = ui->Pos_8;
-    Label1->setText(PosName[7]);
-    if (AllDamageDone>0 )i=PosDmg[7]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_8;
-    Bar1->setValue(i);
-}
-
-if (PosName[8][0]!=0)
-{
-    Label1 = ui->Dmg_9;
-    Label1->setText(QString::number(PosDmg[8]));
-    Label1 = ui->Dps_9;
-    Label1->setText(QString::number(PosDPS[8]));
-    Label1 = ui->Act_9;
-    Label1->setText(QString::number(PosAct[8]));
-    Label1 = ui->Pos_9;
-    Label1->setText(PosName[8]);
-    if (AllDamageDone>0 )i=PosDmg[8]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_9;
-    Bar1->setValue(i);
-}
-
-if (PosName[9][0]!=0)
-{
-    Label1 = ui->Dmg_10;
-    Label1->setText(QString::number(PosDmg[9]));
-    Label1 = ui->Dps_10;
-    Label1->setText(QString::number(PosDPS[9]));
-    Label1 = ui->Act_10;
-    Label1->setText(QString::number(PosAct[9]));
-    Label1 = ui->Pos_10;
-    Label1->setText(PosName[9]);
-    if (AllDamageDone>0 )i=PosDmg[9]*100/AllDamageDone;else i=0;
-    Bar1 = ui->progressBar_10;
-    Bar1->setValue(i);
-}
-
-
-
-}
 }
 
 
