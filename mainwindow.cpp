@@ -8,6 +8,7 @@
 #include "settings.h"
 #include "global.h"
 
+
 using namespace GW2;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,7 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateLabels()));
     ui->setupUi(this);
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
 
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
@@ -532,3 +534,22 @@ void MainWindow::UpdateMaxDmg(int maxDmg)
         maxDmgLabel->setStyleSheet(DmgMeter::s_LowStyle);
     }
 }
+
+// Give movement access to MainWindow
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        move(event->globalPos() - m_dragPosition);
+        event->accept();
+    }
+}
+
+// Give movement access to MainWindow
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        event->accept();
+    }
+}
+

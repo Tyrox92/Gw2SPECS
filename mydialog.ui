@@ -175,7 +175,7 @@
     </sizepolicy>
    </property>
    <property name="text">
-    <string>Based on JaxnX, modified by Kozzy &amp; Tyrox</string>
+    <string>Based on JaxnX, modified by Kozzy, Tyrox and DoM</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_7">
