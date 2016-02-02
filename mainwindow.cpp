@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Using gridLayout3 here which is the outer layout
     QSizeGrip * sizeGrip = new QSizeGrip(this);
     ui->gridLayout->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
 
     QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
