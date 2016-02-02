@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setAttribute(Qt::WA_TranslucentBackground);
     //Resize Option
     // QGridLayout is already in *.ui file
-    // Using gridLayout3 here which is the outer layout
+    // Using gridLayout here which is the outer layout
     QSizeGrip * sizeGrip = new QSizeGrip(this);
     ui->gridLayout->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
@@ -448,6 +448,8 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
         this->show();
     }
 }
+
+
 
 void MainWindow::LinkToWebsite()
 {
