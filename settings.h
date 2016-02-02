@@ -11,6 +11,9 @@
 
 inline static QString ReadNameSettings(void);
 inline static void WriteNameSettings(QString);
+inline static QString ReadIPSettings(void);
+inline static void WriteIPSettings(QString);
+
 
 inline QString ReadNameSettings(void)
 {
@@ -27,6 +30,28 @@ inline void WriteNameSettings(QString text)
 
     QSettings settings("GW2DPS");
     settings.beginGroup("Name");
+    settings.setValue("text",text);
+    settings.endGroup();
+
+}
+
+
+inline QString ReadIPSettings(void)
+{
+    QString tmpip;
+    QSettings settings("GW2DPS");
+    settings.beginGroup("IP");
+    tmpip=settings.value("text").toString();
+    settings.endGroup();
+    return tmpip;
+}
+
+
+inline void WriteIPSettings(QString text)
+{
+
+    QSettings settings("GW2DPS");
+    settings.beginGroup("IP");
     settings.setValue("text",text);
     settings.endGroup();
 
