@@ -2626,6 +2626,9 @@ background-color: rgba(255, 255, 255,0%);</string>
       </layout>
      </widget>
     </item>
+    <item row="2" column="0">
+     <layout class="QGridLayout" name="gridLayout_3"/>
+    </item>
    </layout>
   </widget>
   <action name="actionAutoReset">

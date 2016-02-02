@@ -35,6 +35,19 @@
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="3" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item row="0" column="1">
     <widget class="QLabel" name="label_3">
      <property name="sizePolicy">
@@ -57,31 +70,6 @@
      </property>
      <property name="text">
       <string>GW2DPS</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="label_4">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 10pt &quot;Leelawadee UI Semilight&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Based on JaxnX, modified by Kozzy, Tyrox and DoM</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -115,8 +103,33 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <spacer name="horizontalSpacer">
+   <item row="1" column="1">
+    <widget class="QLabel" name="label_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Leelawadee UI Semilight&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Based on JaxnX, modified by Kozzy, Tyrox and DoM</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -137,6 +150,19 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
       </sizepolicy>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item row="0" column="2">
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
@@ -182,6 +208,9 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
              <height>0</height>
             </size>
            </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">QPushButton#pushButton {
     background-color: #8BB2DA;
@@ -194,7 +223,7 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
     padding: 6px;
 }
 QPushButton#pushButton:pressed {
-    background-color: rgb(224, 0, 0);
+    background-color: rgb(197,216,236);
     border-style: inset;
 }</string>
            </property>
@@ -215,22 +244,6 @@ QPushButton#pushButton:pressed {
            </property>
           </widget>
          </item>
-         <item row="0" column="1" colspan="3">
-          <widget class="QLabel" name="label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Your Name (max 10 chars)</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="1" colspan="2">
           <widget class="QLineEdit" name="lineEdit">
            <property name="sizePolicy">
@@ -247,6 +260,19 @@ QPushButton#pushButton:pressed {
            </property>
           </widget>
          </item>
+         <item row="4" column="1" colspan="2">
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maxLength">
+            <number>15</number>
+           </property>
+          </widget>
+         </item>
          <item row="3" column="1">
           <widget class="QLabel" name="label_2">
            <property name="sizePolicy">
@@ -260,19 +286,6 @@ QPushButton#pushButton:pressed {
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1" colspan="2">
-          <widget class="QLineEdit" name="lineEdit_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maxLength">
-            <number>15</number>
            </property>
           </widget>
          </item>
@@ -304,6 +317,22 @@ QPushButton#pushButton:pressed {
            </property>
           </widget>
          </item>
+         <item row="0" column="1" colspan="3">
+          <widget class="QLabel" name="label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Your Name (max 10 chars)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item row="3" column="3">
           <widget class="QLabel" name="label_5">
            <property name="sizePolicy">
@@ -323,34 +352,8 @@ QPushButton#pushButton:pressed {
         </layout>
        </widget>
       </item>
-      <item row="0" column="0">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
-   </item>
-   <item row="3" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>
