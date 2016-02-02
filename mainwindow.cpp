@@ -437,11 +437,14 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
     if (isAlmostTransparent)
     {
-        this->setWindowOpacity(0.4);
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 1%);");
+        this->show();
+
     }
     else
     {
-        this->setWindowOpacity(1.0);
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 50%);");
+        this->show();
     }
 }
 
