@@ -320,7 +320,7 @@ background-color: rgba(32, 43, 47, 3%);</string>
       <property name="tabBarAutoHide">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="tabWidgetPage1" native="true">
+      <widget class="QWidget" name="tabWidgetPage1">
        <attribute name="icon">
         <iconset resource="Icons/Icons.qrc">
          <normaloff>:/off.png</normaloff>
@@ -950,7 +950,7 @@ background-color: rgba(32, 43, 47, 3%);</string>
        <zorder>avg_DPS</zorder>
        <zorder>labelInfo</zorder>
       </widget>
-      <widget class="QWidget" name="tabWidgetPage2" native="true">
+      <widget class="QWidget" name="tabWidgetPage2">
        <attribute name="icon">
         <iconset resource="Icons/Icons.qrc">
          <normaloff>:/off.png</normaloff>

@@ -91,8 +91,6 @@ namespace GW2
 private slots:
         void UpdateLabels();
 
-        void on_actionActionSummaryPage_triggered();
-        void on_actionActionGrpBrkDwn_triggered();
     };
 
 }
