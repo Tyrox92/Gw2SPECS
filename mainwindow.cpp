@@ -23,9 +23,10 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
     //Resize Option
-    // QGridLayout is already in *.ui file // Using gridLayout3 here which is the outer layout
+    // QGridLayout is already in *.ui file
+    // Using gridLayout3 here which is the outer layout
     QSizeGrip * sizeGrip = new QSizeGrip(this);
-    ui->gridLayout_3->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
 
     QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
