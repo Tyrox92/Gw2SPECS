@@ -10,6 +10,7 @@
 #include <QAbstractSocket>
 #include <QTimer>
 #include <QTime>
+#include <QMouseEvent>
 
 
 namespace Ui
@@ -27,6 +28,9 @@ namespace GW2
         explicit MainWindow(QWidget *parent = 0);
         ~MainWindow();
 
+    protected:
+        void mouseMoveEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent *event);
     private slots:
         void EnableTransparency(bool isAlmostTransparent);
         void LinkToWebsite();
@@ -45,6 +49,7 @@ namespace GW2
         Ui::MainWindow *ui;
         QThread m_ScreenRecorderThread;
         Configurator m_Configurator;
+        QPoint m_dragPosition;
 
         QTcpSocket *socket;
 
@@ -86,6 +91,8 @@ namespace GW2
 private slots:
         void UpdateLabels();
 
+        void on_actionActionSummaryPage_triggered();
+        void on_actionActionGrpBrkDwn_triggered();
     };
 
 }
