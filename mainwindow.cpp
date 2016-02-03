@@ -105,6 +105,14 @@ MainWindow::MainWindow(QWidget *parent) :
     if(!socket->waitForConnected(5000))
     {
         qDebug() << "Error: " << socket->errorString();
+        QDialog *dialog = new QDialog();
+        QHBoxLayout *layout = new QHBoxLayout(dialog);
+        QLabel *label = new QLabel(this);
+        label->setText("Connection to " + HostIP + " failed");
+        layout->addWidget(label);
+        layout->setMargin(50);
+        dialog->setStyleSheet("background:red;");
+        dialog->show();
     }
     m_Dps=0;m_Dmg=0;m_Activity=0;
     update_Timer.start(1000);
