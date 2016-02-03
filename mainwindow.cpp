@@ -24,9 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setAttribute(Qt::WA_TranslucentBackground);
     //Resize Option
     // QGridLayout is already in *.ui file
-    // Using gridLayout here which is the outer layout
+    // Using gridLayout_3 here which is the outer layout
     QSizeGrip * sizeGrip = new QSizeGrip(this);
-    ui->gridLayout->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_3->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
 
     QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
