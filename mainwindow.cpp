@@ -120,6 +120,11 @@ void MainWindow::UpdateLabels()
     tmp4 = tmp3.data();
     if (MyClientSlot!=10)  //connected and semi-handshaked
     {
+        //Failsafe Check
+        if ((m_Dps<0) && (m_Dps>99999)) m_Dps = 1;
+        if ((m_Dmg<0) && (m_Dmg>999999999)) m_Dmg = 1;
+        if ((m_Activity<0) && (m_Activity>100)) m_Activity = 1;
+
         sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp4 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
 
         socket->write(writeBuff);
@@ -358,8 +363,8 @@ void MainWindow::ready2Read()
                      {
                         CurrentPos=incData2[i+1]-48;
                         CurrentMeta=incData2[i+2]-48;
-                        i+=3;
                      }
+                 i+=3;
 
                  }
              else if (incData2[i]=='#')
@@ -375,8 +380,10 @@ void MainWindow::ready2Read()
                        }else
                      {
 
+
+
                          j=i+1;k=0;
-                         while ((j-i-1<12) && (j<incDataSize) && (incData2[j]!='*')) { k=k*10+incData2[j]-48;j++; }
+                         while ((j-i-1<12) && (j<incDataSize) && (incData2[j]!='*')&& (incData2[j]>47)&& (incData2[j]<58)) { k=k*10+incData2[j]-48;j++; }
                          if  (incData2[j]=='*')
                           {
 

@@ -967,8 +967,11 @@ background-color: rgba(255, 255, 255, 0%);</string>
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>100</height>
+         <height>10</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">min-height:10px;</string>
        </property>
        <attribute name="icon">
         <iconset resource="Icons/Icons.qrc">
@@ -979,6 +982,29 @@ background-color: rgba(255, 255, 255, 0%);</string>
         <string>Group Breakdown</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="3" column="1">
+         <widget class="QProgressBar" name="progressBar_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}</string>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="2">
          <widget class="QLabel" name="label_3">
           <property name="sizePolicy">
@@ -990,7 +1016,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1018,7 +1044,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1026,31 +1052,6 @@ background-color: rgba(255, 255, 255, 0%);</string>
           </property>
           <property name="text">
            <string>% Act</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLabel" name="Dps_1">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="text">
-           <string>0</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1068,7 +1069,32 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="Dps_1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1093,7 +1119,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1121,7 +1147,32 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="Dps_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1146,7 +1197,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>13</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1157,59 +1208,6 @@ background-color: rgba(255, 255, 255, 0%);</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLabel" name="Dps_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255, 255, 255)</string>
-          </property>
-          <property name="text">
-           <string>Name</string>
           </property>
          </widget>
         </item>
@@ -1247,7 +1245,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1262,6 +1260,34 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
           <property name="text">
            <string>Disconnected</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255, 255, 255)</string>
+          </property>
+          <property name="text">
+           <string>Name</string>
           </property>
          </widget>
         </item>
@@ -1276,7 +1302,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1294,26 +1320,28 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QProgressBar" name="progressBar_3">
+        <item row="10" column="3">
+         <widget class="QLabel" name="Dps_10">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>10</height>
+           </size>
+          </property>
           <property name="styleSheet">
-           <string notr="true">QProgressBar {
-    border: 2px solid grey;
-    border-radius: 5px;
-    text-align: center;
-}</string>
+           <string notr="true">color:rgb(255,255,255);</string>
           </property>
-          <property name="value">
-           <number>0</number>
+          <property name="text">
+           <string>0</string>
           </property>
-          <property name="textVisible">
-           <bool>true</bool>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -1363,7 +1391,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1391,7 +1419,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1420,7 +1448,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1428,31 +1456,6 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
           <property name="inputMethodHints">
            <set>Qt::ImhNone</set>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="3">
-         <widget class="QLabel" name="Dps_8">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
           </property>
           <property name="text">
            <string>0</string>
@@ -1473,7 +1476,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1487,8 +1490,8 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="3">
-         <widget class="QLabel" name="Dps_3">
+        <item row="8" column="3">
+         <widget class="QLabel" name="Dps_8">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1498,7 +1501,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1523,7 +1526,57 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="Dps_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="4">
+         <widget class="QLabel" name="Act_6">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1548,55 +1601,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QProgressBar" name="progressBar_5">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QProgressBar {
-    border: 2px solid grey;
-    border-radius: 5px;
-    text-align: center;
-}</string>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="textVisible">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="QLabel" name="Act_6">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1633,8 +1638,31 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="2">
-         <widget class="QLabel" name="Dmg_4">
+        <item row="5" column="1">
+         <widget class="QProgressBar" name="progressBar_5">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}</string>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QLabel" name="Dmg_7">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1644,7 +1672,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1672,7 +1700,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1690,8 +1718,8 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="2">
-         <widget class="QLabel" name="Dmg_7">
+        <item row="4" column="2">
+         <widget class="QLabel" name="Dmg_4">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -1701,7 +1729,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1718,6 +1746,35 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="Pos_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255, 255, 255);
+background-color: rgba(255, 255, 255,0%);</string>
+          </property>
+          <property name="text">
+           <string>Disconnected</string>
+          </property>
+         </widget>
+        </item>
         <item row="8" column="0">
          <widget class="QLabel" name="Pos_8">
           <property name="sizePolicy">
@@ -1729,7 +1786,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1770,35 +1827,6 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="Pos_4">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255, 255, 255);
-background-color: rgba(255, 255, 255,0%);</string>
-          </property>
-          <property name="text">
-           <string>Disconnected</string>
-          </property>
-         </widget>
-        </item>
         <item row="9" column="3">
          <widget class="QLabel" name="Dps_9">
           <property name="sizePolicy">
@@ -1810,7 +1838,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1835,7 +1863,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1860,7 +1888,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1897,54 +1925,6 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="4">
-         <widget class="QLabel" name="Act_5">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QProgressBar" name="progressBar_8">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QProgressBar {
-    border: 2px solid grey;
-    border-radius: 5px;
-    text-align: center;
-}</string>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="textVisible">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
         <item row="6" column="0">
          <widget class="QLabel" name="Pos_6">
           <property name="sizePolicy">
@@ -1956,7 +1936,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1997,6 +1977,54 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
+        <item row="5" column="4">
+         <widget class="QLabel" name="Act_5">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>25</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1">
+         <widget class="QProgressBar" name="progressBar_8">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}</string>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="3" column="4">
          <widget class="QLabel" name="Act_3">
           <property name="sizePolicy">
@@ -2008,7 +2036,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -2033,7 +2061,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -2061,7 +2089,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -2079,34 +2107,6 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="2">
-         <widget class="QLabel" name="Dmg_6">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="inputMethodHints">
-           <set>Qt::ImhNone</set>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="7" column="3">
          <widget class="QLabel" name="Dps_7">
           <property name="sizePolicy">
@@ -2118,11 +2118,39 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
            <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <widget class="QLabel" name="Dmg_6">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
           </property>
           <property name="text">
            <string>0</string>
@@ -2143,7 +2171,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>25</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -2168,7 +2196,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -2196,7 +2224,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -2221,7 +2249,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -2239,59 +2267,6 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="2">
-         <widget class="QLabel" name="Dmg_8">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="inputMethodHints">
-           <set>Qt::ImhNone</set>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="4">
-         <widget class="QLabel" name="Act_10">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>25</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(255,255,255);</string>
-          </property>
-          <property name="text">
-           <string>0</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="10" column="0">
          <widget class="QLabel" name="Pos_10">
           <property name="sizePolicy">
@@ -2303,7 +2278,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -2344,8 +2319,8 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="2">
-         <widget class="QLabel" name="Dmg_10">
+        <item row="8" column="2">
+         <widget class="QLabel" name="Dmg_8">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2355,7 +2330,7 @@ background-color: rgba(255, 255, 255,0%);</string>
           <property name="minimumSize">
            <size>
             <width>40</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -2372,8 +2347,8 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
          </widget>
         </item>
-        <item row="10" column="3">
-         <widget class="QLabel" name="Dps_10">
+        <item row="10" column="4">
+         <widget class="QLabel" name="Act_10">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -2382,12 +2357,40 @@ background-color: rgba(255, 255, 255,0%);</string>
           </property>
           <property name="minimumSize">
            <size>
-            <width>40</width>
-            <height>0</height>
+            <width>25</width>
+            <height>10</height>
            </size>
           </property>
           <property name="styleSheet">
            <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="2">
+         <widget class="QLabel" name="Dmg_10">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(255,255,255);</string>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
           </property>
           <property name="text">
            <string>0</string>
