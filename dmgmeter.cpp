@@ -74,9 +74,9 @@ void DmgMeter::Reset()
 {
     hitCounter=0;
     critCounter=0;
-    condiDmg=0;
+    m_condiDmg=0;
     LastColor=0;
-    critChance=0;
+    m_critChance=0;
     m_Dmg = 0;
     m_Dps = 0;
     m_MaxDmg = 0;
@@ -113,12 +113,12 @@ DmgMeter::DmgMeter() :
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
 
-//    ImageAttributes a;
-//    QImage image("../../Screenshots/screen2png.png");
+    //    ImageAttributes a;
+    //    QImage image("../../Screenshots/screen2png.png");
 
-//    m_Reader.UpdateImageAttributes(a, image);
-//    m_Reader.Read(image, a);
-//    m_Reader.ReadLineFromBottom(image, a, 0);
+    //    m_Reader.UpdateImageAttributes(a, image);
+    //    m_Reader.Read(image, a);
+    //    m_Reader.ReadLineFromBottom(image, a, 0);
 
 }
 
@@ -155,21 +155,21 @@ void DmgMeter::EvaluateLine(const QString& params)
     unsigned long dmg = ComputeDmg(params);
 
     if (LastColor>0)
-        {
+    {
         if (LastColor==1)
-            {
+        {
             hitCounter++;
             critCounter++;
-            critChance=critCounter*100/hitCounter;
-            }
+            m_critChance=critCounter*100/hitCounter;
+        }
         if (LastColor==2)
-            {
-             hitCounter++;
-            }
+        {
+            hitCounter++;
+        }
         if (LastColor==3)
-            {
-            condiDmg+=dmg;
-            }
+        {
+            m_condiDmg+=dmg;
+        }
     }
     if (dmg > m_MaxDmg)
     {

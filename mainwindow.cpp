@@ -92,9 +92,9 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     AllDamageDone=0;
     hitCounter=0;
-    critChance=0;
+    m_critChance=0;
     critCounter=0;
-    condiDmg=0;
+    m_condiDmg=0;
     LastColor=0;
 
     socket->connectToHost(HostIP, HostPort);
@@ -339,60 +339,60 @@ void MainWindow::ready2Read()
     i=0;
 
     if (MyClientSlot==10)
-        {
+    {
         if ((incDataSize==4) && (incData2[0]=='*') && (incData2[1]=='*') && (incData2[2]=='*'))
-            {
-             MyClientSlot= incData2[3]-48;
+        {
+            MyClientSlot= incData2[3]-48;
 
-            }
         }
+    }
     else
-       {
+    {
         while (i<incDataSize)
+        {
+            if ((incData2[i]=='*') && (incData2[i+3]=='#'))
             {
-             if ((incData2[i]=='*') && (incData2[i+3]=='#'))
-                 {
 
-                 if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<53))
-                     {
-                        CurrentPos=incData2[i+1]-48;
-                        CurrentMeta=incData2[i+2]-48;
-                     }
-                 i+=3;
-
-                 }
-             else if (incData2[i]=='#')
-                 {
-                 if (CurrentMeta==1)
-                      {
-
-                         j=i+1;
-                         while ((j-i-1<13) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
-                         if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
-                         i=j;
-
-                       }else
-                     {
-
-
-
-                         j=i+1;k=0;
-                         while ((j-i-1<12) && (j<incDataSize) && (incData2[j]!='*')&& (incData2[j]>47)&& (incData2[j]<58)) { k=k*10+incData2[j]-48;j++; }
-                         if  (incData2[j]=='*')
-                          {
-
-                             if  (CurrentMeta==2) SlotDPS[CurrentPos]=k;
-                             if  (CurrentMeta==3) SlotDmg[CurrentPos]=k;
-                             if  (CurrentMeta==4) SlotAct[CurrentPos]=k;
-                         }
-                         i=j;
-                     }
-                 }
-             else { i++; while((i<incDataSize) && (incData2[i])!='*') i++; }
+                if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<53))
+                {
+                    CurrentPos=incData2[i+1]-48;
+                    CurrentMeta=incData2[i+2]-48;
+                }
+                i+=3;
 
             }
+            else if (incData2[i]=='#')
+            {
+                if (CurrentMeta==1)
+                {
 
-       }
+                    j=i+1;
+                    while ((j-i-1<13) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
+                    if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
+                    i=j;
+
+                }else
+                {
+
+
+
+                    j=i+1;k=0;
+                    while ((j-i-1<12) && (j<incDataSize) && (incData2[j]!='*')&& (incData2[j]>47)&& (incData2[j]<58)) { k=k*10+incData2[j]-48;j++; }
+                    if  (incData2[j]=='*')
+                    {
+
+                        if  (CurrentMeta==2) SlotDPS[CurrentPos]=k;
+                        if  (CurrentMeta==3) SlotDmg[CurrentPos]=k;
+                        if  (CurrentMeta==4) SlotAct[CurrentPos]=k;
+                    }
+                    i=j;
+                }
+            }
+            else { i++; while((i<incDataSize) && (incData2[i])!='*') i++; }
+
+        }
+
+    }
 
 
 }
@@ -437,7 +437,7 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
     }
     else
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 50%);");
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         this->show();
     }
 }
@@ -476,20 +476,25 @@ void MainWindow::UpdatePersonalLabels()
     QLabel* Label1;
     long i;
 
+    //Personal DPS Value
     Label1 = ui->labelDpsValue;
     Label1->setText(QString::number(m_Dps));
+    //Personal Crit Chance Value
     Label1 = ui->critChance;
-    Label1->setText(QString::number(critChance));
-    if (m_Dmg>0) i=condiDmg*m_Dps/m_Dmg; else i=0;
+    Label1->setText(QString::number(m_critChance));
+    //Personal Condi DPS Value
+    if (m_Dmg>0) i=m_condiDmg*m_Dps/m_Dmg; else i=0;
     Label1 = ui->condiDPS;
     Label1->setText(QString::number(i));
+    //Personal Max Damage Value
     Label1 = ui->labelMaxDmgValue;
     Label1->setText(QString::number(m_MaxDmg));
+    //Personal Damage Value
     Label1 =ui->labelDmgValue;
     Label1->setText(QString::number(m_Dmg));
-
-    //Label1 =ui->labelCondiDmgValue;
-    //Label1->setText(QString::number(condiDmg));
+    //Personal Condi DMG Value
+    Label1 =ui->labelCondiDMGValue;
+    Label1->setText(QString::number(m_condiDmg));
 
 
     //dps and max dmg limits style, we can keep them if you want
@@ -541,9 +546,9 @@ void MainWindow::UpdatePersonalLabels()
 
 void MainWindow::UpdateTimer(void)
 {
-     SendClientInfo();
-     UpdatePersonalLabels();
-     UpdateGroupLabels();
+    SendClientInfo();
+    UpdatePersonalLabels();
+    UpdateGroupLabels();
 }
 
 
@@ -588,5 +593,3 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         event->accept();
     }
 }
-
-

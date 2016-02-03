@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>353</width>
-    <height>349</height>
+    <width>379</width>
+    <height>392</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,7 +22,7 @@
   <property name="minimumSize">
    <size>
     <width>0</width>
-    <height>0</height>
+    <height>225</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -36,7 +36,7 @@
     <active>
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -45,7 +45,7 @@
      </colorrole>
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -54,7 +54,7 @@
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -65,7 +65,7 @@
     <inactive>
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -74,7 +74,7 @@
      </colorrole>
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -83,7 +83,7 @@
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -94,7 +94,7 @@
     <disabled>
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -103,7 +103,7 @@
      </colorrole>
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -112,7 +112,7 @@
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
-       <color alpha="51">
+       <color alpha="153">
         <red>32</red>
         <green>43</green>
         <blue>47</blue>
@@ -130,7 +130,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">/*background-color:#ff00ff;*/
-background-color: rgba(32, 43, 47, 20%);</string>
+background-color: rgba(32, 43, 47, 60%);</string>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -171,7 +171,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
      <active>
       <colorrole role="Button">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -180,7 +180,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
       </colorrole>
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -189,7 +189,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
       </colorrole>
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -200,7 +200,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
      <inactive>
       <colorrole role="Button">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -209,7 +209,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
       </colorrole>
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -218,7 +218,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
       </colorrole>
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -229,7 +229,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
      <disabled>
       <colorrole role="Button">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -238,7 +238,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
       </colorrole>
       <colorrole role="Base">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -247,7 +247,7 @@ background-color: rgba(32, 43, 47, 20%);</string>
       </colorrole>
       <colorrole role="Window">
        <brush brushstyle="SolidPattern">
-        <color alpha="51">
+        <color alpha="153">
          <red>32</red>
          <green>43</green>
          <blue>47</blue>
@@ -638,7 +638,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
            <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
-           <string>Highest</string>
+           <string>Highest Hit</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -849,7 +849,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
            <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
-           <string>CondiDPS</string>
+           <string>Condi DPS</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -885,7 +885,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
         <item row="5" column="5">
          <widget class="QLabel" name="labelInfo">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -917,7 +917,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
            <bool>false</bool>
           </property>
           <property name="alignment">
-           <set>Qt::AlignCenter</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -927,6 +927,23 @@ background-color: rgba(255, 255, 255, 0%);</string>
           </property>
           <property name="openExternalLinks">
            <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="5">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Condi DMG</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="7">
+         <widget class="QLabel" name="labelCondiDMGValue">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -944,6 +961,8 @@ background-color: rgba(255, 255, 255, 0%);</string>
        <zorder>labelMaxDmg_3</zorder>
        <zorder>condiDPS</zorder>
        <zorder>labelInfo</zorder>
+       <zorder>label_16</zorder>
+       <zorder>labelCondiDMGValue</zorder>
       </widget>
       <widget class="QWidget" name="tabWidgetPage2">
        <property name="minimumSize">
@@ -987,6 +1006,9 @@ background-color: rgba(255, 255, 255, 0%);</string>
           <property name="verticalScrollBarPolicy">
            <enum>Qt::ScrollBarAsNeeded</enum>
           </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
           <property name="sizeAdjustPolicy">
            <enum>QAbstractScrollArea::AdjustToContents</enum>
           </property>
@@ -998,8 +1020,8 @@ background-color: rgba(255, 255, 255, 0%);</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>309</width>
-             <height>221</height>
+             <width>343</width>
+             <height>231</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -1020,10 +1042,15 @@ background-color: rgba(255, 255, 255, 0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -1174,10 +1201,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -1200,7 +1232,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -1235,10 +1267,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -1365,7 +1402,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -1447,7 +1484,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -1503,7 +1540,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>25</width>
+                <width>30</width>
                 <height>0</height>
                </size>
               </property>
@@ -1528,7 +1565,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -1591,10 +1628,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -1675,10 +1717,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -1966,10 +2013,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -1992,7 +2044,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -2020,7 +2072,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -2084,10 +2136,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -2117,10 +2174,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -2194,10 +2256,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
@@ -2270,7 +2337,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -2361,7 +2428,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -2577,7 +2644,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -2605,7 +2672,7 @@ background-color: rgba(255, 255, 255,0%);</string>
               </property>
               <property name="minimumSize">
                <size>
-                <width>40</width>
+                <width>50</width>
                 <height>0</height>
                </size>
               </property>
@@ -2640,10 +2707,15 @@ background-color: rgba(255, 255, 255,0%);</string>
               <property name="styleSheet">
                <string notr="true">QProgressBar {
     border: 2px solid grey;
-    border-radius: 5px;
+    border-radius:4px;
+	font: 7pt &quot;MS Shell Dlg 2&quot;;
     text-align: center;
     min-height: 8px;
-}</string>
+}
+QProgressBar#chunk {
+	background-color: #5EA488;
+}
+</string>
               </property>
               <property name="maximum">
                <number>100</number>
