@@ -849,7 +849,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
            <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
-           <string>CondiDPS</string>
+           <string>Condi DPS</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -930,6 +930,23 @@ background-color: rgba(255, 255, 255, 0%);</string>
           </property>
          </widget>
         </item>
+        <item row="3" column="5">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>Condi DMG</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="7">
+         <widget class="QLabel" name="condiDMG">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
        </layout>
        <zorder>labelDps</zorder>
        <zorder>labelDpsValue</zorder>
@@ -944,6 +961,8 @@ background-color: rgba(255, 255, 255, 0%);</string>
        <zorder>labelMaxDmg_3</zorder>
        <zorder>condiDPS</zorder>
        <zorder>labelInfo</zorder>
+       <zorder>label_16</zorder>
+       <zorder>condiDMG</zorder>
       </widget>
       <widget class="QWidget" name="tabWidgetPage2">
        <property name="minimumSize">
