@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Configurator(this),
     update_Timer(this)
 {
-    QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateLabels()));
+    QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
     ui->setupUi(this);
     //ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
@@ -44,9 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(&m_ScreenRecorderThread, SIGNAL(started()), screenRecorder, SLOT(StartRecording()));
     QObject::connect(screenRecorder, SIGNAL(RequestInfoUpdate(QString)), ui->labelInfo, SLOT(setText(QString)));
     QObject::connect(dmgMeter, SIGNAL(RequestTimeUpdate(int)), this, SLOT(UpdateTime(int)));
-    QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(unsigned long long)), this, SLOT(UpdateDmg(unsigned long long)));
-    QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(int)), this, SLOT(UpdateDps(int)));
-    QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
+    //QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(unsigned long long)), this, SLOT(UpdateDmg(unsigned long long)));
+    //QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(int)), this, SLOT(UpdatePersonal()));
+    //QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
     QObject::connect(ui->btnReset, SIGNAL(clicked()), dmgMeter, SLOT(Reset()));
     QObject::connect(ui->btnAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
@@ -74,8 +74,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(socket, SIGNAL(connected()),this, SLOT(connected()));
     connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
     connect(socket, SIGNAL(readyRead()),this, SLOT(ready2Read()));
-
-    connect(dmgMeter, SIGNAL(RequestNetWrite(char*)), this, SLOT(netWrite(char*)));
 
     qDebug() << "connecting to : " << HostIP << ":" << HostPort;
 
@@ -114,33 +112,21 @@ MainWindow::MainWindow(QWidget *parent) :
         dialog->setStyleSheet("background:red;");
         dialog->show();
     }
-    m_Dps=0;m_Dmg=0;m_Activity=0;
+    m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
     update_Timer.start(1000);
 }
 
-void MainWindow::UpdateLabels()
+
+
+
+void MainWindow::UpdateGroupLabels()
 {
     QLabel* Label1;
     QProgressBar* Bar1;
     long i,j,k;
 
-    tmp3 = MyName.toLatin1();
-    tmp4 = tmp3.data();
     if (MyClientSlot!=10)  //connected and semi-handshaked
     {
-        //Failsafe Check
-        if ((m_Dps<0) && (m_Dps>99999)) m_Dps = 1;
-        if ((m_Dmg<0) && (m_Dmg>999999999)) m_Dmg = 1;
-        if ((m_Activity<0) && (m_Activity>100)) m_Activity = 1;
-
-        sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp4 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
-
-        socket->write(writeBuff);
-        Label1 = ui->critChance;
-        Label1->setText(QString::number(critChance));
-        if (m_Dmg>0) i=condiDmg*m_Dps/m_Dmg; else i=0;
-        Label1 = ui->condiDPS;
-        Label1->setText(QString::number(i));
         AllDamageDone=0;
         for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
         Label1 = ui->grp_Dmg;
@@ -341,7 +327,7 @@ void MainWindow::UpdateLabels()
 void MainWindow::ready2Read()
 {
 
-    int c,i,j;
+    int i,j;
     long k;
 
 
@@ -426,14 +412,6 @@ void MainWindow::disconnected()
 }
 
 
-void MainWindow::netWrite(char* c)
-{
-    socket->write(c);
-}
-
-
-
-
 
 MainWindow::~MainWindow()
 {
@@ -469,6 +447,105 @@ void MainWindow::LinkToWebsite()
     //QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
 }
 
+
+
+void MainWindow::SendClientInfo(void)
+{
+    QByteArray tmp1;
+    const char* tmp2;
+
+    tmp1 = MyName.toLatin1();
+    tmp2 = tmp1.data();
+    if (MyClientSlot!=10)  //connected and semi-handshaked
+    {
+        //Failsafe Checks
+        if (m_Dps>99999) m_Dps = 1;
+        if (m_Dmg>999999999) m_Dmg = 1;
+        if (m_Activity>100) m_Activity = 1;
+
+        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
+
+        socket->write(writeBuff);
+    }
+}
+
+void MainWindow::UpdatePersonalLabels()
+{
+    QLabel* Label1;
+    long i;
+
+    Label1 = ui->labelDpsValue;
+    Label1->setText(QString::number(m_Dps));
+    Label1 = ui->critChance;
+    Label1->setText(QString::number(critChance));
+    if (m_Dmg>0) i=condiDmg*m_Dps/m_Dmg; else i=0;
+    Label1 = ui->condiDPS;
+    Label1->setText(QString::number(i));
+    Label1 = ui->labelMaxDmgValue;
+    Label1->setText(QString::number(m_MaxDmg));
+    Label1 =ui->labelDmgValue;
+    Label1->setText(QString::number(m_Dmg));
+
+    //Label1 =ui->labelCondiDmgValue;
+    //Label1->setText(QString::number(condiDmg));
+
+
+    //dps and max dmg limits style, we can keep them if you want
+    //limit consts are in the dmgmeter.h
+    //style const are in dmgmeter.cpp
+
+
+    /*
+    Label1 = ui->labelDpsValue;
+    if (m_Dps > DMGMETER_HIGH_DPS_LIMIT)
+    {
+        Label1->setStyleSheet(DmgMeter::s_UltraStyle);
+    }
+    else if (m_Dps > DMGMETER_NORMAL_DPS_LIMIT)
+    {
+        Label1->setStyleSheet(DmgMeter::s_HighStyle);
+    }
+    else if (m_Dps > DMGMETER_LOW_DPS_LIMIT)
+    {
+        Label1->setStyleSheet(DmgMeter::s_NormalStyle);
+    }
+    else
+    {
+        Label1->setStyleSheet(DmgMeter::s_LowStyle);
+    }
+
+    Label1 = ui->labelMaxDmgValue;
+    if (m_MaxDmg > DMGMETER_HIGH_DPS_LIMIT)
+    {
+        Label1->setStyleSheet(DmgMeter::s_UltraStyle);
+    }
+    else if (m_MaxDmg > DMGMETER_NORMAL_DPS_LIMIT)
+    {
+        Label1->setStyleSheet(DmgMeter::s_HighStyle);
+    }
+    else if (m_MaxDmg > DMGMETER_LOW_DPS_LIMIT)
+    {
+        Label1->setStyleSheet(DmgMeter::s_NormalStyle);
+    }
+    else
+    {
+        Label1->setStyleSheet(DmgMeter::s_LowStyle);
+    }
+
+    */
+
+}
+
+
+void MainWindow::UpdateTimer(void)
+{
+     SendClientInfo();
+     UpdatePersonalLabels();
+     UpdateGroupLabels();
+}
+
+
+
 void MainWindow::UpdateTime(int timeInMsecs)
 {
     int secs = timeInMsecs / 1000;
@@ -491,61 +568,6 @@ void MainWindow::UpdateTime(int timeInMsecs)
     ui->labelTimeValue->setText(time);
 }
 
-void MainWindow::UpdateDmg(unsigned long long dmg)
-{
-    ui->labelDmgValue->setText(QString::number(dmg));
-
-}
-
-void MainWindow::UpdateDps(int dps)
-{
-    QLabel* Label1;
-    QProgressBar* Bar1;
-    int i,j,k;
-
-
-    QLabel* dpsLabel = ui->labelDpsValue;
-    dpsLabel->setText(QString::number(dps));
-    if (dps > DMGMETER_HIGH_DPS_LIMIT)
-    {
-        dpsLabel->setStyleSheet(DmgMeter::s_UltraStyle);
-    }
-    else if (dps > DMGMETER_NORMAL_DPS_LIMIT)
-    {
-        dpsLabel->setStyleSheet(DmgMeter::s_HighStyle);
-    }
-    else if (dps > DMGMETER_LOW_DPS_LIMIT)
-    {
-        dpsLabel->setStyleSheet(DmgMeter::s_NormalStyle);
-    }
-    else
-    {
-        dpsLabel->setStyleSheet(DmgMeter::s_LowStyle);
-    }
-
-}
-
-void MainWindow::UpdateMaxDmg(int maxDmg)
-{
-    QLabel* maxDmgLabel = ui->labelMaxDmgValue;
-    maxDmgLabel->setText(QString::number(maxDmg));
-    if (maxDmg > DMGMETER_HIGH_MAX_DMG_LIMIT)
-    {
-        maxDmgLabel->setStyleSheet(DmgMeter::s_UltraStyle);
-    }
-    else if (maxDmg > DMGMETER_NORMAL_MAX_DMG_LIMIT)
-    {
-        maxDmgLabel->setStyleSheet(DmgMeter::s_HighStyle);
-    }
-    else if (maxDmg > DMGMETER_LOW_MAX_DMG_LIMIT)
-    {
-        maxDmgLabel->setStyleSheet(DmgMeter::s_NormalStyle);
-    }
-    else
-    {
-        maxDmgLabel->setStyleSheet(DmgMeter::s_LowStyle);
-    }
-}
 
 // Give movement access to MainWindow
 void MainWindow::mouseMoveEvent(QMouseEvent *event)

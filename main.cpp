@@ -22,6 +22,7 @@ unsigned long hitCounter;
 unsigned long critCounter;
 unsigned int critChance;
 unsigned long condiDmg;
+unsigned long m_MaxDmg;
 
 
 

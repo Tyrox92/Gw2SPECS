@@ -18,7 +18,7 @@ extern unsigned long hitCounter;
 extern unsigned long critCounter;
 extern unsigned long condiDmg;
 extern unsigned int critChance;
-
+extern unsigned long m_MaxDmg;
 
 
 

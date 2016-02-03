@@ -29,14 +29,13 @@ namespace GW2
         void RequestDpsUpdate(int);
         void RequestMaxDmgUpdate(int);
 
-        void RequestNetWrite(char*);
 
     public slots:
         void SetUpdatesPerSecond(const QString& updatesPerSecond);
         void SetSecondsInCombat(const QString& secondsInCombat);
         void SetConsideredLineCount(const QString& consideredLineCount);
         void EvaluateImage(const QImage& image, const ImageAttributes& imageAttributes);
-        void Reset(bool emitSignals = true);
+        void Reset();
         void SetIsAutoResetting(bool isAutoResetting);
         //void connectMe();
 
@@ -76,7 +75,6 @@ namespace GW2
         int m_ElapsedTimeSinceCombatInMsec;
         //int m_Dps;
         //unsigned long m_Dmg;
-        int m_MaxDmg;
         int m_TimeoutInMsec;
         int m_SecsInCombat;
         bool m_IsActive;
@@ -84,6 +82,7 @@ namespace GW2
         char writeBuff[128];
         QByteArray tmp1;
         const char* tmp2;
+        unsigned long LastDmg;
 
     };
 

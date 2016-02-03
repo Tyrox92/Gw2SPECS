@@ -34,14 +34,14 @@ namespace GW2
     private slots:
         void EnableTransparency(bool isAlmostTransparent);
         void LinkToWebsite();
+        /*
         void UpdateTime(int timeInMsecs);
         void UpdateDmg(unsigned long long dmg);
-        void UpdateDps(int dps);
+        void UpdateDps();
         void UpdateMaxDmg(int maxDmg);
-
+        */
         void connected();
         void disconnected();
-        void netWrite(char*);
         void ready2Read();
 
 
@@ -82,14 +82,16 @@ namespace GW2
         int CurrentMeta;
 
         char writeBuff[128];
-        QByteArray tmp3;
-        const char* tmp4;
 
 
         char tmp1[20];
         QTimer update_Timer;
 private slots:
-        void UpdateLabels();
+        void UpdateTime(int);
+        void SendClientInfo();
+        void UpdateTimer();
+        void UpdateGroupLabels();
+        void UpdatePersonalLabels();
 
     };
 

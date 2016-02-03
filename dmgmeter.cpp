@@ -70,7 +70,7 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
     }
 }
 
-void DmgMeter::Reset(bool emitSignals)
+void DmgMeter::Reset()
 {
     hitCounter=0;
     critCounter=0;
@@ -86,14 +86,7 @@ void DmgMeter::Reset(bool emitSignals)
     m_Activity=0;
     m_TimeSinceCombat.start();
     OffCombatTime.start();
-    if (emitSignals)
-    {
-        emit RequestTimeUpdate(0);
-        emit RequestDmgUpdate(m_Dmg);
-        emit RequestDpsUpdate(m_Dps);
-        emit RequestMaxDmgUpdate(m_MaxDmg);
-    }
-
+    emit RequestTimeUpdate(0);
 }
 
 void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
@@ -101,7 +94,7 @@ void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
     m_IsAutoResetting = isAutoResetting;
     if (isAutoResetting && (m_TimeSinceEvaluation.elapsed() / 1000.0f) >= m_SecsInCombat)
     {
-        Reset(false);
+        Reset();
     }
 }
 
@@ -110,7 +103,7 @@ DmgMeter::DmgMeter() :
     m_ElapsedTimeSinceCombatInMsec(0),
     //m_Dps(0),
     //m_Dmg(0),
-    m_MaxDmg(0),
+    //m_MaxDmg(0),
     m_TimeoutInMsec(0),
     m_SecsInCombat(0),
     m_IsActive(false),
@@ -139,20 +132,9 @@ void DmgMeter::ComputeDps()
     const double elapsedSecsSinceCombat = elapsedTimeSinceCombat / 1000.0f;
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
-    if ((m_Dps<0) || (m_Dps>999999)) m_Dps = 1;
-    emit RequestDpsUpdate(m_Dps);
+    if (m_Dps>999999) m_Dps = 1;
     m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
-    if ((m_Activity<0) || (m_Activity>100)) m_Activity = 100;
-    /*
-    tmp1 = MyName.toLatin1();
-    tmp2 = tmp1.data();
-    if (MyClientSlot!=10)  //connected and semi-handshaked
-    {
-    sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
-
-    emit RequestNetWrite(writeBuff);
-    }
-    */
+    if (m_Activity>100) m_Activity = 100;
     if (elapsedSecsSinceEvaluation >= m_SecsInCombat)
     {
         // No data received since m_SecsInCombat. End evaluation
@@ -163,14 +145,14 @@ void DmgMeter::ComputeDps()
         OffCombatTime.start();
         if (m_IsAutoResetting)
         {
-            Reset(false);
+            Reset();
         }
     }
 }
 
 void DmgMeter::EvaluateLine(const QString& params)
 {
-    const int dmg = ComputeDmg(params);
+    unsigned long dmg = ComputeDmg(params);
 
     if (LastColor>0)
         {
@@ -192,7 +174,7 @@ void DmgMeter::EvaluateLine(const QString& params)
     if (dmg > m_MaxDmg)
     {
         // New max dmg found, set it as max dmg
-        UpdateMaxDmg(dmg);
+        m_MaxDmg=dmg;
     }
 
 #ifdef DMGMETER_DEBUG
@@ -204,8 +186,9 @@ void DmgMeter::EvaluateLine(const QString& params)
 #endif // DMGMETER_DEBUG
 
     m_Dmg += dmg;
+    LastDmg=dmg;
     m_TimeSinceEvaluation.start();
-    emit RequestDmgUpdate(m_Dmg);
+
     if (!m_IsActive)
     {
         // Evaluation starts, configure timer and start
@@ -231,17 +214,17 @@ int DmgMeter::ComputeDmg(const QString& dmgStr)
     return dmg;
 }
 
-void DmgMeter::UpdateMaxDmg(int dmg)
-{
-    m_MaxDmg = dmg;
-    emit RequestMaxDmgUpdate(m_MaxDmg);
-}
 
 void DmgMeter::StartEvaluation()
 {
+    if (m_Dmg-LastDmg==0)
+    {
+        OffCombatTimeInMsec=0;
+        m_Activity=100;
+        OffCombatTime.restart();
+    } else OffCombatTimeInMsec+=OffCombatTime.elapsed();
     m_IsActive = true;
     m_TimeSinceCombat.start();
-    OffCombatTimeInMsec+=OffCombatTime.elapsed();
     m_Timer.start(m_TimeoutInMsec);
     //m_Dps = m_Dmg;
 }
