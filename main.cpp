@@ -14,6 +14,16 @@ QString MyName;
 QString HostIP;
 int MyClientSlot;
 int HostPort;
+unsigned long m_Dps;
+unsigned long m_Dmg;
+unsigned long m_Activity;
+int LastColor;
+unsigned long hitCounter;
+unsigned long critCounter;
+unsigned int critChance;
+unsigned long condiDmg;
+unsigned long m_MaxDmg;
+
 
 
 int main(int argc, char *argv[])

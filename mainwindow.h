@@ -8,6 +8,9 @@
 #include "configurator.h"
 #include <QTcpSocket>
 #include <QAbstractSocket>
+#include <QTimer>
+#include <QTime>
+#include <QMouseEvent>
 
 
 namespace Ui
@@ -25,17 +28,20 @@ namespace GW2
         explicit MainWindow(QWidget *parent = 0);
         ~MainWindow();
 
+    protected:
+        void mouseMoveEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent *event);
     private slots:
         void EnableTransparency(bool isAlmostTransparent);
         void LinkToWebsite();
+        /*
         void UpdateTime(int timeInMsecs);
         void UpdateDmg(unsigned long long dmg);
-        void UpdateDps(int dps);
+        void UpdateDps();
         void UpdateMaxDmg(int maxDmg);
-
+        */
         void connected();
         void disconnected();
-        void netWrite(char*);
         void ready2Read();
 
 
@@ -43,6 +49,7 @@ namespace GW2
         Ui::MainWindow *ui;
         QThread m_ScreenRecorderThread;
         Configurator m_Configurator;
+        QPoint m_dragPosition;
 
         QTcpSocket *socket;
 
@@ -64,20 +71,30 @@ namespace GW2
         int SlotAct[10];
 
         long AllDamageDone;
+        int GrpDPS;
+        int AvgDPS;
 
         QByteArray incData;
         int incDataSize;
-        char incData2[512];
+        char incData2[800];
 
         int CurrentPos;
         int CurrentMeta;
 
+        char writeBuff[128];
+
 
         char tmp1[20];
-
+        QTimer update_Timer;
+private slots:
+        void UpdateTime(int);
+        void SendClientInfo();
+        void UpdateTimer();
+        void UpdateGroupLabels();
+        void UpdatePersonalLabels();
 
     };
-    extern int m_Dps;
+
 }
 
 
