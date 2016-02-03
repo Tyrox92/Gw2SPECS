@@ -20,8 +20,8 @@ unsigned long m_Activity;
 int LastColor;
 unsigned long hitCounter;
 unsigned long critCounter;
-unsigned int critChance;
-unsigned long condiDmg;
+unsigned int m_critChance;
+unsigned long m_condiDmg;
 unsigned long m_MaxDmg;
 
 

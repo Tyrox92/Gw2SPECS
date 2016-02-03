@@ -53,8 +53,8 @@ ScreenRecorder::ScreenRecorder() :
     qDebug() << "Resolution:" << screens[0]->size();
 #endif // QT_DEBUG
 
-//        QPixmap p = m_Screens[0]->grabWindow(desktopId/*, 0, m_Y, m_ImageAttributes.GetMaxWidth(), m_ImageAttributes.GetMaxHeight()*/);
-//        p.save("../Images/gw2InterfaceLargerMidLargeTextSize.png");
+    //        QPixmap p = m_Screens[0]->grabWindow(desktopId/*, 0, m_Y, m_ImageAttributes.GetMaxWidth(), m_ImageAttributes.GetMaxHeight()*/);
+    //        p.save("../Images/gw2InterfaceLargerMidLargeTextSize.png");
 }
 
 ScreenRecorder::~ScreenRecorder()
@@ -78,60 +78,60 @@ void ScreenRecorder::Capture()
     CharacterPattern::ControlType controlType = m_ImageReader.UpdateImageAttributes(m_ImageAttributes, image);
     switch(controlType)
     {
-        case CharacterPattern::InvalidControl:
+    case CharacterPattern::InvalidControl:
+    {
+        if (!m_IsValid)
         {
-            if (!m_IsValid)
+            // Chat block position not found, change screen
+            m_CurrentScreenIndex = (m_CurrentScreenIndex + 1) % screens.size();
+        }
+
+        m_IsValid = false;
+        m_Y = 0;
+        m_Height = screens[m_CurrentScreenIndex]->size().height();
+        emit RequestInfoUpdate(s_Infos[CharacterPattern::InvalidControl]);
+        break;
+    }
+    case CharacterPattern::VisibleControl:
+    {
+        // Update y pos and height
+        const int endY = m_ImageReader.GetCharacterGrid().GetYOffset() + IMAGEATTRIBUTES_CONTROL_MAX_HEIGHT;
+        if (!m_IsValid)
+        {
+            // Control type first time valid since screen or chat block position change, update y and height
+            m_IsValid = true;
+            m_Y = m_ImageAttributes.GetLastLineY() - (m_DmgMeter.GetConsideredLineCount() - 1) * m_ImageAttributes.GetLineDistance();
+            m_Height = endY - m_Y;
+        }
+
+        bool isLogScrolledDown = m_ImageReader.IsLogScrolledDown(image, m_ImageAttributes);
+        if (!isLogScrolledDown)
+        {
+            // Log is not scrolled down, request scroll down and return
+            emit RequestInfoUpdate(s_Infos[CharacterPattern::ScrollBarControl]);
+        }
+        else
+        {
+            if (oldInterfaceSize == m_ImageAttributes.GetInterfaceSize())
             {
-                // Chat block position not found, change screen
-                m_CurrentScreenIndex = (m_CurrentScreenIndex + 1) % screens.size();
+                // Image attributes ared valid, evaluate
+                m_DmgMeter.EvaluateImage(image, m_ImageAttributes);
             }
 
-            m_IsValid = false;
-            m_Y = 0;
-            m_Height = screens[m_CurrentScreenIndex]->size().height();
-            emit RequestInfoUpdate(s_Infos[CharacterPattern::InvalidControl]);
-            break;
+            emit RequestInfoUpdate(s_Infos[CharacterPattern::VisibleControl]);
         }
-        case CharacterPattern::VisibleControl:
-        {
-            // Update y pos and height
-            const int endY = m_ImageReader.GetCharacterGrid().GetYOffset() + IMAGEATTRIBUTES_CONTROL_MAX_HEIGHT;
-            if (!m_IsValid)
-            {
-                // Control type first time valid since screen or chat block position change, update y and height
-                m_IsValid = true;
-                m_Y = m_ImageAttributes.GetLastLineY() - (m_DmgMeter.GetConsideredLineCount() - 1) * m_ImageAttributes.GetLineDistance();
-                m_Height = endY - m_Y;
-            }
 
-            bool isLogScrolledDown = m_ImageReader.IsLogScrolledDown(image, m_ImageAttributes);
-            if (!isLogScrolledDown)
-            {
-                // Log is not scrolled down, request scroll down and return
-                emit RequestInfoUpdate(s_Infos[CharacterPattern::ScrollBarControl]);
-            }
-            else
-            {
-                if (oldInterfaceSize == m_ImageAttributes.GetInterfaceSize())
-                {
-                    // Image attributes ared valid, evaluate
-                    m_DmgMeter.EvaluateImage(image, m_ImageAttributes);
-                }
-
-                emit RequestInfoUpdate(s_Infos[CharacterPattern::VisibleControl]);
-            }
-
-            break;
-        }
-        case CharacterPattern::HiddenControl:
-        {
-            emit RequestInfoUpdate(s_Infos[CharacterPattern::HiddenControl]);
-            break;
-        }
-        default:
-        {
-            qDebug() << "ScreenRecorder::Capture: Unknown CharacterPattern::ControlType:" << controlType;
-            break;
-        }
+        break;
+    }
+    case CharacterPattern::HiddenControl:
+    {
+        emit RequestInfoUpdate(s_Infos[CharacterPattern::HiddenControl]);
+        break;
+    }
+    default:
+    {
+        qDebug() << "ScreenRecorder::Capture: Unknown CharacterPattern::ControlType:" << controlType;
+        break;
+    }
     }
 }

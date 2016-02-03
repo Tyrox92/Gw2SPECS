@@ -16,8 +16,8 @@ extern unsigned long m_Activity;
 extern int LastColor;
 extern unsigned long hitCounter;
 extern unsigned long critCounter;
-extern unsigned long condiDmg;
-extern unsigned int critChance;
+extern unsigned long m_condiDmg;
+extern unsigned int m_critChance;
 extern unsigned long m_MaxDmg;
 
 

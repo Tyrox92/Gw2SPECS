@@ -23,15 +23,15 @@ MyDialog::~MyDialog()
 void MyDialog::on_pushButton_clicked()
 {
     if (ui->lineEdit->text().length()>0)
-        {
+    {
         WriteNameSettings(ui->lineEdit->text());
         accept();
-        }
+    }
     if (ui->lineEdit_2->text().length()>0)
-        {
+    {
         WriteIPSettings(ui->lineEdit_2->text());
         accept();
-        }
+    }
 }
 
 QString MyDialog::getName()
