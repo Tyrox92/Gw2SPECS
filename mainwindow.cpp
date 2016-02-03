@@ -588,5 +588,3 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         event->accept();
     }
 }
-
-
