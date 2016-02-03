@@ -14,14 +14,14 @@ QString MyName;
 QString HostIP;
 int MyClientSlot;
 int HostPort;
-int m_Dps;
+unsigned long m_Dps;
 unsigned long m_Dmg;
 unsigned long m_Activity;
 int LastColor;
-long hitCounter;
-long critCounter;
-int critChance;
-long condiDmg;
+unsigned long hitCounter;
+unsigned long critCounter;
+unsigned int critChance;
+unsigned long condiDmg;
 
 
 

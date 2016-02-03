@@ -82,6 +82,8 @@ void DmgMeter::Reset(bool emitSignals)
     m_MaxDmg = 0;
     m_ElapsedTimeSinceCombatInMsec = 0;
     OffCombatTimeInMsec=0;
+    m_IsActive=0;
+    m_Activity=0;
     m_TimeSinceCombat.start();
     OffCombatTime.start();
     if (emitSignals)
@@ -137,8 +139,10 @@ void DmgMeter::ComputeDps()
     const double elapsedSecsSinceCombat = elapsedTimeSinceCombat / 1000.0f;
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
+    if ((m_Dps<0) || (m_Dps>999999)) m_Dps = 1;
     emit RequestDpsUpdate(m_Dps);
-    m_Activity=100*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat);
+    m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
+    if ((m_Activity<0) || (m_Activity>100)) m_Activity = 100;
     /*
     tmp1 = MyName.toLatin1();
     tmp2 = tmp1.data();
