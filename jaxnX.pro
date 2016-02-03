@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
+QMAKE_CXXFLAGS_WARN_ON += -Wno-reorder
 TARGET = Gw2DPS
 TEMPLATE = app
 

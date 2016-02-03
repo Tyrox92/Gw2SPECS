@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // QGridLayout is already in *.ui file
     // Using gridLayout here which is the outer layout
     QSizeGrip * sizeGrip = new QSizeGrip(this);
-    ui->gridLayout->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_3->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
 
     QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
@@ -121,11 +121,11 @@ void MainWindow::UpdateLabels()
     if (MyClientSlot!=10)  //connected and semi-handshaked
     {
         //Failsafe Check
-        if ((m_Dps<0) && (m_Dps>99999)) m_Dps = 1;
-        if ((m_Dmg<0) && (m_Dmg>999999999)) m_Dmg = 1;
-        if ((m_Activity<0) && (m_Activity>100)) m_Activity = 1;
+        if (m_Dps>99999) m_Dps = 1;
+        if (m_Dmg>999999999) m_Dmg = 1;
+        if (m_Activity>100) m_Activity = 1;
 
-        sprintf(writeBuff, "*%u1#%s*%u2#%u*%u3#%u*%u4#%u*", MyClientSlot, tmp4 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
+        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*", MyClientSlot, tmp4 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
 
         socket->write(writeBuff);
         Label1 = ui->critChance;
@@ -333,7 +333,7 @@ void MainWindow::UpdateLabels()
 void MainWindow::ready2Read()
 {
 
-    int c,i,j;
+    int i,j;
     long k;
 
 
@@ -445,13 +445,13 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
     if (isAlmostTransparent)
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 1%);");
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         this->show();
 
     }
     else
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 50%);");
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 1%);");
         this->show();
     }
 }
@@ -493,10 +493,6 @@ void MainWindow::UpdateDmg(unsigned long long dmg)
 
 void MainWindow::UpdateDps(int dps)
 {
-    QLabel* Label1;
-    QProgressBar* Bar1;
-    int i,j,k;
-
 
     QLabel* dpsLabel = ui->labelDpsValue;
     dpsLabel->setText(QString::number(dps));
