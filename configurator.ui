@@ -44,7 +44,7 @@
 color: rgb(169, 248, 255);</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="gameSettings">
       <property name="geometry">
@@ -107,6 +107,11 @@ color: rgb(169, 248, 255);</string>
            <string>Large</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>Larger</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item row="1" column="0">
@@ -149,7 +154,7 @@ color: rgb(169, 248, 255);</string>
          </item>
          <item>
           <property name="text">
-           <string>Normal</string>
+           <string>Medium</string>
           </property>
          </item>
          <item>
