@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>394</width>
-    <height>504</height>
+    <width>240</width>
+    <height>225</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -909,8 +909,8 @@ background-color: rgba(255, 255, 255, 0%);</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>358</width>
-             <height>312</height>
+             <width>324</width>
+             <height>221</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">

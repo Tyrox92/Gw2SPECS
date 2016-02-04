@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
     ui->setupUi(this);
-    //ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
 

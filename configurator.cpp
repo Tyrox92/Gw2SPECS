@@ -1,6 +1,7 @@
 #include "configurator.h"
 #include "ui_configurator.h"
 #include "settings.h"
+#include "mainwindow.h"
 
 using namespace GW2;
 
@@ -10,8 +11,11 @@ Configurator::Configurator(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
+
     // Set version
     ui->labelVersion->setText(Settings::s_Product);
+
 
     Settings::ReadSettings(ui->comboBoxScreenshots);
     Settings::ReadSettings(ui->comboBoxUpdates);
@@ -36,3 +40,4 @@ void Configurator::RestoreDefaults()
     ui->comboBoxSecondsInCombat->setCurrentIndex(0);
     ui->comboBoxConsideredLines->setCurrentIndex(0);
 }
+
