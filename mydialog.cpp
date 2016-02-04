@@ -1,3 +1,4 @@
+#ifndef MYDIALOG_CPP
 #include "mydialog.h"
 #include "ui_mydialog.h"
 #include <QDebug>
@@ -49,3 +50,4 @@ int MyDialog::getPort()
 {
     return ui->lineEdit_3->text().toInt();
 }
+#endif

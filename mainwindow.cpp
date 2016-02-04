@@ -8,6 +8,7 @@
 #include "settings.h"
 #include "global.h"
 #include <QSizeGrip>
+#include <QToolBar>
 
 using namespace GW2;
 
@@ -22,16 +23,24 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    //Resize Option
+
+    // Resize Option
     // QGridLayout is already in *.ui file
     // Using gridLayout_3 here which is the outer layout
-    QSizeGrip * sizeGrip = new QSizeGrip(this);
+    QSizeGrip *sizeGrip = new QSizeGrip(this);
     ui->gridLayout_3->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
 
-    QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
-    QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
-    QObject::connect(ui->btnConfig, SIGNAL(clicked()), &m_Configurator, SLOT(exec()));
+    ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
+    ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
+
+
+    //QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
+    //QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
+    //QObject::connect(ui->btnConfig, SIGNAL(clicked()), &m_Configurator, SLOT(exec()));
+    QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
+    QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
+    QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
 
     ScreenRecorder* screenRecorder = new ScreenRecorder;
     DmgMeter* dmgMeter = &screenRecorder->GetDmgMeter();
@@ -47,8 +56,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(unsigned long long)), this, SLOT(UpdateDmg(unsigned long long)));
     //QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(int)), this, SLOT(UpdatePersonal()));
     //QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
-    QObject::connect(ui->btnReset, SIGNAL(clicked()), dmgMeter, SLOT(Reset()));
-    QObject::connect(ui->btnAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
+    //QObject::connect(ui->btnReset, SIGNAL(clicked()), dmgMeter, SLOT(Reset()));
+    //QObject::connect(ui->btnAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
+    QObject::connect(ui->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
+    QObject::connect(ui->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
@@ -431,13 +442,15 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
     if (isAlmostTransparent)
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 1%);");
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
+        ui->toolBar->setStyleSheet("background-color: rgba(0, 0, 0, 1%);");
         this->show();
 
     }
     else
     {
         this->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
+        ui->toolBar->setStyleSheet("background-color: rgba(0, 0, 0, 60%);");
         this->show();
     }
 }
@@ -574,7 +587,6 @@ void MainWindow::UpdateTime(int timeInMsecs)
     time += QString::number(secs) + "s";
     ui->labelTimeValue->setText(time);
 }
-
 
 // Give movement access to MainWindow
 void MainWindow::mouseMoveEvent(QMouseEvent *event)

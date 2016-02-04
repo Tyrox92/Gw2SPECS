@@ -53,6 +53,9 @@
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
+     <property name="currentText">
+      <string>15</string>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
