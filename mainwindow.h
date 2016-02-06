@@ -93,6 +93,7 @@ private slots:
         void UpdateGroupLabels();
         void UpdatePersonalLabels();
 
+        void on_actionShrinkUI_triggered(bool checked);
     };
 
 }

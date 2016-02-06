@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>240</width>
+    <width>312</width>
     <height>225</height>
    </rect>
   </property>
@@ -264,7 +264,7 @@ background-color: rgba(32, 43, 47, 60%);</string>
     <bool>false</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="0">
+    <item row="2" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -307,7 +307,7 @@ background-color: rgba(255, 255, 255, 0%);</string>
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -2972,7 +2972,7 @@ background-color: rgba(255, 255, 255,0%);</string>
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QToolButton { background-color: rgba(32, 43, 47, 1%); } </string>
    </property>
    <property name="iconSize">
     <size>
@@ -2993,7 +2993,8 @@ background-color: rgba(255, 255, 255,0%);</string>
    <addaction name="separator"/>
    <addaction name="actionEnableTransparency"/>
    <addaction name="separator"/>
-   <addaction name="actionHelp"/>
+   <addaction name="actionShrinkUI"/>
+   <addaction name="separator"/>
    <addaction name="separator"/>
    <addaction name="actionConfig"/>
    <addaction name="separator"/>
@@ -3088,6 +3089,22 @@ background-color: rgba(255, 255, 255,0%);</string>
    </property>
    <property name="toolTip">
     <string>Exit DPS Meter</string>
+   </property>
+  </action>
+  <action name="actionShrinkUI">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/shrink_up.png</normaloff>
+     <normalon>:/shrink_down.png</normalon>:/shrink_up.png</iconset>
+   </property>
+   <property name="text">
+    <string>ShrinkUI</string>
+   </property>
+   <property name="toolTip">
+    <string>Shrink UI to toolbar</string>
    </property>
   </action>
  </widget>

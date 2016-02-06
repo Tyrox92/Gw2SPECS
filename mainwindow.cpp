@@ -9,6 +9,7 @@
 #include "global.h"
 #include <QSizeGrip>
 #include <QToolBar>
+#include <QToolButton>
 
 using namespace GW2;
 
@@ -24,15 +25,15 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
 
+    ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
+    ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
+
     // Resize Option
     // QGridLayout is already in *.ui file
     // Using gridLayout_3 here which is the outer layout
     QSizeGrip *sizeGrip = new QSizeGrip(this);
     ui->gridLayout_3->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
-
-    ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
-    ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
 
 
     //QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
@@ -444,6 +445,14 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
     {
         this->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
         ui->toolBar->setStyleSheet("background-color: rgba(0, 0, 0, 1%);");
+        /*setStyleSheet("QMainWindow { background-color: rgba(32, 43, 47, 0%); }"
+                      "QToolBar { background-color: rgba(32, 43, 47, 1%); }"
+                      "QTabWidget { background-color: rgba(32, 43, 47, 0%); }"
+                      "QTabWidget::tabWidgetPage1 { background-color: rgba(32, 43, 47, 0%); }"
+                      "QTabWidget::tabWidgetPage2 { background-color: rgba(32, 43, 47, 0%); }"
+                      "QToolButton { background-color: rgba(32, 43, 47, 1%); }"
+                      "QScrollArea { background-color: rgba(32, 43, 47, 0%); }"
+                      );*/
         this->show();
 
     }
@@ -451,6 +460,14 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
     {
         this->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         ui->toolBar->setStyleSheet("background-color: rgba(0, 0, 0, 60%);");
+        /*setStyleSheet("QMainWindow { background-color: rgba(32, 43, 47, 60%); }"
+                      "QToolBar { background-color: rgba(32, 43, 47, 60%); }"
+                      "QTabWidget { background-color: rgba(32, 43, 47, 60%); }"
+                      "QTabWidget::tabWidgetPage1 { background-color: rgba(32, 43, 47, 60%); }"
+                      "QTabWidget::tabWidgetPage2 { background-color: rgba(32, 43, 47, 60%); }"
+                      "QToolButton { background-color: rgba(32, 43, 47, 1%); }"
+                      "QScrollArea { background-color: rgba(32, 43, 47, 60%); }"
+                      );*/
         this->show();
     }
 }
@@ -603,5 +620,17 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         m_dragPosition = event->globalPos() - frameGeometry().topLeft();
         event->accept();
+    }
+}
+//Shrink UI to ToolBar
+void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
+{
+    if (checked)
+    {
+        ui->centralWidget->hide();
+    }
+    else
+    {
+        ui->centralWidget->show();
     }
 }

@@ -367,9 +367,35 @@ color: rgb(169, 248, 255);</string>
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
-         <property name="currentIndex">
-          <number>0</number>
+         <property name="editable">
+          <bool>false</bool>
          </property>
+         <property name="currentText">
+          <string>16</string>
+         </property>
+         <property name="currentIndex">
+          <number>4</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>14</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>16</string>
@@ -383,6 +409,11 @@ color: rgb(169, 248, 255);</string>
          <item>
           <property name="text">
            <string>24</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>28</string>
           </property>
          </item>
         </widget>
@@ -402,7 +433,7 @@ color: rgb(169, 248, 255);</string>
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>Considered lines</string>
+          <string># of Lines in Combat Log</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -434,6 +465,14 @@ color: rgb(169, 248, 255);</string>
       </layout>
      </widget>
      <widget class="QWidget" name="meterSettings">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>282</width>
+        <height>130</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>Meter UI Settings</string>
       </attribute>
