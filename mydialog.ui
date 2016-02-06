@@ -269,7 +269,7 @@ QPushButton#pushButton:pressed {
             </sizepolicy>
            </property>
            <property name="maxLength">
-            <number>15</number>
+            <number>32767</number>
            </property>
           </widget>
          </item>
@@ -313,7 +313,7 @@ QPushButton#pushButton:pressed {
             <string>1234</string>
            </property>
            <property name="maxLength">
-            <number>4</number>
+            <number>5</number>
            </property>
           </widget>
          </item>
