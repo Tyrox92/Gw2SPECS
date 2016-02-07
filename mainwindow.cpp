@@ -32,9 +32,13 @@ MainWindow::MainWindow(QWidget *parent) :
     // Resize Option
     // QGridLayout is already in *.ui file
     // Using gridLayout_3 here which is the outer layout
-    QSizeGrip *sizeGrip = new QSizeGrip(this);
-    ui->gridLayout_central->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
-    sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
+    QSizeGrip *sizeGripRight = new QSizeGrip(this);
+    QSizeGrip *sizeGripLeft = new QSizeGrip(this);
+    ui->gridLayout_Main->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_Main->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
+    sizeGripLeft->setStyleSheet("background: url(''); width: 16px; height: 16px;");
+    sizeGripRight->setStyleSheet("background: url(''); width: 16px; height: 16px;");
+
 
     //QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
     //QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
@@ -197,7 +201,7 @@ void MainWindow::UpdateGroupLabels()
             if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_1;
             Bar1->setValue(i);
-            QString text = QString("1. %1     %L2 ( %L3, %4% )").arg(PosName[0]).arg(PosDmg[0]).arg(PosDPS[0]).arg(p);
+            QString text = QString("1. %1     %L2 (%L3 | %4%)").arg(PosName[0]).arg(PosDmg[0]).arg(PosDPS[0]).arg(p);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
 
@@ -210,7 +214,7 @@ void MainWindow::UpdateGroupLabels()
             if (AllDamageDone>0)p=PosDmg[1]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_2;
             Bar1->setValue(i);
-            QString text = QString("2. %1     %L2 ( %L3, %4% )").arg(PosName[1]).arg(PosDmg[1]).arg(PosDPS[1]).arg(p);
+            QString text = QString("2. %1     %L2 (%L3 | %4%)").arg(PosName[1]).arg(PosDmg[1]).arg(PosDPS[1]).arg(p);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
 
@@ -222,7 +226,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=PosDmg[2]*100/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[2]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_3;
-            QString text = QString("3. %1     %L2 ( %L3, %4% )").arg(PosName[2]).arg(PosDmg[2]).arg(PosDPS[2]).arg(p);
+            QString text = QString("3. %1     %L2 (%L3 | %4%)").arg(PosName[2]).arg(PosDmg[2]).arg(PosDPS[2]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -234,7 +238,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[3]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[3]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_4;
-            QString text = QString("4. %1     %L2 (%L3, %4%)").arg(PosName[3]).arg(PosDmg[3]).arg(PosDPS[3]).arg(p);
+            QString text = QString("4. %1     %L2 (%L3 | %4%)").arg(PosName[3]).arg(PosDmg[3]).arg(PosDPS[3]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -246,7 +250,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[4]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[4]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_5;
-            QString text = QString("5. %1     %L2 (%L3, %4)").arg(PosName[4]).arg(PosDmg[4]).arg(PosDPS[4]).arg(p);
+            QString text = QString("5. %1     %L2 (%L3 | %4%)").arg(PosName[4]).arg(PosDmg[4]).arg(PosDPS[4]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -259,7 +263,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[5]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[5]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_6;
-            QString text = QString("6. %1     %L2 (%L3, %4)").arg(PosName[5]).arg(PosDmg[5]).arg(PosDPS[5]).arg(p);
+            QString text = QString("6. %1     %L2 (%L3 | %4%)").arg(PosName[5]).arg(PosDmg[5]).arg(PosDPS[5]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -271,7 +275,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[6]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[6]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_7;
-            QString text = QString("7. %1     %L2 (%L3, %4)").arg(PosName[6]).arg(PosDmg[6]).arg(PosDPS[6]).arg(p);
+            QString text = QString("7. %1     %L2 (%L3 | %4%)").arg(PosName[6]).arg(PosDmg[6]).arg(PosDPS[6]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -283,7 +287,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[7]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[7]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_8;
-            QString text = QString("8. %1     %L2 (%L3, %4)").arg(PosName[7]).arg(PosDmg[7]).arg(PosDPS[7]).arg(p);
+            QString text = QString("8. %1     %L2 (%L3 | %4%)").arg(PosName[7]).arg(PosDmg[7]).arg(PosDPS[7]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -295,7 +299,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[8]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[8]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_9;
-            QString text = QString("9. %1     %L2 (%L3, %4)").arg(PosName[8]).arg(PosDmg[8]).arg(PosDPS[8]).arg(p);
+            QString text = QString("9. %1     %L2 (%L3 | %4%)").arg(PosName[8]).arg(PosDmg[8]).arg(PosDPS[8]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -308,7 +312,7 @@ void MainWindow::UpdateGroupLabels()
             if (PosDmg[0]>0)i=(PosDmg[9]*100/PosDmg[0]>0);else i=0;
             if (AllDamageDone>0)p=PosDmg[9]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_10;
-            QString text = QString("10. %1     %L2 (%L3, %4)").arg(PosName[9]).arg(PosDmg[9]).arg(PosDPS[9]).arg(p);
+            QString text = QString("10. %1     %L2 (%L3 | %4%)").arg(PosName[9]).arg(PosDmg[9]).arg(PosDPS[9]).arg(p);
             Bar1->setValue(i);
             Bar1->setFormat(text);
             Bar1->setVisible(true);
@@ -431,7 +435,7 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 
     if (isAlmostTransparent)
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 0%)");
+        this->ui->widget_4->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->labelDpsValue->setStyleSheet("");
         this->show();
@@ -439,7 +443,7 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
     }
     else
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
+        this->ui->widget_4->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->labelDpsValue->setStyleSheet("");
         this->show();
