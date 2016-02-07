@@ -270,6 +270,7 @@ QPushButton#pushButton:pressed {
            </property>
            <property name="maxLength">
             <number>50</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
