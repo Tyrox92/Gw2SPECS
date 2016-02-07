@@ -86,12 +86,14 @@ namespace GW2
 
         char tmp1[20];
         QTimer update_Timer;
-private slots:
+    private slots:
         void UpdateTime(int);
         void SendClientInfo();
         void UpdateTimer();
         void UpdateGroupLabels();
         void UpdatePersonalLabels();
+        void StartupHideProgressBars();
+
 
         void on_actionShrinkUI_triggered(bool checked);
         void on_pushButton_toggled(bool checked);
