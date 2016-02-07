@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define MAINWINDOW_WEBSITE_URL "http://google.com"
+#define MAINWINDOW_WEBSITE_URL "http://gw2dps.com"
 
 #include <QMainWindow>
 #include <QThread>
@@ -94,6 +94,9 @@ private slots:
         void UpdatePersonalLabels();
 
         void on_actionShrinkUI_triggered(bool checked);
+        void on_pushButton_toggled(bool checked);
+        void on_btn_grpMoreInfo_clicked();
+        void on_toolBar_dockLocationChange();
     };
 
 }

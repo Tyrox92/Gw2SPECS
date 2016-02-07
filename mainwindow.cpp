@@ -21,20 +21,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
     ui->setupUi(this);
+    ui->widgetExtraDetails->hide();
+    ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
-
-    ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
-    ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
 
     // Resize Option
     // QGridLayout is already in *.ui file
     // Using gridLayout_3 here which is the outer layout
     QSizeGrip *sizeGrip = new QSizeGrip(this);
-    ui->gridLayout_3->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_central->addWidget(sizeGrip, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     sizeGrip->setStyleSheet("background: url(''); width: 16px; height: 16px;");
-
 
     //QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
     //QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
@@ -127,9 +126,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
     update_Timer.start(1000);
 }
-
-
-
 
 void MainWindow::UpdateGroupLabels()
 {
@@ -333,9 +329,6 @@ void MainWindow::UpdateGroupLabels()
     }
 }
 
-
-
-
 void MainWindow::ready2Read()
 {
 
@@ -409,7 +402,6 @@ void MainWindow::ready2Read()
 
 }
 
-
 void MainWindow::connected()
 {
     qDebug() << "connected...";
@@ -422,7 +414,6 @@ void MainWindow::disconnected()
     //so what now? exit?
 
 }
-
 
 
 MainWindow::~MainWindow()
@@ -441,45 +432,34 @@ MainWindow::~MainWindow()
 
 void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
+    QString styleTransparent = " QGroupBox#groupBoxSettings {\
+            background-color: rgb(248,248,248);\
+            border: 1px solid rgb(170, 170, 255);\
+            border-radius: 3px;\
+            border-color:rgb(170, 170, 255);\
+    }";
+
     if (isAlmostTransparent)
     {
-        this->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
-        ui->toolBar->setStyleSheet("background-color: rgba(0, 0, 0, 1%);");
-        /*setStyleSheet("QMainWindow { background-color: rgba(32, 43, 47, 0%); }"
-                      "QToolBar { background-color: rgba(32, 43, 47, 1%); }"
-                      "QTabWidget { background-color: rgba(32, 43, 47, 0%); }"
-                      "QTabWidget::tabWidgetPage1 { background-color: rgba(32, 43, 47, 0%); }"
-                      "QTabWidget::tabWidgetPage2 { background-color: rgba(32, 43, 47, 0%); }"
-                      "QToolButton { background-color: rgba(32, 43, 47, 1%); }"
-                      "QScrollArea { background-color: rgba(32, 43, 47, 0%); }"
-                      );*/
+        this->setStyleSheet("background-color: rgba(32, 43, 47, 0%)");
+        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+        ui->labelDpsValue->setStyleSheet("");
         this->show();
 
     }
     else
     {
         this->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
-        ui->toolBar->setStyleSheet("background-color: rgba(0, 0, 0, 60%);");
-        /*setStyleSheet("QMainWindow { background-color: rgba(32, 43, 47, 60%); }"
-                      "QToolBar { background-color: rgba(32, 43, 47, 60%); }"
-                      "QTabWidget { background-color: rgba(32, 43, 47, 60%); }"
-                      "QTabWidget::tabWidgetPage1 { background-color: rgba(32, 43, 47, 60%); }"
-                      "QTabWidget::tabWidgetPage2 { background-color: rgba(32, 43, 47, 60%); }"
-                      "QToolButton { background-color: rgba(32, 43, 47, 1%); }"
-                      "QScrollArea { background-color: rgba(32, 43, 47, 60%); }"
-                      );*/
+        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+        ui->labelDpsValue->setStyleSheet("");
         this->show();
     }
 }
 
-
-
 void MainWindow::LinkToWebsite()
 {
-    //QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
+    QDesktopServices::openUrl(QUrl(MAINWINDOW_WEBSITE_URL));
 }
-
-
 
 void MainWindow::SendClientInfo(void)
 {
@@ -531,8 +511,6 @@ void MainWindow::UpdatePersonalLabels()
     //limit consts are in the dmgmeter.h
     //style const are in dmgmeter.cpp
 
-
-    /*
     Label1 = ui->labelDpsValue;
     if (m_Dps > DMGMETER_HIGH_DPS_LIMIT)
     {
@@ -568,11 +546,7 @@ void MainWindow::UpdatePersonalLabels()
     {
         Label1->setStyleSheet(DmgMeter::s_LowStyle);
     }
-
-    */
-
 }
-
 
 void MainWindow::UpdateTimer(void)
 {
@@ -580,8 +554,6 @@ void MainWindow::UpdateTimer(void)
     UpdatePersonalLabels();
     UpdateGroupLabels();
 }
-
-
 
 void MainWindow::UpdateTime(int timeInMsecs)
 {
@@ -622,6 +594,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         event->accept();
     }
 }
+
 //Shrink UI to ToolBar
 void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
 {
@@ -633,4 +606,26 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
     {
         ui->centralWidget->show();
     }
+}
+
+void GW2::MainWindow::on_pushButton_toggled(bool checked)
+{
+    QSettings settings;
+    if (checked)
+    {
+        ui->widgetExtraDetails->show();
+    }
+    else
+    {
+        ui->widgetExtraDetails->hide();
+    }
+}
+
+void GW2::MainWindow::on_toolBar_dockLocationChange()
+{
+
+}
+
+void GW2::MainWindow::on_btn_grpMoreInfo_clicked()
+{
 }
