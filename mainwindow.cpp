@@ -229,7 +229,7 @@ void MainWindow::UpdateGroupLabels()
             case 6: ui->progressBar_7 ->setVisible(false); break;
             case 7: ui->progressBar_8 ->setVisible(false); break;
             case 8: ui->progressBar_9 ->setVisible(false); break;
-            case 8: ui->progressBar_9 ->setVisible(false); break;
+            case 9: ui->progressBar_10 ->setVisible(false); break;
             default: break;
             }
         }
