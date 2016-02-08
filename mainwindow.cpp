@@ -36,8 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QSizeGrip *sizeGripLeft = new QSizeGrip(this);
     ui->gridLayout_Main->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
     ui->gridLayout_Main->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
-    sizeGripLeft->setStyleSheet("background: url(''); width: 16px; height: 16px;");
-    sizeGripRight->setStyleSheet("background: url(''); width: 16px; height: 16px;");
+    sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
+    sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
 
 
     //QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
@@ -235,7 +235,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[3][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[3]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[3]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[3]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_4;
             QString text = QString("4. %1     %L2 (%L3 | %4%)").arg(PosName[3]).arg(PosDmg[3]).arg(PosDPS[3]).arg(p);
@@ -247,7 +247,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[4][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[4]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[4]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[4]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_5;
             QString text = QString("5. %1     %L2 (%L3 | %4%)").arg(PosName[4]).arg(PosDmg[4]).arg(PosDPS[4]).arg(p);
@@ -260,7 +260,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[5][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[5]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[5]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[5]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_6;
             QString text = QString("6. %1     %L2 (%L3 | %4%)").arg(PosName[5]).arg(PosDmg[5]).arg(PosDPS[5]).arg(p);
@@ -272,7 +272,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[6][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[6]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[6]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[6]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_7;
             QString text = QString("7. %1     %L2 (%L3 | %4%)").arg(PosName[6]).arg(PosDmg[6]).arg(PosDPS[6]).arg(p);
@@ -284,7 +284,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[7][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[7]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[7]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[7]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_8;
             QString text = QString("8. %1     %L2 (%L3 | %4%)").arg(PosName[7]).arg(PosDmg[7]).arg(PosDPS[7]).arg(p);
@@ -296,7 +296,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[8][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[8]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[8]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[8]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_9;
             QString text = QString("9. %1     %L2 (%L3 | %4%)").arg(PosName[8]).arg(PosDmg[8]).arg(PosDPS[8]).arg(p);
@@ -309,7 +309,7 @@ void MainWindow::UpdateGroupLabels()
 
         if (PosName[9][0]!=0)
         {
-            if (PosDmg[0]>0)i=(PosDmg[9]*100/PosDmg[0]>0);else i=0;
+            if (PosDmg[0]>0 )i=PosDmg[9]*100.0/PosDmg[0];else i=0;
             if (AllDamageDone>0)p=PosDmg[9]*100/AllDamageDone;else p=0;
             Bar1 = ui->progressBar_10;
             QString text = QString("10. %1     %L2 (%L3 | %4%)").arg(PosName[9]).arg(PosDmg[9]).arg(PosDPS[9]).arg(p);
