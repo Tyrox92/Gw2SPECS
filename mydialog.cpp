@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <settings.h>
 
-using namespace std;
+using namespace GW2;
 
 
 MyDialog::MyDialog(QWidget *parent) :

@@ -82,6 +82,7 @@ namespace GW2
         int CurrentMeta;
 
         char writeBuff[128];
+        int is_connected=0;
 
 
         char tmp1[20];
@@ -94,11 +95,10 @@ namespace GW2
         void UpdatePersonalLabels();
         void StartupHideProgressBars();
 
-
         void on_actionShrinkUI_triggered(bool checked);
         void on_pushButton_toggled(bool checked);
-        void on_btn_grpMoreInfo_clicked();
-        void on_toolBar_dockLocationChange();
+        void letsConnect();
+        void on_actionActionGroupDetails_toggled(bool toggeled);
     };
 
 }

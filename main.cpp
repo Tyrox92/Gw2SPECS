@@ -8,7 +8,7 @@
 #include "global.h"
 #include "mydialog.h"
 
-using namespace std;
+using namespace GW2;
 
 QString MyName;
 QString HostIP;
