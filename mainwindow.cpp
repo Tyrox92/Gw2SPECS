@@ -171,44 +171,44 @@ void MainWindow::UpdateGroupLabels()
             }
         }
 
-            for(int n=0;n<10;n++) {
-                if (PosName[n][0]!=0) {
-                    if (PosDmg[0]>0)i=PosDmg[n]*100/PosDmg[0];
-                    else i=0;
-                    if (AllDamageDone>0)p=PosDmg[n]*100/AllDamageDone;
-                    else p=0;
-                    switch (n) {
-                    case 0: Bar1 = ui->progressBar_1; break;
-                    case 1: Bar1 = ui->progressBar_2; break;
-                    case 2: Bar1 = ui->progressBar_3; break;
-                    case 3: Bar1 = ui->progressBar_4; break;
-                    case 4: Bar1 = ui->progressBar_5; break;
-                    case 5: Bar1 = ui->progressBar_6; break;
-                    case 6: Bar1 = ui->progressBar_7; break;
-                    case 7: Bar1 = ui->progressBar_8; break;
-                    case 8: Bar1 = ui->progressBar_9; break;
-                    case 9: Bar1 = ui->progressBar_10; break;
-                    default: break;
-                    }
-                    Bar1->setValue(i);
-                    QString text = QString("%1. %2     %L3 (%L4 | %5%)").arg(n+1).arg(PosName[n]).arg(PosDmg[n]).arg(PosDPS[n]).arg(p);
-                    Bar1->setFormat(text);
-                    Bar1->setVisible(true);
-                }
-                else switch (n) {
-                case 0: ui->progressBar_1 ->setVisible(false); break;
-                case 1: ui->progressBar_2 ->setVisible(false); break;
-                case 2: ui->progressBar_3 ->setVisible(false); break;
-                case 3: ui->progressBar_4 ->setVisible(false); break;
-                case 4: ui->progressBar_5 ->setVisible(false); break;
-                case 5: ui->progressBar_6 ->setVisible(false); break;
-                case 6: ui->progressBar_7 ->setVisible(false); break;
-                case 7: ui->progressBar_8 ->setVisible(false); break;
-                case 8: ui->progressBar_9 ->setVisible(false); break;
-                case 9: ui->progressBar_10 ->setVisible(false); break;
+        for(int n=0;n<10;n++) {
+            if (PosName[n][0]!=0) {
+                if (PosDmg[0]>0)i=PosDmg[n]*100/PosDmg[0];
+                else i=0;
+                if (AllDamageDone>0)p=PosDmg[n]*100/AllDamageDone;
+                else p=0;
+                switch (n) {
+                case 0: Bar1 = ui->progressBar_1; break;
+                case 1: Bar1 = ui->progressBar_2; break;
+                case 2: Bar1 = ui->progressBar_3; break;
+                case 3: Bar1 = ui->progressBar_4; break;
+                case 4: Bar1 = ui->progressBar_5; break;
+                case 5: Bar1 = ui->progressBar_6; break;
+                case 6: Bar1 = ui->progressBar_7; break;
+                case 7: Bar1 = ui->progressBar_8; break;
+                case 8: Bar1 = ui->progressBar_9; break;
+                case 9: Bar1 = ui->progressBar_10; break;
                 default: break;
                 }
+                Bar1->setValue(i);
+                QString text = QString("%1. %2     %L3 (%L4 | %5%)").arg(n+1).arg(PosName[n]).arg(PosDmg[n]).arg(PosDPS[n]).arg(p);
+                Bar1->setFormat(text);
+                Bar1->setVisible(true);
             }
+            else switch (n) {
+            case 0: ui->progressBar_1 ->setVisible(false); break;
+            case 1: ui->progressBar_2 ->setVisible(false); break;
+            case 2: ui->progressBar_3 ->setVisible(false); break;
+            case 3: ui->progressBar_4 ->setVisible(false); break;
+            case 4: ui->progressBar_5 ->setVisible(false); break;
+            case 5: ui->progressBar_6 ->setVisible(false); break;
+            case 6: ui->progressBar_7 ->setVisible(false); break;
+            case 7: ui->progressBar_8 ->setVisible(false); break;
+            case 8: ui->progressBar_9 ->setVisible(false); break;
+            case 9: ui->progressBar_10 ->setVisible(false); break;
+            default: break;
+            }
+        }
 
 
         /*
@@ -445,26 +445,26 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
     QString styleTransparent = " QGroupBox#groupBoxSettings {\
             background-color: rgb(248,248,248);\
-            border: 1px solid rgb(170, 170, 255);\
-            border-radius: 3px;\
-            border-color:rgb(170, 170, 255);\
-    }";
+border: 1px solid rgb(170, 170, 255);\
+    border-radius: 3px;\
+    border-color:rgb(170, 170, 255);\
+}";
 
-    if (isAlmostTransparent)
-    {
-        this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
-        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
-        ui->labelDpsValue->setStyleSheet("");
-        this->show();
+if (isAlmostTransparent)
+{
+    this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
+    ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+    ui->labelDpsValue->setStyleSheet("");
+    this->show();
 
-    }
-    else
-    {
-        this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
-        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
-        ui->labelDpsValue->setStyleSheet("");
-        this->show();
-    }
+}
+else
+{
+this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
+ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+ui->labelDpsValue->setStyleSheet("");
+this->show();
+}
 }
 
 void MainWindow::LinkToWebsite()
@@ -613,6 +613,7 @@ void MainWindow::letsConnect()
         LastColor=0;
 
         socket->connectToHost(HostIP, HostPort);
+        is_connected = 1;
 
         if(!socket->waitForConnected(5000))
         {
@@ -625,33 +626,33 @@ void MainWindow::letsConnect()
             layout->setMargin(50);
             dialog->setStyleSheet("background:red;");
             dialog->show();
+            is_connected = 0;
         }
-        is_connected = 1;
     }
 
-        // this is not blocking call
+    // this is not blocking call
 
-        // IP should be yours
-        MyClientSlot=10; //no semi-handshake yet
-        CurrentMeta=0;CurrentPos=0;
-        int i;
-        for (i=0;i<10;i++)
-        {
-            SlotDmg[i]=0;
-            SlotDPS[i]=0;
-            SlotAct[i]=0;
-            SlotName[i][0]='\0';
-        }
-        AllDamageDone=0;
-        hitCounter=0;
-        m_critChance=0;
-        critCounter=0;
-        m_condiDmg=0;
-        LastColor=0;
+    // IP should be yours
+    MyClientSlot=10; //no semi-handshake yet
+    CurrentMeta=0;CurrentPos=0;
+    int i;
+    for (i=0;i<10;i++)
+    {
+        SlotDmg[i]=0;
+        SlotDPS[i]=0;
+        SlotAct[i]=0;
+        SlotName[i][0]='\0';
+    }
+    AllDamageDone=0;
+    hitCounter=0;
+    m_critChance=0;
+    critCounter=0;
+    m_condiDmg=0;
+    LastColor=0;
 
-        // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
-        update_Timer.start(1000);
+    // we need to wait...
+    m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+    update_Timer.start(1000);
 
 }
 

@@ -1795,7 +1795,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <string>actionGroupDetails</string>
    </property>
    <property name="toolTip">
-    <string>Group Details</string>
+    <string>Player/Group Details</string>
    </property>
   </action>
  </widget>
