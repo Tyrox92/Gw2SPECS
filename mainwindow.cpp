@@ -94,7 +94,7 @@ void MainWindow::UpdateGroupLabels()
     // Display only the solo user information
     if (is_connected == 0 && MyClientSlot == 10)
     {
-        StartupHideProgressBars();
+        //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
         PosAct[0]=m_Activity;
@@ -766,6 +766,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
     {
         update_Timer.stop();
         socket->abort();
+        StartupHideProgressBars();
         is_connected = 0;
         HostIP="";
         //Go back to the initializer
