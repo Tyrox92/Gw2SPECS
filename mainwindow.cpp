@@ -27,24 +27,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
     ui->widget->hide();
-    ui->widget_2->hide();
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
 
     // Resize Option
-    // QGridLayout is already in *.ui file
-    // Using gridLayout_3 here which is the outer layout
+    // Using gridLayout here which is the main layout
     QSizeGrip *sizeGripRight = new QSizeGrip(this);
     QSizeGrip *sizeGripLeft = new QSizeGrip(this);
-    ui->gridLayout->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
-    ui->gridLayout->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
+    ui->gridLayout_2->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_2->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
     sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
     sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
 
-
-    //QObject::connect(ui->btnTransparency, SIGNAL(clicked(bool)), this, SLOT(EnableTransparency(bool)));
-    //QObject::connect(ui->btnHelp, SIGNAL(clicked()), this, SLOT(LinkToWebsite()));
-    //QObject::connect(ui->btnConfig, SIGNAL(clicked()), &m_Configurator, SLOT(exec()));
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
@@ -63,8 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(unsigned long long)), this, SLOT(UpdateDmg(unsigned long long)));
     //QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(int)), this, SLOT(UpdatePersonal()));
     //QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
-    //QObject::connect(ui->btnReset, SIGNAL(clicked()), dmgMeter, SLOT(Reset()));
-    //QObject::connect(ui->btnAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(ui->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
     QObject::connect(ui->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
@@ -86,7 +78,9 @@ MainWindow::MainWindow(QWidget *parent) :
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
 
-    letsConnect();
+    is_connected = 0;
+
+    Initialize();
 
 }
 
@@ -98,8 +92,9 @@ void MainWindow::UpdateGroupLabels()
 
     // If playing without a server
     // Display only the solo user information
-    if (is_connected == 0)
+    if (is_connected == 0 && MyClientSlot == 10)
     {
+        StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
         PosAct[0]=m_Activity;
@@ -113,8 +108,7 @@ void MainWindow::UpdateGroupLabels()
         AllDamageDone=m_Dmg;
         ui->grp_Dmg->setText(QString::number(AllDamageDone));
     }
-    // If playing connected to a server
-    if (MyClientSlot!=10)  //connected and semi-handshaked
+    else
     {
         AllDamageDone=0;
         for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
@@ -423,9 +417,7 @@ void MainWindow::disconnected()
 {
     qDebug() << "disconnected...";
     //so what now? exit?
-
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -443,28 +435,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
-    QString styleTransparent = " QGroupBox#groupBoxSettings {\
-            background-color: rgb(248,248,248);\
-border: 1px solid rgb(170, 170, 255);\
-    border-radius: 3px;\
-    border-color:rgb(170, 170, 255);\
-}";
-
-if (isAlmostTransparent)
-{
-    this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
-    ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
-    ui->labelDpsValue->setStyleSheet("");
-    this->show();
-
-}
-else
-{
-this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
-ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
-ui->labelDpsValue->setStyleSheet("");
-this->show();
-}
+    if (isAlmostTransparent)
+    {
+        this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
+        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+        ui->grp_DPS->setStyleSheet("");
+        this->show();
+    }
+    else
+    {
+        this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
+        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+        ui->grp_DPS->setStyleSheet("");
+        this->show();
+    }
 }
 
 void MainWindow::LinkToWebsite()
@@ -498,8 +482,8 @@ void MainWindow::UpdatePersonalLabels()
     long i;
 
     //Personal DPS Value
-    Label1 = ui->labelDpsValue;
-    Label1->setText(QString::number(m_Dps));
+    //Label1 = ui->grp_DPS;
+    //Label1->setText(QString::number(m_Dps));
     //Personal Crit Chance Value
     Label1 = ui->critChance;
     Label1->setText(QString::number(m_critChance));
@@ -510,30 +494,31 @@ void MainWindow::UpdatePersonalLabels()
     //Personal Max Damage Value
     Label1 = ui->labelMaxDmgValue;
     Label1->setText(QString::number(m_MaxDmg));
-    //Personal Damage Value
-    Label1 =ui->labelDmgValue;
-    Label1->setText(QString::number(m_Dmg));
     //Personal Condi DMG Value
     Label1 =ui->labelCondiDMGValue;
     Label1->setText(QString::number(m_condiDmg));
 
-    Label1 = ui->labelDpsValue;
-    if (m_Dps > DMGMETER_HIGH_DPS_LIMIT)
+    if (is_connected == 0)
     {
-        Label1->setStyleSheet(DmgMeter::s_UltraStyle);
+        Label1 = ui->grp_DPS;
+        if (m_Dps > DMGMETER_HIGH_DPS_LIMIT)
+        {
+            Label1->setStyleSheet(DmgMeter::s_UltraStyle);
+        }
+        else if (m_Dps > DMGMETER_NORMAL_DPS_LIMIT)
+        {
+            Label1->setStyleSheet(DmgMeter::s_HighStyle);
+        }
+        else if (m_Dps > DMGMETER_LOW_DPS_LIMIT)
+        {
+            Label1->setStyleSheet(DmgMeter::s_NormalStyle);
+        }
+        else
+        {
+            Label1->setStyleSheet(DmgMeter::s_LowStyle);
+        }
     }
-    else if (m_Dps > DMGMETER_NORMAL_DPS_LIMIT)
-    {
-        Label1->setStyleSheet(DmgMeter::s_HighStyle);
-    }
-    else if (m_Dps > DMGMETER_LOW_DPS_LIMIT)
-    {
-        Label1->setStyleSheet(DmgMeter::s_NormalStyle);
-    }
-    else
-    {
-        Label1->setStyleSheet(DmgMeter::s_LowStyle);
-    }
+    else ui->grp_DPS->setStyleSheet("color: rgb(255, 255, 255);");
 
     Label1 = ui->labelMaxDmgValue;
     if (m_MaxDmg > DMGMETER_HIGH_DPS_LIMIT)
@@ -556,9 +541,18 @@ void MainWindow::UpdatePersonalLabels()
 
 void MainWindow::UpdateTimer(void)
 {
-    SendClientInfo();
+    if (is_connected == 1)
+    {
+        ui->actionConnect->setIcon(QIcon(":/on"));
+        SendClientInfo();
+        UpdatePersonalLabels();
+        UpdateGroupLabels();
+    }
+    else ui->actionConnect->setIcon(QIcon(":/off"));
+
     UpdatePersonalLabels();
     UpdateGroupLabels();
+
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -583,11 +577,9 @@ void MainWindow::UpdateTime(int timeInMsecs)
     ui->labelTimeValue->setText(time);
 }
 
-void MainWindow::letsConnect()
+void MainWindow::Initialize()
 {
-    // My lazy attempt to check if connected to server or not
-    // We need to make a better check if connected here. Ran out of time.
-    if (HostIP != "")
+    if (HostIP != "" && is_connected == 0)
     {
         socket = new QTcpSocket(this);
         connect(socket, SIGNAL(connected()),this, SLOT(connected()));
@@ -613,7 +605,6 @@ void MainWindow::letsConnect()
         LastColor=0;
 
         socket->connectToHost(HostIP, HostPort);
-        is_connected = 1;
 
         if(!socket->waitForConnected(5000))
         {
@@ -628,13 +619,14 @@ void MainWindow::letsConnect()
             dialog->show();
             is_connected = 0;
         }
+        else is_connected = 1;
     }
+    else is_connected = 0;
 
     // this is not blocking call
-
-    // IP should be yours
     MyClientSlot=10; //no semi-handshake yet
     CurrentMeta=0;CurrentPos=0;
+
     int i;
     for (i=0;i<10;i++)
     {
@@ -653,7 +645,6 @@ void MainWindow::letsConnect()
     // we need to wait...
     m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
     update_Timer.start(1000);
-
 }
 
 // Give movement access to MainWindow
@@ -686,6 +677,7 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
         ui->centralWidget->show();
     }
 }
+
 //Show Condi DPS/Crit%/Condi DMG/Highest Hit if ". . ." icon is actionActionGroupDetails is toggled on/off.
 void GW2::MainWindow::on_pushButton_toggled(bool checked)
 {
@@ -722,8 +714,13 @@ void GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
     {
         if (toggeled)
         {
-            ui->labelDps->hide();
-            ui->labelDpsValue->hide();
+            ui->avg_DPS->show();
+            ui->grp_DPS->show();
+            ui->grp_Dmg->show();
+            ui->labelDmg_2->show();
+            ui->labelDmg_3->show();
+            ui->labelDmg_3->setText("Grp DPS");
+            ui->labelDmg_4->show();
             MainWindow::ui->widget->show();
         }
         else ui->widget->hide();
@@ -737,8 +734,47 @@ void GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
             ui->grp_DPS->hide();
             ui->labelDmg_3->hide();
             ui->labelDmg_4->hide();
+            ui->grp_Dmg->hide();
+            ui->labelDmg_2->hide();
             MainWindow::ui->widget->show();
         }
         else ui->widget->hide();
     }
+}
+
+void GW2::MainWindow::on_actionConnect_triggered()
+{
+    // If not connected to a server when triggered
+    // Then open myDialog
+    if (is_connected == 0)
+    {
+        update_Timer.stop();
+        MyDialog mDialog;
+        mDialog.setModal(true);
+
+
+        mDialog.exec();
+
+        MyName=mDialog.getName();
+        HostIP = mDialog.getIP();
+        HostPort=mDialog.getPort();
+
+        Initialize();
+    }
+    // Otherwise stop the timer and abort the connection
+    else
+    {
+        update_Timer.stop();
+        socket->abort();
+        is_connected = 0;
+        HostIP="";
+        //Go back to the initializer
+        Initialize();
+    }
+}
+
+void GW2::MainWindow::on_actionClose_triggered()
+{
+    // Let's abort the connection to the server before closing
+    socket->abort();
 }

@@ -5,8 +5,8 @@
         <file>Reset.png</file>
         <file>Config.png</file>
         <file>Transparency.png</file>
-        <file>off.png</file>
-        <file>on.png</file>
+        <file alias="off">off.png</file>
+        <file alias="on">on.png</file>
         <file>Auto_Reset_Active.png</file>
         <file>Exit.png</file>
         <file>shrink_down.png</file>

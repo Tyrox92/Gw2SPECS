@@ -17,9 +17,9 @@ class MyDialog : public QDialog
 public:
     explicit MyDialog(QWidget *parent = 0);
     ~MyDialog();
-     QString getName();
-     QString getIP();
-     int getPort();
+    QString getName();
+    QString getIP();
+    int getPort();
 
 private slots:
     void on_pushButton_clicked();
