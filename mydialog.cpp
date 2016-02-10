@@ -3,6 +3,7 @@
 #include "ui_mydialog.h"
 #include <QDebug>
 #include <settings.h>
+#include "mainwindow.h"
 
 using namespace GW2;
 
@@ -12,6 +13,7 @@ MyDialog::MyDialog(QWidget *parent) :
     ui(new Ui::MyDialog)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
     ui->lineEdit->setText(ReadNameSettings());
     ui->lineEdit_2->setText(ReadIPSettings());
 }
@@ -50,4 +52,5 @@ int MyDialog::getPort()
 {
     return ui->lineEdit_3->text().toInt();
 }
+
 #endif

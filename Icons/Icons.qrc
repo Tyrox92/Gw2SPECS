@@ -13,5 +13,7 @@
         <file>shrink_up.png</file>
         <file>toolBox_bg.png</file>
         <file>moreDetails.png</file>
+        <file alias="connected">connect.png</file>
+        <file alias="connect">connected.png</file>
     </qresource>
 </RCC>

@@ -10,6 +10,7 @@
 #include <QSizeGrip>
 #include <QToolBar>
 #include <QToolButton>
+#include "configurator.h"
 
 using namespace GW2;
 
@@ -102,7 +103,7 @@ void MainWindow::UpdateGroupLabels()
         if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
         Bar1 = ui->progressBar_1;
         Bar1->setValue(i);
-        QString text = QString("%L2 - %L3").arg(PosDmg[0]).arg(PosDPS[0]);
+        QString text = QString("%L2 - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
         Bar1->setFormat(text);
         Bar1->setVisible(true);
         AllDamageDone=m_Dmg;
@@ -185,7 +186,7 @@ void MainWindow::UpdateGroupLabels()
                 default: break;
                 }
                 Bar1->setValue(i);
-                QString text = QString("%1. %2     %L3 (%L4 | %5%)").arg(n+1).arg(PosName[n]).arg(PosDmg[n]).arg(PosDPS[n]).arg(p);
+                QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
                 Bar1->setFormat(text);
                 Bar1->setVisible(true);
             }
@@ -543,12 +544,12 @@ void MainWindow::UpdateTimer(void)
 {
     if (is_connected == 1)
     {
-        ui->actionConnect->setIcon(QIcon(":/on"));
+        ui->actionConnect->setIcon(QIcon(":/connected"));
         SendClientInfo();
         UpdatePersonalLabels();
         UpdateGroupLabels();
     }
-    else ui->actionConnect->setIcon(QIcon(":/off"));
+    else ui->actionConnect->setIcon(QIcon(":/connect"));
 
     UpdatePersonalLabels();
     UpdateGroupLabels();
@@ -679,17 +680,19 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
 }
 
 //Show Condi DPS/Crit%/Condi DMG/Highest Hit if ". . ." icon is actionActionGroupDetails is toggled on/off.
-void GW2::MainWindow::on_pushButton_toggled(bool checked)
+bool GW2::MainWindow::on_pushButton_toggled(bool toggeled)
 {
-    QSettings settings;
-    if (checked)
+    if (toggeled)
     {
         ui->widgetExtraDetails->show();
+        toggeled = true;
     }
     else
     {
         ui->widgetExtraDetails->hide();
+        toggeled = false;
     }
+    return toggeled;
 }
 
 void GW2::MainWindow::StartupHideProgressBars()
@@ -707,7 +710,7 @@ void GW2::MainWindow::StartupHideProgressBars()
 }
 
 //Show player/group details
-void GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
+bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
 {
     // Check if this user is playing on a server or not
     if (is_connected == 1)
@@ -722,8 +725,13 @@ void GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
             ui->labelDmg_3->setText("Grp DPS");
             ui->labelDmg_4->show();
             MainWindow::ui->widget->show();
+            toggeled = true;
         }
-        else ui->widget->hide();
+        else
+        {
+            ui->widget->hide();
+            toggeled = false;
+        }
     }
     // If playing solo - show only DPS/DMG/TIME
     else
@@ -737,13 +745,24 @@ void GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
             ui->grp_Dmg->hide();
             ui->labelDmg_2->hide();
             MainWindow::ui->widget->show();
+            toggeled = true;
         }
-        else ui->widget->hide();
+        else
+        {
+            ui->widget->hide();
+            toggeled = false;
+        }
     }
+    return toggeled;
 }
 
 void GW2::MainWindow::on_actionConnect_triggered()
 {
+    if (ui->actionActionGroupDetails->isChecked())
+        ui->actionActionGroupDetails->setChecked(false);
+    if (ui->pushButton->isChecked())
+        ui->pushButton->setChecked(false);
+
     // If not connected to a server when triggered
     // Then open myDialog
     if (is_connected == 0)

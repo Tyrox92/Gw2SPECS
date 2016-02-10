@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>440</height>
+    <width>215</width>
+    <height>205</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>450</width>
-    <height>440</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -32,23 +32,23 @@
    <string>GW2DPS</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">QWidget { background-color: rgba(32, 43, 47, 60%); }
+QWidget#widget { background-color: rgba(32, 43, 47, 0%); }
+QLabel {  background-color: rgba(32, 43, 47, 0%); color: rgb(255, 255, 255); }
+QLineEdit {
+    background-color: #202B2F;
+	color: #FFFFFF;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: beige;
+    font: bold 10px;
+}
+
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="3" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="1">
+   <item row="0" column="0">
     <widget class="QLabel" name="label_3">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -69,79 +69,14 @@
       <string notr="true">font: 75 14pt &quot;Leelawadee UI&quot;;</string>
      </property>
      <property name="text">
-      <string>GW2DPS</string>
+      <string>Connect to Host</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="label_7">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 9pt &quot;Leelawadee UI Semilight&quot;;</string>
-     </property>
-     <property name="text">
-      <string>What makes it legal : It does not offend the Terms of Service of Guild Wars 2. It does not read from game memory. Instead it uses Computer Vision techniques to read out numbers presented in the combat log by taking screenshots of the chat block periodically, converting pixels of the image into numbers and using the converted numbers for dmg / dps calculation. The whole process happens in real time.
-
-Settings for correct measuring : Options/Graphics Options: Interface Size=Normal, Resolution=Windowed Fullscreen, Chatbox/options: Text Size=Medium, Disable Timestamps, Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage. Make sure your combat log has more then 16+ lines and always visible.</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="label_4">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 10pt &quot;Leelawadee UI Semilight&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Based on JaxnX, modified by Kozzy, Tyrox and DoM</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="1">
+   <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -151,32 +86,6 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="2">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="1">
        <widget class="QGroupBox" name="groupBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -194,56 +103,6 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
          <bool>false</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="7" column="1">
-          <widget class="QPushButton" name="pushButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>156</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton#pushButton {
-    background-color: #8BB2DA;
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 5px;
-    border-color: beige;
-    font: bold 12px;
-    min-width: 10em;
-    padding: 6px;
-}
-QPushButton#pushButton:pressed {
-    background-color: rgb(197,216,236);
-    border-style: inset;
-}</string>
-           </property>
-           <property name="text">
-            <string>Login</string>
-           </property>
-           <property name="autoExclusive">
-            <bool>false</bool>
-           </property>
-           <property name="autoDefault">
-            <bool>true</bool>
-           </property>
-           <property name="default">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="1" colspan="2">
           <widget class="QLineEdit" name="lineEdit">
            <property name="sizePolicy">
@@ -251,6 +110,9 @@ QPushButton#pushButton:pressed {
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
            <property name="maxLength">
             <number>10</number>
@@ -269,7 +131,6 @@ QPushButton#pushButton:pressed {
             </sizepolicy>
            </property>
            <property name="maxLength">
-            <number>50</number>
             <number>100</number>
            </property>
           </widget>
@@ -300,7 +161,7 @@ QPushButton#pushButton:pressed {
            </property>
            <property name="minimumSize">
             <size>
-             <width>45</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
@@ -347,6 +208,56 @@ QPushButton#pushButton:pressed {
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1" colspan="3">
+          <widget class="QPushButton" name="pushButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>156</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton#pushButton {
+    background-color: #8BB2DA;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: beige;
+    font: bold 12px;
+    min-width: 10em;
+    padding: 6px;
+}
+QPushButton#pushButton:pressed {
+    background-color: rgb(197,216,236);
+    border-style: inset;
+}</string>
+           </property>
+           <property name="text">
+            <string>Login</string>
+           </property>
+           <property name="autoExclusive">
+            <bool>false</bool>
+           </property>
+           <property name="autoDefault">
+            <bool>true</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
            </property>
           </widget>
          </item>

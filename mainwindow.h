@@ -94,9 +94,9 @@ private slots:
     void StartupHideProgressBars();
 
     void on_actionShrinkUI_triggered(bool checked);
-    void on_pushButton_toggled(bool checked);
+    bool on_pushButton_toggled(bool toggeled);
     void Initialize();
-    void on_actionActionGroupDetails_toggled(bool toggeled);
+    bool on_actionActionGroupDetails_toggled(bool toggeled);
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
 };

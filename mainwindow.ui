@@ -1094,7 +1094,7 @@
             <x>0</x>
             <y>0</y>
             <width>222</width>
-            <height>260</height>
+            <height>255</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -1552,10 +1552,6 @@ QProgressBar::chunk {
      </widget>
     </item>
    </layout>
-   <zorder>widget</zorder>
-   <zorder>widget_3</zorder>
-   <zorder>widget_2</zorder>
-   <zorder>widgetExtraDetails</zorder>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="sizePolicy">
@@ -1576,8 +1572,8 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
    </property>
    <property name="iconSize">
     <size>
-     <width>11</width>
-     <height>11</height>
+     <width>12</width>
+     <height>12</height>
     </size>
    </property>
    <attribute name="toolBarArea">

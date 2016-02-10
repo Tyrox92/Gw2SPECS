@@ -16,12 +16,9 @@ Configurator::Configurator(QWidget *parent) :
     // Set version
     ui->labelVersion->setText(Settings::s_Product);
 
-
-    Settings::ReadSettings(ui->comboBoxGwChatTxtSize);
-    Settings::ReadSettings(ui->comboBoxGwChatWindowHeight);
-    Settings::ReadSettings(ui->comboBoxGwInterfaceSize);
-    Settings::ReadSettings(ui->sliderFontSize);
-    Settings::ReadSettings(ui->sliderOpacity);
+    Settings::ReadSettings(ui->checkBoxDamageDone);
+    Settings::ReadSettings(ui->checkBoxPercentDD);
+    Settings::ReadSettings(ui->checkBoxPosition);
     Settings::ReadSettings(ui->comboBoxScreenshots);
     Settings::ReadSettings(ui->comboBoxUpdates);
     Settings::ReadSettings(ui->comboBoxSecondsInCombat);
@@ -35,11 +32,9 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->comboBoxUpdates);
     Settings::WriteSettings(ui->comboBoxSecondsInCombat);
     Settings::WriteSettings(ui->comboBoxConsideredLines);
-    Settings::WriteSettings(ui->comboBoxGwChatTxtSize);
-    Settings::WriteSettings(ui->comboBoxGwChatWindowHeight);
-    Settings::WriteSettings(ui->comboBoxGwInterfaceSize);
-    Settings::WriteSettings(ui->sliderFontSize);
-    Settings::WriteSettings(ui->sliderOpacity);
+    Settings::WriteSettings(ui->checkBoxDamageDone);
+    Settings::WriteSettings(ui->checkBoxPercentDD);
+    Settings::WriteSettings(ui->checkBoxPosition);
 
     delete ui;
 }

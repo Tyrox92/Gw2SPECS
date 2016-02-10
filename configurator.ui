@@ -51,12 +51,12 @@ color: rgb(169, 248, 255);</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>232</width>
-        <height>102</height>
+        <width>282</width>
+        <height>162</height>
        </rect>
       </property>
       <attribute name="label">
-       <string>Gw2 In-game Settings</string>
+       <string>Player Bar Settings (NOT FINISHED)</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
@@ -74,44 +74,18 @@ color: rgb(169, 248, 255);</string>
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>Gw2 Interface Size</string>
+          <string>Position</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBoxGwInterfaceSize">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
+        <widget class="QCheckBox" name="checkBoxPosition">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+         <property name="text">
+          <string>Enable</string>
          </property>
-         <item>
-          <property name="text">
-           <string>Small</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Normal</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Large</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Larger</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="1" column="0">
@@ -129,39 +103,18 @@ color: rgb(169, 248, 255);</string>
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>Gw2 Chat Txt Size</string>
+          <string>Damage Done</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBoxGwChatTxtSize">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
+        <widget class="QCheckBox" name="checkBoxDamageDone">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+         <property name="text">
+          <string>Enable</string>
          </property>
-         <item>
-          <property name="text">
-           <string>Small</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Medium</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Large</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="2" column="0">
@@ -179,34 +132,18 @@ color: rgb(169, 248, 255);</string>
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>Chat Window Height</string>
+          <string>% of Damage Done</string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QComboBox" name="comboBoxGwChatWindowHeight">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
+        <widget class="QCheckBox" name="checkBoxPercentDD">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+         <property name="text">
+          <string>Enable</string>
          </property>
-         <item>
-          <property name="text">
-           <string extracomment="Always use MAX Width!">Lowest</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string extracomment="Always use MAX Width!">Highest</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>
@@ -216,8 +153,8 @@ color: rgb(169, 248, 255);</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>265</width>
-        <height>132</height>
+        <width>282</width>
+        <height>162</height>
        </rect>
       </property>
       <attribute name="label">
@@ -261,10 +198,10 @@ color: rgb(169, 248, 255);</string>
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="currentText">
-          <string>15</string>
+          <string>25</string>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <item>
           <property name="text">
@@ -327,6 +264,16 @@ color: rgb(169, 248, 255);</string>
          <item>
           <property name="text">
            <string>2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4</string>
           </property>
          </item>
         </widget>
@@ -418,6 +365,11 @@ color: rgb(169, 248, 255);</string>
          </item>
          <item>
           <property name="text">
+           <string>27</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>28</string>
           </property>
          </item>
@@ -464,91 +416,6 @@ color: rgb(169, 248, 255);</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="meterSettings">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>98</width>
-        <height>68</height>
-       </rect>
-      </property>
-      <attribute name="label">
-       <string>Meter UI Settings</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="labelFontSize">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Font Size</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QSlider" name="sliderFontSize">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="labelOpacity">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Opacity</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QSlider" name="sliderOpacity">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
