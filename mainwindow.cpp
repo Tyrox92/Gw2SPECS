@@ -88,7 +88,17 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::UpdateGroupLabels()
 {
     QLabel* Label1;
-    QProgressBar* Bar1;
+    QProgressBar* Bar1 = ui->progressBar_1;
+    QProgressBar* Bar2 = ui->progressBar_2;
+    QProgressBar* Bar3 = ui->progressBar_3;
+    QProgressBar* Bar4 = ui->progressBar_4;
+    QProgressBar* Bar5 = ui->progressBar_5;
+    QProgressBar* Bar6 = ui->progressBar_6;
+    QProgressBar* Bar7 = ui->progressBar_7;
+    QProgressBar* Bar8 = ui->progressBar_8;
+    QProgressBar* Bar9 = ui->progressBar_9;
+    QProgressBar* Bar10 = ui->progressBar_10;
+    QProgressBar* Bar [10] = {Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9,Bar10};
     long p,i,j,k;
 
     // If playing without a server
@@ -101,11 +111,10 @@ void MainWindow::UpdateGroupLabels()
         PosAct[0]=m_Activity;
         if (PosDmg[0]>0 )i=PosDmg[0]*100.0/PosDmg[0];else i=0;
         if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
-        Bar1 = ui->progressBar_1;
-        Bar1->setValue(i);
+        Bar[0]->setValue(i);
         QString text = QString("%L2 - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
-        Bar1->setFormat(text);
-        Bar1->setVisible(true);
+        Bar[0]->setFormat(text);
+        Bar[0]->setVisible(true);
         AllDamageDone=m_Dmg;
         ui->grp_Dmg->setText(QString::number(AllDamageDone));
     }
@@ -172,166 +181,15 @@ void MainWindow::UpdateGroupLabels()
                 else i=0;
                 if (AllDamageDone>0)p=PosDmg[n]*100/AllDamageDone;
                 else p=0;
-                switch (n) {
-                case 0: Bar1 = ui->progressBar_1; break;
-                case 1: Bar1 = ui->progressBar_2; break;
-                case 2: Bar1 = ui->progressBar_3; break;
-                case 3: Bar1 = ui->progressBar_4; break;
-                case 4: Bar1 = ui->progressBar_5; break;
-                case 5: Bar1 = ui->progressBar_6; break;
-                case 6: Bar1 = ui->progressBar_7; break;
-                case 7: Bar1 = ui->progressBar_8; break;
-                case 8: Bar1 = ui->progressBar_9; break;
-                case 9: Bar1 = ui->progressBar_10; break;
-                default: break;
-                }
-                Bar1->setValue(i);
+                Bar[n]->setValue(i);
                 QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-                Bar1->setFormat(text);
-                Bar1->setVisible(true);
+                Bar[n]->setFormat(text);
+                Bar[n]->setVisible(true);
             }
-            else switch (n) {
-            case 0: ui->progressBar_1 ->setVisible(false); break;
-            case 1: ui->progressBar_2 ->setVisible(false); break;
-            case 2: ui->progressBar_3 ->setVisible(false); break;
-            case 3: ui->progressBar_4 ->setVisible(false); break;
-            case 4: ui->progressBar_5 ->setVisible(false); break;
-            case 5: ui->progressBar_6 ->setVisible(false); break;
-            case 6: ui->progressBar_7 ->setVisible(false); break;
-            case 7: ui->progressBar_8 ->setVisible(false); break;
-            case 8: ui->progressBar_9 ->setVisible(false); break;
-            case 9: ui->progressBar_10 ->setVisible(false); break;
-            default: break;
-            }
+            else
+                Bar[n] ->setVisible(false);
         }
 
-
-        /*
-        if (PosName[0][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[0]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_1;
-            Bar1->setValue(i);
-            QString text = QString("1. %1     %L2 (%L3 | %4%)").arg(PosName[0]).arg(PosDmg[0]).arg(PosDPS[0]).arg(p);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-
-        }
-        else ui->progressBar_1->setVisible(false);
-
-        if (PosName[1][0]!=0)
-        {
-            if (PosDmg[0]>0)i=PosDmg[1]*100/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[1]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_2;
-            Bar1->setValue(i);
-            QString text = QString("2. %1     %L2 (%L3 | %4%)").arg(PosName[1]).arg(PosDmg[1]).arg(PosDPS[1]).arg(p);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-
-        }
-        else ui->progressBar_2->setVisible(false);
-
-        if (PosName[2][0]!=0)
-        {
-            if (PosDmg[0]>0)i=PosDmg[2]*100/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[2]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_3;
-            QString text = QString("3. %1     %L2 (%L3 | %4%)").arg(PosName[2]).arg(PosDmg[2]).arg(PosDPS[2]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-        }
-        else ui->progressBar_3->setVisible(false);
-
-        if (PosName[3][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[3]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[3]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_4;
-            QString text = QString("4. %1     %L2 (%L3 | %4%)").arg(PosName[3]).arg(PosDmg[3]).arg(PosDPS[3]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-        }
-        else ui->progressBar_4->setVisible(false);
-
-        if (PosName[4][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[4]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[4]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_5;
-            QString text = QString("5. %1     %L2 (%L3 | %4%)").arg(PosName[4]).arg(PosDmg[4]).arg(PosDPS[4]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-        }
-        else ui->progressBar_5->setVisible(false);
-
-
-        if (PosName[5][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[5]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[5]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_6;
-            QString text = QString("6. %1     %L2 (%L3 | %4%)").arg(PosName[5]).arg(PosDmg[5]).arg(PosDPS[5]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-        }
-        else ui->progressBar_6->setVisible(false);
-
-        if (PosName[6][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[6]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[6]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_7;
-            QString text = QString("7. %1     %L2 (%L3 | %4%)").arg(PosName[6]).arg(PosDmg[6]).arg(PosDPS[6]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-        }
-        else ui->progressBar_7->setVisible(false);
-
-        if (PosName[7][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[7]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[7]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_8;
-            QString text = QString("8. %1     %L2 (%L3 | %4%)").arg(PosName[7]).arg(PosDmg[7]).arg(PosDPS[7]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-        }
-        else ui->progressBar_8->setVisible(false);
-
-        if (PosName[8][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[8]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[8]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_9;
-            QString text = QString("9. %1     %L2 (%L3 | %4%)").arg(PosName[8]).arg(PosDmg[8]).arg(PosDPS[8]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-
-        }
-        else ui->progressBar_9->setVisible(false);
-
-        if (PosName[9][0]!=0)
-        {
-            if (PosDmg[0]>0 )i=PosDmg[9]*100.0/PosDmg[0];else i=0;
-            if (AllDamageDone>0)p=PosDmg[9]*100/AllDamageDone;else p=0;
-            Bar1 = ui->progressBar_10;
-            QString text = QString("10. %1     %L2 (%L3 | %4%)").arg(PosName[9]).arg(PosDmg[9]).arg(PosDPS[9]).arg(p);
-            Bar1->setValue(i);
-            Bar1->setFormat(text);
-            Bar1->setVisible(true);
-
-        }
-        else ui->progressBar_10->setVisible(false);
-*/
     }
 }
 
