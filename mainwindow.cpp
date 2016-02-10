@@ -112,7 +112,7 @@ void MainWindow::UpdateGroupLabels()
         if (PosDmg[0]>0 )i=PosDmg[0]*100.0/PosDmg[0];else i=0;
         if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
         Bar[0]->setValue(i);
-        QString text = QString("%L2 - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
+        QString text = QString("%L2 DMG - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
         Bar[0]->setFormat(text);
         Bar[0]->setVisible(true);
         AllDamageDone=m_Dmg;
@@ -184,7 +184,42 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n]->setValue(i);
                 QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
                 Bar[n]->setFormat(text);
+                Bar[n]->setAlignment(Qt::AlignRight);
                 Bar[n]->setVisible(true);
+
+
+
+                // For Future Release Adding Labels to Align Text within the Progressbar properly
+
+
+
+//                //Disable normal Text
+//                Bar[n]->setTextVisible(false);
+
+//                QVBoxLayout(Bar[n]).addWidget(nameLabel);
+//                QVBoxLayout(Bar[n]).addWidget(dmgLabel);
+//                //Position and Name
+//                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
+//                // DPS and %
+//                QString myDmg = QString("%L3% [%L4 DPS]").arg(p).arg(PosDPS[n]);
+//                //Set Text
+//                nameLabel->setText(myname);
+//                dmgLabel->setText(myDmg);
+//                //Styling them
+//                nameLabel->setStyleSheet("color:white;background:none;margin-top:50%;font-size:12px;");
+//                dmgLabel->setStyleSheet("color:white;background:none;");
+//                //Align Them
+//                nameLabel->setMinimumHeight(17);
+//                dmgLabel->setMinimumSize(100,17);
+
+
+//                //Display Labels
+//                nameLabel->show();
+//                dmgLabel->show();
+
+
+
+
             }
             else
                 Bar[n] ->setVisible(false);

@@ -12,6 +12,7 @@
 #include <QTime>
 #include <QMouseEvent>
 #include "mydialog.h"
+#include <QLabel>
 
 namespace Ui
 {
@@ -82,6 +83,8 @@ private:
     char writeBuff[128];
     int is_connected;
 
+    //QLabel *nameLabel = new QLabel(this);
+    //QLabel *dmgLabel = new QLabel(this);
 
     char tmp1[20];
     QTimer update_Timer;
