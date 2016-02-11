@@ -67,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
     QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
+
+    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
+
+
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
     dmgMeter->SetSecondsInCombat(uiConfig->comboBoxSecondsInCombat->currentText());
     dmgMeter->SetConsideredLineCount(uiConfig->comboBoxConsideredLines->currentText());
@@ -81,15 +85,28 @@ MainWindow::MainWindow(QWidget *parent) :
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
     ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
     is_connected = 0;
-
+    m_MyProfession=uiConfig->professionComboBox->currentIndex()+1;
     Initialize();
+}
 
+
+void MainWindow::ProfChanged(QString prof)
+{
+    if (prof== "Elementalist") m_MyProfession=1;else
+        if (prof== "Engineer") m_MyProfession=2;else
+            if (prof== "Guardian") m_MyProfession=3;else
+                if (prof== "Mesmer") m_MyProfession=4;else
+                    if (prof== "Necromancer") m_MyProfession=5;else
+                        if (prof== "Ranger") m_MyProfession=6;else
+                            if (prof== "Revenant") m_MyProfession=7;else
+                                if (prof== "Thief") m_MyProfession=8;else
+                                    if (prof== "Warrior") m_MyProfession=9;
 }
 
 
 void MainWindow::ProfSettingsChanged()
 {
-   if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=1;
+    if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=0;
 }
 
 void MainWindow::UpdateGroupLabels()
@@ -199,44 +216,44 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n]->setAlignment(Qt::AlignRight);
                 Bar[n]->setVisible(true);
                 if (ProfBasedColors>0)
-                    {
+                {
                     //profession based bar colors
                     switch (PosProf[n])
-                            {
-                            case 1:
-                              Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(200, 40, 40 , 60%);}");
-                              break;
-                            case 2:
-                              Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(40, 200, 40 , 60%);}");
-                              break;
-                            case 3:
-                              Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(40, 40, 200 , 60%);}");
-                              break;
-                            case 4:
-                              Bar[n]->setStyleSheet("");
-                              break;
-                            case 5:
-                              Bar[n]->setStyleSheet("");
-                              break;
-                            case 6:
-                              Bar[n]->setStyleSheet("");
-                              break;
-                            case 7:
-                              Bar[n]->setStyleSheet("");
-                              break;
-                            case 8:
-                              Bar[n]->setStyleSheet("");
-                              break;
-                            case 9:
-                              Bar[n]->setStyleSheet("");
-                              break;
-                            }
-                    }
-                else
                     {
-                     if (n%2==0 ) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
-                       else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
+                    case 1:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                        break;
+                    case 2:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                        break;
+                    case 3:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
+                        break;
+                    case 4:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                        break;
+                    case 5:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                        break;
+                    case 6:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
+                        break;
+                    case 7:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
+                        break;
+                    case 8:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
+                        break;
+                    case 9:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                        break;
                     }
+                }
+                else
+                {
+                    if (n%2==0 ) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                    else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
+                }
 
 
 
@@ -244,29 +261,29 @@ void MainWindow::UpdateGroupLabels()
 
 
 
-//                //Disable normal Text
-//                Bar[n]->setTextVisible(false);
+                //                //Disable normal Text
+                //                Bar[n]->setTextVisible(false);
 
-//                QVBoxLayout(Bar[n]).addWidget(nameLabel);
-//                QVBoxLayout(Bar[n]).addWidget(dmgLabel);
-//                //Position and Name
-//                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
-//                // DPS and %
-//                QString myDmg = QString("%L3% [%L4 DPS]").arg(p).arg(PosDPS[n]);
-//                //Set Text
-//                nameLabel->setText(myname);
-//                dmgLabel->setText(myDmg);
-//                //Styling them
-//                nameLabel->setStyleSheet("color:white;background:none;margin-top:50%;font-size:12px;");
-//                dmgLabel->setStyleSheet("color:white;background:none;");
-//                //Align Them
-//                nameLabel->setMinimumHeight(17);
-//                dmgLabel->setMinimumSize(100,17);
+                //                QVBoxLayout(Bar[n]).addWidget(nameLabel);
+                //                QVBoxLayout(Bar[n]).addWidget(dmgLabel);
+                //                //Position and Name
+                //                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
+                //                // DPS and %
+                //                QString myDmg = QString("%L3% [%L4 DPS]").arg(p).arg(PosDPS[n]);
+                //                //Set Text
+                //                nameLabel->setText(myname);
+                //                dmgLabel->setText(myDmg);
+                //                //Styling them
+                //                nameLabel->setStyleSheet("color:white;background:none;margin-top:50%;font-size:12px;");
+                //                dmgLabel->setStyleSheet("color:white;background:none;");
+                //                //Align Them
+                //                nameLabel->setMinimumHeight(17);
+                //                dmgLabel->setMinimumSize(100,17);
 
 
-//                //Display Labels
-//                nameLabel->show();
-//                dmgLabel->show();
+                //                //Display Labels
+                //                nameLabel->show();
+                //                dmgLabel->show();
 
 
 
@@ -721,7 +738,6 @@ void GW2::MainWindow::on_actionConnect_triggered()
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort();
-        m_MyProfession=mDialog.getProf();
         Initialize();
     }
     // Otherwise stop the timer and abort the connection

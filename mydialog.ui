@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>215</width>
-    <height>277</height>
+    <height>217</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -103,7 +103,7 @@ QLineEdit {
          <bool>false</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="5" column="3">
+         <item row="4" column="3">
           <widget class="QLineEdit" name="lineEdit_3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -135,7 +135,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
+         <item row="3" column="1">
           <widget class="QLabel" name="label_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -151,7 +151,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="1" colspan="2">
+         <item row="4" column="1" colspan="2">
           <widget class="QLineEdit" name="lineEdit_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -184,7 +184,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="3">
+         <item row="3" column="3">
           <widget class="QLabel" name="label_5">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -200,7 +200,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="1" colspan="3">
+         <item row="7" column="1" colspan="3">
           <widget class="QPushButton" name="pushButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -210,7 +210,7 @@ border:1px solid #fff;</string>
            </property>
            <property name="minimumSize">
             <size>
-             <width>154</width>
+             <width>156</width>
              <height>0</height>
             </size>
            </property>
@@ -220,13 +220,17 @@ border:1px solid #fff;</string>
            <property name="styleSheet">
             <string notr="true">QPushButton#pushButton {
     background-color: #8BB2DA;
-
+	border-style: outset;
+	border-width: 2px;
+	border-radius: 5px;
+	border-color: beige;
     font: bold 12px;
     min-width: 10em;
     padding: 6px;
 }
 QPushButton#pushButton:pressed {
     background-color: rgb(197,216,236);
+	border-style: inset;
  
 }</string>
            </property>
@@ -245,64 +249,6 @@ QPushButton#pushButton:pressed {
            <property name="flat">
             <bool>false</bool>
            </property>
-          </widget>
-         </item>
-         <item row="3" column="1" colspan="3">
-          <widget class="QComboBox" name="professionComboBox">
-           <property name="editable">
-            <bool>false</bool>
-           </property>
-           <property name="currentText">
-            <string>Elementalist</string>
-           </property>
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>Elementalist</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Engineer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Guardian</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Necromancer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Mesmer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Ranger</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Revenant</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Thief</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Warrior</string>
-            </property>
-           </item>
           </widget>
          </item>
          <item row="1" column="1">

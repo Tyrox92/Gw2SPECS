@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>300</height>
+    <width>292</width>
+    <height>292</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>300</width>
-    <height>300</height>
+    <width>320</width>
+    <height>320</height>
    </size>
   </property>
   <property name="font">
@@ -118,7 +118,7 @@
      </property>
      <property name="styleSheet">
       <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;
-color: rgb(169, 248, 255);</string>
+color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -128,149 +128,225 @@ color: rgb(169, 248, 255);</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>282</width>
-        <height>162</height>
+        <width>274</width>
+        <height>154</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Player Bar Settings (NOT FINISHED)</string>
       </attribute>
-      <widget class="QWidget" name="">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>205</width>
-         <height>108</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QLabel" name="labelGwInterfaceSize">
-          <property name="font">
-           <font>
-            <family>MS Shell Dlg 2</family>
-            <pointsize>11</pointsize>
-            <weight>9</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="checkBoxPercentDD">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelGwChatWindowHeight">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>% of Damage Done</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBoxPosition">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelGwChatTxtSize">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Damage Done</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelGwInterfaceSize">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Position</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="checkBoxDamageDone">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxProfColors">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QComboBox" name="professionComboBox">
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+    background-color: #8BB2DA;
+	color: rgb(0, 0, 0);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: beige;
+}
+QComboBox:editable {
+    background: #8BB2DA;
+}
+
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 30px;
+
+    border-left-width: 1px;
+    border-left-color:#8BB2DA;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+QComboBox QAbstractItemView {
+    border: 2px solid darkgray;
+    selection-background-color:#8BB2DA;
+}</string>
+         </property>
+         <property name="editable">
+          <bool>false</bool>
+         </property>
+         <property name="currentText">
+          <string>Elementalist</string>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <property name="maxVisibleItems">
+          <number>10</number>
+         </property>
+         <item>
           <property name="text">
-           <string>Position</string>
+           <string>Elementalist</string>
           </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QCheckBox" name="checkBoxPosition">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>Enable</string>
+           <string>Engineer</string>
           </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="labelGwChatTxtSize">
-          <property name="font">
-           <font>
-            <family>MS Shell Dlg 2</family>
-            <pointsize>11</pointsize>
-            <weight>9</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>Damage Done</string>
+           <string>Guardian</string>
           </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QCheckBox" name="checkBoxDamageDone">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>Enable</string>
+           <string>Mesmer</string>
           </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="labelGwChatWindowHeight">
-          <property name="font">
-           <font>
-            <family>MS Shell Dlg 2</family>
-            <pointsize>11</pointsize>
-            <weight>9</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>% of Damage Done</string>
+           <string>Necromancer</string>
           </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QCheckBox" name="checkBoxPercentDD">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>Enable</string>
+           <string>Ranger</string>
           </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="labelGwChatWindowHeight_2">
-          <property name="font">
-           <font>
-            <family>MS Shell Dlg 2</family>
-            <pointsize>11</pointsize>
-            <weight>9</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>Profession colors</string>
+           <string>Revenant</string>
           </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QCheckBox" name="checkBoxProfColors">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
+         </item>
+         <item>
           <property name="text">
-           <string>Enable</string>
+           <string>Thief</string>
           </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+         </item>
+         <item>
+          <property name="text">
+           <string>Warrior</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="accuracySettings">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>282</width>
-        <height>162</height>
+        <width>274</width>
+        <height>154</height>
        </rect>
       </property>
       <attribute name="label">

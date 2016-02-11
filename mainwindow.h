@@ -100,6 +100,7 @@ private slots:
     void UpdatePersonalLabels();
     void StartupHideProgressBars();
     void ProfSettingsChanged();
+    void ProfChanged(QString);
 
     void on_actionShrinkUI_triggered(bool checked);
     bool on_pushButton_toggled(bool toggeled);

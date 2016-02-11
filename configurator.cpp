@@ -23,6 +23,7 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->comboBoxUpdates);
     Settings::ReadSettings(ui->comboBoxSecondsInCombat);
     Settings::ReadSettings(ui->comboBoxConsideredLines);
+    Settings::ReadSettings(ui->professionComboBox);
 
 }
 
@@ -36,7 +37,7 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxDamageDone);
     Settings::WriteSettings(ui->checkBoxPercentDD);
     Settings::WriteSettings(ui->checkBoxPosition);
-
+    Settings::WriteSettings(ui->professionComboBox);
     delete ui;
 }
 
