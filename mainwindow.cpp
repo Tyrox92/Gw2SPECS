@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     screenRecorder->moveToThread(&m_ScreenRecorderThread);
 
     Ui::Configurator* uiConfig = m_Configurator.ui;
+
     dmgMeter->moveToThread(&m_ScreenRecorderThread);
 
     QObject::connect(&m_ScreenRecorderThread, SIGNAL(finished()), screenRecorder, SLOT(deleteLater()));
@@ -65,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
-
+    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
     dmgMeter->SetSecondsInCombat(uiConfig->comboBoxSecondsInCombat->currentText());
     dmgMeter->SetConsideredLineCount(uiConfig->comboBoxConsideredLines->currentText());
@@ -78,11 +79,17 @@ MainWindow::MainWindow(QWidget *parent) :
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
-
+    ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
     is_connected = 0;
 
     Initialize();
 
+}
+
+
+void MainWindow::ProfSettingsChanged()
+{
+   if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=1;
 }
 
 void MainWindow::UpdateGroupLabels()
@@ -139,6 +146,7 @@ void MainWindow::UpdateGroupLabels()
             PosDmg[j]=SlotDmg[j];
             PosDPS[j]=SlotDPS[j];
             PosAct[j]=SlotAct[j];
+            PosProf[j]=SlotProf[j];
             strcpy(PosName[j],SlotName[j]);
         }
 
@@ -158,12 +166,15 @@ void MainWindow::UpdateGroupLabels()
                     k=PosAct[i];
                     PosAct[i]=PosAct[j];
                     PosAct[j]=k;
+                    k=PosProf[i];
+                    PosProf[i]=PosProf[j];
+                    PosProf[j]=k;
                     strcpy(tmp1,PosName[i]);
                     strcpy(PosName[i],PosName[j]);
                     strcpy(PosName[j],tmp1);
                 }
             }
-            for (int p=0;p<9;p++)
+            for (int p=0;p<10;p++)
             {
                 if (PosName[p]==QString("Disconnected"))
                 {
@@ -171,6 +182,7 @@ void MainWindow::UpdateGroupLabels()
                     PosDmg[p]=0;
                     PosDPS[p]=0;
                     PosAct[p]=0;
+                    PosProf[p]=0;
                 }
             }
         }
@@ -186,6 +198,45 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n]->setFormat(text);
                 Bar[n]->setAlignment(Qt::AlignRight);
                 Bar[n]->setVisible(true);
+                if (ProfBasedColors>0)
+                    {
+                    //profession based bar colors
+                    switch (PosProf[n])
+                            {
+                            case 1:
+                              Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(200, 40, 40 , 60%);}");
+                              break;
+                            case 2:
+                              Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(40, 200, 40 , 60%);}");
+                              break;
+                            case 3:
+                              Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(40, 40, 200 , 60%);}");
+                              break;
+                            case 4:
+                              Bar[n]->setStyleSheet("");
+                              break;
+                            case 5:
+                              Bar[n]->setStyleSheet("");
+                              break;
+                            case 6:
+                              Bar[n]->setStyleSheet("");
+                              break;
+                            case 7:
+                              Bar[n]->setStyleSheet("");
+                              break;
+                            case 8:
+                              Bar[n]->setStyleSheet("");
+                              break;
+                            case 9:
+                              Bar[n]->setStyleSheet("");
+                              break;
+                            }
+                    }
+                else
+                    {
+                     if (n%2==0 ) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                       else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
+                    }
 
 
 
@@ -239,7 +290,6 @@ void MainWindow::ready2Read()
     incDataSize = incData.size();
     memcpy(incData2, incData.data(), incDataSize);
 
-
     i=0;
 
     if (MyClientSlot==10)
@@ -257,7 +307,7 @@ void MainWindow::ready2Read()
             if ((incData2[i]=='*') && (incData2[i+3]=='#'))
             {
 
-                if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<53))
+                if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<54))
                 {
                     CurrentPos=incData2[i+1]-48;
                     CurrentMeta=incData2[i+2]-48;
@@ -288,6 +338,8 @@ void MainWindow::ready2Read()
                         if  (CurrentMeta==2) SlotDPS[CurrentPos]=k;
                         if  (CurrentMeta==3) SlotDmg[CurrentPos]=k;
                         if  (CurrentMeta==4) SlotAct[CurrentPos]=k;
+                        if  (CurrentMeta==5) SlotProf[CurrentPos]=k;
+
                     }
                     i=j;
                 }
@@ -364,8 +416,7 @@ void MainWindow::SendClientInfo(void)
         if (m_Dmg>999999999) m_Dmg = 1;
         if (m_Activity>100) m_Activity = 1;
 
-        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity);
-
+        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*%u5#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity,MyClientSlot, m_MyProfession);
         socket->write(writeBuff);
     }
 }
@@ -439,8 +490,8 @@ void MainWindow::UpdateTimer(void)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
         SendClientInfo();
-        UpdatePersonalLabels();
-        UpdateGroupLabels();
+        //UpdatePersonalLabels();
+        //UpdateGroupLabels();
     }
     else ui->actionConnect->setIcon(QIcon(":/connect"));
 
@@ -535,7 +586,7 @@ void MainWindow::Initialize()
     critCounter=0;
     m_condiDmg=0;
     LastColor=0;
-
+    //m_MyProfession=0;
     // we need to wait...
     m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
     update_Timer.start(1000);
@@ -670,7 +721,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort();
-
+        m_MyProfession=mDialog.getProf();
         Initialize();
     }
     // Otherwise stop the timer and abort the connection
@@ -689,5 +740,5 @@ void GW2::MainWindow::on_actionConnect_triggered()
 void GW2::MainWindow::on_actionClose_triggered()
 {
     // Let's abort the connection to the server before closing
-    socket->abort();
+    if (is_connected>0) socket->abort();
 }

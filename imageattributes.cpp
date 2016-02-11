@@ -3,8 +3,8 @@
 using namespace GW2;
 
 const int ImageAttributes::s_LastLineControlYOffsets[] = {
-    0,21,0,
-    0,20,0,
+    18,21,0,
+    17,20,0,
     0,17,0,
     0,21,0
 };

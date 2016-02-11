@@ -19,6 +19,7 @@ unsigned long critCounter;
 unsigned int m_critChance;
 unsigned long m_condiDmg;
 unsigned long m_MaxDmg;
+unsigned long m_MyProfession;
 
 int main(int argc, char *argv[])
 {

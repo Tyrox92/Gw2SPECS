@@ -63,11 +63,14 @@ private:
     int PosDPS[10];
     long PosDmg[10];
     int PosAct[10];
+    int PosProf[10];
 
     char SlotName[10][15];
     int SlotDPS[10];
     long SlotDmg[10];
     int SlotAct[10];
+    int SlotProf[10];
+
 
     long AllDamageDone;
     int GrpDPS;
@@ -83,6 +86,7 @@ private:
     char writeBuff[128];
     int is_connected;
 
+    int ProfBasedColors;
     //QLabel *nameLabel = new QLabel(this);
     //QLabel *dmgLabel = new QLabel(this);
 
@@ -95,6 +99,7 @@ private slots:
     void UpdateGroupLabels();
     void UpdatePersonalLabels();
     void StartupHideProgressBars();
+    void ProfSettingsChanged();
 
     void on_actionShrinkUI_triggered(bool checked);
     bool on_pushButton_toggled(bool toggeled);

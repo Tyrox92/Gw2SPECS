@@ -19,6 +19,9 @@ extern unsigned long critCounter;
 extern unsigned long m_condiDmg;
 extern unsigned int m_critChance;
 extern unsigned long m_MaxDmg;
+extern unsigned long m_MyProfession;
+
+
 
 
 

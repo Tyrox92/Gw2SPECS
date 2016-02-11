@@ -16,6 +16,9 @@ MyDialog::MyDialog(QWidget *parent) :
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
     ui->lineEdit->setText(ReadNameSettings());
     ui->lineEdit_2->setText(ReadIPSettings());
+    Settings::ReadSettings(ui->professionComboBox);
+
+
 }
 
 MyDialog::~MyDialog()
@@ -25,6 +28,8 @@ MyDialog::~MyDialog()
 
 void MyDialog::on_pushButton_clicked()
 {
+
+    Settings::WriteSettings(ui->professionComboBox);
     if (ui->lineEdit->text().length()>0)
     {
         WriteNameSettings(ui->lineEdit->text());
@@ -37,10 +42,16 @@ void MyDialog::on_pushButton_clicked()
     }
 }
 
+int MyDialog::getProf()
+{
+    return ui->professionComboBox->currentIndex()+1;
+}
+
 QString MyDialog::getName()
 {
     return ui->lineEdit->text();
 }
+
 
 QString MyDialog::getIP()
 {
