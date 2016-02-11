@@ -210,7 +210,7 @@ border:1px solid #fff;</string>
            </property>
            <property name="minimumSize">
             <size>
-             <width>156</width>
+             <width>154</width>
              <height>0</height>
             </size>
            </property>
@@ -220,17 +220,14 @@ border:1px solid #fff;</string>
            <property name="styleSheet">
             <string notr="true">QPushButton#pushButton {
     background-color: #8BB2DA;
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 5px;
-    border-color: beige;
+
     font: bold 12px;
     min-width: 10em;
     padding: 6px;
 }
 QPushButton#pushButton:pressed {
     background-color: rgb(197,216,236);
-    border-style: inset;
+ 
 }</string>
            </property>
            <property name="text">
@@ -252,47 +249,6 @@ QPushButton#pushButton:pressed {
          </item>
          <item row="3" column="1" colspan="3">
           <widget class="QComboBox" name="professionComboBox">
-           <property name="styleSheet">
-            <string notr="true">QComboBox {
-    background-color: #8BB2DA;
-    border-style: outset;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: beige;
-    min-width: 6em;
-}
-QComboBox:editable {
-    background: #8BB2DA;
-}
-
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 15px;
-
-    border-left-width: 1px;
-    border-left-color:#8BB2DA;
-    border-left-style: solid; /* just a single line */
-    border-top-right-radius: 3px; /* same radius as the QComboBox */
-    border-bottom-right-radius: 3px;
-}
-QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-    top: 1px;
-    left: 1px;
-}
-QComboBox QAbstractItemView {
-    border: 2px solid darkgray;
-    selection-background-color:#8BB2DA;
-}</string>
-           </property>
            <property name="editable">
             <bool>false</bool>
            </property>
