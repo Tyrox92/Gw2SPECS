@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pDamageDone=uiConfig->checkBoxDamageDone->isChecked();
 
     is_connected = 0;
-    uiConfig->professionComboBox->setCurrentIndex(0);
+    //uiConfig->professionComboBox->setCurrentIndex(0);
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
 
     Initialize();
