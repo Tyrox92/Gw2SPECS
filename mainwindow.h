@@ -87,6 +87,8 @@ private:
     int is_connected;
 
     int ProfBasedColors;
+    int pPosition;
+    int pDamageDone;
     //QLabel *nameLabel = new QLabel(this);
     //QLabel *dmgLabel = new QLabel(this);
 
@@ -108,6 +110,8 @@ private slots:
     bool on_actionActionGroupDetails_toggled(bool toggeled);
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
+    void PositionChanged();
+    void DamageDoneChanged();
 };
 
 }

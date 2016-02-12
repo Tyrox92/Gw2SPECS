@@ -17,7 +17,6 @@ Configurator::Configurator(QWidget *parent) :
     ui->labelVersion->setText(Settings::s_Product);
     Settings::ReadSettings(ui->checkBoxProfColors);
     Settings::ReadSettings(ui->checkBoxDamageDone);
-    Settings::ReadSettings(ui->checkBoxPercentDD);
     Settings::ReadSettings(ui->checkBoxPosition);
     Settings::ReadSettings(ui->comboBoxScreenshots);
     Settings::ReadSettings(ui->comboBoxUpdates);
@@ -35,7 +34,6 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->comboBoxSecondsInCombat);
     Settings::WriteSettings(ui->comboBoxConsideredLines);
     Settings::WriteSettings(ui->checkBoxDamageDone);
-    Settings::WriteSettings(ui->checkBoxPercentDD);
     Settings::WriteSettings(ui->checkBoxPosition);
     Settings::WriteSettings(ui->professionComboBox);
     delete ui;

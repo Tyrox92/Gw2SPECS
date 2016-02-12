@@ -67,9 +67,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
     QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
+    QObject::connect(uiConfig->checkBoxDamageDone, SIGNAL(clicked(bool)), this, SLOT(DamageDoneChanged()));
+    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
 
     QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
-
 
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
     dmgMeter->SetSecondsInCombat(uiConfig->comboBoxSecondsInCombat->currentText());
@@ -84,8 +85,13 @@ MainWindow::MainWindow(QWidget *parent) :
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
     ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
+    pPosition=uiConfig->checkBoxPosition->isChecked();
+    pDamageDone=uiConfig->checkBoxDamageDone->isChecked();
+
     is_connected = 0;
-    m_MyProfession=uiConfig->professionComboBox->currentIndex()+1;
+    uiConfig->professionComboBox->setCurrentIndex(0);
+    m_MyProfession=uiConfig->professionComboBox->currentIndex();
+
     Initialize();
 }
 
@@ -103,10 +109,17 @@ void MainWindow::ProfChanged(QString prof)
                                     if (prof== "Warrior") m_MyProfession=9;
 }
 
-
 void MainWindow::ProfSettingsChanged()
 {
-    if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=0;
+    if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=1;
+}
+void MainWindow::PositionChanged()
+{
+    if (pPosition==1) pPosition=0; else pPosition=1;
+}
+void MainWindow::DamageDoneChanged()
+{
+    if (pDamageDone==1) pDamageDone=0; else pDamageDone=1;
 }
 
 void MainWindow::UpdateGroupLabels()
@@ -127,23 +140,24 @@ void MainWindow::UpdateGroupLabels()
 
     // If playing without a server
     // Display only the solo user information
-    if (is_connected == 0 && MyClientSlot == 10)
+    if (is_connected == 0)
     {
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
         PosAct[0]=m_Activity;
         if (PosDmg[0]>0 )i=PosDmg[0]*100.0/PosDmg[0];else i=0;
-        if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
+        //if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
         Bar[0]->setValue(i);
         QString text = QString("%L2 DMG - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
         Bar[0]->setFormat(text);
         Bar[0]->setVisible(true);
-        AllDamageDone=m_Dmg;
-        ui->grp_Dmg->setText(QString::number(AllDamageDone));
+        //AllDamageDone=m_Dmg;
+        ui->grp_Dmg->setText(QString::number(m_Dmg));
     }
     else
     {
+
         AllDamageDone=0;
         for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
         Label1 = ui->grp_Dmg;
@@ -211,8 +225,21 @@ void MainWindow::UpdateGroupLabels()
                 if (AllDamageDone>0)p=PosDmg[n]*100/AllDamageDone;
                 else p=0;
                 Bar[n]->setValue(i);
-                QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-                Bar[n]->setFormat(text);
+                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
+                QString text;
+                if (pPosition>0)
+                {
+                    if (pDamageDone>0) text = QString("%1. %2 %L3% [%L4][%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+                    else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
+                    Bar[n]->setFormat(text);
+                }
+                if (pPosition<1)
+                {
+                    if (pDamageDone<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
+                    else text = QString("%1 %L2% [%L3][%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+                    Bar[n]->setFormat(text);
+                }
+
                 Bar[n]->setAlignment(Qt::AlignRight);
                 Bar[n]->setVisible(true);
                 if (ProfBasedColors>0)
@@ -221,31 +248,31 @@ void MainWindow::UpdateGroupLabels()
                     switch (PosProf[n])
                     {
                     case 1:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 60%);}");
                         break;
                     case 2:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 60%);}");
                         break;
                     case 3:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 60%);}");
                         break;
                     case 4:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 60%);}");
                         break;
                     case 5:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 60%);}");
                         break;
                     case 6:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 60%);}");
                         break;
                     case 7:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 60%);}");
                         break;
                     case 8:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 60%);}");
                         break;
                     case 9:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 60%);}");
                         break;
                     }
                 }
@@ -292,7 +319,6 @@ void MainWindow::UpdateGroupLabels()
             else
                 Bar[n] ->setVisible(false);
         }
-
     }
 }
 
@@ -441,26 +467,13 @@ void MainWindow::SendClientInfo(void)
 void MainWindow::UpdatePersonalLabels()
 {
     QLabel* Label1;
-    long i;
+    long c;
 
-    //Personal DPS Value
-    //Label1 = ui->grp_DPS;
-    //Label1->setText(QString::number(m_Dps));
-    //Personal Crit Chance Value
-    Label1 = ui->critChance;
-    Label1->setText(QString::number(m_critChance));
-    //Personal Condi DPS Value
-    if (m_Dmg>0) i=m_condiDmg*m_Dps/m_Dmg; else i=0;
-    Label1 = ui->condiDPS;
-    Label1->setText(QString::number(i));
-    //Personal Max Damage Value
-    Label1 = ui->labelMaxDmgValue;
-    Label1->setText(QString::number(m_MaxDmg));
-    //Personal Condi DMG Value
-    Label1 =ui->labelCondiDMGValue;
-    Label1->setText(QString::number(m_condiDmg));
-
-    if (is_connected == 0)
+    if (is_connected == 1)
+    {
+        ui->grp_DPS->setStyleSheet("color: rgb(255, 255, 255);");
+    }
+    else
     {
         Label1 = ui->grp_DPS;
         if (m_Dps > DMGMETER_HIGH_DPS_LIMIT)
@@ -480,9 +493,19 @@ void MainWindow::UpdatePersonalLabels()
             Label1->setStyleSheet(DmgMeter::s_LowStyle);
         }
     }
-    else ui->grp_DPS->setStyleSheet("color: rgb(255, 255, 255);");
-
+    //Personal Crit Chance Value
+    Label1 = ui->critChance;
+    Label1->setText(QString::number(m_critChance));
+    //Personal Condi DMG Value
+    Label1 =ui->labelCondiDMGValue;
+    Label1->setText(QString::number(m_condiDmg));
+    //Personal Condi DPS Value
+    if (m_Dmg>0)c=m_condiDmg*m_Dps/m_Dmg;else c=0;
+    Label1 = ui->condiDPS;
+    Label1->setText(QString::number(c));
+    //Personal Max Damage Value
     Label1 = ui->labelMaxDmgValue;
+    Label1->setText(QString::number(m_MaxDmg));
     if (m_MaxDmg > DMGMETER_HIGH_DPS_LIMIT)
     {
         Label1->setStyleSheet(DmgMeter::s_UltraStyle);
@@ -507,14 +530,10 @@ void MainWindow::UpdateTimer(void)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
         SendClientInfo();
-        //UpdatePersonalLabels();
-        //UpdateGroupLabels();
     }
     else ui->actionConnect->setIcon(QIcon(":/connect"));
-
-    UpdatePersonalLabels();
     UpdateGroupLabels();
-
+    UpdatePersonalLabels();
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -582,31 +601,38 @@ void MainWindow::Initialize()
             is_connected = 0;
         }
         else is_connected = 1;
+        //m_MyProfession=0;
+        // we need to wait...
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+        update_Timer.start(1000);
     }
-    else is_connected = 0;
-
-    // this is not blocking call
-    MyClientSlot=10; //no semi-handshake yet
-    CurrentMeta=0;CurrentPos=0;
-
-    int i;
-    for (i=0;i<10;i++)
+    else
     {
-        SlotDmg[i]=0;
-        SlotDPS[i]=0;
-        SlotAct[i]=0;
-        SlotName[i][0]='\0';
+        is_connected = 0;
+
+        // this is not blocking call
+        MyClientSlot=10; //no semi-handshake yet
+        CurrentMeta=0;CurrentPos=0;
+
+        int i;
+        for (i=0;i<10;i++)
+        {
+            SlotDmg[i]=0;
+            SlotDPS[i]=0;
+            SlotAct[i]=0;
+            SlotName[i][0]='\0';
+        }
+        AllDamageDone=0;
+        hitCounter=0;
+        m_critChance=0;
+        critCounter=0;
+        m_condiDmg=0;
+        LastColor=0;
+        //m_MyProfession=0;
+        // we need to wait...
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+        update_Timer.start(1000);
     }
-    AllDamageDone=0;
-    hitCounter=0;
-    m_critChance=0;
-    critCounter=0;
-    m_condiDmg=0;
-    LastColor=0;
-    //m_MyProfession=0;
-    // we need to wait...
-    m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
-    update_Timer.start(1000);
 }
 
 // Give movement access to MainWindow
@@ -719,6 +745,8 @@ bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
 
 void GW2::MainWindow::on_actionConnect_triggered()
 {
+    Ui::Configurator* uiConfig = m_Configurator.ui;
+
     if (ui->actionActionGroupDetails->isChecked())
         ui->actionActionGroupDetails->setChecked(false);
     if (ui->pushButton->isChecked())
@@ -738,6 +766,8 @@ void GW2::MainWindow::on_actionConnect_triggered()
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort();
+        m_MyProfession=mDialog.getProfession();
+        uiConfig->professionComboBox->setCurrentIndex(m_MyProfession);
         Initialize();
     }
     // Otherwise stop the timer and abort the connection
@@ -748,6 +778,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
         StartupHideProgressBars();
         is_connected = 0;
         HostIP="";
+
         //Go back to the initializer
         Initialize();
     }

@@ -133,45 +133,19 @@ color: #8BB2DA;</string>
        </rect>
       </property>
       <attribute name="label">
-       <string>Player Bar Settings (NOT FINISHED)</string>
+       <string>Player Bar Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoxPercentDD">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Enable</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="labelGwChatWindowHeight">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>% of Damage Done</string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="1">
         <widget class="QCheckBox" name="checkBoxPosition">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Enable</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -213,29 +187,6 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="checkBoxDamageDone">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Enable</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QCheckBox" name="checkBoxProfColors">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Enable</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="0">
         <widget class="QComboBox" name="professionComboBox">
          <property name="styleSheet">
@@ -262,7 +213,7 @@ QComboBox:on { /* shift the text when the popup opens */
 QComboBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: top right;
-    width: 30px;
+    width: 40px;
 
     border-left-width: 1px;
     border-left-color:#8BB2DA;
@@ -283,7 +234,7 @@ QComboBox QAbstractItemView {
           <bool>false</bool>
          </property>
          <property name="currentText">
-          <string>Elementalist</string>
+          <string>Select Profession</string>
          </property>
          <property name="currentIndex">
           <number>0</number>
@@ -291,6 +242,11 @@ QComboBox QAbstractItemView {
          <property name="maxVisibleItems">
           <number>10</number>
          </property>
+         <item>
+          <property name="text">
+           <string>Select Profession</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Elementalist</string>
@@ -336,6 +292,32 @@ QComboBox QAbstractItemView {
            <string>Warrior</string>
           </property>
          </item>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxProfColors">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="checkBoxDamageDone">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Enable</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
       </layout>

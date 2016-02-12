@@ -20,6 +20,7 @@ public:
     QString getName();
     QString getIP();
     int getPort();
+    int getProfession();
 
 private slots:
     void on_pushButton_clicked();
