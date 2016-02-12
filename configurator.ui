@@ -192,34 +192,27 @@ color: #8BB2DA;</string>
          <property name="styleSheet">
           <string notr="true">QComboBox {
     background-color: #8BB2DA;
-	color: rgb(0, 0, 0);
-    border-style: outset;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: beige;
+	color: rgb(255, 255, 255);
+    border: 1px solid #AAA;
+	font-size: 14px;
 }
 QComboBox:editable {
     background: #8BB2DA;
+	color: rgb(255, 255, 255);
 }
 
 QComboBox:on { /* shift the text when the popup opens */
     padding-top: 3px;
     padding-left: 4px;
 }
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
+
 QComboBox::drop-down {
     subcontrol-origin: padding;
     subcontrol-position: top right;
-    width: 40px;
+	color: rgb(255, 255, 255);
+	border:none;
 
-    border-left-width: 1px;
-    border-left-color:#8BB2DA;
-    border-left-style: solid; /* just a single line */
-    border-top-right-radius: 3px; /* same radius as the QComboBox */
-    border-bottom-right-radius: 3px;
+
 }
 QComboBox::down-arrow:on { /* shift the arrow when popup is open */
     top: 1px;
@@ -228,6 +221,7 @@ QComboBox::down-arrow:on { /* shift the arrow when popup is open */
 QComboBox QAbstractItemView {
     border: 2px solid darkgray;
     selection-background-color:#8BB2DA;
+	color: rgb(255, 255, 255);
 }</string>
          </property>
          <property name="editable">
