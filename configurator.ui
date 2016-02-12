@@ -121,7 +121,7 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="gameSettings">
       <property name="geometry">
@@ -145,7 +145,7 @@ color: #8BB2DA;</string>
           <string>Enable</string>
          </property>
          <property name="checked">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -316,7 +316,7 @@ QComboBox QAbstractItemView {
           <string>Enable</string>
          </property>
          <property name="checked">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>

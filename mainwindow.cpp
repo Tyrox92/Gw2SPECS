@@ -486,7 +486,8 @@ void MainWindow::SendClientInfo(void)
 void MainWindow::UpdatePersonalLabels()
 {
     QLabel* Label1;
-    unsigned long long c;
+    unsigned long c;
+    double c1,c2,c3,c4;
 
     if (is_connected == 1)
     {
@@ -519,7 +520,11 @@ void MainWindow::UpdatePersonalLabels()
     Label1 =ui->labelCondiDMGValue;
     Label1->setText(QString::number(m_condiDmg));
     //Personal Condi DPS Value
-    if (m_Dmg>0)c=m_condiDmg*m_Dps/m_Dmg;else c=0;
+    c2=m_condiDmg;
+    c3=m_Dps;
+    c4=m_Dmg;
+    c1=c2*c3;
+    if (m_Dmg>0)c=round(c1/c4);else c=0;
     Label1 = ui->condiDPS;
     Label1->setText(QString::number(c));
     //Personal Max Damage Value
