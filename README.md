@@ -31,4 +31,5 @@ To make it work:
  - Combat-Log active
  
 Download Link: Server & Client
-Windows: https://www.dropbox.com/s/amziwubbsfv2ky7/GW2_DPSMETER_v1.09.zip?dl=0
+Windows: http://gw2dps.com/download
+Mac: Can't compile it at the moment. If it works without any big issues after we tried it, find the link here.

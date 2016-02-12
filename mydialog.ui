@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>440</height>
+    <width>215</width>
+    <height>227</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>450</width>
-    <height>440</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -32,23 +32,23 @@
    <string>GW2DPS</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">QWidget { background-color: rgba(32, 43, 47, 60%); }
+QWidget#widget { background-color: rgba(32, 43, 47, 0%); }
+QLabel {  background-color: rgba(32, 43, 47, 0%); color: rgb(255, 255, 255); }
+QLineEdit {
+    background-color: #202B2F;
+	color: #FFFFFF;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: beige;
+    font: bold 10px;
+}
+
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="3" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="1">
+   <item row="0" column="0">
     <widget class="QLabel" name="label_3">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -69,79 +69,14 @@
       <string notr="true">font: 75 14pt &quot;Leelawadee UI&quot;;</string>
      </property>
      <property name="text">
-      <string>GW2DPS</string>
+      <string>Connect to Host</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="label_7">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 9pt &quot;Leelawadee UI Semilight&quot;;</string>
-     </property>
-     <property name="text">
-      <string>What makes it legal : It does not offend the Terms of Service of Guild Wars 2. It does not read from game memory. Instead it uses Computer Vision techniques to read out numbers presented in the combat log by taking screenshots of the chat block periodically, converting pixels of the image into numbers and using the converted numbers for dmg / dps calculation. The whole process happens in real time.
-
-Settings for correct measuring : Options/Graphics Options: Interface Size=Normal, Resolution=Windowed Fullscreen, Chatbox/options: Text Size=Medium, Disable Timestamps, Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage. Make sure your combat log has more then 16+ lines and always visible.</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="label_4">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 10pt &quot;Leelawadee UI Semilight&quot;;</string>
-     </property>
-     <property name="text">
-      <string>Based on JaxnX, modified by Kozzy, Tyrox and DoM</string>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="1">
+   <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -151,32 +86,6 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="2">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="1">
        <widget class="QGroupBox" name="groupBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -194,7 +103,124 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
          <bool>false</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="7" column="1">
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius:0px;
+border:1px solid #fff;</string>
+           </property>
+           <property name="maxLength">
+            <number>10</number>
+           </property>
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius:0px;
+border:1px solid #fff;</string>
+           </property>
+           <property name="maxLength">
+            <number>100</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QLabel" name="label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Your Name (max 10 chars)</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QLabel" name="label_5">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Port</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="2">
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>45</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-radius:0px;
+border:1px solid #fff;</string>
+           </property>
+           <property name="text">
+            <string>1234</string>
+           </property>
+           <property name="maxLength">
+            <number>5</number>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Host IP</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1" colspan="2">
           <widget class="QPushButton" name="pushButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -204,7 +230,7 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
            </property>
            <property name="minimumSize">
             <size>
-             <width>156</width>
+             <width>154</width>
              <height>0</height>
             </size>
            </property>
@@ -214,17 +240,15 @@ Settings for correct measuring : Options/Graphics Options: Interface Size=Normal
            <property name="styleSheet">
             <string notr="true">QPushButton#pushButton {
     background-color: #8BB2DA;
-    border-style: outset;
-    border-width: 2px;
-    border-radius: 5px;
-    border-color: beige;
+
     font: bold 12px;
     min-width: 10em;
     padding: 6px;
 }
 QPushButton#pushButton:pressed {
     background-color: rgb(197,216,236);
-    border-style: inset;
+	border-style: inset;
+ 
 }</string>
            </property>
            <property name="text">
@@ -245,108 +269,104 @@ QPushButton#pushButton:pressed {
           </widget>
          </item>
          <item row="2" column="1" colspan="2">
-          <widget class="QLineEdit" name="lineEdit">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <widget class="QComboBox" name="professionComboBox">
+           <property name="styleSheet">
+            <string notr="true">QComboBox {
+    background-color: #8BB2DA;
+	color: rgb(255, 255, 255);
+    border: 1px solid #AAA;
+	font-size: 14px;
+}
+QComboBox:editable {
+    background: #8BB2DA;
+	color: rgb(255, 255, 255);
+}
+
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 3px;
+    padding-left: 4px;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+	color: rgb(255, 255, 255);
+	border:none;
+
+
+}
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}
+QComboBox QAbstractItemView {
+    border: 2px solid darkgray;
+    selection-background-color:#8BB2DA;
+	color: rgb(255, 255, 255);
+}</string>
            </property>
-           <property name="maxLength">
-            <number>10</number>
-           </property>
-           <property name="readOnly">
+           <property name="editable">
             <bool>false</bool>
            </property>
-          </widget>
-         </item>
-         <item row="4" column="1" colspan="2">
-          <widget class="QLineEdit" name="lineEdit_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="currentText">
+            <string>Select Profession</string>
            </property>
-           <property name="maxLength">
-            <number>32767</number>
+           <property name="currentIndex">
+            <number>0</number>
            </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLabel" name="label_2">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+           <property name="maxVisibleItems">
+            <number>10</number>
            </property>
-           <property name="text">
-            <string>Host IP</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3">
-          <widget class="QLineEdit" name="lineEdit_3">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>45</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>45</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>1234</string>
-           </property>
-           <property name="maxLength">
-            <number>5</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="3">
-          <widget class="QLabel" name="label">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Your Name (max 10 chars)</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="3">
-          <widget class="QLabel" name="label_5">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Port</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
+           <item>
+            <property name="text">
+             <string>Select Profession</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Elementalist</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Engineer</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Guardian</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Mesmer</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Necromancer</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ranger</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Revenant</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Thief</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Warrior</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
