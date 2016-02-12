@@ -14,6 +14,31 @@ inline static void WriteNameSettings(QString);
 inline static QString ReadIPSettings(void);
 inline static void WriteIPSettings(QString);
 
+inline static QString Read1stRun(void);
+inline static void Write1stRun(QString);
+
+
+inline QString Read1stRun(void)
+{
+    QString tmp;
+    QSettings settings("GW2DPS");
+    settings.beginGroup("FirstRun");
+    tmp=settings.value("text").toString();
+    settings.endGroup();
+    return tmp;
+}
+
+
+inline void Write1stRun(QString text)
+{
+
+    QSettings settings("GW2DPS");
+    settings.beginGroup("FirstRun");
+    settings.setValue("text",text);
+    settings.endGroup();
+
+}
+
 
 inline QString ReadNameSettings(void)
 {

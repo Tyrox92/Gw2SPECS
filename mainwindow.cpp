@@ -80,6 +80,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Settings::ReadSettings<QMainWindow>(this);
 
+    //First Run checks
+    QString tmp1=Read1stRun();
+    if (tmp1!="OK")
+    {
+       //show a new window with explanation of the correct gw2 settings
+
+        QDialog *dialog1 = new QDialog();
+        QHBoxLayout *layout = new QHBoxLayout(dialog1);
+        QLabel *label1 = new QLabel(this);
+        label1->setText("Welcome to GW2DPS!\n\nPlease set up the following options in your Guild Wars2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!");
+        layout->addWidget(label1);
+        layout->setMargin(10);
+        //dialog1->setStyleSheet("background:red;");
+        dialog1->show();
+
+        Write1stRun("OK");
+    }
+
     // Start screenshot timer from separate thread
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
@@ -229,14 +247,14 @@ void MainWindow::UpdateGroupLabels()
                 QString text;
                 if (pPosition>0)
                 {
-                    if (pDamageDone>0) text = QString("%1. %2 %L3% [%L4][%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+                    if (pDamageDone>0) text = QString("%1. %2 %L3% [%L4] [%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
                     else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
                     Bar[n]->setFormat(text);
                 }
                 if (pPosition<1)
                 {
                     if (pDamageDone<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
-                    else text = QString("%1 %L2% [%L3][%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+                    else text = QString("%1 %L2% [%L3] [%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
                     Bar[n]->setFormat(text);
                 }
 
@@ -404,6 +422,7 @@ void MainWindow::connected()
 
 void MainWindow::disconnected()
 {
+    is_connected=0;MyClientSlot=10;
     qDebug() << "disconnected...";
     //so what now? exit?
 }
@@ -467,7 +486,7 @@ void MainWindow::SendClientInfo(void)
 void MainWindow::UpdatePersonalLabels()
 {
     QLabel* Label1;
-    long c;
+    unsigned long long c;
 
     if (is_connected == 1)
     {

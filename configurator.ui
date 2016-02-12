@@ -121,7 +121,7 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="gameSettings">
       <property name="geometry">
@@ -372,10 +372,10 @@ QComboBox QAbstractItemView {
           <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="currentText">
-          <string>25</string>
+          <string>15</string>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -445,11 +445,6 @@ QComboBox QAbstractItemView {
            <string>3</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>4</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="2" column="0">
@@ -492,21 +487,11 @@ QComboBox QAbstractItemView {
           <bool>false</bool>
          </property>
          <property name="currentText">
-          <string>7</string>
+          <string>10</string>
          </property>
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <item>
-          <property name="text">
-           <string>7</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>8</string>
-          </property>
-         </item>
          <item>
           <property name="text">
            <string>10</string>
@@ -540,11 +525,6 @@ QComboBox QAbstractItemView {
          <item>
           <property name="text">
            <string>27</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>28</string>
           </property>
          </item>
         </widget>
