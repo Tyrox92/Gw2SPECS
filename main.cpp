@@ -53,7 +53,10 @@ int main(int argc, char *argv[])
             QDialog *dialog = new QDialog();
             QHBoxLayout *layout = new QHBoxLayout(dialog);
             QLabel *label = new QLabel();
-            label->setText("A newer Version of GW2DPS is available!<br><hr><br><a href='#'>Download new Version</a>");
+            label->setText("A newer Version of GW2DPS is available!<br><hr><br><a href='http://gw2dps.com/download'>Download new Version</a>");
+            label->setTextFormat(Qt::RichText);
+            label->setTextInteractionFlags(Qt::TextBrowserInteraction);
+            label->setOpenExternalLinks(true);
             layout->addWidget(label);
             layout->setMargin(50);
             dialog->setStyleSheet("background:#f2f2f2;");
