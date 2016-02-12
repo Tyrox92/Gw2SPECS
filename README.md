@@ -20,4 +20,4 @@ To make it work:
  - Combat-Log active
  
 Download Link: Server & Client
-Windows: https://www.dropbox.com/s/ahjxysu3lxjfprm/GW2DPS_win10_v1.06.zip?dl=1
+Windows: http://gw2dps.com/wp-content/uploads/2016/02/GW2DPS_Release_v2.3.zip
