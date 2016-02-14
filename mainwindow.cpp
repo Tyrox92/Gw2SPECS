@@ -792,7 +792,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
 
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
-        HostPort=mDialog.getPort();
+        HostPort=mDialog.getPort().toInt();
         m_MyProfession=mDialog.getProfession();
         uiConfig->professionComboBox->setCurrentIndex(m_MyProfession);
         Initialize();

@@ -16,6 +16,7 @@ MyDialog::MyDialog(QWidget *parent) :
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
     ui->lineEdit->setText(ReadNameSettings());
     ui->lineEdit_2->setText(ReadIPSettings());
+    ui->lineEdit_3->setText(ReadPortSettings());
     Settings::ReadSettings(ui->professionComboBox);
 
 
@@ -41,6 +42,11 @@ void MyDialog::on_pushButton_clicked()
         WriteIPSettings(ui->lineEdit_2->text());
         accept();
     }
+    if (ui->lineEdit_3->text().length()>0)
+    {
+        WritePortSettings(ui->lineEdit_3->text());
+        accept();
+    }
 }
 
 int MyDialog::getProfession()
@@ -60,9 +66,9 @@ QString MyDialog::getIP()
 }
 
 
-int MyDialog::getPort()
+QString MyDialog::getPort()
 {
-    return ui->lineEdit_3->text().toInt();
+    return ui->lineEdit_3->text();
 }
 
 #endif

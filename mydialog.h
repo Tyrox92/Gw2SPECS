@@ -19,7 +19,7 @@ public:
     ~MyDialog();
     QString getName();
     QString getIP();
-    int getPort();
+    QString getPort();
     int getProfession();
 
 private slots:

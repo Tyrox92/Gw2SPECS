@@ -14,6 +14,9 @@ inline static void WriteNameSettings(QString);
 inline static QString ReadIPSettings(void);
 inline static void WriteIPSettings(QString);
 
+inline static QString ReadPortSettings(void);
+inline static void WritePortSettings(QString);
+
 inline static QString Read1stRun(void);
 inline static void Write1stRun(QString);
 
@@ -81,6 +84,28 @@ inline void WriteIPSettings(QString text)
     settings.endGroup();
 
 }
+
+inline QString ReadPortSettings(void)
+{
+    QString tmpPort;
+    QSettings settings("GW2DPS");
+    settings.beginGroup("Port");
+    tmpPort=settings.value("text").toString();
+    settings.endGroup();
+    return tmpPort;
+}
+
+
+inline void WritePortSettings(QString text)
+{
+
+    QSettings settings("GW2DPS");
+    settings.beginGroup("Port");
+    settings.setValue("text",text);
+    settings.endGroup();
+
+}
+
 
 namespace GW2
 {
