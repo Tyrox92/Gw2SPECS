@@ -14,7 +14,7 @@ QMAKE_CXXFLAGS += -std=c++0x
 QMAKE_CXXFLAGS_WARN_ON += -Wno-reorder
 TARGET = Gw2DPS
 TEMPLATE = app
-
+CONFIG-=app_bundle
 
 SOURCES += main.cpp\
         mainwindow.cpp \
