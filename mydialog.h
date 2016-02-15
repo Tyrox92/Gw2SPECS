@@ -10,23 +10,28 @@ namespace Ui {
 class MyDialog;
 }
 
-class MyDialog : public QDialog
+namespace GW2
 {
-    Q_OBJECT
+    class MyDialog : public QDialog
+    {
+        Q_OBJECT
 
-public:
-    explicit MyDialog(QWidget *parent = 0);
-    ~MyDialog();
-    QString getName();
-    QString getIP();
-    QString getPort();
-    int getProfession();
+    public:
+        explicit MyDialog(QWidget *parent = 0);
+        ~MyDialog();
+        QString getName();
+        QString getIP();
+        QString getPort();
+        int getProfession();
 
-private slots:
-    void on_pushButton_clicked();
+    private slots:
+        void on_pushButton_clicked();
 
-private:
-    Ui::MyDialog *ui;
-};
+    private:
+        Ui::MyDialog *ui;
+
+        friend class MainWindow;
+    };
+}
 
 #endif // MYDIALOG_Hs

@@ -15,5 +15,6 @@
         <file>moreDetails.png</file>
         <file alias="connected">connect.png</file>
         <file alias="connect">connected.png</file>
+        <file>specs_logo.ico</file>
     </qresource>
 </RCC>

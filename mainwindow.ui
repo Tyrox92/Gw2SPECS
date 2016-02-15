@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>231</width>
-    <height>386</height>
+    <width>244</width>
+    <height>187</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -130,6 +130,15 @@
   </property>
   <property name="styleSheet">
    <string notr="true"/>
+  </property>
+  <property name="inputMethodHints">
+   <set>Qt::ImhNone</set>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>24</width>
+    <height>24</height>
+   </size>
   </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
@@ -1141,8 +1150,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>231</width>
-            <height>270</height>
+            <width>227</width>
+            <height>170</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -1603,13 +1612,13 @@ QProgressBar::chunk {
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string/>
    </property>
    <property name="autoFillBackground">
     <bool>false</bool>
@@ -1624,11 +1633,14 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
      <height>12</height>
     </size>
    </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
    <addaction name="actionReset"/>
    <addaction name="separator"/>

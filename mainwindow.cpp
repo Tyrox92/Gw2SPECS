@@ -10,7 +10,8 @@
 #include <QSizeGrip>
 #include <QToolBar>
 #include <QToolButton>
-#include "configurator.h"
+#include "ui_mydialog.h"
+#include <QtNetwork>
 
 using namespace GW2;
 
@@ -18,31 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_Configurator(this),
+    m_MyDialog(this),
     update_Timer(this)
 {
-    QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
     ui->setupUi(this);
-    StartupHideProgressBars();
-    ui->widgetExtraDetails->hide();
-    ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
-    ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
-    ui->widget->hide();
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
+    StartupPref();
 
-    // Resize Option
-    // Using gridLayout here which is the main layout
-    QSizeGrip *sizeGripRight = new QSizeGrip(this);
-    QSizeGrip *sizeGripLeft = new QSizeGrip(this);
-    ui->gridLayout_2->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
-    ui->gridLayout_2->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
-    sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
-    sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
-
-    QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
-    QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
-    QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
+    QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
 
     ScreenRecorder* screenRecorder = new ScreenRecorder;
     DmgMeter* dmgMeter = &screenRecorder->GetDmgMeter();
@@ -56,11 +39,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(&m_ScreenRecorderThread, SIGNAL(started()), screenRecorder, SLOT(StartRecording()));
     QObject::connect(screenRecorder, SIGNAL(RequestInfoUpdate(QString)), ui->labelInfo, SLOT(setText(QString)));
     QObject::connect(dmgMeter, SIGNAL(RequestTimeUpdate(int)), this, SLOT(UpdateTime(int)));
-    //QObject::connect(dmgMeter, SIGNAL(RequestDmgUpdate(unsigned long long)), this, SLOT(UpdateDmg(unsigned long long)));
-    //QObject::connect(dmgMeter, SIGNAL(RequestDpsUpdate(int)), this, SLOT(UpdatePersonal()));
-    //QObject::connect(dmgMeter, SIGNAL(RequestMaxDmgUpdate(int)), this, SLOT(UpdateMaxDmg(int)));
     QObject::connect(ui->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
     QObject::connect(ui->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
+    QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
+    QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
+    QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
@@ -69,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
     QObject::connect(uiConfig->checkBoxDamageDone, SIGNAL(clicked(bool)), this, SLOT(DamageDoneChanged()));
     QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
-
     QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
 
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
@@ -78,41 +60,27 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_ScreenRecorderThread.start();
 
-    Settings::ReadSettings<QMainWindow>(this);
-
-    //First Run checks
-    QString tmp1=Read1stRun();
-    if (tmp1!="OK")
-    {
-       //show a new window with explanation of the correct gw2 settings
-
-        QDialog *dialog1 = new QDialog();
-        QHBoxLayout *layout = new QHBoxLayout(dialog1);
-        QLabel *label1 = new QLabel(this);
-        label1->setText("Welcome to GW2DPS!\n\nPlease set up the following options in your Guild Wars2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!");
-        layout->addWidget(label1);
-        layout->setMargin(10);
-        //dialog1->setStyleSheet("background:red;");
-        dialog1->show();
-
-        Write1stRun("OK");
-    }
+    //Settings::ReadSettings<QMainWindow>(this);
 
     // Start screenshot timer from separate thread
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
+
+    // Profession Color Bars
     ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
     pPosition=uiConfig->checkBoxPosition->isChecked();
     pDamageDone=uiConfig->checkBoxDamageDone->isChecked();
-
-    is_connected = 0;
-    //uiConfig->professionComboBox->setCurrentIndex(0);
+    uiConfig->professionComboBox->setCurrentIndex(0);
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
 
+    // We are not connected on start up
+    is_connected = false;
+
+    CheckFirstRun();
+    CheckForUpdate();
     Initialize();
 }
-
 
 void MainWindow::ProfChanged(QString prof)
 {
@@ -125,6 +93,27 @@ void MainWindow::ProfChanged(QString prof)
                             if (prof== "Revenant") m_MyProfession=7;else
                                 if (prof== "Thief") m_MyProfession=8;else
                                     if (prof== "Warrior") m_MyProfession=9;
+}
+
+void MainWindow::CheckFirstRun()
+{
+    //First Run checks
+    QString tmp1=Read1stRun();
+    if (tmp1!="OK")
+    {
+        //show a new window with explanation of the correct gw2 settings
+
+        QDialog *dialog1 = new QDialog();
+        QHBoxLayout *layout = new QHBoxLayout(dialog1);
+        QLabel *label1 = new QLabel(this);
+        label1->setText("Welcome to GW2DPS!\n\nPlease set up the following options in your Guild Wars2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!");
+        layout->addWidget(label1);
+        layout->setMargin(10);
+        //dialog1->setStyleSheet("background:red;");
+        dialog1->show();
+
+        Write1stRun("OK");
+    }
 }
 
 void MainWindow::ProfSettingsChanged()
@@ -158,7 +147,7 @@ void MainWindow::UpdateGroupLabels()
 
     // If playing without a server
     // Display only the solo user information
-    if (is_connected == 0 && MyClientSlot == 10)
+    if ((is_connected == false) && MyClientSlot == 10)
     {
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
@@ -425,7 +414,7 @@ void MainWindow::connected()
 
 void MainWindow::disconnected()
 {
-    is_connected=0;MyClientSlot=10;
+    is_connected = false;MyClientSlot=10;
     qDebug() << "disconnected...";
     //so what now? exit?
 }
@@ -492,7 +481,7 @@ void MainWindow::UpdatePersonalLabels()
     unsigned long c;
     double c1,c2,c3,c4;
 
-    if (is_connected == 1)
+    if ((is_connected == true))
     {
         ui->grp_DPS->setStyleSheet("color: rgb(255, 255, 255);");
     }
@@ -553,7 +542,7 @@ void MainWindow::UpdatePersonalLabels()
 
 void MainWindow::UpdateTimer(void)
 {
-    if (is_connected == 1)
+    if ((is_connected == true))
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
         SendClientInfo();
@@ -587,7 +576,7 @@ void MainWindow::UpdateTime(int timeInMsecs)
 
 void MainWindow::Initialize()
 {
-    if (HostIP != "" && is_connected == 0)
+    if (HostIP != "" && (is_connected == false))
     {
         socket = new QTcpSocket(this);
         connect(socket, SIGNAL(connected()),this, SLOT(connected()));
@@ -625,9 +614,9 @@ void MainWindow::Initialize()
             layout->setMargin(50);
             dialog->setStyleSheet("background:red;");
             dialog->show();
-            is_connected = 0;
+            is_connected = false;
         }
-        else is_connected = 1;
+        else is_connected = true;
         //m_MyProfession=0;
         // we need to wait...
         m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
@@ -635,7 +624,7 @@ void MainWindow::Initialize()
     }
     else
     {
-        is_connected = 0;
+        is_connected = false;
 
         // this is not blocking call
         MyClientSlot=10; //no semi-handshake yet
@@ -709,8 +698,25 @@ bool GW2::MainWindow::on_pushButton_toggled(bool toggeled)
     return toggeled;
 }
 
-void GW2::MainWindow::StartupHideProgressBars()
+void GW2::MainWindow::StartupPref()
 {
+    ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
+    //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
+    ui->widget->hide();
+    ui->widgetExtraDetails->hide();
+
+    // Resize Option
+    // Using gridLayout here which is the main layout
+    QSizeGrip *sizeGripRight = new QSizeGrip(this);
+    QSizeGrip *sizeGripLeft = new QSizeGrip(this);
+    ui->gridLayout_2->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_2->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
+    sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
+    sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
+
     ui->progressBar_1->setVisible(false);
     ui->progressBar_2->setVisible(false);
     ui->progressBar_3->setVisible(false);
@@ -727,7 +733,7 @@ void GW2::MainWindow::StartupHideProgressBars()
 bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
 {
     // Check if this user is playing on a server or not
-    if (is_connected == 1)
+    if ((is_connected == true))
     {
         if (toggeled)
         {
@@ -781,7 +787,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
 
     // If not connected to a server when triggered
     // Then open myDialog
-    if (is_connected == 0)
+    if ((is_connected == false))
     {
         update_Timer.stop();
         MyDialog mDialog;
@@ -802,8 +808,8 @@ void GW2::MainWindow::on_actionConnect_triggered()
     {
         update_Timer.stop();
         socket->abort();
-        StartupHideProgressBars();
-        is_connected = 0;
+        StartupPref();
+        is_connected = false;
         HostIP="";
 
         //Go back to the initializer
@@ -814,5 +820,44 @@ void GW2::MainWindow::on_actionConnect_triggered()
 void GW2::MainWindow::on_actionClose_triggered()
 {
     // Let's abort the connection to the server before closing
-    if (is_connected>0) socket->abort();
+    if ((is_connected == true)) socket->abort();
+}
+
+void GW2::MainWindow::CheckForUpdate()
+{
+    QString curVersion = Settings::s_Version;
+
+    QNetworkAccessManager *nam = new QNetworkAccessManager();
+    QUrl data_url("http://www.gw2dps.com/version/version_check.txt");
+    QNetworkReply* reply = nam->get(QNetworkRequest(data_url));
+    QEventLoop eventLoop;
+    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+    eventLoop.exec();
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        // Something went wrong. Error can be retrieved with: reply->error()
+        qDebug() << reply->error();
+    }
+    else
+    {
+        // Call reply->readAll() and do what you need with the data
+        QString ver = reply->readAll();
+        qDebug() << ver;
+        if(curVersion < ver)
+        {
+            qDebug() << "You need to Update";
+            QDialog *dialog = new QDialog();
+            QHBoxLayout *layout = new QHBoxLayout(dialog);
+            QLabel *label = new QLabel();
+            label->setText("A newer Version of GW2DPS is available!<br><hr><br><a href='http://gw2dps.com/download'>Download new Version</a>");
+            label->setTextFormat(Qt::RichText);
+            label->setTextInteractionFlags(Qt::TextBrowserInteraction);
+            label->setOpenExternalLinks(true);
+            layout->addWidget(label);
+            layout->setMargin(50);
+            dialog->setStyleSheet("background:#f2f2f2;");
+            dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
+            dialog->show();
+        }
+    }
 }

@@ -11,7 +11,7 @@ Configurator::Configurator(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 
     // Set version
     ui->labelVersion->setText(Settings::s_Product);

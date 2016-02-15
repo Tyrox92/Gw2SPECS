@@ -18,8 +18,6 @@ MyDialog::MyDialog(QWidget *parent) :
     ui->lineEdit_2->setText(ReadIPSettings());
     ui->lineEdit_3->setText(ReadPortSettings());
     Settings::ReadSettings(ui->professionComboBox);
-
-
 }
 
 MyDialog::~MyDialog()

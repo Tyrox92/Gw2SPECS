@@ -50,6 +50,7 @@ private:
     Ui::MainWindow *ui;
     QThread m_ScreenRecorderThread;
     Configurator m_Configurator;
+    MyDialog m_MyDialog;
     QPoint m_dragPosition;
 
     QTcpSocket *socket;
@@ -84,7 +85,7 @@ private:
     int CurrentMeta;
 
     char writeBuff[128];
-    int is_connected;
+    bool is_connected;
 
     int ProfBasedColors;
     int pPosition;
@@ -94,13 +95,14 @@ private:
 
     char tmp1[20];
     QTimer update_Timer;
+    void CheckForUpdate();
 private slots:
     void UpdateTime(int);
     void SendClientInfo();
     void UpdateTimer();
     void UpdateGroupLabels();
     void UpdatePersonalLabels();
-    void StartupHideProgressBars();
+    void StartupPref();
     void ProfSettingsChanged();
     void ProfChanged(QString);
 
@@ -112,6 +114,7 @@ private slots:
     void on_actionClose_triggered();
     void PositionChanged();
     void DamageDoneChanged();
+    void CheckFirstRun();
 };
 
 }
