@@ -12,7 +12,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 QMAKE_CXXFLAGS_WARN_ON += -Wno-reorder
-TARGET = Gw2DPS
+TARGET = Gw2SPECS
 TEMPLATE = app
 
 
@@ -48,4 +48,4 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     Icons/Icons.qrc
 
-RC_FILE = jaxnX.rc
+RC_FILE = specs.rc

@@ -123,7 +123,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>GW2DPS</string>
+   <string>Gw2SPECS</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -1640,7 +1640,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="actionReset"/>
    <addaction name="separator"/>
