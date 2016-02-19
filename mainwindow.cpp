@@ -12,6 +12,7 @@
 #include <QToolButton>
 #include "ui_mydialog.h"
 #include <QtNetwork>
+#include <QUrl>
 
 using namespace GW2;
 
@@ -107,7 +108,7 @@ void MainWindow::CheckFirstRun()
         QDialog *dialog1 = new QDialog();
         QHBoxLayout *layout = new QHBoxLayout(dialog1);
         QLabel *label1 = new QLabel(this);
-        label1->setText("Welcome to GW2DPS!\n\nPlease set up the following options in your Guild Wars2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!");
+        label1->setText("Welcome to GW2SPECS!\n\nPlease set up the following options in your Guild Wars 2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!");
         layout->addWidget(label1);
         layout->setMargin(10);
         //dialog1->setStyleSheet("background:red;");
@@ -614,6 +615,7 @@ void MainWindow::Initialize()
             layout->addWidget(label);
             layout->setMargin(50);
             dialog->setStyleSheet("background:red;");
+            dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
             dialog->show();
             is_connected = false;
         }
@@ -848,18 +850,42 @@ void GW2::MainWindow::CheckForUpdate()
         if(curVersion < ver)
         {
             qDebug() << "You need to Update";
-            QDialog *dialog = new QDialog();
-            QHBoxLayout *layout = new QHBoxLayout(dialog);
-            QLabel *label = new QLabel();
-            label->setText("A newer Version of GW2DPS is available!<br><hr><br><a href='http://gw2dps.com/download'>Download new Version</a>");
-            label->setTextFormat(Qt::RichText);
-            label->setTextInteractionFlags(Qt::TextBrowserInteraction);
-            label->setOpenExternalLinks(true);
+            QDialog *checkUpdate = new QDialog();
+            QVBoxLayout *layout = new QVBoxLayout(checkUpdate);
+            QPushButton *download = new QPushButton("Get latest Version!", this);
+            QPushButton *changelog = new QPushButton("Check the Changelog!", this);
+            QLabel *label = new QLabel("<center>Your Version: <strong style='color:red;'>" + curVersion + "</strong></center><center>New Version: <strong style='color:green';>" + ver + "</strong></center><br>" + "A new Version of GW2SPECS is available!", this);
+
+            //Connect Functions to Buttons when clicked
+            connect(download,SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
+            connect(changelog,SIGNAL(clicked(bool)),this,SLOT(on_pushButton2_clicked()));
+
+            //Add Widgets to the Layout
             layout->addWidget(label);
-            layout->setMargin(50);
-            dialog->setStyleSheet("background:#f2f2f2;");
-            dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
-            dialog->show();
+            layout->addWidget(download);
+            layout->addWidget(changelog);
+
+            //Style the Dialog
+            layout->setMargin(30);
+
+            checkUpdate->setStyleSheet("background:#f4f4f4;");
+            checkUpdate->setWindowFlags(Qt::WindowStaysOnTopHint);
+
+            //Style Other Elements
+            download->setStyleSheet("background:#8BB2DA;");
+
+            //Display Dialog
+            checkUpdate->show();
         }
     }
+}
+
+void GW2::MainWindow::on_pushButton_clicked(){
+    QString downloadlink = "http://gw2dps.com/download";
+    QDesktopServices::openUrl(QUrl(downloadlink));
+}
+
+void GW2::MainWindow::on_pushButton2_clicked(){
+    QString changeloglink = "http://gw2dps.com/changelog";
+    QDesktopServices::openUrl(QUrl(changeloglink));
 }

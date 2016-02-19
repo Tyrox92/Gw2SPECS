@@ -96,6 +96,9 @@ private:
     char tmp1[20];
     QTimer update_Timer;
     void CheckForUpdate();
+    QPushButton *download;
+    QPushButton *changelog;
+
 private slots:
     void UpdateTime(int);
     void SendClientInfo();
@@ -115,6 +118,10 @@ private slots:
     void PositionChanged();
     void DamageDoneChanged();
     void CheckFirstRun();
+    void on_pushButton_clicked();
+    void on_pushButton2_clicked();
+
+
 };
 
 }
