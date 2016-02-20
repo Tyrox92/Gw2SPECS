@@ -55,7 +55,6 @@ private:
 
     QTcpSocket *socket;
 
-
     QString MyName;
     QString HostIP;
     int HostPort;
@@ -90,8 +89,10 @@ private:
     int ProfBasedColors;
     int pPosition;
     int pDamageDone;
-    //QLabel *nameLabel = new QLabel(this);
-    //QLabel *dmgLabel = new QLabel(this);
+    QLabel *nameLabel = new QLabel(this);
+    QLabel *dmgLabel = new QLabel(this);
+    QLabel *nameLabel2 = new QLabel(this);
+    QLabel *dmgLabel2 = new QLabel(this);
 
     char tmp1[20];
     QTimer update_Timer;

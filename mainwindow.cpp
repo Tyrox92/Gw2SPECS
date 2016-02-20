@@ -79,6 +79,23 @@ MainWindow::MainWindow(QWidget *parent) :
     // We are not connected on start up
     is_connected = false;
 
+
+    //New ProgressbarLabels
+    QVBoxLayout *progressLayout = new QVBoxLayout(ui->progressBar_1);
+    QVBoxLayout *progress2Layout = new QVBoxLayout(ui->progressBar_2);
+
+    progressLayout->addWidget(nameLabel);
+    progressLayout->addWidget(dmgLabel);
+
+    progress2Layout->addWidget(nameLabel2);
+    progress2Layout->addWidget(dmgLabel2);
+
+    nameLabel->setAlignment(Qt::AlignLeft);
+    dmgLabel->setAlignment(Qt::AlignRight);
+//    nameLabel->setAlignment(Qt::AlignCenter);
+//    dmgLabel->setAlignment(Qt::AlignCenter);
+
+
     CheckFirstRun();
     CheckForUpdate();
     Initialize();
@@ -145,6 +162,7 @@ void MainWindow::UpdateGroupLabels()
     QProgressBar* Bar9 = ui->progressBar_9;
     QProgressBar* Bar10 = ui->progressBar_10;
     QProgressBar* Bar [10] = {Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9,Bar10};
+
     long p,i,j,k;
 
     // If playing without a server
@@ -301,28 +319,32 @@ void MainWindow::UpdateGroupLabels()
 
 
                 //                //Disable normal Text
-                //                Bar[n]->setTextVisible(false);
+                Bar[n]->setTextVisible(false);
 
                 //                QVBoxLayout(Bar[n]).addWidget(nameLabel);
                 //                QVBoxLayout(Bar[n]).addWidget(dmgLabel);
                 //                //Position and Name
-                //                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
+                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
                 //                // DPS and %
-                //                QString myDmg = QString("%L3% [%L4 DPS]").arg(p).arg(PosDPS[n]);
+                QString myDmg = QString("%L2% %L3[%L4 DPS]").arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
                 //                //Set Text
-                //                nameLabel->setText(myname);
-                //                dmgLabel->setText(myDmg);
+                nameLabel->setText(myname);
+                dmgLabel->setText(myDmg);
+                nameLabel2->setText(myname);
+                dmgLabel2->setText(myDmg);
                 //                //Styling them
-                //                nameLabel->setStyleSheet("color:white;background:none;margin-top:50%;font-size:12px;");
-                //                dmgLabel->setStyleSheet("color:white;background:none;");
+                nameLabel->setStyleSheet("color:white;background:none;text-align:center;");
+                dmgLabel->setStyleSheet("color:white;background:none;text-align:center;");
                 //                //Align Them
-                //                nameLabel->setMinimumHeight(17);
-                //                dmgLabel->setMinimumSize(100,17);
+
+
 
 
                 //                //Display Labels
-                //                nameLabel->show();
-                //                dmgLabel->show();
+                nameLabel->show();
+                dmgLabel->show();
+                nameLabel2->show();
+                dmgLabel2->show();
 
 
 
