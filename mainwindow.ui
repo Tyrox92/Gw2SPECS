@@ -1180,7 +1180,7 @@
             <number>0</number>
            </property>
            <item row="9" column="0">
-            <widget class="QProgressBar" name="progressBar_10">
+            <widget class="QProgressBar" name="progressBar_9">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1220,7 +1220,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="8" column="0">
-            <widget class="QProgressBar" name="progressBar_9">
+            <widget class="QProgressBar" name="progressBar_8">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1260,7 +1260,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QProgressBar" name="progressBar_1">
+            <widget class="QProgressBar" name="progressBar_0">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1312,7 +1312,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QProgressBar" name="progressBar_2">
+            <widget class="QProgressBar" name="progressBar_1">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1352,7 +1352,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="6" column="0">
-            <widget class="QProgressBar" name="progressBar_7">
+            <widget class="QProgressBar" name="progressBar_6">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1392,7 +1392,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="7" column="0">
-            <widget class="QProgressBar" name="progressBar_8">
+            <widget class="QProgressBar" name="progressBar_7">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1432,7 +1432,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QProgressBar" name="progressBar_3">
+            <widget class="QProgressBar" name="progressBar_2">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1472,7 +1472,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QProgressBar" name="progressBar_4">
+            <widget class="QProgressBar" name="progressBar_3">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1512,7 +1512,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QProgressBar" name="progressBar_5">
+            <widget class="QProgressBar" name="progressBar_4">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1552,7 +1552,7 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QProgressBar" name="progressBar_6">
+            <widget class="QProgressBar" name="progressBar_5">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1592,16 +1592,16 @@ QProgressBar::chunk {
             </widget>
            </item>
           </layout>
-          <zorder>progressBar_1</zorder>
-          <zorder>progressBar_4</zorder>
+          <zorder>progressBar_0</zorder>
           <zorder>progressBar_3</zorder>
-          <zorder>progressBar_9</zorder>
-          <zorder>progressBar_5</zorder>
-          <zorder>progressBar_10</zorder>
           <zorder>progressBar_2</zorder>
-          <zorder>progressBar_7</zorder>
-          <zorder>progressBar_6</zorder>
           <zorder>progressBar_8</zorder>
+          <zorder>progressBar_4</zorder>
+          <zorder>progressBar_9</zorder>
+          <zorder>progressBar_1</zorder>
+          <zorder>progressBar_6</zorder>
+          <zorder>progressBar_5</zorder>
+          <zorder>progressBar_7</zorder>
          </widget>
         </widget>
        </item>

@@ -72,7 +72,7 @@ private:
     int SlotProf[10];
 
 
-    long AllDamageDone;
+    long GrpDmg;
     int GrpDPS;
     int AvgDPS;
 
@@ -89,10 +89,66 @@ private:
     int ProfBasedColors;
     int pPosition;
     int pDamageDone;
-    QLabel *nameLabel = new QLabel(this);
-    QLabel *dmgLabel = new QLabel(this);
-    QLabel *nameLabel2 = new QLabel(this);
-    QLabel *dmgLabel2 = new QLabel(this);
+
+    // name labels (in group mode)
+    QLabel *labelname_0 = new QLabel(this);
+    QLabel *labelname_1 = new QLabel(this);
+    QLabel *labelname_2 = new QLabel(this);
+    QLabel *labelname_3 = new QLabel(this);
+    QLabel *labelname_4 = new QLabel(this);
+    QLabel *labelname_5 = new QLabel(this);
+    QLabel *labelname_6 = new QLabel(this);
+    QLabel *labelname_7 = new QLabel(this);
+    QLabel *labelname_8 = new QLabel(this);
+    QLabel *labelname_9 = new QLabel(this);
+
+    // damage dealt labels (in group mode)
+    QLabel *labeldmg_0 = new QLabel(this);
+    QLabel *labeldmg_1 = new QLabel(this);
+    QLabel *labeldmg_2 = new QLabel(this);
+    QLabel *labeldmg_3 = new QLabel(this);
+    QLabel *labeldmg_4 = new QLabel(this);
+    QLabel *labeldmg_5 = new QLabel(this);
+    QLabel *labeldmg_6 = new QLabel(this);
+    QLabel *labeldmg_7 = new QLabel(this);
+    QLabel *labeldmg_8 = new QLabel(this);
+    QLabel *labeldmg_9 = new QLabel(this);
+
+    // percental damage dealt in relation to total damage labels (in group mode)
+    QLabel *labelper_0 = new QLabel(this);
+    QLabel *labelper_1 = new QLabel(this);
+    QLabel *labelper_2 = new QLabel(this);
+    QLabel *labelper_3 = new QLabel(this);
+    QLabel *labelper_4 = new QLabel(this);
+    QLabel *labelper_5 = new QLabel(this);
+    QLabel *labelper_6 = new QLabel(this);
+    QLabel *labelper_7 = new QLabel(this);
+    QLabel *labelper_8 = new QLabel(this);
+    QLabel *labelper_9 = new QLabel(this);
+
+    // single dps over time labels (in group mode)
+    QLabel *labeldps_0 = new QLabel(this);
+    QLabel *labeldps_1 = new QLabel(this);
+    QLabel *labeldps_2 = new QLabel(this);
+    QLabel *labeldps_3 = new QLabel(this);
+    QLabel *labeldps_4 = new QLabel(this);
+    QLabel *labeldps_5 = new QLabel(this);
+    QLabel *labeldps_6 = new QLabel(this);
+    QLabel *labeldps_7 = new QLabel(this);
+    QLabel *labeldps_8 = new QLabel(this);
+    QLabel *labeldps_9 = new QLabel(this);
+
+    // activity labels (in group mode)
+    QLabel *labelact_0 = new QLabel(this);
+    QLabel *labelact_1 = new QLabel(this);
+    QLabel *labelact_2 = new QLabel(this);
+    QLabel *labelact_3 = new QLabel(this);
+    QLabel *labelact_4 = new QLabel(this);
+    QLabel *labelact_5 = new QLabel(this);
+    QLabel *labelact_6 = new QLabel(this);
+    QLabel *labelact_7 = new QLabel(this);
+    QLabel *labelact_8 = new QLabel(this);
+    QLabel *labelact_9 = new QLabel(this);
 
     char tmp1[20];
     QTimer update_Timer;
