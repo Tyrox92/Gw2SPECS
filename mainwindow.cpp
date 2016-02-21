@@ -797,7 +797,6 @@ void GW2::MainWindow::on_actionConnect_triggered()
         MyDialog mDialog;
         mDialog.setModal(true);
 
-
         mDialog.exec();
 
         MyName=mDialog.getName();
@@ -812,7 +811,16 @@ void GW2::MainWindow::on_actionConnect_triggered()
     {
         update_Timer.stop();
         socket->abort();
-        StartupPref();
+        ui->progressBar_1->setVisible(false);
+        ui->progressBar_2->setVisible(false);
+        ui->progressBar_3->setVisible(false);
+        ui->progressBar_4->setVisible(false);
+        ui->progressBar_5->setVisible(false);
+        ui->progressBar_6->setVisible(false);
+        ui->progressBar_7->setVisible(false);
+        ui->progressBar_8->setVisible(false);
+        ui->progressBar_9->setVisible(false);
+        ui->progressBar_10->setVisible(false);
         is_connected = false;
         HostIP="";
 
