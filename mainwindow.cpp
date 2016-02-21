@@ -71,8 +71,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Profession Color Bars
     ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
-    pPosition=uiConfig->checkBoxPosition->isChecked();
-    pDamageDone=uiConfig->checkBoxDamageDone->isChecked();
+    displaypos=uiConfig->checkBoxPosition->isChecked();
+    displaydmg=uiConfig->checkBoxDamageDone->isChecked();
     uiConfig->professionComboBox->setCurrentIndex(0);
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
 
@@ -150,11 +150,19 @@ MainWindow::MainWindow(QWidget *parent) :
 //    layoutprogressbar_9->addWidget(labelact_9);
 
     for(int n=0;n<10;n++) {
+        // aligning labels
         labelname[n]->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         labeldmg[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         labelper[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         labeldps[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+        // styling labels
+        labelname[n]->setStyleSheet("color:white;background:none;");
+        labeldmg[n]->setStyleSheet("color:white;background:none;");
+        labelper[n]->setStyleSheet("color:white;background:none;");
+        labeldps[n]->setStyleSheet("color:white;background:none;");
+        //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 
     // nameLabel->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
@@ -225,12 +233,12 @@ void MainWindow::ProfSettingsChanged()
 
 void MainWindow::PositionChanged()
 {
-    if (pPosition==1) pPosition=0; else pPosition=1;
+    if (displaypos==1) displaypos=0; else displaypos=1;
 }
 
 void MainWindow::DamageDoneChanged()
 {
-    if (pDamageDone==1) pDamageDone=0; else pDamageDone=1;
+    if (displaydmg==1) displaydmg=0; else displaydmg=1;
 }
 
 void MainWindow::UpdateGroupLabels()
@@ -268,7 +276,7 @@ void MainWindow::UpdateGroupLabels()
         Bar[0]->setFormat(text);
         Bar[0]->setVisible(true);
         Bar[0]->setTextVisible(true);
-        // Syph: I think this is useless, if not, please explain and change it back
+        // Syph: I think this is useless, if not, please explain and change it back:
         //ui->grp_Dmg->setText(QString::number(m_Dmg));
     }
     else
@@ -352,28 +360,9 @@ void MainWindow::UpdateGroupLabels()
                     p=PosDmg[n]*100/GrpDmg;
                 else p=0;
 
-                // le showing labels
-
-//                Bar[n]->setValue(i);
-//                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-//                QString text;
-//                if (pPosition>0)
-//                {
-//                    if (pDamageDone>0) text = QString("%1. %2 %L3% [%L4] [%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
-//                    else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-//                    Bar[n]->setFormat(text);
-//                }
-//                if (pPosition<1)
-//                {
-//                    if (pDamageDone<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
-//                    else text = QString("%1 %L2% [%L3] [%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
-//                    Bar[n]->setFormat(text);
-//                }
-
-//                Bar[n]->setAlignment(Qt::AlignRight);
+                // profession based bar coloring
                 if (ProfBasedColors>0)
                 {
-                    //profession based bar colors
                     switch (PosProf[n])
                     {
                     case 0:
@@ -408,40 +397,53 @@ void MainWindow::UpdateGroupLabels()
                         break;
                     }
                 }
-//                else
+                else
+                    if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                    else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
+
+                // le showing labels
+
+
+                Bar[n]->setValue(i);
+//                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
+//                QString text;
+//                if (displaypos>0)
 //                {
-//                    if (n%2==0 ) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
-//                    else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
+//                    if (displaydmg>0) text = QString("%1. %2 %L3% [%L4] [%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+//                    else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
+//                    Bar[n]->setFormat(text);
+//                }
+//                if (displaypos<1)
+//                {
+//                    if (displaydmg<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
+//                    else text = QString("%1 %L2% [%L3] [%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+//                    Bar[n]->setFormat(text);
 //                }
 
-                //                //Disable normal Text
+//                Bar[n]->setAlignment(Qt::AlignRight);
 
-                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
-                //                // DPS and %
-                QString myDmg = QString("%L1").arg(PosDmg[n]);
-                QString myPer = QString("%L1%").arg(p);
-                //                //Set Text
-                QString myDps = QString("[%L1 DPS]").arg(PosDPS[n]);
+                //display name and position or not
+                if (displaypos>0) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
+                else labelname[n]->setText(QString("%1").arg(PosName[n]));
 
-                // showing names w/ & w/o Pos(!)
-                labelname[n]->setText(myname);
+                // damage
+                if (displaydmg>0) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
+                else labeldmg[n]->setText("");
+                // this could also be done by not adding widget or hiding/not-showing
 
-                // showing dmg, percental dmg, dps, activity
-                labeldmg[n]->setText(myDmg);
-                labelper[n]->setText(myPer);
-                labeldps[n]->setText(myDps);
-                //labelact[n]->setText(myAct);
+                // percental
+                labelper[n]->setText(QString("%L1%").arg(p));
+                // add option to disable (see damage)
 
-                //Styling labels
-                labelname[n]->setStyleSheet("color:white;background:none;");
-                labeldmg[n]->setStyleSheet("color:white;background:none;");
-                labelper[n]->setStyleSheet("color:white;background:none;");
-                labeldps[n]->setStyleSheet("color:white;background:none;");
-                //labelact[n]->setStyleSheet("color:white;background:none;");
+                // DPS
+                labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
+                // add option to disable (see damage)
 
-                //Align Them
+                // activity
+                //labelact[n]->setText(QString("%L1%").arg());
+                // add option to disable (see damage)
 
-                //Display Labels
+                // display labels
                 labelname[n]->show();
                 labeldmg[n]->show();
                 labelper[n]->show();

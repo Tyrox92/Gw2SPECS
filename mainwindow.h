@@ -87,8 +87,8 @@ private:
     bool is_connected;
 
     int ProfBasedColors;
-    int pPosition;
-    int pDamageDone;
+    int displaypos;
+    int displaydmg;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);
