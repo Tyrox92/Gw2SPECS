@@ -149,11 +149,13 @@ MainWindow::MainWindow(QWidget *parent) :
 //    layoutprogressbar_8->addWidget(labelact_8);
 //    layoutprogressbar_9->addWidget(labelact_9);
 
-    labelname_0->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    labeldmg_0->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    labelper_0->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    labeldps_0->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-//    labelact_0->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    for(int n=0;n<10;n++) {
+        labelname[n]->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        labeldmg[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        labelper[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        labeldps[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    }
 
     // nameLabel->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
 
@@ -165,28 +167,33 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::ProfChanged(QString prof)
 {
-    if (prof== "Elementalist") m_MyProfession=1;else
-        if (prof== "Engineer") m_MyProfession=2;else
-            if (prof== "Guardian") m_MyProfession=3;else
-                if (prof== "Mesmer") m_MyProfession=4;else
-                    if (prof== "Necromancer") m_MyProfession=5;else
-                        if (prof== "Ranger") m_MyProfession=6;else
-                            if (prof== "Revenant") m_MyProfession=7;else
-                                if (prof== "Thief") m_MyProfession=8;else
-                                    if (prof== "Warrior") m_MyProfession=9;
+//    if (prof== "Elementalist") m_MyProfession=1;else
+//        if (prof== "Engineer") m_MyProfession=2;else
+//            if (prof== "Guardian") m_MyProfession=3;else
+//                if (prof== "Mesmer") m_MyProfession=4;else
+//                    if (prof== "Necromancer") m_MyProfession=5;else
+//                        if (prof== "Ranger") m_MyProfession=6;else
+//                            if (prof== "Revenant") m_MyProfession=7;else
+//                                if (prof== "Thief") m_MyProfession=8;else
+//                                    if (prof== "Warrior") m_MyProfession=9;
 
 // this should be more ressource efficent, but can't test it right now, esp. if prof==War
 // https://stackoverflow.com/questions/767821/is-else-if-faster-than-switch-case
-//    switch (prof) {
-//    case "Elementalist": m_MyProfession=1; break;
-//    case "Engineer"    : m_MyProfession=2; break;
-//    case "Guardian"    : m_MyProfession=3; break;
-//    case "Mesmer"      : m_MyProfession=4; break;
-//    case "Necromancer" : m_MyProfession=5; break;
-//    case "Ranger"      : m_MyProfession=6; break;
-//    case "Revenant"    : m_MyProfession=7; break;
-//    case "Thief"       : m_MyProfession=8; break;
-//    case "Warrior"     : m_MyProfession=9; break;
+    QStringList proflist;
+    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+    m_MyProfession = proflist.indexOf(prof)+1;
+
+//    switch (proflist.indexOf(prof)) {
+//    case 0: m_MyProfession=1; break;
+//    case 1: m_MyProfession=2; break;
+//    case 2: m_MyProfession=3; break;
+//    case 3: m_MyProfession=4; break;
+//    case 4: m_MyProfession=5; break;
+//    case 5: m_MyProfession=6; break;
+//    case 6: m_MyProfession=7; break;
+//    case 7: m_MyProfession=8; break;
+//    case 8: m_MyProfession=9; break;
+//    default: m_MyProfession=0; break;
 //    }
 }
 
@@ -215,10 +222,12 @@ void MainWindow::ProfSettingsChanged()
 {
     if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=1;
 }
+
 void MainWindow::PositionChanged()
 {
     if (pPosition==1) pPosition=0; else pPosition=1;
 }
+
 void MainWindow::DamageDoneChanged()
 {
     if (pDamageDone==1) pDamageDone=0; else pDamageDone=1;
@@ -226,7 +235,6 @@ void MainWindow::DamageDoneChanged()
 
 void MainWindow::UpdateGroupLabels()
 {
-    QLabel* Label1;             // fuck you, dude!
     QProgressBar* Bar0 = ui->progressBar_0;
     QProgressBar* Bar1 = ui->progressBar_1;
     QProgressBar* Bar2 = ui->progressBar_2;
@@ -259,6 +267,7 @@ void MainWindow::UpdateGroupLabels()
 
         Bar[0]->setFormat(text);
         Bar[0]->setVisible(true);
+        Bar[0]->setTextVisible(true);
         // Syph: I think this is useless, if not, please explain and change it back
         //ui->grp_Dmg->setText(QString::number(m_Dmg));
     }
@@ -332,13 +341,19 @@ void MainWindow::UpdateGroupLabels()
 
         // doing the math and setting the labels
         for(int n=0;n<10;n++) {
+            Bar[n]->setVisible(true);
+            Bar[n]->setTextVisible(false);
             if (PosName[n][0]!=0) {
+                // le math
                 if (PosDmg[0]>0)
                     i=PosDmg[n]*100/PosDmg[0];
                 else i=0;
                 if (GrpDmg>0)
                     p=PosDmg[n]*100/GrpDmg;
                 else p=0;
+
+                // le showing labels
+
 //                Bar[n]->setValue(i);
 //                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
 //                QString text;
@@ -356,44 +371,43 @@ void MainWindow::UpdateGroupLabels()
 //                }
 
 //                Bar[n]->setAlignment(Qt::AlignRight);
-                Bar[n]->setVisible(true);
-//                if (ProfBasedColors>0)
-//                {
-//                    //profession based bar colors
-//                    switch (PosProf[n])
-//                    {
-//                    case 0:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
-//                        break;
-//                    case 1:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
-//                        break;
-//                    case 2:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
-//                        break;
-//                    case 3:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
-//                        break;
-//                    case 4:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
-//                        break;
-//                    case 5:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
-//                        break;
-//                    case 6:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
-//                        break;
-//                    case 7:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
-//                        break;
-//                    case 8:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
-//                        break;
-//                    case 9:
-//                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
-//                        break;
-//                    }
-//                }
+                if (ProfBasedColors>0)
+                {
+                    //profession based bar colors
+                    switch (PosProf[n])
+                    {
+                    case 0:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                        break;
+                    case 1:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                        break;
+                    case 2:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                        break;
+                    case 3:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
+                        break;
+                    case 4:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                        break;
+                    case 5:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                        break;
+                    case 6:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
+                        break;
+                    case 7:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
+                        break;
+                    case 8:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
+                        break;
+                    case 9:
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                        break;
+                    }
+                }
 //                else
 //                {
 //                    if (n%2==0 ) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
@@ -401,7 +415,6 @@ void MainWindow::UpdateGroupLabels()
 //                }
 
                 //                //Disable normal Text
-                //Bar[n]->setTextVisible(false);
 
                 QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
                 //                // DPS and %
@@ -410,60 +423,30 @@ void MainWindow::UpdateGroupLabels()
                 //                //Set Text
                 QString myDps = QString("[%L1 DPS]").arg(PosDPS[n]);
 
+                // showing names w/ & w/o Pos(!)
+                labelname[n]->setText(myname);
 
-                labelname_0->setText(myname);
-                labelname_1->setText(myname);
+                // showing dmg, percental dmg, dps, activity
+                labeldmg[n]->setText(myDmg);
+                labelper[n]->setText(myPer);
+                labeldps[n]->setText(myDps);
+                //labelact[n]->setText(myAct);
 
-                labeldmg_0->setText(myDmg);
-                labeldmg_1->setText(myDmg);
+                //Styling labels
+                labelname[n]->setStyleSheet("color:white;background:none;");
+                labeldmg[n]->setStyleSheet("color:white;background:none;");
+                labelper[n]->setStyleSheet("color:white;background:none;");
+                labeldps[n]->setStyleSheet("color:white;background:none;");
+                //labelact[n]->setStyleSheet("color:white;background:none;");
 
-                labelper_0->setText(myPer);
-                labelper_1->setText(myPer);
+                //Align Them
 
-                labeldps_0->setText(myDps);
-                labeldps_1->setText(myDps);
-
-                //labelact_0->setText(myAct);
-                //labelact_1->setText(myAct);
-
-                labelname_1->setText(myname);
-                labeldmg_1->setText(myDmg);
-
-                labelname_2->setText(myname);
-                labeldmg_2->setText(myDmg);
-                //                //Styling them
-
-                labelname_0->setStyleSheet("color:white;background:none;");
-                labeldmg_0->setStyleSheet("color:white;background:none;");
-                labelper_0->setStyleSheet("color:white;background:none;");
-                labeldps_0->setStyleSheet("color:white;background:none;");
-
-                labelname_1->setStyleSheet("color:white;background:none;text-align:center;");
-                labeldmg_1->setStyleSheet("color:white;background:none;text-align:center;");
-
-                labelname_2->setStyleSheet("color:white;background:none;text-align:center;");
-                labeldmg_2->setStyleSheet("color:white;background:none;text-align:center;");
-                //                //Align Them
-
-
-
-
-                //                //Display Labels
-                labelname_0->show();
-                labeldmg_0->show();
-                labelper_0->show();
-                labeldps_0->show();
-                //labelact_0->show();
-
-                labelname_1->show();
-                labeldmg_1->show();
-
-                labelname_2->show();
-                labeldmg_2->show();
-
-
-
-
+                //Display Labels
+                labelname[n]->show();
+                labeldmg[n]->show();
+                labelper[n]->show();
+                labeldps[n]->show();
+                //labelact[n]->show();
             }
             else
                 Bar[n] ->setVisible(false);
@@ -948,6 +931,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
     {
         update_Timer.stop();
         socket->abort();
+        ui->progressBar_0->setVisible(false);
         ui->progressBar_1->setVisible(false);
         ui->progressBar_2->setVisible(false);
         ui->progressBar_3->setVisible(false);
@@ -957,7 +941,6 @@ void GW2::MainWindow::on_actionConnect_triggered()
         ui->progressBar_7->setVisible(false);
         ui->progressBar_8->setVisible(false);
         ui->progressBar_9->setVisible(false);
-        ui->progressBar_10->setVisible(false);
         is_connected = false;
         HostIP="";
 
