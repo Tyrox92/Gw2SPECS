@@ -71,13 +71,102 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Profession Color Bars
     ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
-    pPosition=uiConfig->checkBoxPosition->isChecked();
-    pDamageDone=uiConfig->checkBoxDamageDone->isChecked();
+    displaypos=uiConfig->checkBoxPosition->isChecked();
+    displaydmg=uiConfig->checkBoxDamageDone->isChecked();
     uiConfig->professionComboBox->setCurrentIndex(0);
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
 
     // We are not connected on start up
     is_connected = false;
+
+
+    //New ProgressbarLabels
+    QHBoxLayout *layoutprogressbar_0 = new QHBoxLayout(ui->progressBar_0);
+    QHBoxLayout *layoutprogressbar_1 = new QHBoxLayout(ui->progressBar_1);
+    QHBoxLayout *layoutprogressbar_2 = new QHBoxLayout(ui->progressBar_2);
+    QHBoxLayout *layoutprogressbar_3 = new QHBoxLayout(ui->progressBar_3);
+    QHBoxLayout *layoutprogressbar_4 = new QHBoxLayout(ui->progressBar_4);
+    QHBoxLayout *layoutprogressbar_5 = new QHBoxLayout(ui->progressBar_5);
+    QHBoxLayout *layoutprogressbar_6 = new QHBoxLayout(ui->progressBar_6);
+    QHBoxLayout *layoutprogressbar_7 = new QHBoxLayout(ui->progressBar_7);
+    QHBoxLayout *layoutprogressbar_8 = new QHBoxLayout(ui->progressBar_8);
+    QHBoxLayout *layoutprogressbar_9 = new QHBoxLayout(ui->progressBar_9);
+
+    // adding colomns to bars (not yet shown)
+    // names
+    layoutprogressbar_0->addWidget(labelname_0);
+    layoutprogressbar_1->addWidget(labelname_1);
+    layoutprogressbar_2->addWidget(labelname_2);
+    layoutprogressbar_3->addWidget(labelname_3);
+    layoutprogressbar_4->addWidget(labelname_4);
+    layoutprogressbar_5->addWidget(labelname_5);
+    layoutprogressbar_6->addWidget(labelname_6);
+    layoutprogressbar_7->addWidget(labelname_7);
+    layoutprogressbar_8->addWidget(labelname_8);
+    layoutprogressbar_9->addWidget(labelname_9);
+    // dmg
+    layoutprogressbar_0->addWidget(labeldmg_0);
+    layoutprogressbar_1->addWidget(labeldmg_1);
+    layoutprogressbar_2->addWidget(labeldmg_2);
+    layoutprogressbar_3->addWidget(labeldmg_3);
+    layoutprogressbar_4->addWidget(labeldmg_4);
+    layoutprogressbar_5->addWidget(labeldmg_5);
+    layoutprogressbar_6->addWidget(labeldmg_6);
+    layoutprogressbar_7->addWidget(labeldmg_7);
+    layoutprogressbar_8->addWidget(labeldmg_8);
+    layoutprogressbar_9->addWidget(labeldmg_9);
+    // percental dmg
+    layoutprogressbar_0->addWidget(labelper_0);
+    layoutprogressbar_1->addWidget(labelper_1);
+    layoutprogressbar_2->addWidget(labelper_2);
+    layoutprogressbar_3->addWidget(labelper_3);
+    layoutprogressbar_4->addWidget(labelper_4);
+    layoutprogressbar_5->addWidget(labelper_5);
+    layoutprogressbar_6->addWidget(labelper_6);
+    layoutprogressbar_7->addWidget(labelper_7);
+    layoutprogressbar_8->addWidget(labelper_8);
+    layoutprogressbar_9->addWidget(labelper_9);
+    // dps
+    layoutprogressbar_0->addWidget(labeldps_0);
+    layoutprogressbar_1->addWidget(labeldps_1);
+    layoutprogressbar_2->addWidget(labeldps_2);
+    layoutprogressbar_3->addWidget(labeldps_3);
+    layoutprogressbar_4->addWidget(labeldps_4);
+    layoutprogressbar_5->addWidget(labeldps_5);
+    layoutprogressbar_6->addWidget(labeldps_6);
+    layoutprogressbar_7->addWidget(labeldps_7);
+    layoutprogressbar_8->addWidget(labeldps_8);
+    layoutprogressbar_9->addWidget(labeldps_9);
+//    //activity
+//    layoutprogressbar_0->addWidget(labelact_0);
+//    layoutprogressbar_1->addWidget(labelact_1);
+//    layoutprogressbar_2->addWidget(labelact_2);
+//    layoutprogressbar_3->addWidget(labelact_3);
+//    layoutprogressbar_4->addWidget(labelact_4);
+//    layoutprogressbar_5->addWidget(labelact_5);
+//    layoutprogressbar_6->addWidget(labelact_6);
+//    layoutprogressbar_7->addWidget(labelact_7);
+//    layoutprogressbar_8->addWidget(labelact_8);
+//    layoutprogressbar_9->addWidget(labelact_9);
+
+    for(int n=0;n<10;n++) {
+        // aligning labels
+        labelname[n]->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        labeldmg[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        labelper[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        labeldps[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+        // styling labels
+        labelname[n]->setStyleSheet("color:white;background:none;");
+        labeldmg[n]->setStyleSheet("color:white;background:none;");
+        labelper[n]->setStyleSheet("color:white;background:none;");
+        labeldps[n]->setStyleSheet("color:white;background:none;");
+        //labelact[n]->setStyleSheet("color:white;background:none;");
+    }
+
+    // nameLabel->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
+
 
     CheckFirstRun();
     CheckForUpdate();
@@ -86,15 +175,34 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::ProfChanged(QString prof)
 {
-    if (prof== "Elementalist") m_MyProfession=1;else
-        if (prof== "Engineer") m_MyProfession=2;else
-            if (prof== "Guardian") m_MyProfession=3;else
-                if (prof== "Mesmer") m_MyProfession=4;else
-                    if (prof== "Necromancer") m_MyProfession=5;else
-                        if (prof== "Ranger") m_MyProfession=6;else
-                            if (prof== "Revenant") m_MyProfession=7;else
-                                if (prof== "Thief") m_MyProfession=8;else
-                                    if (prof== "Warrior") m_MyProfession=9;
+//    if (prof== "Elementalist") m_MyProfession=1;else
+//        if (prof== "Engineer") m_MyProfession=2;else
+//            if (prof== "Guardian") m_MyProfession=3;else
+//                if (prof== "Mesmer") m_MyProfession=4;else
+//                    if (prof== "Necromancer") m_MyProfession=5;else
+//                        if (prof== "Ranger") m_MyProfession=6;else
+//                            if (prof== "Revenant") m_MyProfession=7;else
+//                                if (prof== "Thief") m_MyProfession=8;else
+//                                    if (prof== "Warrior") m_MyProfession=9;
+
+// this should be more ressource efficent, but can't test it right now, esp. if prof==War
+// https://stackoverflow.com/questions/767821/is-else-if-faster-than-switch-case
+    QStringList proflist;
+    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+    m_MyProfession = proflist.indexOf(prof)+1;
+
+//    switch (proflist.indexOf(prof)) {
+//    case 0: m_MyProfession=1; break;
+//    case 1: m_MyProfession=2; break;
+//    case 2: m_MyProfession=3; break;
+//    case 3: m_MyProfession=4; break;
+//    case 4: m_MyProfession=5; break;
+//    case 5: m_MyProfession=6; break;
+//    case 6: m_MyProfession=7; break;
+//    case 7: m_MyProfession=8; break;
+//    case 8: m_MyProfession=9; break;
+//    default: m_MyProfession=0; break;
+//    }
 }
 
 void MainWindow::CheckFirstRun()
@@ -122,18 +230,20 @@ void MainWindow::ProfSettingsChanged()
 {
     if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=1;
 }
+
 void MainWindow::PositionChanged()
 {
-    if (pPosition==1) pPosition=0; else pPosition=1;
+    if (displaypos==1) displaypos=0; else displaypos=1;
 }
+
 void MainWindow::DamageDoneChanged()
 {
-    if (pDamageDone==1) pDamageDone=0; else pDamageDone=1;
+    if (displaydmg==1) displaydmg=0; else displaydmg=1;
 }
 
 void MainWindow::UpdateGroupLabels()
 {
-    QLabel* Label1;
+    QProgressBar* Bar0 = ui->progressBar_0;
     QProgressBar* Bar1 = ui->progressBar_1;
     QProgressBar* Bar2 = ui->progressBar_2;
     QProgressBar* Bar3 = ui->progressBar_3;
@@ -143,8 +253,8 @@ void MainWindow::UpdateGroupLabels()
     QProgressBar* Bar7 = ui->progressBar_7;
     QProgressBar* Bar8 = ui->progressBar_8;
     QProgressBar* Bar9 = ui->progressBar_9;
-    QProgressBar* Bar10 = ui->progressBar_10;
-    QProgressBar* Bar [10] = {Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9,Bar10};
+    QProgressBar* Bar [10] = {Bar0,Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9};
+
     long p,i,j,k;
 
     // If playing without a server
@@ -154,42 +264,63 @@ void MainWindow::UpdateGroupLabels()
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
-        PosAct[0]=m_Activity;
-        if (PosDmg[0]>0 )i=PosDmg[0]*100.0/PosDmg[0];else i=0;
-        //if (AllDamageDone>0)p=PosDmg[0]*100/AllDamageDone;else p=0;
+        // PosAct[0]=m_Activity;
+        if (PosDmg[0]>0)
+            i=PosDmg[0]*100.0/PosDmg[0];
+        else i=0;
         Bar[0]->setValue(i);
+
+        // change this @syph
         QString text = QString("%L2 DMG - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
+
         Bar[0]->setFormat(text);
         Bar[0]->setVisible(true);
-        //AllDamageDone=m_Dmg;
-        ui->grp_Dmg->setText(QString::number(m_Dmg));
+        Bar[0]->setTextVisible(true);
+        // Syph: I think this is useless, if not, please explain and change it back:
+        //ui->grp_Dmg->setText(QString::number(m_Dmg));
     }
     else
     {
-
-        AllDamageDone=0;
-        for (j=0;j<10;j++) AllDamageDone+=SlotDmg[j];
-        Label1 = ui->grp_Dmg;
-        Label1->setText(QString::number(AllDamageDone));
+        // reset total dmg,dps
+        GrpDmg=0;
         GrpDPS=0;
+
+        // add up all dmg/dps and set the labels
+        for (j=0;j<10;j++) GrpDmg+=SlotDmg[j];
+        ui->grp_Dmg->setText(QString::number(GrpDmg));
         for (j=0;j<10;j++) GrpDPS+=SlotDPS[j];
-        Label1 = ui->grp_DPS;
-        Label1->setText(QString::number(GrpDPS));
+        ui->grp_DPS->setText(QString::number(GrpDPS));
+
+        // reset number of player; set
         i=0;
         for (j=0;j<10;j++) if (SlotDPS[j]>0) i++;
         if (i>0) AvgDPS=GrpDPS/i; else AvgDPS=0;
-        Label1 = ui->avg_DPS;
-        Label1->setText(QString::number(AvgDPS));
+        ui->avg_DPS->setText(QString::number(AvgDPS));
 
+        // setting input from server to local Slots
         for (j=0;j<10;j++)
         {
+            strcpy(PosName[j],SlotName[j]);
             PosDmg[j]=SlotDmg[j];
             PosDPS[j]=SlotDPS[j];
-            PosAct[j]=SlotAct[j];
+            //PosAct[j]=SlotAct[j];
             PosProf[j]=SlotProf[j];
-            strcpy(PosName[j],SlotName[j]);
         }
 
+        // resting empty/disconnected slot to 0
+        for (int p=0;p<10;p++)
+        {
+            if (PosName[p]==QString("Disconnected"))
+            {
+                PosName[p][0]=0;
+                PosDmg[p]=0;
+                PosDPS[p]=0;
+                PosAct[p]=0;
+                PosProf[p]=0;
+            }
+        }
+
+        // sorting the slots
         k=0;
         for (i=0;i<9;i++)
         {
@@ -203,9 +334,9 @@ void MainWindow::UpdateGroupLabels()
                     k=PosDPS[i];
                     PosDPS[i]=PosDPS[j];
                     PosDPS[j]=k;
-                    k=PosAct[i];
-                    PosAct[i]=PosAct[j];
-                    PosAct[j]=k;
+                    //k=PosAct[i];
+                    //PosAct[i]=PosAct[j];
+                    //PosAct[j]=k;
                     k=PosProf[i];
                     PosProf[i]=PosProf[j];
                     PosProf[j]=k;
@@ -214,46 +345,24 @@ void MainWindow::UpdateGroupLabels()
                     strcpy(PosName[j],tmp1);
                 }
             }
-            for (int p=0;p<10;p++)
-            {
-                if (PosName[p]==QString("Disconnected"))
-                {
-                    PosName[p][0]=0;
-                    PosDmg[p]=0;
-                    PosDPS[p]=0;
-                    PosAct[p]=0;
-                    PosProf[p]=0;
-                }
-            }
         }
 
+        // doing the math and setting the labels
         for(int n=0;n<10;n++) {
+            Bar[n]->setVisible(true);
+            Bar[n]->setTextVisible(false);
             if (PosName[n][0]!=0) {
-                if (PosDmg[0]>0)i=PosDmg[n]*100/PosDmg[0];
+                // le math
+                if (PosDmg[0]>0)
+                    i=PosDmg[n]*100/PosDmg[0];
                 else i=0;
-                if (AllDamageDone>0)p=PosDmg[n]*100/AllDamageDone;
+                if (GrpDmg>0)
+                    p=PosDmg[n]*100/GrpDmg;
                 else p=0;
-                Bar[n]->setValue(i);
-                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-                QString text;
-                if (pPosition>0)
-                {
-                    if (pDamageDone>0) text = QString("%1. %2 %L3% [%L4] [%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
-                    else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-                    Bar[n]->setFormat(text);
-                }
-                if (pPosition<1)
-                {
-                    if (pDamageDone<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
-                    else text = QString("%1 %L2% [%L3] [%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
-                    Bar[n]->setFormat(text);
-                }
 
-                Bar[n]->setAlignment(Qt::AlignRight);
-                Bar[n]->setVisible(true);
+                // profession based bar coloring
                 if (ProfBasedColors>0)
                 {
-                    //profession based bar colors
                     switch (PosProf[n])
                     {
                     case 0:
@@ -289,44 +398,57 @@ void MainWindow::UpdateGroupLabels()
                     }
                 }
                 else
-                {
-                    if (n%2==0 ) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                    if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
-                }
+
+                // le showing labels
 
 
+                Bar[n]->setValue(i);
+//                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
+//                QString text;
+//                if (displaypos>0)
+//                {
+//                    if (displaydmg>0) text = QString("%1. %2 %L3% [%L4] [%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+//                    else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
+//                    Bar[n]->setFormat(text);
+//                }
+//                if (displaypos<1)
+//                {
+//                    if (displaydmg<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
+//                    else text = QString("%1 %L2% [%L3] [%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
+//                    Bar[n]->setFormat(text);
+//                }
 
-                // For Future Release Adding Labels to Align Text within the Progressbar properly
+//                Bar[n]->setAlignment(Qt::AlignRight);
 
+                //display name and position or not
+                if (displaypos>0) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
+                else labelname[n]->setText(QString("%1").arg(PosName[n]));
 
+                // damage
+                if (displaydmg>0) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
+                else labeldmg[n]->setText("");
+                // this could also be done by not adding widget or hiding/not-showing
 
-                //                //Disable normal Text
-                //                Bar[n]->setTextVisible(false);
+                // percental
+                labelper[n]->setText(QString("%L1%").arg(p));
+                // add option to disable (see damage)
 
-                //                QVBoxLayout(Bar[n]).addWidget(nameLabel);
-                //                QVBoxLayout(Bar[n]).addWidget(dmgLabel);
-                //                //Position and Name
-                //                QString myname = QString("%1. %2").arg(n+1).arg(PosName[n]);
-                //                // DPS and %
-                //                QString myDmg = QString("%L3% [%L4 DPS]").arg(p).arg(PosDPS[n]);
-                //                //Set Text
-                //                nameLabel->setText(myname);
-                //                dmgLabel->setText(myDmg);
-                //                //Styling them
-                //                nameLabel->setStyleSheet("color:white;background:none;margin-top:50%;font-size:12px;");
-                //                dmgLabel->setStyleSheet("color:white;background:none;");
-                //                //Align Them
-                //                nameLabel->setMinimumHeight(17);
-                //                dmgLabel->setMinimumSize(100,17);
+                // DPS
+                labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
+                // add option to disable (see damage)
 
+                // activity
+                //labelact[n]->setText(QString("%L1%").arg());
+                // add option to disable (see damage)
 
-                //                //Display Labels
-                //                nameLabel->show();
-                //                dmgLabel->show();
-
-
-
-
+                // display labels
+                labelname[n]->show();
+                labeldmg[n]->show();
+                labelper[n]->show();
+                labeldps[n]->show();
+                //labelact[n]->show();
             }
             else
                 Bar[n] ->setVisible(false);
@@ -596,7 +718,7 @@ void MainWindow::Initialize()
             SlotAct[i]=0;
             SlotName[i][0]='\0';
         }
-        AllDamageDone=0;
+        GrpDmg=0;
         hitCounter=0;
         m_critChance=0;
         critCounter=0;
@@ -641,7 +763,7 @@ void MainWindow::Initialize()
             SlotAct[i]=0;
             SlotName[i][0]='\0';
         }
-        AllDamageDone=0;
+        GrpDmg=0;
         hitCounter=0;
         m_critChance=0;
         critCounter=0;
@@ -721,6 +843,7 @@ void GW2::MainWindow::StartupPref()
     sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
     sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
 
+    ui->progressBar_0->setVisible(false);
     ui->progressBar_1->setVisible(false);
     ui->progressBar_2->setVisible(false);
     ui->progressBar_3->setVisible(false);
@@ -730,7 +853,6 @@ void GW2::MainWindow::StartupPref()
     ui->progressBar_7->setVisible(false);
     ui->progressBar_8->setVisible(false);
     ui->progressBar_9->setVisible(false);
-    ui->progressBar_10->setVisible(false);
 }
 
 //Show player/group details
@@ -811,6 +933,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
     {
         update_Timer.stop();
         socket->abort();
+        ui->progressBar_0->setVisible(false);
         ui->progressBar_1->setVisible(false);
         ui->progressBar_2->setVisible(false);
         ui->progressBar_3->setVisible(false);
@@ -820,7 +943,6 @@ void GW2::MainWindow::on_actionConnect_triggered()
         ui->progressBar_7->setVisible(false);
         ui->progressBar_8->setVisible(false);
         ui->progressBar_9->setVisible(false);
-        ui->progressBar_10->setVisible(false);
         is_connected = false;
         HostIP="";
 
