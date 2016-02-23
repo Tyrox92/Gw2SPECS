@@ -21,7 +21,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>220</width>
     <height>0</height>
    </size>
   </property>
@@ -1189,7 +1189,7 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1229,7 +1229,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1269,7 +1269,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1321,7 +1321,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1361,7 +1361,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1401,7 +1401,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1441,7 +1441,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1481,7 +1481,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1521,7 +1521,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>
@@ -1561,7 +1561,7 @@ QProgressBar::chunk {
              </property>
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>0</width>
                <height>17</height>
               </size>
              </property>

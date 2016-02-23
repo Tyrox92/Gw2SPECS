@@ -158,10 +158,10 @@ MainWindow::MainWindow(QWidget *parent) :
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        labelname[n]->setStyleSheet("color:white;background:none;");
-        labeldmg[n]->setStyleSheet("color:white;background:none;");
-        labelper[n]->setStyleSheet("color:white;background:none;");
-        labeldps[n]->setStyleSheet("color:white;background:none;");
+        labelname[n]->setStyleSheet("color:white;background:none;background-color:red;");
+        labeldmg[n]->setStyleSheet("color:white;background:none;background-color:green;");
+        labelper[n]->setStyleSheet("color:white;background:none;background-color:blue;");
+        labeldps[n]->setStyleSheet("color:white;background:none;background-color:black;padding:10px");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 
@@ -273,6 +273,13 @@ void MainWindow::UpdateGroupLabels()
         // change this @syph
         QString text = QString("%L2 DMG - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
 
+        // set group thing invisible
+        //labelname[n]->show();
+        //labeldmg[n]->show();
+        //labelper[n]->show();
+        //labeldps[n]->show();
+
+        // set solo thing visible
         Bar[0]->setFormat(text);
         Bar[0]->setVisible(true);
         Bar[0]->setTextVisible(true);
