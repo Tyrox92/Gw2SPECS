@@ -92,6 +92,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QHBoxLayout *layoutprogressbar_8 = new QHBoxLayout(ui->progressBar_8);
     QHBoxLayout *layoutprogressbar_9 = new QHBoxLayout(ui->progressBar_9);
 
+    // styling layouts
+    layoutprogressbar_0->setMargin(0);
+    layoutprogressbar_1->setMargin(0);
+    layoutprogressbar_2->setMargin(0);
+    layoutprogressbar_3->setMargin(0);
+    layoutprogressbar_4->setMargin(0);
+    layoutprogressbar_5->setMargin(0);
+    layoutprogressbar_6->setMargin(0);
+    layoutprogressbar_7->setMargin(0);
+    layoutprogressbar_8->setMargin(0);
+    layoutprogressbar_9->setMargin(0);
+
     // adding colomns to bars (not yet shown)
     // names
     layoutprogressbar_0->addWidget(labelname_0);
@@ -158,10 +170,10 @@ MainWindow::MainWindow(QWidget *parent) :
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        labelname[n]->setStyleSheet("color:white;background:none;background-color:red;");
+        labelname[n]->setStyleSheet("color:white;background:none;background-color:red;min-width:113px;");
         labeldmg[n]->setStyleSheet("color:white;background:none;background-color:green;");
         labelper[n]->setStyleSheet("color:white;background:none;background-color:blue;");
-        labeldps[n]->setStyleSheet("color:white;background:none;background-color:black;padding:10px");
+        labeldps[n]->setStyleSheet("color:white;background:none;background-color:black;");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 
