@@ -164,8 +164,6 @@ private:
     QPushButton *download;
     QPushButton *changelog;
     QString m_Time;
-    QString combatCourse;
-
 
 
 private slots:

@@ -88,6 +88,7 @@ void DmgMeter::Reset()
     OffCombatTime.start();
     emit RequestTimeUpdate(0);
     countCombat = 0;
+    combatCourse = "";
 }
 
 void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
