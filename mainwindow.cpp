@@ -59,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
     dmgMeter->SetSecondsInCombat(uiConfig->comboBoxSecondsInCombat->currentText());
     dmgMeter->SetConsideredLineCount(uiConfig->comboBoxConsideredLines->currentText());
+    dmgMeter->Reset(); //Make sure Everything is reset if not set Timer will be set to 2s upon start
 
     m_ScreenRecorderThread.start();
 
@@ -454,6 +455,7 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n] ->setVisible(false);
         }
     }
+    updateCombatCourse();
 }
 
 void MainWindow::ready2Read()
@@ -683,7 +685,9 @@ void MainWindow::UpdateTime(int timeInMsecs)
     secs -= mins * 60;
     int hours = mins / 60;
     mins -= hours * 60;
+
     QString time;
+
     if (hours > 0)
     {
         time += QString::number(hours) + "h ";
@@ -696,6 +700,7 @@ void MainWindow::UpdateTime(int timeInMsecs)
 
     time += QString::number(secs) + "s";
     ui->labelTimeValue->setText(time);
+    m_Time = time;
 }
 
 void MainWindow::Initialize()
@@ -719,11 +724,14 @@ void MainWindow::Initialize()
             SlotName[i][0]='\0';
         }
         GrpDmg=0;
+        GrpDPS=0;
+        AvgDPS=0;
         hitCounter=0;
         m_critChance=0;
         critCounter=0;
         m_condiDmg=0;
         LastColor=0;
+        combatCourse = "";
 
         socket->connectToHost(HostIP, HostPort);
 
@@ -832,7 +840,6 @@ void GW2::MainWindow::StartupPref()
     //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
     ui->widget->hide();
     ui->widgetExtraDetails->hide();
-
 
     // Resize Option
     // Using gridLayout here which is the main layout
@@ -1018,4 +1025,100 @@ void GW2::MainWindow::on_pushButton_clicked(){
 void GW2::MainWindow::on_pushButton2_clicked(){
     QString changeloglink = "http://gw2dps.com/changelog";
     QDesktopServices::openUrl(QUrl(changeloglink));
+}
+
+void MainWindow::updateCombatCourse(){
+    if(countCombat > 0){
+        //Filling Up Variable For saving later into the Log
+        combatCourse += m_Time + " | " + QString::number(m_Dps) + " | " + QString::number(m_Dmg) + "\r\n";
+    }
+}
+
+void GW2::MainWindow::writeTxt(){
+
+    QDir dir("combatLog/");
+    if (!dir.exists()) {dir.mkpath(".");}
+
+    unsigned long c;
+    double c1,c2,c3,c4;
+    c2=m_condiDmg;
+    c3=m_Dps;
+    c4=m_Dmg;
+    c1=c2*c3;
+    if (m_Dmg>0)c=round(c1/c4);else c=0;
+
+    const QDateTime now = QDateTime::currentDateTime();
+    const QString timestamp = now.toString(QLatin1String("yyyy-MM-dd_hh''mm''ss"));
+    const QString filename = QString::fromLatin1("combatLog/combatLog-%1.txt").arg(timestamp);
+
+    QFile file( filename );
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+        QTextStream stream( &file );
+        stream << "*************************************\r\n" << endl;
+        stream << "*         SPECS Log - v 1.0         *\r\n" << endl;
+        stream << "*************************************\r\n" << endl;
+        stream << "\r\n" << endl;
+        stream << "Time: " << m_Time << "\r\n" << endl;
+        stream << "Hitcounter: " << hitCounter << "\r\n" << endl;
+        stream << "Highest Hit: " << m_MaxDmg << "\r\n" << endl;
+        stream << "CritChance: " << m_critChance << "%" << "\r\n" << endl;
+        stream << "\r\n" << endl;
+        stream << "DPS: " << m_Dps << "\r\n" << endl;
+        stream << "DMG: " << m_Dmg << "\r\n" << endl;
+        stream << "\r\n" << endl;
+        stream << "CondiDPS: " << c << "\r\n" << endl;
+        stream << "CondiDMG: " << m_condiDmg << "\r\n" << endl;
+        stream << "\r\n\r\n" << endl;
+
+        if(is_connected == true){
+            stream << "*************************************\r\n" << endl;
+            stream << "*            Group Info             *\r\n" << endl;
+            stream << "*************************************\r\n" << endl;
+            stream << "\r\n" << endl;
+            stream << "AvgDPS: " << AvgDPS << "\r\n" << endl;
+            stream << "GroupDPS: " << GrpDPS << "\r\n" << endl;
+            stream << "GroupDMG: " << GrpDmg << "\r\n" << endl;
+            stream << "\r\n\r\n\r\n" << endl;
+            QStringList profList;
+            profList << "None" << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+            stream <<  "Name       |   DPS  |    DMG    | Class\r\n" << endl;
+            for(int i=0;i<10;i++){
+                if(PosName[i][0] !=0){
+                    QString tempName = PosName[i];
+                    QString tempDPS = QString::number(PosDPS[i]);
+                    QString tempDMG = QString::number(PosDmg[i]);
+                    QString modDMG;
+
+                    if (tempDMG.size() > 3) {
+                        modDMG = tempDMG.rightJustified(7, ' ');
+                    } if (tempDMG.size() > 6) {
+                        modDMG = tempDMG.rightJustified(7, ' ');
+                    } else {
+                        modDMG = tempDMG.rightJustified(8, ' ');
+                    }
+
+                    if (tempDMG.size() > 3) {
+                    modDMG.insert(modDMG.size() - 3, ".");
+                    }
+                    if (tempDMG.size() > 6) {
+                    modDMG.insert(modDMG.size() - 7, ".");
+                    }
+
+
+                    if(tempDPS.size() > 3){tempDPS.insert(tempDPS.size() -3, ".");}
+                    stream << tempName.leftJustified(10, ' ') << " | " << tempDPS.rightJustified(6, ' ') << " | " << modDMG << " | " << profList[PosProf[i]] << "\r\n" << endl;
+                }
+
+            }
+            stream << "\r\n\r\n\r\n" << endl;
+        }
+        stream << " Time |  DPS  |  DMG\r\n" << endl;
+        stream << combatCourse << endl;
+    }
+}
+
+void GW2::MainWindow::on_actionActionSave_triggered()
+{
+    writeTxt();
 }

@@ -87,6 +87,7 @@ void DmgMeter::Reset()
     m_TimeSinceCombat.start();
     OffCombatTime.start();
     emit RequestTimeUpdate(0);
+    countCombat = 0;
 }
 
 void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
@@ -143,6 +144,7 @@ void DmgMeter::ComputeDps()
         emit RequestTimeUpdate(m_ElapsedTimeSinceCombatInMsec);
         m_IsActive = false;
         OffCombatTime.start();
+        countCombat = 0; // We're currently not in combat
         if (m_IsAutoResetting)
         {
             Reset();
@@ -210,7 +212,6 @@ int DmgMeter::ComputeDmg(const QString& dmgStr)
             dmg += c.digitValue();
         }
     }
-
     return dmg;
 }
 
@@ -227,6 +228,9 @@ void DmgMeter::StartEvaluation()
     m_TimeSinceCombat.start();
     m_Timer.start(m_TimeoutInMsec);
     //m_Dps = m_Dmg;
+
+    //Setting countCombat to 1 to verify we're actively in combat
+    countCombat = 1;
 }
 
 

@@ -68,7 +68,6 @@ namespace GW2
         QTime m_TimeSinceCombat;
         QTime m_TimeSinceEvaluation;
 
-
         ImageReader m_Reader;
         int OffCombatTimeInMsec;
         //int m_Activity;

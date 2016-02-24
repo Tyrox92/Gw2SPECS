@@ -22,6 +22,7 @@ unsigned int m_critChance;
 unsigned long m_condiDmg;
 unsigned long m_MaxDmg;
 unsigned long m_MyProfession;
+unsigned long countCombat;
 //QString curVersion = Settings::s_Version;
 
 int main(int argc, char *argv[])
