@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
-    <height>184</height>
+    <width>294</width>
+    <height>196</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1150,7 +1150,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>244</width>
+            <width>277</width>
             <height>170</height>
            </rect>
           </property>
@@ -1654,6 +1654,8 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
    <addaction name="separator"/>
    <addaction name="actionConnect"/>
    <addaction name="separator"/>
+   <addaction name="actionActionSave"/>
+   <addaction name="separator"/>
    <addaction name="actionConfig"/>
    <addaction name="separator"/>
    <addaction name="actionHelp"/>
@@ -1792,6 +1794,18 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
    </property>
    <property name="toolTip">
     <string>Connect to Server</string>
+   </property>
+  </action>
+  <action name="actionActionSave">
+   <property name="icon">
+    <iconset resource="Icons/Icons.qrc">
+     <normaloff>:/saveIcon.png</normaloff>:/saveIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>actionSave</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Data</string>
    </property>
   </action>
  </widget>

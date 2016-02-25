@@ -28,6 +28,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+        QString time;
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
@@ -162,6 +163,8 @@ private:
     void CheckForUpdate();
     QPushButton *download;
     QPushButton *changelog;
+    QString m_Time;
+
 
 private slots:
     void UpdateTime(int);
@@ -184,8 +187,9 @@ private slots:
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton2_clicked();
-
-
+    void writeTxt();
+    void on_actionActionSave_triggered();
+    void updateCombatCourse();
 };
 
 }
