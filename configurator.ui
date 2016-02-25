@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>292</height>
+    <width>330</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>320</width>
+    <width>330</width>
     <height>320</height>
    </size>
   </property>
@@ -28,27 +28,6 @@
    <string notr="true">background-color: rgb(32, 43, 47);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="2" column="0" colspan="3">
-    <widget class="QPushButton" name="pushButtonReset">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>Restore defaults</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="4">
     <widget class="QPushButton" name="pushButtonReset_2">
      <property name="sizePolicy">
@@ -105,6 +84,27 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QPushButton" name="pushButtonReset">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Restore defaults</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="5">
     <widget class="QToolBox" name="settingsToolbox">
      <property name="font">
@@ -128,66 +128,54 @@ color: #8BB2DA;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>274</width>
-        <height>154</height>
+        <width>312</width>
+        <height>182</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Player Bar Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBoxPosition">
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBoxDamageDone">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Enable</string>
+          <string>Show Damage</string>
          </property>
          <property name="checked">
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="labelGwChatTxtSize">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBoxDPS">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
          <property name="text">
-          <string>Damage Done</string>
+          <string>/Show DPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="labelGwInterfaceSize">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBoxProfColors">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
          <property name="text">
-          <string>Position</string>
+          <string>Show Profession</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="0" column="1">
         <widget class="QComboBox" name="professionComboBox">
          <property name="styleSheet">
           <string notr="true">QComboBox {
@@ -288,29 +276,78 @@ QComboBox QAbstractItemView {
          </item>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QCheckBox" name="checkBoxProfColors">
+       <item row="3" column="0">
+        <widget class="QLabel" name="GroupSettings">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Group Settings:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="checkBoxPosition">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Enable</string>
+          <string>Show Position</string>
          </property>
          <property name="checked">
           <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="checkBoxDamageDone">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="checkBoxPerDmg">
          <property name="text">
-          <string>Enable</string>
+          <string>/Percental Damage</string>
          </property>
          <property name="checked">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="checkBoxActivity">
+         <property name="text">
+          <string>/Show Activity</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="SoloSettings">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Solo Setting:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QCheckBox" name="checkBoxName">
+         <property name="text">
+          <string>/Show Name</string>
          </property>
         </widget>
        </item>
@@ -321,8 +358,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>274</width>
-        <height>154</height>
+        <width>312</width>
+        <height>182</height>
        </rect>
       </property>
       <attribute name="label">
