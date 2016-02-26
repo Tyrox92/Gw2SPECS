@@ -187,9 +187,11 @@ private slots:
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton2_clicked();
-    void writeTxt();
+    void writeFile(QString);
     void on_actionActionSave_triggered();
     void updateCombatCourse();
+    void writeCsv();
+    void writeTxt();
 };
 
 }

@@ -719,7 +719,7 @@ void MainWindow::UpdateTime(int timeInMsecs)
 
     time += QString::number(secs) + "s";
     ui->labelTimeValue->setText(time);
-    m_Time = time;
+    m_Time.sprintf("%02d:%02d:%02d", hours, mins, secs);
 }
 
 void MainWindow::Initialize()
@@ -1053,7 +1053,18 @@ void MainWindow::updateCombatCourse(){
     }
 }
 
-void GW2::MainWindow::writeTxt(){
+void MainWindow::writeFile(QString separator){
+    QString tableSep = "";
+    QString fileEnding = "txt";
+    if(separator == ";"){
+        //If we're in CSV Mode
+        tableSep = separator;
+        fileEnding = QString::fromLatin1("csv");
+    }else{
+        //If we're in TXT Mode
+        tableSep = "|";
+        fileEnding = QString::fromLatin1("txt");
+    }
 
     QDir dir("combatLog/");
     if (!dir.exists()) {dir.mkpath(".");}
@@ -1068,40 +1079,48 @@ void GW2::MainWindow::writeTxt(){
 
     const QDateTime now = QDateTime::currentDateTime();
     const QString timestamp = now.toString(QLatin1String("yyyy-MM-dd_hh''mm''ss"));
-    const QString filename = QString::fromLatin1("combatLog/combatLog-%1.txt").arg(timestamp);
+    const QString filename = QString::fromLatin1("combatLog/combatLog-%1.%2").arg(timestamp).arg(fileEnding);
 
     QFile file( filename );
     if ( file.open(QIODevice::ReadWrite) )
     {
         QTextStream stream( &file );
-        stream << "*************************************\r\n" << endl;
-        stream << "*         SPECS Log - v 1.0         *\r\n" << endl;
-        stream << "*************************************\r\n" << endl;
-        stream << "\r\n" << endl;
-        stream << "Time: " << m_Time << "\r\n" << endl;
-        stream << "Hitcounter: " << hitCounter << "\r\n" << endl;
-        stream << "Highest Hit: " << m_MaxDmg << "\r\n" << endl;
-        stream << "CritChance: " << m_critChance << "%" << "\r\n" << endl;
-        stream << "\r\n" << endl;
-        stream << "DPS: " << m_Dps << "\r\n" << endl;
-        stream << "DMG: " << m_Dmg << "\r\n" << endl;
-        stream << "\r\n" << endl;
-        stream << "CondiDPS: " << c << "\r\n" << endl;
-        stream << "CondiDMG: " << m_condiDmg << "\r\n" << endl;
-        stream << "\r\n\r\n" << endl;
+        if(separator == ": "){
+            stream << "*************************************\r\n";
+            stream << "*         SPECS Log - v 1.0         *\r\n";
+            stream << "*************************************\r\n";
+            stream << "\r\n";
+        }
+        if(separator == ";"){
+            stream << "Personal Data\r\n";
+        }
+
+        stream << "Time" << separator << m_Time << "\r\n";
+        stream << "Hitcounter" << separator << hitCounter << "\r\n";
+        stream << "Highest Hit" << separator << m_MaxDmg << "\r\n";
+        stream << "CritChance" << separator << m_critChance << "%" << "\r\n";
+        stream << "\r\n";
+        stream << "DPS" << separator << m_Dps << "\r\n";
+        stream << "DMG" << separator << m_Dmg << "\r\n";
+        stream << "\r\n";
+        stream << "CondiDPS" << separator << c << "\r\n";
+        stream << "CondiDMG" << separator << m_condiDmg << "\r\n";
+        stream << "\r\n\r\n";
 
         if(is_connected == true){
-            stream << "*************************************\r\n" << endl;
-            stream << "*            Group Info             *\r\n" << endl;
-            stream << "*************************************\r\n" << endl;
-            stream << "\r\n" << endl;
-            stream << "AvgDPS: " << AvgDPS << "\r\n" << endl;
-            stream << "GroupDPS: " << GrpDPS << "\r\n" << endl;
-            stream << "GroupDMG: " << GrpDmg << "\r\n" << endl;
-            stream << "\r\n\r\n\r\n" << endl;
+            if(separator == ": "){
+                stream << "*************************************\r\n";
+                stream << "*            Group Info             *\r\n";
+                stream << "*************************************\r\n";
+            }
+            stream << "\r\n";
+            stream << "AvgDPS" << separator << AvgDPS << "\r\n";
+            stream << "GroupDPS" << separator << GrpDPS << "\r\n";
+            stream << "GroupDMG " << separator << GrpDmg << "\r\n";
+            stream << "\r\n\r\n\r\n";
             QStringList profList;
             profList << "None" << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
-            stream <<  "Name       |   DPS  |    DMG    | Class\r\n" << endl;
+            stream <<  "Name       " << tableSep << "   DPS  " << tableSep << "    DMG    " << tableSep << " Class\r\n";
             for(int i=0;i<10;i++){
                 if(PosName[i][0] !=0){
                     QString tempName = PosName[i];
@@ -1126,18 +1145,62 @@ void GW2::MainWindow::writeTxt(){
 
 
                     if(tempDPS.size() > 3){tempDPS.insert(tempDPS.size() -3, ".");}
-                    stream << tempName.leftJustified(10, ' ') << " | " << tempDPS.rightJustified(6, ' ') << " | " << modDMG << " | " << profList[PosProf[i]] << "\r\n" << endl;
+                    stream << tempName.leftJustified(10, ' ') << " " << tableSep << " " << tempDPS.rightJustified(6, ' ') << " " << tableSep << " " << modDMG << " " << tableSep << " " << profList[PosProf[i]] << "\r\n";
                 }
 
             }
-            stream << "\r\n\r\n\r\n" << endl;
+            stream << "\r\n\r\n\r\n";
         }
-        stream << " Time |  DPS  |  DMG\r\n" << endl;
-        stream << combatCourse << endl;
+        stream << " Time(hh:mm:ss) " << tableSep << "  DPS  " << tableSep << "  DMG\r\n";
+        if(separator == ";"){
+            combatCourse.replace(QString("|"),QString(";"));
+        }
+        combatCourse.replace(QString("m "),QString(":"));
+        combatCourse.replace(QString("s"),QString(""));
+        stream << combatCourse;
     }
 }
 
 void GW2::MainWindow::on_actionActionSave_triggered()
 {
-    writeTxt();
+    //Show Popup here to choose between TXT and CSV
+        QDialog *savePopup= new QDialog();
+        QVBoxLayout *layout = new QVBoxLayout(savePopup);
+        QPushButton *txtButton = new QPushButton(this);
+        QPushButton *csvButton = new QPushButton(this);
+        QLabel *chooseLabel = new QLabel(this);
+
+        layout->addWidget(chooseLabel);
+        layout->addWidget(txtButton);
+        layout->addWidget(csvButton);
+
+        layout->setMargin(10);
+        chooseLabel->setText("Choose the File Format you like!");
+        txtButton->setText("*.txt");
+        csvButton->setText("*.csv");
+
+        savePopup->setWindowTitle("Gw2SPECS Save v1.0");
+        savePopup->setStyleSheet("background:#f2f2f2;");
+        savePopup->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowSystemMenuHint);
+        savePopup->show();
+
+        //need to create 2 Buttons
+        //set dialog settings to always on top frameless
+        //connect Buttons to functions
+        QObject::connect(txtButton, SIGNAL(clicked(bool)), this, SLOT(writeTxt()));
+        QObject::connect(txtButton, SIGNAL(clicked(bool)), savePopup, SLOT(hide()));
+        QObject::connect(csvButton, SIGNAL(clicked(bool)), this, SLOT(writeCsv()));
+        QObject::connect(csvButton, SIGNAL(clicked(bool)), savePopup, SLOT(hide()));
+
+}
+
+void GW2::MainWindow::writeTxt(){
+    QString txtSep = ": ";
+    writeFile(txtSep);
+
+}
+
+void GW2::MainWindow::writeCsv(){
+    QString csvSep = ";";
+    writeFile(csvSep);
 }
