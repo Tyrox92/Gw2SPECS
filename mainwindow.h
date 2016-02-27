@@ -13,6 +13,8 @@
 #include <QMouseEvent>
 #include "mydialog.h"
 #include <QLabel>
+#include <QPoint>
+#include <QMenu>
 
 namespace Ui
 {
@@ -29,6 +31,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
         QString time;
+//        QMenu myMenu;
+
+//        QAction *testAction = myMenu.addAction("test");
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
@@ -169,7 +174,6 @@ private:
     QPushButton *changelog;
     QString m_Time;
 
-
 private slots:
     void UpdateTime(int);
     void SendClientInfo();
@@ -181,9 +185,9 @@ private slots:
     void ProfChanged(QString);
 
     void on_actionShrinkUI_triggered(bool checked);
-    bool on_pushButton_toggled(bool toggeled);
+    bool on_pushButton_toggled(bool toggled);
     void Initialize();
-    bool on_actionActionGroupDetails_toggled(bool toggeled);
+    bool on_actionActionGroupDetails_toggled(bool toggled);
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
     void PositionChanged();
@@ -200,6 +204,8 @@ private slots:
     void updateCombatCourse();
     void writeCsv();
     void writeTxt();
+    //void ShowContextMenu(const QPoint& pos);
+    //bool hideunhideToolbar(bool toggled);
 };
 
 }
