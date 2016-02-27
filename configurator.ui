@@ -136,42 +136,22 @@ color: #8BB2DA;</string>
        <string>Player Bar Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBoxDamageDone">
-         <property name="enabled">
-          <bool>true</bool>
+       <item row="4" column="0">
+        <widget class="QLabel" name="GroupSettings">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
-          <string>Show Damage</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBoxDPS">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>/Show DPS</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBoxProfColors">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Show Profession</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
+          <string>Group Settings:</string>
          </property>
         </widget>
        </item>
@@ -276,26 +256,56 @@ QComboBox QAbstractItemView {
          </item>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="GroupSettings">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBoxProfColors">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
          <property name="text">
-          <string>Group Settings:</string>
+          <string>Show Profession</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBoxDPS">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Show DPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBoxDamageDone">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Show Damage</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="checkBoxPerDmg">
+         <property name="text">
+          <string>Percental Damage</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
         <widget class="QCheckBox" name="checkBoxPosition">
          <property name="enabled">
           <bool>true</bool>
@@ -308,24 +318,14 @@ QComboBox QAbstractItemView {
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QCheckBox" name="checkBoxPerDmg">
-         <property name="text">
-          <string>/Percental Damage</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
+       <item row="7" column="0">
         <widget class="QCheckBox" name="checkBoxActivity">
          <property name="text">
-          <string>/Show Activity</string>
+          <string>Show Activity</string>
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="8" column="0">
         <widget class="QLabel" name="SoloSettings">
          <property name="font">
           <font>
@@ -344,10 +344,10 @@ QComboBox QAbstractItemView {
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <widget class="QCheckBox" name="checkBoxName">
          <property name="text">
-          <string>/Show Name</string>
+          <string>Show Name</string>
          </property>
         </widget>
        </item>

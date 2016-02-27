@@ -45,15 +45,22 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
+    // connecting configurator - display settings
+    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
+    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
+    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
+    QObject::connect(uiConfig->checkBoxName, SIGNAL(clicked(bool)), this, SLOT(NameChanged()));
+    QObject::connect(uiConfig->checkBoxDamageDone, SIGNAL(clicked(bool)), this, SLOT(DamageDoneChanged()));
+    QObject::connect(uiConfig->checkBoxPerDmg, SIGNAL(clicked(bool)), this, SLOT(PerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxDPS, SIGNAL(clicked(bool)), this, SLOT(DPSChanged()));
+    QObject::connect(uiConfig->checkBoxActivity, SIGNAL(clicked(bool)), this, SLOT(ActivityChanged()));
+    // connecting configurator - accuracy settings
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
-    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
-    QObject::connect(uiConfig->checkBoxDamageDone, SIGNAL(clicked(bool)), this, SLOT(DamageDoneChanged()));
-    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
-    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
+    // reset button
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));
 
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
@@ -73,7 +80,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // Profession Color Bars
     ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
     displaypos=uiConfig->checkBoxPosition->isChecked();
+    displayname=uiConfig->checkBoxName->isChecked();
+    displayper=uiConfig->checkBoxPerDmg->isChecked();
     displaydmg=uiConfig->checkBoxDamageDone->isChecked();
+    displaydps=uiConfig->checkBoxDPS->isChecked();
+    displayact=uiConfig->checkBoxActivity->isChecked();
+
     uiConfig->professionComboBox->setCurrentIndex(0);
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
 
@@ -249,9 +261,29 @@ void MainWindow::PositionChanged()
     if (displaypos==1) displaypos=0; else displaypos=1;
 }
 
+void MainWindow::NameChanged()
+{
+    if (displayname==1) displayname=0; else displayname=1;
+}
+
 void MainWindow::DamageDoneChanged()
 {
     if (displaydmg==1) displaydmg=0; else displaydmg=1;
+}
+
+void MainWindow::PerDmgChanged()
+{
+    if (displayper==1) displayper=0; else displayper=1;
+}
+
+void MainWindow::DPSChanged()
+{
+    if (displaydps==1) displaydps=0; else displaydps=1;
+}
+
+void MainWindow::ActivityChanged()
+{
+    if (displayact==1) displayact=0; else displayact=1;
 }
 
 void MainWindow::UpdateGroupLabels()

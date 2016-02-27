@@ -89,7 +89,11 @@ private:
 
     int ProfBasedColors;
     int displaypos;
+    int displayname;
     int displaydmg;
+    int displayper;
+    int displaydps;
+    int displayact;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);
@@ -183,7 +187,11 @@ private slots:
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
     void PositionChanged();
+    void NameChanged();
     void DamageDoneChanged();
+    void PerDmgChanged();
+    void DPSChanged();
+    void ActivityChanged();
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton2_clicked();

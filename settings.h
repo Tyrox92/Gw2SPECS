@@ -135,26 +135,26 @@ private:
 
 /*
     template <>
-    inline void Settings::ReadSettings(QLineEdit* lineEdit)
+    inline void Settings::ReadSettings(QLineEdit* InputName)
     {
         QSettings settings(s_Product);
 
-        settings.beginGroup(lineEdit->objectName());
-        lineEdit->setText(settings.value("text"));
+        settings.beginGroup(InputName->objectName());
+        InputName->setText(settings.value("text"));
         settings.endGroup();
 
-        ReadSettings<QWidget>(lineEdit);
+        ReadSettings<QWidget>(InputName);
     }
 
     template <>
-    inline void Settings::WriteSettings(QLineEdit* lineEdit)
+    inline void Settings::WriteSettings(QLineEdit* InputName)
     {
         QSettings settings(s_Product);
-        settings.beginGroup(lineEdit->objectName());
-        settings.setValue("text",lineEdit->text());
+        settings.beginGroup(InputName->objectName());
+        settings.setValue("text",InputName->text());
         settings.endGroup();
 
-        WriteSettings<QWidget>(lineEdit);
+        WriteSettings<QWidget>(InputName);
     }
 */
 
