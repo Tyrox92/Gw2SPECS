@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
+    // contect menu
+    ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
     // reset button
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));
 
@@ -106,16 +109,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QHBoxLayout *layoutprogressbar_9 = new QHBoxLayout(ui->progressBar_9);
 
     // styling layouts
-    layoutprogressbar_0->setMargin(0);
-    layoutprogressbar_1->setMargin(0);
-    layoutprogressbar_2->setMargin(0);
-    layoutprogressbar_3->setMargin(0);
-    layoutprogressbar_4->setMargin(0);
-    layoutprogressbar_5->setMargin(0);
-    layoutprogressbar_6->setMargin(0);
-    layoutprogressbar_7->setMargin(0);
-    layoutprogressbar_8->setMargin(0);
-    layoutprogressbar_9->setMargin(0);
+    layoutprogressbar_0->setContentsMargins(10,0,10,0);
+    layoutprogressbar_1->setContentsMargins(10,0,10,0);
+    layoutprogressbar_2->setContentsMargins(10,0,10,0);
+    layoutprogressbar_3->setContentsMargins(10,0,10,0);
+    layoutprogressbar_4->setContentsMargins(10,0,10,0);
+    layoutprogressbar_5->setContentsMargins(10,0,10,0);
+    layoutprogressbar_6->setContentsMargins(10,0,10,0);
+    layoutprogressbar_7->setContentsMargins(10,0,10,0);
+    layoutprogressbar_8->setContentsMargins(10,0,10,0);
+    layoutprogressbar_9->setContentsMargins(10,0,10,0);
 
     // adding colomns to bars (not yet shown)
     // names
@@ -326,8 +329,8 @@ void MainWindow::UpdateGroupLabels()
 
         // set solo thing visible
         Bar[0]->setFormat(text);
-        Bar[0]->setVisible(true);
-        Bar[0]->setTextVisible(true);
+        Bar[0]->setVisible(false);
+        Bar[0]->setTextVisible(false);
         // Syph: I think this is useless, if not, please explain and change it back:
         //ui->grp_Dmg->setText(QString::number(m_Dmg));
     }
@@ -453,54 +456,50 @@ void MainWindow::UpdateGroupLabels()
                     if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
 
-                // le showing labels
-
-
+                // set bar length
                 Bar[n]->setValue(i);
-//                //QString text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-//                QString text;
-//                if (displaypos>0)
-//                {
-//                    if (displaydmg>0) text = QString("%1. %2 %L3% [%L4] [%L5 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
-//                    else text = QString("%1. %2 %L3% [%L4 DPS]").arg(n+1).arg(PosName[n]).arg(p).arg(PosDPS[n]);
-//                    Bar[n]->setFormat(text);
-//                }
-//                if (displaypos<1)
-//                {
-//                    if (displaydmg<1) text = QString("%1 %L2% [%L3 DPS]").arg(PosName[n]).arg(p).arg(PosDPS[n]);
-//                    else text = QString("%1 %L2% [%L3] [%L4 DPS]").arg(PosName[n]).arg(p).arg(PosDmg[n]).arg(PosDPS[n]);
-//                    Bar[n]->setFormat(text);
-//                }
-
-//                Bar[n]->setAlignment(Qt::AlignRight);
+                // Bar[n]->setFormat(text);
 
                 //display name and position or not
-                if (displaypos>0) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
-                else labelname[n]->setText(QString("%1").arg(PosName[n]));
+                if (displayname>0) {
+                    if (displaypos>0) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
+                    else labelname[n]->setText(QString("%1").arg(PosName[n]));
+                    labelname[n]->show();
+                } else {
+                    labelname[n]->hide();
+                }
 
                 // damage
-                if (displaydmg>0) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
-                else labeldmg[n]->setText("");
-                // this could also be done by not adding widget or hiding/not-showing
+                if (displaydmg>0) {
+                    labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
+                    labeldmg[n]->show();
+                } else {
+                    labeldmg[n]->hide();
+                }
 
                 // percental
-                labelper[n]->setText(QString("%L1%").arg(p));
-                // add option to disable (see damage)
+                if (displayper>0) {
+                    labelper[n]->setText(QString("%L1%").arg(p));
+                    labelper[n]->show();
+                } else {
+                    labelper[n]->hide();
+                }
 
                 // DPS
-                labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
-                // add option to disable (see damage)
+                if (displaydps>0) {
+                    labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
+                    labeldps[n]->show();
+                } else {
+                    labeldps[n]->hide();
+                }
 
                 // activity
-                //labelact[n]->setText(QString("%L1%").arg());
-                // add option to disable (see damage)
-
-                // display labels
-                labelname[n]->show();
-                labeldmg[n]->show();
-                labelper[n]->show();
-                labeldps[n]->show();
-                //labelact[n]->show();
+                //if (displayact>0) {
+                //    labelact[n]->setText(QString("%L1%").arg());
+                //    labelact[n]->show();
+                //} else {
+                //    labelact[n]->hide();
+                //}
             }
             else
                 Bar[n] ->setVisible(false);
@@ -683,11 +682,9 @@ void MainWindow::UpdatePersonalLabels()
         }
     }
     //Personal Crit Chance Value
-    Label1 = ui->critChance;
-    Label1->setText(QString::number(m_critChance));
+    ui->critChance->setText(QString::number(m_critChance));
     //Personal Condi DMG Value
-    Label1 =ui->labelCondiDMGValue;
-    Label1->setText(QString::number(m_condiDmg));
+    ui->labelCondiDMGValue->setText(QString::number(m_condiDmg));
     //Personal Condi DPS Value
     c2=m_condiDmg;
     c3=m_Dps;
@@ -867,19 +864,20 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
 }
 
 //Show Condi DPS/Crit%/Condi DMG/Highest Hit if ". . ." icon is actionActionGroupDetails is toggled on/off.
-bool GW2::MainWindow::on_pushButton_toggled(bool toggeled)
+bool GW2::MainWindow::on_pushButton_toggled(bool toggled)
 {
-    if (toggeled)
+    qDebug () << toggled;
+    if (toggled)
     {
         ui->widgetExtraDetails->show();
-        toggeled = true;
+        toggled = true;
     }
     else
     {
         ui->widgetExtraDetails->hide();
-        toggeled = false;
+        toggled = false;
     }
-    return toggeled;
+    return toggled;
 }
 
 void GW2::MainWindow::StartupPref()
@@ -914,12 +912,12 @@ void GW2::MainWindow::StartupPref()
 }
 
 //Show player/group details
-bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
+bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggled)
 {
     // Check if this user is playing on a server or not
     if ((is_connected == true))
     {
-        if (toggeled)
+        if (toggled)
         {
             ui->avg_DPS->show();
             ui->grp_DPS->show();
@@ -929,18 +927,18 @@ bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
             ui->labelDmg_3->setText("Grp DPS");
             ui->labelDmg_4->show();
             MainWindow::ui->widget->show();
-            toggeled = true;
+            toggled = true;
         }
         else
         {
             ui->widget->hide();
-            toggeled = false;
+            toggled = false;
         }
     }
     // If playing solo - show only DPS/DMG/TIME
     else
     {
-        if (toggeled)
+        if (toggled)
         {
             ui->avg_DPS->hide();
             ui->grp_DPS->hide();
@@ -949,15 +947,15 @@ bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggeled)
             ui->grp_Dmg->hide();
             ui->labelDmg_2->hide();
             MainWindow::ui->widget->show();
-            toggeled = true;
+            toggled = true;
         }
         else
         {
             ui->widget->hide();
-            toggeled = false;
+            toggled = false;
         }
     }
-    return toggeled;
+    return toggled;
 }
 
 void GW2::MainWindow::on_actionConnect_triggered()
@@ -1213,7 +1211,7 @@ void GW2::MainWindow::on_actionActionSave_triggered()
 
         savePopup->setWindowTitle("Gw2SPECS Save v1.0");
         savePopup->setStyleSheet("background:#f2f2f2;");
-        savePopup->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowSystemMenuHint);
+        savePopup->setWindowFlags(Qt::WindowStaysOnTopHint| Qt::WindowCloseButtonHint);
         savePopup->show();
 
         //need to create 2 Buttons
@@ -1236,3 +1234,30 @@ void GW2::MainWindow::writeCsv(){
     QString csvSep = ";";
     writeFile(csvSep);
 }
+
+//void GW2::MainWindow::ShowContextMenu(const QPoint& pos)
+//{
+//    QPoint globalPos = ui->scrollArea->viewport()->mapToGlobal(pos);
+//    QAction *hideunhide = new QAction("Hide Toolbar", this);
+
+//    //myMenu.addAction("Hide Toolbar", SIGNAL(clicked), this, SLOT(hideunhideToolbar(bool)));
+//    QObject::connect(testAction,SIGNAL(triggered(bool)),this, SLOT(hideunhideToolbar(bool)));
+
+//    myMenu.exec(globalPos);
+//}
+
+//bool GW2::MainWindow::hideunhideToolbar(bool toggled)
+//{
+//    qDebug() << toggled;
+//    if (toggled)
+//    {
+//        ui->toolBar->show();
+//        toggled = true;
+//    }
+//    else
+//    {
+//        ui->toolBar->hide();
+//        toggled = false;
+//    }
+//    return toggled;
+//}
