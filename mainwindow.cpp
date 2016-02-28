@@ -100,6 +100,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //New ProgressbarLabels
+    QHBoxLayout *layoutlegend = new QHBoxLayout(ui->legend);
     QHBoxLayout *layoutprogressbar_0 = new QHBoxLayout(ui->progressBar_0);
     QHBoxLayout *layoutprogressbar_1 = new QHBoxLayout(ui->progressBar_1);
     QHBoxLayout *layoutprogressbar_2 = new QHBoxLayout(ui->progressBar_2);
@@ -112,6 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QHBoxLayout *layoutprogressbar_9 = new QHBoxLayout(ui->progressBar_9);
 
     // styling layouts
+    layoutlegend->setContentsMargins(10,3,10,3);
     layoutprogressbar_0->setContentsMargins(10,0,10,0);
     layoutprogressbar_1->setContentsMargins(10,0,10,0);
     layoutprogressbar_2->setContentsMargins(10,0,10,0);
@@ -124,6 +126,12 @@ MainWindow::MainWindow(QWidget *parent) :
     layoutprogressbar_9->setContentsMargins(10,0,10,0);
 
     // adding colomns to bars (not yet shown)
+    // legend
+    layoutlegend->addWidget(labellegendname);
+    layoutlegend->addWidget(labellegenddmg);
+    layoutlegend->addWidget(labellegendper);
+    layoutlegend->addWidget(labellegenddps);
+    //labellegend->addWidget(labellegendact);
     // names
     layoutprogressbar_0->addWidget(labelname_0);
     layoutprogressbar_1->addWidget(labelname_1);
@@ -180,6 +188,24 @@ MainWindow::MainWindow(QWidget *parent) :
 //    layoutprogressbar_8->addWidget(labelact_8);
 //    layoutprogressbar_9->addWidget(labelact_9);
 
+    // legend allignment and styling
+    labellegendname->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    labellegenddmg->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    labellegendper->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    labellegenddps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    //labellegendact->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;*/min-width:113px;");
+    labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;");
+    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/");
+    labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/");
+    //labelact[n]->setStyleSheet("color:white;background:none;");
+
+    labellegendname->setText(QString("Name"));
+    labellegenddmg->setText(QString("Damage"));
+    labellegendper->setText(QString("Percental"));
+    labellegenddps->setText(QString("DPS"));
+    // set layout or widget visible?
+
     for(int n=0;n<10;n++) {
         // aligning labels
         labelname[n]->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
@@ -189,10 +215,10 @@ MainWindow::MainWindow(QWidget *parent) :
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        labelname[n]->setStyleSheet("color:white;background:none;background-color:red;min-width:113px;");
-        labeldmg[n]->setStyleSheet("color:white;background:none;background-color:green;");
-        labelper[n]->setStyleSheet("color:white;background:none;background-color:blue;");
-        labeldps[n]->setStyleSheet("color:white;background:none;background-color:black;");
+        labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;*/min-width:113px;");
+        labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;*/");
+        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/");
+        labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>294</width>
-    <height>196</height>
+    <width>500</width>
+    <height>795</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -815,6 +815,35 @@
             </property>
            </spacer>
           </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="labelMaxDmg_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>DINPro-Black</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+              <underline>false</underline>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Crit %</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="2">
            <widget class="QLabel" name="condiDPS">
             <property name="sizePolicy">
@@ -844,35 +873,6 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QLabel" name="labelMaxDmg_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>DINPro-Black</family>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-              <underline>false</underline>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>Crit %</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -1150,8 +1150,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>277</width>
-            <height>170</height>
+            <width>500</width>
+            <height>679</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -1179,87 +1179,7 @@
            <property name="spacing">
             <number>0</number>
            </property>
-           <item row="9" column="0">
-            <widget class="QProgressBar" name="progressBar_9">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>17</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QProgressBar {
-    border: 0px solid grey;
-    border-radius:0px;
-	font: 87 10pt &quot;DINPro-Black&quot;;
-	color: rgb(255, 255, 255);
-    text-align: center;
-    min-height: 15px;
-	margin: 0.5px;
-}
-QProgressBar::chunk {
-	background-color: rgba(3, 132, 146 , 60%);
-}
-</string>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-             <property name="value">
-              <number>0</number>
-             </property>
-             <property name="textVisible">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="8" column="0">
-            <widget class="QProgressBar" name="progressBar_8">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>17</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QProgressBar {
-    border: 0px solid grey;
-    border-radius:0px;
-	font: 87 10pt &quot;DINPro-Black&quot;;
-	color: rgb(255, 255, 255);
-    text-align: center;
-    min-height: 15px;
-	margin: 0.5px;
-}
-QProgressBar::chunk {
-	background-color: rgba(4,165,183, 60%);
-}
-</string>
-             </property>
-             <property name="maximum">
-              <number>100</number>
-             </property>
-             <property name="value">
-              <number>0</number>
-             </property>
-             <property name="textVisible">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
+           <item row="1" column="0">
             <widget class="QProgressBar" name="progressBar_0">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -1311,8 +1231,8 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QProgressBar" name="progressBar_1">
+           <item row="10" column="0">
+            <widget class="QProgressBar" name="progressBar_9">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1351,8 +1271,8 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
-           <item row="6" column="0">
-            <widget class="QProgressBar" name="progressBar_6">
+           <item row="9" column="0">
+            <widget class="QProgressBar" name="progressBar_8">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1392,6 +1312,46 @@ QProgressBar::chunk {
             </widget>
            </item>
            <item row="7" column="0">
+            <widget class="QProgressBar" name="progressBar_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>17</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QProgressBar {
+    border: 0px solid grey;
+    border-radius:0px;
+	font: 87 10pt &quot;DINPro-Black&quot;;
+	color: rgb(255, 255, 255);
+    text-align: center;
+    min-height: 15px;
+	margin: 0.5px;
+}
+QProgressBar::chunk {
+	background-color: rgba(4,165,183, 60%);
+}
+</string>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+             <property name="textVisible">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
             <widget class="QProgressBar" name="progressBar_7">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -1431,7 +1391,7 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <widget class="QProgressBar" name="progressBar_2">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -1471,8 +1431,8 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QProgressBar" name="progressBar_3">
+           <item row="2" column="0">
+            <widget class="QProgressBar" name="progressBar_1">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
@@ -1511,7 +1471,7 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
+           <item row="5" column="0">
             <widget class="QProgressBar" name="progressBar_4">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -1551,7 +1511,47 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="4" column="0">
+            <widget class="QProgressBar" name="progressBar_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>17</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QProgressBar {
+    border: 0px solid grey;
+    border-radius:0px;
+	font: 87 10pt &quot;DINPro-Black&quot;;
+	color: rgb(255, 255, 255);
+    text-align: center;
+    min-height: 15px;
+	margin: 0.5px;
+}
+QProgressBar::chunk {
+	background-color: rgba(3, 132, 146 , 60%);
+}
+</string>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+             <property name="textVisible">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
             <widget class="QProgressBar" name="progressBar_5">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
@@ -1591,6 +1591,9 @@ QProgressBar::chunk {
              </property>
             </widget>
            </item>
+           <item row="0" column="0">
+            <widget class="QWidget" name="legend" native="true"/>
+           </item>
           </layout>
           <zorder>progressBar_0</zorder>
           <zorder>progressBar_3</zorder>
@@ -1602,6 +1605,7 @@ QProgressBar::chunk {
           <zorder>progressBar_6</zorder>
           <zorder>progressBar_5</zorder>
           <zorder>progressBar_7</zorder>
+          <zorder>legend</zorder>
          </widget>
         </widget>
        </item>

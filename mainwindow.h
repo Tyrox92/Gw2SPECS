@@ -159,12 +159,19 @@ private:
     QLabel *labelact_8 = new QLabel(this);
     QLabel *labelact_9 = new QLabel(this);
 
+    // legend labels (in group mode)
+    QLabel *labellegendname = new QLabel(this);
+    QLabel *labellegenddmg = new QLabel(this);
+    QLabel *labellegendper = new QLabel(this);
+    QLabel *labellegenddps = new QLabel(this);
+    QLabel *labellegendact = new QLabel(this);
+
     // label arrays
     QLabel* labelname [10] = {labelname_0,labelname_1,labelname_2,labelname_3,labelname_4,labelname_5,labelname_6,labelname_7,labelname_8,labelname_9};
     QLabel* labeldmg [10] = {labeldmg_0,labeldmg_1,labeldmg_2,labeldmg_3,labeldmg_4,labeldmg_5,labeldmg_6,labeldmg_7,labeldmg_8,labeldmg_9};
     QLabel* labelper [10] = {labelper_0,labelper_1,labelper_2,labelper_3,labelper_4,labelper_5,labelper_6,labelper_7,labelper_8,labelper_9};
     QLabel* labeldps [10] = {labeldps_0,labeldps_1,labeldps_2,labeldps_3,labeldps_4,labeldps_5,labeldps_6,labeldps_7,labeldps_8,labeldps_9};
-    //QLabel* labelact [10] = {labelact_0,labelact_1,labelact_2,labelact_3,labelact_4,labelact_5,labelact_6,labelact_7,labelact_8,labelact_9};
+    QLabel* labelact [10] = {labelact_0,labelact_1,labelact_2,labelact_3,labelact_4,labelact_5,labelact_6,labelact_7,labelact_8,labelact_9};
 
     char tmp1[20];
     QTimer update_Timer;
