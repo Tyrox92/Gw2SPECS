@@ -194,17 +194,23 @@ MainWindow::MainWindow(QWidget *parent) :
     labellegendper->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     labellegenddps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     //labellegendact->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;*/min-width:113px;");
-    labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;");
-    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/");
-    labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/");
+    labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/");
+    labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;");
+    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;");
+    labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
     //labelact[n]->setStyleSheet("color:white;background:none;");
 
     labellegendname->setText(QString("Name"));
     labellegenddmg->setText(QString("Damage"));
-    labellegendper->setText(QString("Percental"));
+    labellegendper->setText(QString("%Dmg"));
     labellegenddps->setText(QString("DPS"));
-    // set layout or widget visible?
+
+    //hide all legend labels by default
+    labellegendname->hide();
+    labellegenddmg->hide();
+    labellegendper->hide();
+    labellegenddps->hide();
+    //labellegendact->hide();
 
     for(int n=0;n<10;n++) {
         // aligning labels
@@ -215,10 +221,10 @@ MainWindow::MainWindow(QWidget *parent) :
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;*/min-width:113px;");
-        labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;*/");
-        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/");
-        labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/");
+        labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/");
+        labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;");
+        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;");
+        labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 
@@ -232,34 +238,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::ProfChanged(QString prof)
 {
-//    if (prof== "Elementalist") m_MyProfession=1;else
-//        if (prof== "Engineer") m_MyProfession=2;else
-//            if (prof== "Guardian") m_MyProfession=3;else
-//                if (prof== "Mesmer") m_MyProfession=4;else
-//                    if (prof== "Necromancer") m_MyProfession=5;else
-//                        if (prof== "Ranger") m_MyProfession=6;else
-//                            if (prof== "Revenant") m_MyProfession=7;else
-//                                if (prof== "Thief") m_MyProfession=8;else
-//                                    if (prof== "Warrior") m_MyProfession=9;
-
-// this should be more ressource efficent, but can't test it right now, esp. if prof==War
-// https://stackoverflow.com/questions/767821/is-else-if-faster-than-switch-case
     QStringList proflist;
     proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
     m_MyProfession = proflist.indexOf(prof)+1;
-
-//    switch (proflist.indexOf(prof)) {
-//    case 0: m_MyProfession=1; break;
-//    case 1: m_MyProfession=2; break;
-//    case 2: m_MyProfession=3; break;
-//    case 3: m_MyProfession=4; break;
-//    case 4: m_MyProfession=5; break;
-//    case 5: m_MyProfession=6; break;
-//    case 6: m_MyProfession=7; break;
-//    case 7: m_MyProfession=8; break;
-//    case 8: m_MyProfession=9; break;
-//    default: m_MyProfession=0; break;
-//    }
 }
 
 void MainWindow::CheckFirstRun()
@@ -332,6 +313,15 @@ void MainWindow::UpdateGroupLabels()
     QProgressBar* Bar9 = ui->progressBar_9;
     QProgressBar* Bar [10] = {Bar0,Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9};
 
+    // hide labels
+    for(int n=0;n<10;n++) {
+        labelname[n]->hide();
+        labeldmg[n]->hide();
+        labelper[n]->hide();
+        labeldps[n]->hide();
+        //labelact[n]->hide();
+    }
+
     long p,i,j,k;
 
     // If playing without a server
@@ -345,23 +335,43 @@ void MainWindow::UpdateGroupLabels()
         if (PosDmg[0]>0)
             i=PosDmg[0]*100.0/PosDmg[0];
         else i=0;
+
+
+        Bar[0]->setTextVisible(false);
+        Bar[0]->setVisible(true);
+
+        // set bar length
         Bar[0]->setValue(i);
 
-        // change this @syph
-        QString text = QString("%L2 DMG - [%L3 DPS]").arg(PosDmg[0]).arg(PosDPS[0]);
+        //display name
+        if (displayname>0) {
+            labelname[0]->setText(QString("%1").arg(PosName[0]));
+            labelname[0]->show();
+            labellegendname->show();
+        } else {
+            labelname[0]->hide();
+            labellegendname->hide();
+        }
 
-        // set group thing invisible
-        //labelname[n]->show();
-        //labeldmg[n]->show();
-        //labelper[n]->show();
-        //labeldps[n]->show();
+        // damage
+        if (displaydmg>0) {
+            labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
+            labeldmg[0]->show();
+            labellegenddmg->show();
+        } else {
+            labeldmg[0]->hide();
+            labellegenddmg->hide();
+        }
 
-        // set solo thing visible
-        Bar[0]->setFormat(text);
-        Bar[0]->setVisible(false);
-        Bar[0]->setTextVisible(false);
-        // Syph: I think this is useless, if not, please explain and change it back:
-        //ui->grp_Dmg->setText(QString::number(m_Dmg));
+        // DPS
+        if (displaydps>0) {
+            labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
+            labeldps[0]->show();
+            labellegenddps->show();
+        } else {
+            labeldps[0]->hide();
+            labellegenddps->hide();
+        }
     }
     else
     {
@@ -391,7 +401,7 @@ void MainWindow::UpdateGroupLabels()
             PosProf[j]=SlotProf[j];
         }
 
-        // resting empty/disconnected slot to 0
+        // reseting empty/disconnected slot to 0
         for (int p=0;p<10;p++)
         {
             if (PosName[p]==QString("Disconnected"))
@@ -434,7 +444,7 @@ void MainWindow::UpdateGroupLabels()
         // doing the math and setting the labels
         for(int n=0;n<10;n++) {
             Bar[n]->setVisible(true);
-            Bar[n]->setTextVisible(false);
+            //Bar[n]->setTextVisible(false);
             if (PosName[n][0]!=0) {
                 // le math
                 if (PosDmg[0]>0)
@@ -487,47 +497,56 @@ void MainWindow::UpdateGroupLabels()
 
                 // set bar length
                 Bar[n]->setValue(i);
-                // Bar[n]->setFormat(text);
 
                 //display name and position or not
                 if (displayname>0) {
                     if (displaypos>0) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                     labelname[n]->show();
+                    labellegendname->show();
                 } else {
                     labelname[n]->hide();
+                    labellegendname->hide();
                 }
 
                 // damage
                 if (displaydmg>0) {
                     labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
                     labeldmg[n]->show();
+                    labellegenddmg->show();
                 } else {
                     labeldmg[n]->hide();
+                    labellegenddmg->hide();
                 }
 
                 // percental
                 if (displayper>0) {
                     labelper[n]->setText(QString("%L1%").arg(p));
                     labelper[n]->show();
+                    labellegendper->show();
                 } else {
                     labelper[n]->hide();
+                    labellegendper->hide();
                 }
 
                 // DPS
                 if (displaydps>0) {
                     labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                     labeldps[n]->show();
+                    labellegenddps->show();
                 } else {
                     labeldps[n]->hide();
+                    labellegenddps->hide();
                 }
 
                 // activity
                 //if (displayact>0) {
                 //    labelact[n]->setText(QString("%L1%").arg());
                 //    labelact[n]->show();
+                //    labellegendact->show();
                 //} else {
                 //    labelact[n]->hide();
+                //    labellegendact->hide();
                 //}
             }
             else
