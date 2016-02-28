@@ -60,9 +60,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
-    // contect menu
+    // context menu
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
+    QObject::connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
+    hideShowToolbar->setCheckable(true); //Needs to be checkable to be toggled
+    QObject::connect(hideShowToolbar, SIGNAL(toggled(bool)), this, SLOT(HideAndShowToolbar(bool)));
+
     // reset button
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));
 
@@ -1235,29 +1238,27 @@ void GW2::MainWindow::writeCsv(){
     writeFile(csvSep);
 }
 
-//void GW2::MainWindow::ShowContextMenu(const QPoint& pos)
-//{
-//    QPoint globalPos = ui->scrollArea->viewport()->mapToGlobal(pos);
-//    QAction *hideunhide = new QAction("Hide Toolbar", this);
+void GW2::MainWindow::ShowContextMenu(const QPoint& pos)
+{
+    QPoint globalPos = ui->scrollArea->viewport()->mapToGlobal(pos);
+    myMenu.exec(globalPos);
+}
 
-//    //myMenu.addAction("Hide Toolbar", SIGNAL(clicked), this, SLOT(hideunhideToolbar(bool)));
-//    QObject::connect(testAction,SIGNAL(triggered(bool)),this, SLOT(hideunhideToolbar(bool)));
-
-//    myMenu.exec(globalPos);
-//}
-
-//bool GW2::MainWindow::hideunhideToolbar(bool toggled)
-//{
-//    qDebug() << toggled;
-//    if (toggled)
-//    {
-//        ui->toolBar->show();
-//        toggled = true;
-//    }
-//    else
-//    {
-//        ui->toolBar->hide();
-//        toggled = false;
-//    }
-//    return toggled;
-//}
+bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
+{
+    if (toggled)
+    {
+        //Toolbar is hidden
+        hideShowToolbar->setText("Show Toolbar");
+        ui->toolBar->hide();
+        toggled = true;
+    }
+    else
+    {
+        //Toolbar is visible
+        hideShowToolbar->setText("Hide Toolbar");
+        ui->toolBar->show();
+        toggled = false;
+    }
+    return toggled;
+}

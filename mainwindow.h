@@ -31,9 +31,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
         QString time;
-//        QMenu myMenu;
-
-//        QAction *testAction = myMenu.addAction("test");
+        QMenu myMenu;
+        QAction *hideShowToolbar = myMenu.addAction("Hide Toolbar");
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
@@ -186,6 +185,7 @@ private slots:
 
     void on_actionShrinkUI_triggered(bool checked);
     bool on_pushButton_toggled(bool toggled);
+    bool HideAndShowToolbar(bool);
     void Initialize();
     bool on_actionActionGroupDetails_toggled(bool toggled);
     void on_actionConnect_triggered();
@@ -204,7 +204,7 @@ private slots:
     void updateCombatCourse();
     void writeCsv();
     void writeTxt();
-    //void ShowContextMenu(const QPoint& pos);
+    void ShowContextMenu(const QPoint& pos);
     //bool hideunhideToolbar(bool toggled);
 };
 
