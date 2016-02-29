@@ -314,13 +314,13 @@ void MainWindow::UpdateGroupLabels()
     QProgressBar* Bar [10] = {Bar0,Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9};
 
     // hide labels
-    for(int n=0;n<10;n++) {
-        labelname[n]->hide();
-        labeldmg[n]->hide();
-        labelper[n]->hide();
-        labeldps[n]->hide();
-        //labelact[n]->hide();
-    }
+//    for(int n=0;n<10;n++) {
+//        labelname[n]->hide();
+//        labeldmg[n]->hide();
+//        labelper[n]->hide();
+//        labeldps[n]->hide();
+//        //labelact[n]->hide();
+//    }
 
     long p,i,j,k;
 
@@ -339,6 +339,11 @@ void MainWindow::UpdateGroupLabels()
 
         Bar[0]->setTextVisible(false);
         Bar[0]->setVisible(true);
+
+        labellegendact->hide();
+        labellegendper->hide();
+        labelper[0]->hide();
+        labelact[0]->hide();
 
         // set bar length
         Bar[0]->setValue(i);
@@ -494,6 +499,8 @@ void MainWindow::UpdateGroupLabels()
                 else
                     if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
+
+                Bar[n]->setTextVisible(false);
 
                 // set bar length
                 Bar[n]->setValue(i);
