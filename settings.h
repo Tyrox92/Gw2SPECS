@@ -20,6 +20,9 @@ inline static void WritePortSettings(QString);
 inline static QString Read1stRun(void);
 inline static void Write1stRun(QString);
 
+inline static QString ReadToolbarSettings(void);
+inline static void WriteToolbarSettings(QString);
+
 
 inline QString Read1stRun(void)
 {
@@ -101,6 +104,27 @@ inline void WritePortSettings(QString text)
 
     QSettings settings("Gw2SPECS");
     settings.beginGroup("Port");
+    settings.setValue("text",text);
+    settings.endGroup();
+
+}
+
+inline QString ReadToolbarSettings(void)
+{
+    QString tmpToolbar;
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("toolBarHidden");
+    tmpToolbar=settings.value("text").toString();
+    settings.endGroup();
+    return tmpToolbar;
+}
+
+
+inline void WriteToolbarSettings(QString text)
+{
+
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("toolBarHidden");
     settings.setValue("text",text);
     settings.endGroup();
 

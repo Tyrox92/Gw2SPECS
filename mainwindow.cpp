@@ -117,6 +117,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
     QObject::connect(ui->widget, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuDetails(const QPoint&)));
 
+    QString readToolbar = ReadToolbarSettings();
+    if(readToolbar == "hidden"){
+        HideAndShowToolbar(true);
+        hideShowToolbar->setChecked(true);
+    }else{
+        ui->toolBar->show();
+    }
+
+
     // reset button
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));
 
@@ -1372,9 +1381,11 @@ void GW2::MainWindow::ShowContextMenuDetails(const QPoint& pos)
 
 bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
 {
+    qDebug()<< toggled;
     if (toggled)
     {
         //Toolbar is hidden
+        WriteToolbarSettings("hidden");
         hideShowToolbar->setText("Show Toolbar");
         ui->toolBar->hide();
         toggled = true;
@@ -1382,6 +1393,7 @@ bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
     else
     {
         //Toolbar is visible
+        WriteToolbarSettings("visible");
         hideShowToolbar->setText("Hide Toolbar");
         ui->toolBar->show();
         toggled = false;
