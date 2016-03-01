@@ -61,10 +61,47 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
     // context menu
+
+    myMenu.setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
+
+    exitSeparator->setSeparator(true);
+    myMenu.addAction(exitSeparator);
+
+    exitMenu->setIcon(QIcon(":/Exit"));
+    exitMenu->setIconVisibleInMenu(true);
+
+    resetData->setIcon(QIcon(":/Reset"));
+    resetData->setIconVisibleInMenu(true);
+
+    extraOptions->setIcon(QIcon(":/moreDetails"));
+    extraOptions->setIconVisibleInMenu(true);
+
+    transparentWindow->setIcon(QIcon(":/Transparency"));
+    transparentWindow->setIconVisibleInMenu(true);
+
+    autoReset->setIcon(QIcon(":/Auto_Reset"));
+    autoReset->setIconVisibleInMenu(true);
+
+    connectServer->setIcon(QIcon(":/connect"));
+    connectServer->setIconVisibleInMenu(true);
+
+    options->setIcon(QIcon(":/Config"));
+    options->setIconVisibleInMenu(true);
+
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
     QObject::connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
-    hideShowToolbar->setCheckable(true); //Needs to be checkable to be toggled
+    //Needs to be checkable to be toggled
+    hideShowToolbar->setCheckable(true);
+
+
+
+
+    //Connect Items to Functions
     QObject::connect(hideShowToolbar, SIGNAL(toggled(bool)), this, SLOT(HideAndShowToolbar(bool)));
+    QObject::connect(exitMenu, SIGNAL(triggered(bool)), this, SLOT(close()));
+
+
+
 
     // reset button
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));

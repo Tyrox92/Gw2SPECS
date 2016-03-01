@@ -32,7 +32,16 @@ public:
     ~MainWindow();
         QString time;
         QMenu myMenu;
-        QAction *hideShowToolbar = myMenu.addAction("Hide Toolbar");
+        QAction *hideShowToolbar = myMenu.addAction("Hide Toolbar"); //Toggle
+        QAction *resetData = myMenu.addAction("Reset");
+        QAction *extraOptions = myMenu.addAction("Extra Options"); //Toggle
+        QAction *transparentWindow = myMenu.addAction("Transparent"); //Toggle
+        QAction *autoReset = myMenu.addAction("Auto-Reset"); //Toggle
+        QAction *connectServer = myMenu.addAction("Connect");
+        QAction *options = myMenu.addAction("Options");
+        QAction *exitSeparator = new QAction(this);
+        QAction *exitMenu = myMenu.addAction("Exit");
+
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
