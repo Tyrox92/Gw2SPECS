@@ -100,13 +100,13 @@ private:
     char writeBuff[128];
     bool is_connected;
 
-    int ProfBasedColors;
-    int displaypos;
-    int displayname;
-    int displaydmg;
-    int displayper;
-    int displaydps;
-    int displayact;
+    bool ProfBasedColors;
+    bool displaypos;
+    bool displayname;
+    bool displaydmg;
+    bool displayper;
+    bool displaydps;
+    bool displayact;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);

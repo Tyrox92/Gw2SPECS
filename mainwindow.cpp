@@ -386,8 +386,8 @@ void MainWindow::UpdateGroupLabels()
         Bar[0]->setValue(i);
 
         //display name
-        if (displayname>0) {
-            labelname[0]->setText(QString("%1").arg(PosName[0]));
+        if (displayname==true) {
+            labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
             labelname[0]->show();
             labellegendname->show();
         } else {
@@ -396,7 +396,7 @@ void MainWindow::UpdateGroupLabels()
         }
 
         // damage
-        if (displaydmg>0) {
+        if (displaydmg==true) {
             labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
             labeldmg[0]->show();
             labellegenddmg->show();
@@ -406,7 +406,7 @@ void MainWindow::UpdateGroupLabels()
         }
 
         // DPS
-        if (displaydps>0) {
+        if (displaydps==true) {
             labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
             labeldps[0]->show();
             labellegenddps->show();
@@ -497,7 +497,7 @@ void MainWindow::UpdateGroupLabels()
                 else p=0;
 
                 // profession based bar coloring
-                if (ProfBasedColors>0)
+                if (ProfBasedColors==true)
                 {
                     switch (PosProf[n])
                     {
@@ -543,8 +543,9 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n]->setValue(i);
 
                 //display name and position or not
-                if (displayname>0) {
-                    if (displaypos>0) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
+                if (displayname==true) {
+                    qDebug() << "displayname is >1" << displayname;
+                    if (displaypos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                     labelname[n]->show();
                     labellegendname->show();
@@ -554,7 +555,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // damage
-                if (displaydmg>0) {
+                if (displaydmg==true) {
                     labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
                     labeldmg[n]->show();
                     labellegenddmg->show();
@@ -564,7 +565,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // percental
-                if (displayper>0) {
+                if (displayper==true) {
                     labelper[n]->setText(QString("%L1%").arg(p));
                     labelper[n]->show();
                     labellegendper->show();
@@ -574,7 +575,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // DPS
-                if (displaydps>0) {
+                if (displaydps==true) {
                     labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                     labeldps[n]->show();
                     labellegenddps->show();
@@ -584,7 +585,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // activity
-                //if (displayact>0) {
+                //if (displayact==true) {
                 //    labelact[n]->setText(QString("%L1%").arg());
                 //    labelact[n]->show();
                 //    labellegendact->show();
