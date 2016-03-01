@@ -410,7 +410,8 @@ void MainWindow::UpdateGroupLabels()
 
         //display name
         if (displayname==true) {
-            labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
+            if (ReadNameSettings()!="") labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
+            else labelname[0]->setText(QString("Myself"));
             labelname[0]->show();
             labellegendname->show();
         } else {
