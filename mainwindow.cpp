@@ -90,10 +90,18 @@ MainWindow::MainWindow(QWidget *parent) :
     autoReset->setIcon(QIcon(":/Auto_Reset"));
     autoReset->setIconVisibleInMenu(true);
     QObject::connect(autoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
+    QObject::connect(autoReset, SIGNAL(triggered(bool)), this, SLOT(resetAutomatic(bool)));
 
+    connectServer->setCheckable(true);
     connectServer->setIcon(QIcon(":/connect"));
     connectServer->setIconVisibleInMenu(true);
     QObject::connect(connectServer, SIGNAL(triggered()), this, SLOT(on_actionConnect_triggered()));
+    QObject::connect(connectServer, SIGNAL(triggered(bool)), this, SLOT(connectToServ(bool)));
+
+
+    saveToFile->setIcon(QIcon(":/saveIcon"));
+    saveToFile->setIconVisibleInMenu(true);
+    QObject::connect(saveToFile, SIGNAL(triggered()), this, SLOT(on_actionActionSave_triggered()));
 
     options->setIcon(QIcon(":/Config"));
     options->setIconVisibleInMenu(true);
@@ -550,7 +558,6 @@ void MainWindow::UpdateGroupLabels()
 
                 //display name and position or not
                 if (displayname==true) {
-                    qDebug() << "displayname is >1" << displayname;
                     if (displaypos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                     labelname[n]->show();
@@ -715,6 +722,7 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->grp_DPS->setStyleSheet("");
+        transparentWindow->setText("Transparency Off");
         this->show();
     }
     else
@@ -722,6 +730,7 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->grp_DPS->setStyleSheet("");
+        transparentWindow->setText("Transparency On");
         this->show();
     }
 }
@@ -815,14 +824,25 @@ void MainWindow::UpdatePersonalLabels()
 
 void MainWindow::UpdateTimer(void)
 {
+    // Always on top fix
+    this->raise();
+    myMenu.raise();
+    subMenu->raise();
+
     if ((is_connected == true))
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
+        connectServer->setIcon(QIcon(":/connected"));
+        connectServer->setText("Disconnect");
         SendClientInfo();
     }
-    else ui->actionConnect->setIcon(QIcon(":/connect"));
-    UpdateGroupLabels();
-    UpdatePersonalLabels();
+    else{
+        ui->actionConnect->setIcon(QIcon(":/connect"));
+        connectServer->setIcon(QIcon(":/connect"));
+        connectServer->setText("Connect");
+        UpdateGroupLabels();
+        UpdatePersonalLabels();
+    }
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -1026,11 +1046,13 @@ bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggled)
             ui->labelDmg_3->setText("Grp DPS");
             ui->labelDmg_4->show();
             MainWindow::ui->widget->show();
+            extraOptions->setText("Hide Details");
             toggled = true;
         }
         else
         {
             ui->widget->hide();
+            extraOptions->setText("Show Details");
             toggled = false;
         }
     }
@@ -1046,11 +1068,13 @@ bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggled)
             ui->grp_Dmg->hide();
             ui->labelDmg_2->hide();
             MainWindow::ui->widget->show();
+            extraOptions->setText("Hide Details");
             toggled = true;
         }
         else
         {
             ui->widget->hide();
+            extraOptions->setText("Show Details");
             toggled = false;
         }
     }
@@ -1142,8 +1166,8 @@ void GW2::MainWindow::CheckForUpdate()
             QLabel *label = new QLabel("<center>Your Version: <strong style='color:red;'>" + curVersion + "</strong></center><center>New Version: <strong style='color:green';>" + ver + "</strong></center><br>" + "A new Version of GW2SPECS is available!", this);
 
             //Connect Functions to Buttons when clicked
-            connect(download,SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
-            connect(changelog,SIGNAL(clicked(bool)),this,SLOT(on_pushButton2_clicked()));
+            connect(download, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
+            connect(changelog, SIGNAL(clicked(bool)),this,SLOT(on_pushButton2_clicked()));
 
             //Add Widgets to the Layout
             layout->addWidget(label);
@@ -1360,6 +1384,38 @@ bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
         //Toolbar is visible
         hideShowToolbar->setText("Hide Toolbar");
         ui->toolBar->show();
+        toggled = false;
+    }
+    return toggled;
+}
+
+bool GW2::MainWindow::connectToServ(bool toggled){
+    if (toggled)
+    {
+        connectServer->setIcon(QIcon(":/connected"));
+        connectServer->setText("Disconnect");
+        toggled = true;
+    }
+    else
+    {
+        connectServer->setIcon(QIcon(":/connect"));
+        connectServer->setText("Connect");
+        toggled = false;
+    }
+    return toggled;
+}
+
+bool GW2::MainWindow::resetAutomatic(bool toggled){
+    if (toggled)
+    {
+        autoReset->setIcon(QIcon(":/Auto_Reset_Active"));
+        autoReset->setText("Auto Reset Off");
+        toggled = true;
+    }
+    else
+    {
+        autoReset->setIcon(QIcon(":/Auto_Reset"));
+        autoReset->setText("Auto Reset On");
         toggled = false;
     }
     return toggled;
