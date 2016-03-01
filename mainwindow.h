@@ -32,11 +32,12 @@ public:
     ~MainWindow();
         QString time;
         QMenu myMenu;
-        QAction *hideShowToolbar = myMenu.addAction("Hide Toolbar"); //Toggle
+        QMenu *subMenu = new QMenu("Hide/Show", this);
+        QAction *hideShowToolbar = subMenu->addAction("Hide Toolbar"); //Toggle
         QAction *resetData = myMenu.addAction("Reset");
-        QAction *extraOptions = myMenu.addAction("Extra Options"); //Toggle
-        QAction *transparentWindow = myMenu.addAction("Transparent"); //Toggle
-        QAction *autoReset = myMenu.addAction("Auto-Reset"); //Toggle
+        QAction *extraOptions = subMenu->addAction("Extra Options"); //Toggle
+        QAction *transparentWindow = subMenu->addAction("Transparent"); //Toggle
+        QAction *autoReset = subMenu->addAction("Auto-Reset"); //Toggle
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *options = myMenu.addAction("Options");
         QAction *exitSeparator = new QAction(this);
@@ -221,6 +222,7 @@ private slots:
     void writeCsv();
     void writeTxt();
     void ShowContextMenu(const QPoint& pos);
+    void ShowContextMenuDetails(const QPoint& pos);
     //bool hideunhideToolbar(bool toggled);
 };
 

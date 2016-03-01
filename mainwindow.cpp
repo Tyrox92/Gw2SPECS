@@ -63,45 +63,51 @@ MainWindow::MainWindow(QWidget *parent) :
     // context menu
 
     myMenu.setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
+    subMenu->setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
 
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
+    QObject::connect(exitMenu, SIGNAL(triggered(bool)), this, SLOT(close()));
 
     resetData->setIcon(QIcon(":/Reset"));
     resetData->setIconVisibleInMenu(true);
+    QObject::connect(resetData, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
 
+    extraOptions->setCheckable(true);
     extraOptions->setIcon(QIcon(":/moreDetails"));
     extraOptions->setIconVisibleInMenu(true);
+    QObject::connect(extraOptions, SIGNAL(triggered(bool)), this, SLOT(on_actionActionGroupDetails_toggled(bool)));
 
+    transparentWindow->setCheckable(true);
     transparentWindow->setIcon(QIcon(":/Transparency"));
     transparentWindow->setIconVisibleInMenu(true);
+    QObject::connect(transparentWindow, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
 
+    autoReset->setCheckable(true);
     autoReset->setIcon(QIcon(":/Auto_Reset"));
     autoReset->setIconVisibleInMenu(true);
+    QObject::connect(autoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
 
     connectServer->setIcon(QIcon(":/connect"));
     connectServer->setIconVisibleInMenu(true);
+    QObject::connect(connectServer, SIGNAL(triggered()), this, SLOT(on_actionConnect_triggered()));
 
     options->setIcon(QIcon(":/Config"));
     options->setIconVisibleInMenu(true);
+    QObject::connect(options, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
+
+    hideShowToolbar->setCheckable(true);
+    QObject::connect(hideShowToolbar, SIGNAL(toggled(bool)), this, SLOT(HideAndShowToolbar(bool)));
+
+    myMenu.addMenu(subMenu);
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->widget->setContextMenuPolicy(Qt::CustomContextMenu);
     QObject::connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
-    //Needs to be checkable to be toggled
-    hideShowToolbar->setCheckable(true);
-
-
-
-
-    //Connect Items to Functions
-    QObject::connect(hideShowToolbar, SIGNAL(toggled(bool)), this, SLOT(HideAndShowToolbar(bool)));
-    QObject::connect(exitMenu, SIGNAL(triggered(bool)), this, SLOT(close()));
-
-
-
+    QObject::connect(ui->widget, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuDetails(const QPoint&)));
 
     // reset button
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));
@@ -1331,6 +1337,12 @@ void GW2::MainWindow::writeCsv(){
 void GW2::MainWindow::ShowContextMenu(const QPoint& pos)
 {
     QPoint globalPos = ui->scrollArea->viewport()->mapToGlobal(pos);
+    myMenu.exec(globalPos);
+}
+
+void GW2::MainWindow::ShowContextMenuDetails(const QPoint& pos)
+{
+    QPoint globalPos = ui->widget->mapToGlobal(pos);
     myMenu.exec(globalPos);
 }
 
