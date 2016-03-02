@@ -850,9 +850,9 @@ void MainWindow::UpdateTimer(void)
         ui->actionConnect->setIcon(QIcon(":/connect"));
         connectServer->setIcon(QIcon(":/connect"));
         connectServer->setText("Connect");
-        UpdateGroupLabels();
-        UpdatePersonalLabels();
     }
+    UpdateGroupLabels();
+    UpdatePersonalLabels();
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
