@@ -22,6 +22,7 @@ unsigned int m_critChance;
 unsigned long m_condiDmg;
 unsigned long m_MaxDmg;
 unsigned long m_MyProfession;
+unsigned long soloMyProfession;
 unsigned long countCombat;
 QString combatCourse;
 //QString curVersion = Settings::s_Version;

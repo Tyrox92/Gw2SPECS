@@ -15,6 +15,7 @@
 #include <QLabel>
 #include <QPoint>
 #include <QMenu>
+#include <QProgressBar>
 
 namespace Ui
 {
@@ -102,13 +103,22 @@ private:
     char writeBuff[128];
     bool is_connected;
 
-    bool ProfBasedColors;
-    bool displaypos;
-    bool displayname;
-    bool displaydmg;
-    bool displayper;
-    bool displaydps;
-    bool displayact;
+    // solo settings
+    bool displaySProfColor;
+    bool displaySName;
+    bool displaySDmg;
+    bool displaySDPS;
+    bool displaySCDmg;
+    bool displaySCPer;
+    bool displaySCDPS;
+    // group settings
+    bool displayGProfColor;
+    bool displayGPos;
+    bool displayGName;
+    bool displayGDmg;
+    bool displayGPer;
+    bool displayGDPS;
+    bool displayGAct;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);
@@ -198,8 +208,6 @@ private slots:
     void UpdateGroupLabels();
     void UpdatePersonalLabels();
     void StartupPref();
-    void ProfSettingsChanged();
-    void ProfChanged(QString);
 
     void on_actionShrinkUI_triggered(bool checked);
     bool on_pushButton_toggled(bool toggled);
@@ -208,12 +216,26 @@ private slots:
     bool on_actionActionGroupDetails_toggled(bool toggled);
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
-    void PositionChanged();
-    void NameChanged();
-    void DamageDoneChanged();
-    void PerDmgChanged();
-    void DPSChanged();
-    void ActivityChanged();
+
+    void SProfChanged(QString);
+    void SProfSettingsChanged();
+    void SNameChanged();
+    void SDamageChanged();
+    void SDPSChanged();
+    void SCDamageChanged();
+    void SCPerDmgChanged();
+    void SCDPSChanged();
+    
+
+    void GProfChanged(QString);
+    void GProfSettingsChanged();
+    void GPositionChanged();
+    void GNameChanged();
+    void GDamageChanged();
+    void GPerDmgChanged();
+    void GDPSChanged();
+    void GActivityChanged();
+
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton2_clicked();
@@ -227,6 +249,7 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
+    void InterfaceGeneration();
 };
 
 }

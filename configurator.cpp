@@ -16,14 +16,23 @@ Configurator::Configurator(QWidget *parent) :
     // Set version
     ui->labelVersion->setText(Settings::s_Product);
 
-    Settings::ReadSettings(ui->checkBoxProfColors);
+    Settings::ReadSettings(ui->checkBoxSoloProfColors);
     Settings::ReadSettings(ui->professionComboBox);
-    Settings::ReadSettings(ui->checkBoxPosition);
-    Settings::ReadSettings(ui->checkBoxName);
-    Settings::ReadSettings(ui->checkBoxDamageDone);
-    Settings::ReadSettings(ui->checkBoxPerDmg);
-    Settings::ReadSettings(ui->checkBoxDPS);
-    Settings::ReadSettings(ui->checkBoxActivity);
+    Settings::ReadSettings(ui->checkBoxSoloName);
+    Settings::ReadSettings(ui->checkBoxSoloDamage);
+    Settings::ReadSettings(ui->checkBoxSoloDPS);
+    Settings::ReadSettings(ui->checkBoxSoloCDamage);
+    Settings::ReadSettings(ui->checkBoxSoloCPerDmg);
+    Settings::ReadSettings(ui->checkBoxSoloCDPS);
+
+    Settings::ReadSettings(ui->checkBoxGroupProfColors);
+    Settings::ReadSettings(ui->professionComboBox);
+    Settings::ReadSettings(ui->checkBoxGroupPosition);
+    Settings::ReadSettings(ui->checkBoxGroupName);
+    Settings::ReadSettings(ui->checkBoxGroupDamage);
+    Settings::ReadSettings(ui->checkBoxGroupPerDmg);
+    Settings::ReadSettings(ui->checkBoxGroupDPS);
+    Settings::ReadSettings(ui->checkBoxGroupActivity);
 
     Settings::ReadSettings(ui->comboBoxScreenshots);
     Settings::ReadSettings(ui->comboBoxUpdates);
@@ -34,14 +43,23 @@ Configurator::Configurator(QWidget *parent) :
 
 Configurator::~Configurator()
 {
-    Settings::WriteSettings(ui->checkBoxProfColors);
+    Settings::WriteSettings(ui->checkBoxSoloProfColors);
     Settings::WriteSettings(ui->professionComboBox);
-    Settings::WriteSettings(ui->checkBoxPosition);
-    Settings::WriteSettings(ui->checkBoxName);
-    Settings::WriteSettings(ui->checkBoxDamageDone);
-    Settings::WriteSettings(ui->checkBoxPerDmg);
-    Settings::WriteSettings(ui->checkBoxDPS);
-    Settings::WriteSettings(ui->checkBoxActivity);
+    Settings::WriteSettings(ui->checkBoxSoloName);
+    Settings::WriteSettings(ui->checkBoxSoloDamage);
+    Settings::WriteSettings(ui->checkBoxSoloDPS);
+    Settings::WriteSettings(ui->checkBoxSoloCDamage);
+    Settings::WriteSettings(ui->checkBoxSoloCPerDmg);
+    Settings::WriteSettings(ui->checkBoxSoloCDPS);
+
+    Settings::WriteSettings(ui->checkBoxGroupProfColors);
+    Settings::WriteSettings(ui->professionComboBox);
+    Settings::WriteSettings(ui->checkBoxGroupPosition);
+    Settings::WriteSettings(ui->checkBoxGroupName);
+    Settings::WriteSettings(ui->checkBoxGroupDamage);
+    Settings::WriteSettings(ui->checkBoxGroupPerDmg);
+    Settings::WriteSettings(ui->checkBoxGroupDPS);
+    Settings::WriteSettings(ui->checkBoxGroupActivity);
 
     Settings::WriteSettings(ui->comboBoxScreenshots);
     Settings::WriteSettings(ui->comboBoxUpdates);

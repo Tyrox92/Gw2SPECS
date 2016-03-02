@@ -45,15 +45,24 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
-    // connecting configurator - display settings
-    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
-    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
-    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
-    QObject::connect(uiConfig->checkBoxName, SIGNAL(clicked(bool)), this, SLOT(NameChanged()));
-    QObject::connect(uiConfig->checkBoxDamageDone, SIGNAL(clicked(bool)), this, SLOT(DamageDoneChanged()));
-    QObject::connect(uiConfig->checkBoxPerDmg, SIGNAL(clicked(bool)), this, SLOT(PerDmgChanged()));
-    QObject::connect(uiConfig->checkBoxDPS, SIGNAL(clicked(bool)), this, SLOT(DPSChanged()));
-    QObject::connect(uiConfig->checkBoxActivity, SIGNAL(clicked(bool)), this, SLOT(ActivityChanged()));
+    // connecting configurator - solo display settings
+    QObject::connect(uiConfig->checkBoxSoloProfColors, SIGNAL(clicked(bool)), this, SLOT(SProfSettingsChanged()));
+    QObject::connect(uiConfig->professionSoloComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SProfChanged(QString)));
+    QObject::connect(uiConfig->checkBoxSoloName, SIGNAL(clicked(bool)), this, SLOT(SNameChanged()));
+    QObject::connect(uiConfig->checkBoxSoloDamage, SIGNAL(clicked(bool)), this, SLOT(SDamageChanged()));
+    QObject::connect(uiConfig->checkBoxSoloDPS, SIGNAL(clicked(bool)), this, SLOT(SDPSChanged()));
+    QObject::connect(uiConfig->checkBoxSoloCDamage, SIGNAL(clicked(bool)), this, SLOT(SCDamageChanged()));
+    QObject::connect(uiConfig->checkBoxSoloCPerDmg, SIGNAL(clicked(bool)), this, SLOT(SCPerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxSoloCDPS, SIGNAL(clicked(bool)), this, SLOT(SCDPSChanged()));
+    // connecting configurator - group display settings
+    QObject::connect(uiConfig->checkBoxGroupProfColors, SIGNAL(clicked(bool)), this, SLOT(GProfSettingsChanged()));
+    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(GProfChanged(QString)));
+    QObject::connect(uiConfig->checkBoxGroupPosition, SIGNAL(clicked(bool)), this, SLOT(GPositionChanged()));
+    QObject::connect(uiConfig->checkBoxGroupName, SIGNAL(clicked(bool)), this, SLOT(GNameChanged()));
+    QObject::connect(uiConfig->checkBoxGroupDamage, SIGNAL(clicked(bool)), this, SLOT(GDamageChanged()));
+    QObject::connect(uiConfig->checkBoxGroupPerDmg, SIGNAL(clicked(bool)), this, SLOT(GPerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxGroupDPS, SIGNAL(clicked(bool)), this, SLOT(GDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGroupActivity, SIGNAL(clicked(bool)), this, SLOT(GActivityChanged()));
     // connecting configurator - accuracy settings
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
@@ -143,21 +152,41 @@ MainWindow::MainWindow(QWidget *parent) :
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
 
-    // Profession Color Bars
-    ProfBasedColors=uiConfig->checkBoxProfColors->isChecked();
-    displaypos=uiConfig->checkBoxPosition->isChecked();
-    displayname=uiConfig->checkBoxName->isChecked();
-    displayper=uiConfig->checkBoxPerDmg->isChecked();
-    displaydmg=uiConfig->checkBoxDamageDone->isChecked();
-    displaydps=uiConfig->checkBoxDPS->isChecked();
-    displayact=uiConfig->checkBoxActivity->isChecked();
+    // solo settings
+    displaySProfColor=uiConfig->checkBoxSoloProfColors->isChecked();
+    displaySName=uiConfig->checkBoxSoloName->isChecked();
+    displaySDmg=uiConfig->checkBoxSoloDamage->isChecked();
+    displaySDPS=uiConfig->checkBoxSoloDPS->isChecked();
+    displaySCDmg=uiConfig->checkBoxSoloCDamage->isChecked();
+    displaySCPer=uiConfig->checkBoxSoloCPerDmg->isChecked();
+    displaySCDPS=uiConfig->checkBoxSoloCDPS->isChecked();
+    // group settings
+    displayGProfColor=uiConfig->checkBoxGroupProfColors->isChecked();
+    displayGPos=uiConfig->checkBoxGroupPosition->isChecked();
+    displayGName=uiConfig->checkBoxGroupName->isChecked();
+    displayGPer=uiConfig->checkBoxGroupPerDmg->isChecked();
+    displayGDmg=uiConfig->checkBoxGroupDamage->isChecked();
+    displayGDPS=uiConfig->checkBoxGroupDPS->isChecked();
+    displayGAct=uiConfig->checkBoxGroupActivity->isChecked();
 
     uiConfig->professionComboBox->setCurrentIndex(0);
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
+    soloMyProfession=uiConfig->professionSoloComboBox->currentIndex();
 
     // We are not connected on start up
     is_connected = false;
 
+    // generation widgets, labels + styling and aligning the,
+    InterfaceGeneration();
+
+    CheckFirstRun();
+    CheckForUpdate();
+    Initialize();
+}
+
+void MainWindow::InterfaceGeneration()
+{
+    // this function is called once in updateTimer at start up
 
     //New ProgressbarLabels
     QHBoxLayout *layoutlegend = new QHBoxLayout(ui->legend);
@@ -272,7 +301,20 @@ MainWindow::MainWindow(QWidget *parent) :
     labellegenddps->hide();
     //labellegendact->hide();
 
+    // disable progressbar percentage number
+    ui->progressBar_0->setTextVisible(false);
+    ui->progressBar_1->setTextVisible(false);
+    ui->progressBar_2->setTextVisible(false);
+    ui->progressBar_3->setTextVisible(false);
+    ui->progressBar_4->setTextVisible(false);
+    ui->progressBar_5->setTextVisible(false);
+    ui->progressBar_6->setTextVisible(false);
+    ui->progressBar_7->setTextVisible(false);
+    ui->progressBar_8->setTextVisible(false);
+    ui->progressBar_9->setTextVisible(false);
+
     for(int n=0;n<10;n++) {
+
         // aligning labels
         labelname[n]->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         labeldmg[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -287,20 +329,6 @@ MainWindow::MainWindow(QWidget *parent) :
         labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
-
-    // nameLabel->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
-
-
-    CheckFirstRun();
-    CheckForUpdate();
-    Initialize();
-}
-
-void MainWindow::ProfChanged(QString prof)
-{
-    QStringList proflist;
-    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
-    m_MyProfession = proflist.indexOf(prof)+1;
 }
 
 void MainWindow::CheckFirstRun()
@@ -324,39 +352,208 @@ void MainWindow::CheckFirstRun()
     }
 }
 
-void MainWindow::ProfSettingsChanged()
+void GW2::MainWindow::CheckForUpdate()
 {
-    if (ProfBasedColors==1) ProfBasedColors=0; else ProfBasedColors=1;
+    QString curVersion = Settings::s_Version;
+
+    QNetworkAccessManager *nam = new QNetworkAccessManager();
+    QUrl data_url("http://www.gw2dps.com/version/version_check.txt");
+    QNetworkReply* reply = nam->get(QNetworkRequest(data_url));
+    QEventLoop eventLoop;
+    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+    eventLoop.exec();
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        // Something went wrong. Error can be retrieved with: reply->error()
+        qDebug() << reply->error();
+    }
+    else
+    {
+        // Call reply->readAll() and do what you need with the data
+        QString ver = reply->readAll();
+        qDebug() << ver;
+        if(curVersion < ver)
+        {
+            qDebug() << "You need to Update";
+            QDialog *checkUpdate = new QDialog();
+            QVBoxLayout *layout = new QVBoxLayout(checkUpdate);
+            QPushButton *download = new QPushButton("Get latest Version!", this);
+            QPushButton *changelog = new QPushButton("Check the Changelog!", this);
+            QLabel *label = new QLabel("<center>Your Version: <strong style='color:red;'>" + curVersion + "</strong></center><center>New Version: <strong style='color:green';>" + ver + "</strong></center><br>" + "A new Version of GW2SPECS is available!", this);
+
+            //Connect Functions to Buttons when clicked
+            connect(download, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
+            connect(changelog, SIGNAL(clicked(bool)),this,SLOT(on_pushButton2_clicked()));
+
+            //Add Widgets to the Layout
+            layout->addWidget(label);
+            layout->addWidget(download);
+            layout->addWidget(changelog);
+
+            //Style the Dialog
+            layout->setMargin(30);
+
+            checkUpdate->setStyleSheet("background:#f4f4f4;");
+            checkUpdate->setWindowFlags(Qt::WindowStaysOnTopHint);
+
+            //Style Other Elements
+            download->setStyleSheet("background:#8BB2DA;");
+
+            //Display Dialog
+            checkUpdate->show();
+        }
+    }
 }
 
-void MainWindow::PositionChanged()
+void MainWindow::Initialize()
 {
-    if (displaypos==1) displaypos=0; else displaypos=1;
+    if (HostIP != "" && (is_connected == false))
+    {
+        socket = new QTcpSocket(this);
+        connect(socket, SIGNAL(connected()),this, SLOT(connected()));
+        connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
+        connect(socket, SIGNAL(readyRead()),this, SLOT(ready2Read()));
+        qDebug() << "connecting to : " << HostIP << ":" << HostPort;
+
+        MyClientSlot=10; //no semi-handshake yet
+        CurrentMeta=0;CurrentPos=0;
+        int i;
+        for (i=0;i<10;i++)
+        {
+            SlotDmg[i]=0;
+            SlotDPS[i]=0;
+            SlotAct[i]=0;
+            SlotName[i][0]='\0';
+        }
+        GrpDmg=0;
+        GrpDPS=0;
+        AvgDPS=0;
+        hitCounter=0;
+        m_critChance=0;
+        critCounter=0;
+        m_condiDmg=0;
+        LastColor=0;
+        combatCourse = "";
+
+        socket->connectToHost(HostIP, HostPort);
+
+        if(!socket->waitForConnected(5000))
+        {
+            qDebug() << "Error: " << socket->errorString();
+            QDialog *dialog = new QDialog();
+            QHBoxLayout *layout = new QHBoxLayout(dialog);
+            QLabel *label = new QLabel(this);
+            label->setText("Connection to " + HostIP + " failed");
+            layout->addWidget(label);
+            layout->setMargin(50);
+            dialog->setStyleSheet("background:red;");
+            dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
+            dialog->show();
+            is_connected = false;
+        }
+        else is_connected = true;
+        //m_MyProfession=0;
+        // we need to wait...
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+        update_Timer.start(1000);
+    }
+    else
+    {
+        is_connected = false;
+
+        // this is not blocking call
+        MyClientSlot=10; //no semi-handshake yet
+        CurrentMeta=0;CurrentPos=0;
+
+        int i;
+        for (i=0;i<10;i++)
+        {
+            SlotDmg[i]=0;
+            SlotDPS[i]=0;
+            SlotAct[i]=0;
+            SlotName[i][0]='\0';
+        }
+        GrpDmg=0;
+        hitCounter=0;
+        m_critChance=0;
+        critCounter=0;
+        m_condiDmg=0;
+        LastColor=0;
+        //m_MyProfession=0;
+        // we need to wait...
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+        update_Timer.start(1000);
+    }
 }
 
-void MainWindow::NameChanged()
+void MainWindow::SProfChanged(QString prof)
 {
-    if (displayname==1) displayname=0; else displayname=1;
+    QStringList proflist;
+    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+    soloMyProfession = proflist.indexOf(prof)+1;
+}
+void MainWindow::SProfSettingsChanged()
+{
+    if (displaySProfColor==1) displaySProfColor=0; else displaySProfColor=1;
+}
+void MainWindow::SNameChanged()
+{
+    if (displaySName==1) displaySName=0; else displaySName=1;
+}
+void MainWindow::SDamageChanged()
+{
+    if (displaySDmg==1) displaySDmg=0; else displaySDmg=1;
+}
+void MainWindow::SDPSChanged()
+{
+    if (displaySDPS==1) displaySDPS=0; else displaySDPS=1;
+}
+void MainWindow::SCDamageChanged()
+{
+    if (displaySCDmg==1) displaySDmg=0; else displaySCDmg=1;
+}
+void MainWindow::SCPerDmgChanged()
+{
+    if (displaySCPer==1) displaySCPer=0; else displaySCPer=1;
+}
+void MainWindow::SCDPSChanged()
+{
+    if (displaySCDPS==1) displaySCDPS=0; else displaySCDPS=1;
 }
 
-void MainWindow::DamageDoneChanged()
+void MainWindow::GProfChanged(QString prof)
 {
-    if (displaydmg==1) displaydmg=0; else displaydmg=1;
+    QStringList proflist;
+    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+    m_MyProfession = proflist.indexOf(prof)+1;
 }
-
-void MainWindow::PerDmgChanged()
+void MainWindow::GProfSettingsChanged()
 {
-    if (displayper==1) displayper=0; else displayper=1;
+    if (displayGProfColor==1) displayGProfColor=0; else displayGProfColor=1;
 }
-
-void MainWindow::DPSChanged()
+void MainWindow::GPositionChanged()
 {
-    if (displaydps==1) displaydps=0; else displaydps=1;
+    if (displayGPos==1) displayGPos=0; else displayGPos=1;
 }
-
-void MainWindow::ActivityChanged()
+void MainWindow::GNameChanged()
 {
-    if (displayact==1) displayact=0; else displayact=1;
+    if (displayGName==1) displayGName=0; else displayGName=1;
+}
+void MainWindow::GDamageChanged()
+{
+    if (displayGDmg==1) displayGDmg=0; else displayGDmg=1;
+}
+void MainWindow::GPerDmgChanged()
+{
+    if (displayGPer==1) displayGPer=0; else displayGPer=1;
+}
+void MainWindow::GDPSChanged()
+{
+    if (displayGDPS==1) displayGDPS=0; else displayGDPS=1;
+}
+void MainWindow::GActivityChanged()
+{
+    if (displayGAct==1) displayGAct=0; else displayGAct=1;
 }
 
 void MainWindow::UpdateGroupLabels()
@@ -397,7 +594,6 @@ void MainWindow::UpdateGroupLabels()
         else i=0;
 
 
-        Bar[0]->setTextVisible(false);
         Bar[0]->setVisible(true);
 
         labellegendact->hide();
@@ -409,7 +605,7 @@ void MainWindow::UpdateGroupLabels()
         Bar[0]->setValue(i);
 
         //display name
-        if (displayname==true) {
+        if (displaySName==true) {
             if (ReadNameSettings()!="") labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
             else labelname[0]->setText(QString("Myself"));
             labelname[0]->show();
@@ -420,7 +616,7 @@ void MainWindow::UpdateGroupLabels()
         }
 
         // damage
-        if (displaydmg==true) {
+        if (displaySDmg==true) {
             labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
             labeldmg[0]->show();
             labellegenddmg->show();
@@ -430,7 +626,7 @@ void MainWindow::UpdateGroupLabels()
         }
 
         // DPS
-        if (displaydps==true) {
+        if (displaySDPS==true) {
             labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
             labeldps[0]->show();
             labellegenddps->show();
@@ -521,39 +717,39 @@ void MainWindow::UpdateGroupLabels()
                 else p=0;
 
                 // profession based bar coloring
-                if (ProfBasedColors==true)
+                if (displayGProfColor==true)
                 {
                     switch (PosProf[n])
                     {
                     case 0:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                         break;
                     case 1:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
                         break;
                     case 2:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
                         break;
                     case 3:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
                         break;
                     case 4:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
                         break;
                     case 5:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
                         break;
                     case 6:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
                         break;
                     case 7:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
                         break;
                     case 8:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
                         break;
                     case 9:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
                         break;
                     }
                 }
@@ -561,14 +757,12 @@ void MainWindow::UpdateGroupLabels()
                     if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
 
-                Bar[n]->setTextVisible(false);
-
                 // set bar length
                 Bar[n]->setValue(i);
 
                 //display name and position or not
-                if (displayname==true) {
-                    if (displaypos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
+                if (displayGName==true) {
+                    if (displayGPos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                     labelname[n]->show();
                     labellegendname->show();
@@ -578,7 +772,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // damage
-                if (displaydmg==true) {
+                if (displayGDmg==true) {
                     labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
                     labeldmg[n]->show();
                     labellegenddmg->show();
@@ -588,7 +782,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // percental
-                if (displayper==true) {
+                if (displayGPer==true) {
                     labelper[n]->setText(QString("%L1%").arg(p));
                     labelper[n]->show();
                     labellegendper->show();
@@ -598,7 +792,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // DPS
-                if (displaydps==true) {
+                if (displayGDPS==true) {
                     labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                     labeldps[n]->show();
                     labellegenddps->show();
@@ -608,7 +802,7 @@ void MainWindow::UpdateGroupLabels()
                 }
 
                 // activity
-                //if (displayact==true) {
+                //if (displayGAct==true) {
                 //    labelact[n]->setText(QString("%L1%").arg());
                 //    labelact[n]->show();
                 //    labellegendact->show();
@@ -880,87 +1074,6 @@ void MainWindow::UpdateTime(int timeInMsecs)
     m_Time.sprintf("%02d:%02d:%02d", hours, mins, secs);
 }
 
-void MainWindow::Initialize()
-{
-    if (HostIP != "" && (is_connected == false))
-    {
-        socket = new QTcpSocket(this);
-        connect(socket, SIGNAL(connected()),this, SLOT(connected()));
-        connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
-        connect(socket, SIGNAL(readyRead()),this, SLOT(ready2Read()));
-        qDebug() << "connecting to : " << HostIP << ":" << HostPort;
-
-        MyClientSlot=10; //no semi-handshake yet
-        CurrentMeta=0;CurrentPos=0;
-        int i;
-        for (i=0;i<10;i++)
-        {
-            SlotDmg[i]=0;
-            SlotDPS[i]=0;
-            SlotAct[i]=0;
-            SlotName[i][0]='\0';
-        }
-        GrpDmg=0;
-        GrpDPS=0;
-        AvgDPS=0;
-        hitCounter=0;
-        m_critChance=0;
-        critCounter=0;
-        m_condiDmg=0;
-        LastColor=0;
-        combatCourse = "";
-
-        socket->connectToHost(HostIP, HostPort);
-
-        if(!socket->waitForConnected(5000))
-        {
-            qDebug() << "Error: " << socket->errorString();
-            QDialog *dialog = new QDialog();
-            QHBoxLayout *layout = new QHBoxLayout(dialog);
-            QLabel *label = new QLabel(this);
-            label->setText("Connection to " + HostIP + " failed");
-            layout->addWidget(label);
-            layout->setMargin(50);
-            dialog->setStyleSheet("background:red;");
-            dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
-            dialog->show();
-            is_connected = false;
-        }
-        else is_connected = true;
-        //m_MyProfession=0;
-        // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
-        update_Timer.start(1000);
-    }
-    else
-    {
-        is_connected = false;
-
-        // this is not blocking call
-        MyClientSlot=10; //no semi-handshake yet
-        CurrentMeta=0;CurrentPos=0;
-
-        int i;
-        for (i=0;i<10;i++)
-        {
-            SlotDmg[i]=0;
-            SlotDPS[i]=0;
-            SlotAct[i]=0;
-            SlotName[i][0]='\0';
-        }
-        GrpDmg=0;
-        hitCounter=0;
-        m_critChance=0;
-        critCounter=0;
-        m_condiDmg=0;
-        LastColor=0;
-        //m_MyProfession=0;
-        // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
-        update_Timer.start(1000);
-    }
-}
-
 // Give movement access to MainWindow
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
@@ -995,7 +1108,6 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
 //Show Condi DPS/Crit%/Condi DMG/Highest Hit if ". . ." icon is actionActionGroupDetails is toggled on/off.
 bool GW2::MainWindow::on_pushButton_toggled(bool toggled)
 {
-    qDebug () << toggled;
     if (toggled)
     {
         ui->widgetExtraDetails->show();
@@ -1146,59 +1258,6 @@ void GW2::MainWindow::on_actionClose_triggered()
     if ((is_connected == true)) socket->abort();
 }
 
-void GW2::MainWindow::CheckForUpdate()
-{
-    QString curVersion = Settings::s_Version;
-
-    QNetworkAccessManager *nam = new QNetworkAccessManager();
-    QUrl data_url("http://www.gw2dps.com/version/version_check.txt");
-    QNetworkReply* reply = nam->get(QNetworkRequest(data_url));
-    QEventLoop eventLoop;
-    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
-    eventLoop.exec();
-    if (reply->error() != QNetworkReply::NoError)
-    {
-        // Something went wrong. Error can be retrieved with: reply->error()
-        qDebug() << reply->error();
-    }
-    else
-    {
-        // Call reply->readAll() and do what you need with the data
-        QString ver = reply->readAll();
-        qDebug() << ver;
-        if(curVersion < ver)
-        {
-            qDebug() << "You need to Update";
-            QDialog *checkUpdate = new QDialog();
-            QVBoxLayout *layout = new QVBoxLayout(checkUpdate);
-            QPushButton *download = new QPushButton("Get latest Version!", this);
-            QPushButton *changelog = new QPushButton("Check the Changelog!", this);
-            QLabel *label = new QLabel("<center>Your Version: <strong style='color:red;'>" + curVersion + "</strong></center><center>New Version: <strong style='color:green';>" + ver + "</strong></center><br>" + "A new Version of GW2SPECS is available!", this);
-
-            //Connect Functions to Buttons when clicked
-            connect(download, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
-            connect(changelog, SIGNAL(clicked(bool)),this,SLOT(on_pushButton2_clicked()));
-
-            //Add Widgets to the Layout
-            layout->addWidget(label);
-            layout->addWidget(download);
-            layout->addWidget(changelog);
-
-            //Style the Dialog
-            layout->setMargin(30);
-
-            checkUpdate->setStyleSheet("background:#f4f4f4;");
-            checkUpdate->setWindowFlags(Qt::WindowStaysOnTopHint);
-
-            //Style Other Elements
-            download->setStyleSheet("background:#8BB2DA;");
-
-            //Display Dialog
-            checkUpdate->show();
-        }
-    }
-}
-
 void GW2::MainWindow::on_pushButton_clicked(){
     QString downloadlink = "http://gw2dps.com/download";
     QDesktopServices::openUrl(QUrl(downloadlink));
@@ -1209,7 +1268,8 @@ void GW2::MainWindow::on_pushButton2_clicked(){
     QDesktopServices::openUrl(QUrl(changeloglink));
 }
 
-void MainWindow::updateCombatCourse(){
+void MainWindow::updateCombatCourse()
+{
     if(countCombat > 0){
         //Filling Up Variable For saving later into the Log
         combatCourse += m_Time + " | " + QString::number(m_Dps) + " | " + QString::number(m_Dmg) + "\r\n";
@@ -1357,13 +1417,14 @@ void GW2::MainWindow::on_actionActionSave_triggered()
 
 }
 
-void GW2::MainWindow::writeTxt(){
+void GW2::MainWindow::writeTxt()
+{
     QString txtSep = ": ";
     writeFile(txtSep);
-
 }
 
-void GW2::MainWindow::writeCsv(){
+void GW2::MainWindow::writeCsv()
+{
     QString csvSep = ";";
     writeFile(csvSep);
 }
