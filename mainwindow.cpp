@@ -608,32 +608,23 @@ void MainWindow::UpdateGroupLabels()
         if (displaySName==true) {
             if (ReadNameSettings()!="") labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
             else labelname[0]->setText(QString("Myself"));
-            labelname[0]->show();
-            labellegendname->show();
-        } else {
-            labelname[0]->hide();
-            labellegendname->hide();
         }
+        labelname[0]->setVisible(displaySName);
+        labellegendname->setVisible(displaySName);
 
         // damage
         if (displaySDmg==true) {
             labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
-            labeldmg[0]->show();
-            labellegenddmg->show();
-        } else {
-            labeldmg[0]->hide();
-            labellegenddmg->hide();
         }
+        labeldmg[0]->setVisible(displaySDmg);
+        labellegenddmg->setVisible(displaySDmg);
 
         // DPS
         if (displaySDPS==true) {
             labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
-            labeldps[0]->show();
-            labellegenddps->show();
-        } else {
-            labeldps[0]->hide();
-            labellegenddps->hide();
         }
+        labeldps[0]->setVisible(displaySDPS);
+        labellegenddps->setVisible(displaySDPS);
     }
     else
     {
@@ -764,52 +755,29 @@ void MainWindow::UpdateGroupLabels()
                 if (displayGName==true) {
                     if (displayGPos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
-                    labelname[n]->show();
-                    labellegendname->show();
-                } else {
-                    labelname[n]->hide();
-                    labellegendname->hide();
                 }
+                labelname[n]->setVisible(displayGName);
+                labellegendname->setVisible(displayGName);
 
                 // damage
-                if (displayGDmg==true) {
-                    labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
-                    labeldmg[n]->show();
-                    labellegenddmg->show();
-                } else {
-                    labeldmg[n]->hide();
-                    labellegenddmg->hide();
-                }
+                if (displayGDmg==true) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
+                labeldmg[n]->setVisible(displayGDmg);
+                labellegenddmg->setVisible(displayGDmg);
 
                 // percental
-                if (displayGPer==true) {
-                    labelper[n]->setText(QString("%L1%").arg(p));
-                    labelper[n]->show();
-                    labellegendper->show();
-                } else {
-                    labelper[n]->hide();
-                    labellegendper->hide();
-                }
+                if (displayGPer==true) labelper[n]->setText(QString("%L1%").arg(p));
+                labelper[n]->setVisible(displayGPer);
+                labellegendper->setVisible(displayGPer);
 
                 // DPS
-                if (displayGDPS==true) {
-                    labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
-                    labeldps[n]->show();
-                    labellegenddps->show();
-                } else {
-                    labeldps[n]->hide();
-                    labellegenddps->hide();
-                }
+                if (displayGDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
+                labeldps[n]->setVisible(displayGDPS);
+                labellegenddps->setVisible(displayGDPS);
 
                 // activity
-                //if (displayGAct==true) {
-                //    labelact[n]->setText(QString("%L1%").arg());
-                //    labelact[n]->show();
-                //    labellegendact->show();
-                //} else {
-                //    labelact[n]->hide();
-                //    labellegendact->hide();
-                //}
+                //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg());
+                //labelact[n]->setVisible(setVisible(displayGAct);
+                //labellegendact->setVisible(setVisible(displayGAct);
             }
             else
                 Bar[n] ->setVisible(false);
