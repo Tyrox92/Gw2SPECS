@@ -289,6 +289,12 @@ void MainWindow::InterfaceGeneration()
     labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
     //labelact[n]->setStyleSheet("color:white;background:none;");
 
+    // Begin - For Testing Purposes
+
+    //labellegenddmg
+
+    // End - For Testing Purposes
+
     labellegendname->setText(QString("Name"));
     labellegenddmg->setText(QString("Damage"));
     labellegendper->setText(QString("%Dmg"));
@@ -556,8 +562,39 @@ void MainWindow::GActivityChanged()
     if (displayGAct==1) displayGAct=0; else displayGAct=1;
 }
 
+void MainWindow::SSettingsChanged()
+{
+    labellegendname->setVisible(displaySName);
+    labelname[0]->setVisible(displaySName);
+    labellegenddmg->setVisible(displaySDmg);
+    labeldmg[0]->setVisible(displaySDmg);
+    labellegendper->hide();
+    labelper[0]->hide();
+    labellegenddps->setVisible(displaySDPS);
+    labeldps[0]->setVisible(displaySDPS);
+    //labellegendact->hide();
+    //labelact[0]->hide();
+}
+
+void MainWindow::GSettingsChanged()
+{
+    for(int n=0;n<10;n++) {
+        labellegendname->setVisible(displayGName);
+        labelname[n]->setVisible(displayGName);
+        labellegenddmg->setVisible(displayGDmg);
+        labeldmg[n]->setVisible(displayGDmg);
+        labellegendper->setVisible(displayGPer);
+        labelper[n]->setVisible(displayGPer);
+        labellegenddps->setVisible(displayGDPS);
+        labeldps[n]->setVisible(displayGDPS);
+        //labellegendact->setVisible(setVisible(displayGAct);
+        //labelact[n]->setVisible(setVisible(displayGAct);
+    }
+}
+
 void MainWindow::UpdateGroupLabels()
 {
+    long p,i,j,k;
     QProgressBar* Bar0 = ui->progressBar_0;
     QProgressBar* Bar1 = ui->progressBar_1;
     QProgressBar* Bar2 = ui->progressBar_2;
@@ -569,17 +606,6 @@ void MainWindow::UpdateGroupLabels()
     QProgressBar* Bar8 = ui->progressBar_8;
     QProgressBar* Bar9 = ui->progressBar_9;
     QProgressBar* Bar [10] = {Bar0,Bar1,Bar2,Bar3,Bar4,Bar5,Bar6,Bar7,Bar8,Bar9};
-
-    // hide labels
-//    for(int n=0;n<10;n++) {
-//        labelname[n]->hide();
-//        labeldmg[n]->hide();
-//        labelper[n]->hide();
-//        labeldps[n]->hide();
-//        //labelact[n]->hide();
-//    }
-
-    long p,i,j,k;
 
     // If playing without a server
     // Display only the solo user information
@@ -593,38 +619,58 @@ void MainWindow::UpdateGroupLabels()
             i=PosDmg[0]*100.0/PosDmg[0];
         else i=0;
 
-
+        // set bar length + visable
+        Bar[0]->setValue(i);
         Bar[0]->setVisible(true);
 
-        labellegendact->hide();
-        labellegendper->hide();
-        labelper[0]->hide();
-        labelact[0]->hide();
-
-        // set bar length
-        Bar[0]->setValue(i);
-
-        //display name
+        // profession based bar coloring
+        if (displaySProfColor==true)
+        {
+            switch (soloMyProfession)
+            {
+            case 0:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+                break;
+            case 1:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                break;
+            case 2:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                break;
+            case 3:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
+                break;
+            case 4:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                break;
+            case 5:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                break;
+            case 6:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
+                break;
+            case 7:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
+                break;
+            case 8:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
+                break;
+            case 9:
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                break;
+            }
+        }
+        else
+            Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
+        // set name, damage, DPS
         if (displaySName==true) {
             if (ReadNameSettings()!="") labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
             else labelname[0]->setText(QString("Myself"));
         }
-        labelname[0]->setVisible(displaySName);
-        labellegendname->setVisible(displaySName);
+        if (displaySDmg==true) labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
+        if (displaySDPS==true) labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
 
-        // damage
-        if (displaySDmg==true) {
-            labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
-        }
-        labeldmg[0]->setVisible(displaySDmg);
-        labellegenddmg->setVisible(displaySDmg);
-
-        // DPS
-        if (displaySDPS==true) {
-            labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
-        }
-        labeldps[0]->setVisible(displaySDPS);
-        labellegenddps->setVisible(displaySDPS);
+        SSettingsChanged();
     }
     else
     {
@@ -662,7 +708,7 @@ void MainWindow::UpdateGroupLabels()
                 PosName[p][0]=0;
                 PosDmg[p]=0;
                 PosDPS[p]=0;
-                PosAct[p]=0;
+                //PosAct[p]=0;
                 PosProf[p]=0;
             }
         }
@@ -696,8 +742,6 @@ void MainWindow::UpdateGroupLabels()
 
         // doing the math and setting the labels
         for(int n=0;n<10;n++) {
-            Bar[n]->setVisible(true);
-            //Bar[n]->setTextVisible(false);
             if (PosName[n][0]!=0) {
                 // le math
                 if (PosDmg[0]>0)
@@ -706,6 +750,10 @@ void MainWindow::UpdateGroupLabels()
                 if (GrpDmg>0)
                     p=PosDmg[n]*100/GrpDmg;
                 else p=0;
+
+                // set bar length + visable
+                Bar[n]->setValue(i);
+                Bar[n]->setVisible(true);
 
                 // profession based bar coloring
                 if (displayGProfColor==true)
@@ -747,37 +795,17 @@ void MainWindow::UpdateGroupLabels()
                 else
                     if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
-
-                // set bar length
-                Bar[n]->setValue(i);
-
-                //display name and position or not
+                //display name, position, damage, percental, DPS, Activity
                 if (displayGName==true) {
                     if (displayGPos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                 }
-                labelname[n]->setVisible(displayGName);
-                labellegendname->setVisible(displayGName);
-
-                // damage
                 if (displayGDmg==true) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
-                labeldmg[n]->setVisible(displayGDmg);
-                labellegenddmg->setVisible(displayGDmg);
-
-                // percental
                 if (displayGPer==true) labelper[n]->setText(QString("%L1%").arg(p));
-                labelper[n]->setVisible(displayGPer);
-                labellegendper->setVisible(displayGPer);
-
-                // DPS
                 if (displayGDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
-                labeldps[n]->setVisible(displayGDPS);
-                labellegenddps->setVisible(displayGDPS);
+                //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
 
-                // activity
-                //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg());
-                //labelact[n]->setVisible(setVisible(displayGAct);
-                //labellegendact->setVisible(setVisible(displayGAct);
+                GSettingsChanged();
             }
             else
                 Bar[n] ->setVisible(false);
@@ -997,9 +1025,10 @@ void MainWindow::UpdatePersonalLabels()
 void MainWindow::UpdateTimer(void)
 {
     // Always on top fix
-    this->raise();
-    myMenu.raise();
-    subMenu->raise();
+    //this->raise();
+    //myMenu.raise();
+    //subMenu->raise();
+    // does more harm then it does good
 
     if ((is_connected == true))
     {
@@ -1411,7 +1440,6 @@ void GW2::MainWindow::ShowContextMenuDetails(const QPoint& pos)
 
 bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
 {
-    qDebug()<< toggled;
     if (toggled)
     {
         //Toolbar is hidden

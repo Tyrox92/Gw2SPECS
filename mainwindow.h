@@ -236,6 +236,8 @@ private slots:
     void GDPSChanged();
     void GActivityChanged();
 
+    void SSettingsChanged();
+    void GSettingsChanged();
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton2_clicked();

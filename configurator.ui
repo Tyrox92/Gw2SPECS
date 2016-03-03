@@ -240,7 +240,7 @@ QComboBox QAbstractItemView {
        <item row="0" column="0">
         <widget class="QCheckBox" name="checkBoxSoloProfColors">
          <property name="text">
-          <string>/Color</string>
+          <string>Color</string>
          </property>
         </widget>
        </item>
@@ -302,8 +302,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>312</width>
-        <height>150</height>
+        <width>294</width>
+        <height>124</height>
        </rect>
       </property>
       <attribute name="label">
@@ -497,8 +497,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>312</width>
-        <height>150</height>
+        <width>231</width>
+        <height>132</height>
        </rect>
       </property>
       <attribute name="label">
