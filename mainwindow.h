@@ -251,7 +251,6 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
-    void InterfaceGeneration();
 };
 
 }

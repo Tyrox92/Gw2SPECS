@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     update_Timer(this)
 {
     ui->setupUi(this);
+    // generate ui and so on
     StartupPref();
 
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
@@ -176,17 +177,53 @@ MainWindow::MainWindow(QWidget *parent) :
     // We are not connected on start up
     is_connected = false;
 
-    // generation widgets, labels + styling and aligning the,
-    InterfaceGeneration();
-
     CheckFirstRun();
     CheckForUpdate();
     Initialize();
 }
 
-void MainWindow::InterfaceGeneration()
+void GW2::MainWindow::StartupPref()
 {
-    // this function is called once in updateTimer at start up
+    ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
+    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
+    //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
+    ui->widget->hide();
+    ui->widgetExtraDetails->hide();
+
+    // Resize Option
+    // Using gridLayout here which is the main layout
+    QSizeGrip *sizeGripRight = new QSizeGrip(this);
+    QSizeGrip *sizeGripLeft = new QSizeGrip(this);
+    ui->gridLayout_2->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
+    ui->gridLayout_2->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
+    sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
+    sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
+
+    // disable progressbar by default
+    ui->progressBar_0->setVisible(false);
+    ui->progressBar_1->setVisible(false);
+    ui->progressBar_2->setVisible(false);
+    ui->progressBar_3->setVisible(false);
+    ui->progressBar_4->setVisible(false);
+    ui->progressBar_5->setVisible(false);
+    ui->progressBar_6->setVisible(false);
+    ui->progressBar_7->setVisible(false);
+    ui->progressBar_8->setVisible(false);
+    ui->progressBar_9->setVisible(false);
+
+    // disable progressbar percentage number
+    ui->progressBar_0->setTextVisible(false);
+    ui->progressBar_1->setTextVisible(false);
+    ui->progressBar_2->setTextVisible(false);
+    ui->progressBar_3->setTextVisible(false);
+    ui->progressBar_4->setTextVisible(false);
+    ui->progressBar_5->setTextVisible(false);
+    ui->progressBar_6->setTextVisible(false);
+    ui->progressBar_7->setTextVisible(false);
+    ui->progressBar_8->setTextVisible(false);
+    ui->progressBar_9->setTextVisible(false);
 
     //New ProgressbarLabels
     QHBoxLayout *layoutlegend = new QHBoxLayout(ui->legend);
@@ -214,7 +251,7 @@ void MainWindow::InterfaceGeneration()
     layoutprogressbar_8->setContentsMargins(10,0,10,0);
     layoutprogressbar_9->setContentsMargins(10,0,10,0);
 
-    // adding colomns to bars (not yet shown)
+    // adding colomns to bars
     // legend
     layoutlegend->addWidget(labellegendname);
     layoutlegend->addWidget(labellegenddmg);
@@ -277,24 +314,6 @@ void MainWindow::InterfaceGeneration()
 //    layoutprogressbar_8->addWidget(labelact_8);
 //    layoutprogressbar_9->addWidget(labelact_9);
 
-    // legend allignment and styling
-    labellegendname->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    labellegenddmg->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    labellegendper->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    labellegenddps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    //labellegendact->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/");
-    labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;");
-    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;");
-    labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
-    //labelact[n]->setStyleSheet("color:white;background:none;");
-
-    // Begin - For Testing Purposes
-
-    //labellegenddmg
-
-    // End - For Testing Purposes
-
     labellegendname->setText(QString("Name"));
     labellegenddmg->setText(QString("Damage"));
     labellegendper->setText(QString("%Dmg"));
@@ -307,17 +326,22 @@ void MainWindow::InterfaceGeneration()
     labellegenddps->hide();
     //labellegendact->hide();
 
-    // disable progressbar percentage number
-    ui->progressBar_0->setTextVisible(false);
-    ui->progressBar_1->setTextVisible(false);
-    ui->progressBar_2->setTextVisible(false);
-    ui->progressBar_3->setTextVisible(false);
-    ui->progressBar_4->setTextVisible(false);
-    ui->progressBar_5->setTextVisible(false);
-    ui->progressBar_6->setTextVisible(false);
-    ui->progressBar_7->setTextVisible(false);
-    ui->progressBar_8->setTextVisible(false);
-    ui->progressBar_9->setTextVisible(false);
+    // legend allignment and styling
+    labellegendname->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    labellegenddmg->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    labellegendper->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    labellegenddps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    //labellegendact->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+    //labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/");
+    labellegendname->setStyleSheet("color:white;background:none;background-color:red;/*min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
+    //labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;");
+    labellegenddmg->setStyleSheet("color:white;background:none;background-color:green;/*min-width:39px;*/font: 87 10pt \"DINPro-Black\";");
+    //labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;");
+    labellegendper->setStyleSheet("color:white;background:none;background-color:blue;max-width:37px;min-width:37px;font: 87 10pt \"DINPro-Black\";");
+    //labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
+    labellegenddps->setStyleSheet("color:white;background:none;background-color:black;max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
+    //labelact[n]->setStyleSheet("color:white;background:none;");
 
     for(int n=0;n<10;n++) {
 
@@ -329,10 +353,14 @@ void MainWindow::InterfaceGeneration()
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/");
-        labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;");
-        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;");
-        labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
+        // labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
+        labelname[n]->setStyleSheet("color:white;background:none;background-color:red;/*min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
+        // labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;font: 87 10pt \"DINPro-Black\";");
+        labeldmg[n]->setStyleSheet("color:white;background:none;background-color:green;/*min-width:39px;*/font: 87 10pt \"DINPro-Black\";");
+        // labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;font: 87 10pt \"DINPro-Black\";");
+        labelper[n]->setStyleSheet("color:white;background:none;background-color:blue;max-width:37px;min-width:37px;font: 87 10pt \"DINPro-Black\";");
+        // labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;font: 87 10pt \"DINPro-Black\";");
+        labeldps[n]->setStyleSheet("color:white;background:none;background-color:black;max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 }
@@ -575,7 +603,6 @@ void MainWindow::SSettingsChanged()
     //labellegendact->hide();
     //labelact[0]->hide();
 }
-
 void MainWindow::GSettingsChanged()
 {
     for(int n=0;n<10;n++) {
@@ -893,7 +920,6 @@ void MainWindow::connected()
     qDebug() << "connected...";
     MyClientSlot=10;  //no handshake yet
 }
-
 void MainWindow::disconnected()
 {
     is_connected = false;MyClientSlot=10;
@@ -1118,37 +1144,6 @@ bool GW2::MainWindow::on_pushButton_toggled(bool toggled)
     return toggled;
 }
 
-void GW2::MainWindow::StartupPref()
-{
-    ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
-    //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
-    ui->widget->hide();
-    ui->widgetExtraDetails->hide();
-
-    // Resize Option
-    // Using gridLayout here which is the main layout
-    QSizeGrip *sizeGripRight = new QSizeGrip(this);
-    QSizeGrip *sizeGripLeft = new QSizeGrip(this);
-    ui->gridLayout_2->addWidget(sizeGripRight, 0,0,10,10,Qt::AlignBottom | Qt::AlignRight);
-    ui->gridLayout_2->addWidget(sizeGripLeft, 0,0,10,10,Qt::AlignBottom | Qt::AlignLeft);
-    sizeGripLeft->setStyleSheet("background: url(''); width: 20px; height: 20px;");
-    sizeGripRight->setStyleSheet("background: url(''); width: 20px; height: 20px;");
-
-    ui->progressBar_0->setVisible(false);
-    ui->progressBar_1->setVisible(false);
-    ui->progressBar_2->setVisible(false);
-    ui->progressBar_3->setVisible(false);
-    ui->progressBar_4->setVisible(false);
-    ui->progressBar_5->setVisible(false);
-    ui->progressBar_6->setVisible(false);
-    ui->progressBar_7->setVisible(false);
-    ui->progressBar_8->setVisible(false);
-    ui->progressBar_9->setVisible(false);
-}
-
 //Show player/group details
 bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggled)
 {
@@ -1273,7 +1268,8 @@ void MainWindow::updateCombatCourse()
     }
 }
 
-void MainWindow::writeFile(QString separator){
+void MainWindow::writeFile(QString separator)
+{
     QString tableSep = "";
     QString fileEnding = "txt";
     if(separator == ";"){
@@ -1411,7 +1407,6 @@ void GW2::MainWindow::on_actionActionSave_triggered()
         QObject::connect(txtButton, SIGNAL(clicked(bool)), savePopup, SLOT(hide()));
         QObject::connect(csvButton, SIGNAL(clicked(bool)), this, SLOT(writeCsv()));
         QObject::connect(csvButton, SIGNAL(clicked(bool)), savePopup, SLOT(hide()));
-
 }
 
 void GW2::MainWindow::writeTxt()
