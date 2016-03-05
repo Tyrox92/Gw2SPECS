@@ -16,6 +16,7 @@
 #include <QPoint>
 #include <QMenu>
 #include <QProgressBar>
+#include "qcustomplot.h"
 
 namespace Ui
 {
@@ -251,6 +252,8 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
+    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs);
+    void runMe();
 };
 
 }

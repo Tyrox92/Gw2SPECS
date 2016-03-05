@@ -13,6 +13,7 @@
 #include "ui_mydialog.h"
 #include <QtNetwork>
 #include <QUrl>
+#include <qcustomplot.h>
 
 using namespace GW2;
 
@@ -185,8 +186,11 @@ MainWindow::MainWindow(QWidget *parent) :
 void GW2::MainWindow::StartupPref()
 {
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
+
+    runMe();
+
     //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
     //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
     ui->widget->hide();
@@ -1054,7 +1058,7 @@ void MainWindow::UpdateTimer(void)
     //this->raise();
     //myMenu.raise();
     //subMenu->raise();
-    // does more harm then it does good
+    // Need to raise every element to work properly - also doesnt work 100%
 
     if ((is_connected == true))
     {
@@ -1095,6 +1099,15 @@ void MainWindow::UpdateTime(int timeInMsecs)
     time += QString::number(secs) + "s";
     ui->labelTimeValue->setText(time);
     m_Time.sprintf("%02d:%02d:%02d", hours, mins, secs);
+    unsigned long c;
+    double c1,c2,c3,c4;
+    c2=m_condiDmg;
+    c3=m_Dps;
+    c4=m_Dmg;
+    c1=c2*c3;
+    if (m_Dmg>0)c=round(c1/c4);else c=0;
+    realTimeDataSlot(m_Dps,c,AvgDPS,timeInMsecs);
+
 }
 
 // Give movement access to MainWindow
@@ -1485,3 +1498,110 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
     }
     return toggled;
 }
+
+
+
+void GW2::MainWindow::runMe(){
+    ui->widget_4->addGraph(); // blue line
+    ui->widget_4->graph(0)->setPen(QPen(QColor(41,128, 185)));
+    ui->widget_4->graph(0)->setBrush(QBrush(QColor(41,128, 185)));
+
+    ui->widget_4->addGraph(); // purple line
+    ui->widget_4->graph(1)->setPen(QPen(QColor(142, 68, 173)));
+    ui->widget_4->graph(1)->setBrush(QBrush(QColor(142, 68, 173)));
+    //ui->widget_4->graph(0)->setChannelFillGraph(ui->widget_4->graph(1)); //Setting color between graphs
+
+    if(is_connected == true){
+        ui->widget_4->addGraph(); // yellow line
+        ui->widget_4->graph(2)->setPen(QPen(QColor(243, 156, 18)));
+        //ui->widget_4->graph(2)->setBrush(QBrush(QColor(243, 156, 18)));
+    }else{}
+    ui->widget_4->addGraph(); // blue dot
+    ui->widget_4->graph(3)->setPen(QPen(QColor(41,128, 185)));
+    ui->widget_4->graph(3)->setLineStyle(QCPGraph::lsNone);
+    ui->widget_4->graph(3)->setScatterStyle(QCPScatterStyle::ssDisc);
+
+    ui->widget_4->addGraph(); // red dot
+    ui->widget_4->graph(4)->setPen(QPen(QColor(142, 68, 173)));
+    ui->widget_4->graph(4)->setLineStyle(QCPGraph::lsNone);
+    ui->widget_4->graph(4)->setScatterStyle(QCPScatterStyle::ssDisc);
+
+    ui->widget_4->addGraph(); // yellow dot
+    ui->widget_4->graph(5)->setPen(QPen(QColor(243, 156, 18)));
+    ui->widget_4->graph(5)->setLineStyle(QCPGraph::lsNone);
+    ui->widget_4->graph(5)->setScatterStyle(QCPScatterStyle::ssDisc);
+
+    ui->widget_4->xAxis->setAutoTickStep(false);
+    ui->widget_4->xAxis->setTickStep(1);
+    ui->widget_4->yAxis->setLabel("DPS");
+   // ui->widget_4->rescaleAxes();
+    //ui->widget_4->axisRect()->setupFullAxesBox();
+    ui->widget_4->yAxis->setRange(0,35000);
+    ui->widget_4->yAxis2->setRange(0,35000);
+    ui->widget_4->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+
+    ui->widget_4->xAxis->setBasePen(QPen(Qt::white, 1));
+    ui->widget_4->yAxis->setBasePen(QPen(Qt::white, 1));
+    ui->widget_4->xAxis->setTickPen(QPen(Qt::white, 1));
+    ui->widget_4->yAxis->setTickPen(QPen(Qt::white, 1));
+    ui->widget_4->xAxis->setSubTickPen(QPen(Qt::white, 1));
+    ui->widget_4->yAxis->setSubTickPen(QPen(Qt::white, 1));
+    ui->widget_4->xAxis->setTickLabelColor(Qt::white);
+    ui->widget_4->yAxis->setTickLabelColor(Qt::white);
+    ui->widget_4->yAxis->setLabelColor(Qt::white);
+    ui->widget_4->xAxis->grid()->setZeroLinePen(Qt::NoPen);
+    ui->widget_4->yAxis->grid()->setZeroLinePen(Qt::NoPen);
+
+
+    //Graph Background Color
+    ui->widget_4->setBackground(Qt::transparent);
+
+    //Graph Axis Color
+    QLinearGradient axisRectGradient;
+    axisRectGradient.setStart(0, 0);
+    axisRectGradient.setFinalStop(0, 350);
+    axisRectGradient.setColorAt(0, QColor(80, 80, 80));
+    axisRectGradient.setColorAt(1, QColor(30, 30, 30));
+    ui->widget_4->axisRect()->setBackground(axisRectGradient);
+
+
+    // make left and bottom axes transfer their ranges to right and top axes:
+    connect(ui->widget_4->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget_4->xAxis2, SLOT(setRange(QCPRange)));
+    connect(ui->widget_4->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget_4->yAxis2, SLOT(setRange(QCPRange)));
+
+    ui->widget_4->replot();
+}
+
+void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
+    // calculate two new data points:
+    double key = msecs/1000;
+    static double lastPointKey = 0;
+    if (key-lastPointKey > 0.01) // at most add point every 10 ms
+    {
+      double value0 = dps;
+      double value1 = cdps;
+      double value2 = avgdps;
+
+      // add data to lines:
+      ui->widget_4->graph(0)->addData(key, value0);
+      ui->widget_4->graph(1)->addData(key, value1);
+      if(is_connected == true){ui->widget_4->graph(2)->addData(key, value2);}
+      // set data of dots:
+      ui->widget_4->graph(3)->clearData();
+      ui->widget_4->graph(3)->addData(key, value0);
+      ui->widget_4->graph(4)->clearData();
+      ui->widget_4->graph(4)->addData(key, value1);
+      if(is_connected == true){ui->widget_4->graph(5)->clearData();
+      ui->widget_4->graph(5)->addData(key, value2);}
+      // rescale value (vertical) axis to fit the current data:
+      ui->widget_4->graph(0)->rescaleValueAxis();
+      ui->widget_4->graph(1)->rescaleValueAxis(true);
+      if(is_connected == true){ui->widget_4->graph(2)->rescaleValueAxis(true);}
+      lastPointKey = key;
+    }
+    // make key axis range scroll with the data (at a constant range size of 8):
+    ui->widget_4->xAxis->setRange(key+0.25, 8, Qt::AlignRight);
+    ui->widget_4->replot();
+}
+
+
