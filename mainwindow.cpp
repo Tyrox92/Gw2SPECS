@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(screenRecorder, SIGNAL(RequestInfoUpdate(QString)), ui->labelInfo, SLOT(setText(QString)));
     QObject::connect(dmgMeter, SIGNAL(RequestTimeUpdate(int)), this, SLOT(UpdateTime(int)));
     QObject::connect(ui->actionReset, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
+    QObject::connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(resetGraph()));
     QObject::connect(ui->actionAutoReset, SIGNAL(triggered(bool)), dmgMeter, SLOT(SetIsAutoResetting(bool)));
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
@@ -86,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent) :
     resetData->setIcon(QIcon(":/Reset"));
     resetData->setIconVisibleInMenu(true);
     QObject::connect(resetData, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
+    QObject::connect(resetData, SIGNAL(triggered()), this, SLOT(resetGraph()));
 
     extraOptions->setCheckable(true);
     extraOptions->setIcon(QIcon(":/moreDetails"));
@@ -121,6 +123,9 @@ MainWindow::MainWindow(QWidget *parent) :
     hideShowToolbar->setCheckable(true);
     QObject::connect(hideShowToolbar, SIGNAL(toggled(bool)), this, SLOT(HideAndShowToolbar(bool)));
 
+    hideShowGraph->setCheckable(true);
+    QObject::connect(hideShowGraph, SIGNAL(toggled(bool)), this, SLOT(HideAndShowGraph(bool)));
+
     myMenu.addMenu(subMenu);
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -134,6 +139,14 @@ MainWindow::MainWindow(QWidget *parent) :
         hideShowToolbar->setChecked(true);
     }else{
         ui->toolBar->show();
+    }
+
+    QString readGraph = ReadGraphSettings();
+    if(readGraph == "hidden"){
+        HideAndShowGraph(true);
+        hideShowGraph->setChecked(true);
+    }else{
+        ui->widget_4->show();
     }
 
 
@@ -708,7 +721,6 @@ void MainWindow::UpdateGroupLabels()
         // reset total dmg,dps
         GrpDmg=0;
         GrpDPS=0;
-
         // add up all dmg/dps and set the labels
         for (j=0;j<10;j++) GrpDmg+=SlotDmg[j];
         ui->grp_Dmg->setText(QString::number(GrpDmg));
@@ -1074,6 +1086,14 @@ void MainWindow::UpdateTimer(void)
     }
     UpdateGroupLabels();
     UpdatePersonalLabels();
+    unsigned long c;
+    double c1,c2,c3,c4;
+    c2=m_condiDmg;
+    c3=m_Dps;
+    c4=m_Dmg;
+    c1=c2*c3;
+    if (m_Dmg>0)c=round(c1/c4);else c=0;
+    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs);
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -1099,15 +1119,7 @@ void MainWindow::UpdateTime(int timeInMsecs)
     time += QString::number(secs) + "s";
     ui->labelTimeValue->setText(time);
     m_Time.sprintf("%02d:%02d:%02d", hours, mins, secs);
-    unsigned long c;
-    double c1,c2,c3,c4;
-    c2=m_condiDmg;
-    c3=m_Dps;
-    c4=m_Dmg;
-    c1=c2*c3;
-    if (m_Dmg>0)c=round(c1/c4);else c=0;
-    realTimeDataSlot(m_Dps,c,AvgDPS,timeInMsecs);
-
+    m_msecs = timeInMsecs;
 }
 
 // Give movement access to MainWindow
@@ -1467,6 +1479,28 @@ bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
     return toggled;
 }
 
+bool GW2::MainWindow::HideAndShowGraph(bool toggled)
+{
+    if (toggled)
+    {
+        //Toolbar is hidden
+        WriteGraphSettings("hidden");
+        hideShowGraph->setText("Show Graph");
+        ui->widget_4->hide();
+        toggled = true;
+    }
+    else
+    {
+        //Toolbar is visible
+        WriteGraphSettings("visible");
+        hideShowGraph->setText("Hide Graph");
+        ui->widget_4->show();
+        toggled = false;
+    }
+    return toggled;
+}
+
+
 bool GW2::MainWindow::connectToServ(bool toggled){
     if (toggled)
     {
@@ -1505,6 +1539,7 @@ void GW2::MainWindow::runMe(){
     ui->widget_4->addGraph(); // blue line
     ui->widget_4->graph(0)->setPen(QPen(QColor(41,128, 185)));
     ui->widget_4->graph(0)->setBrush(QBrush(QColor(41,128, 185)));
+    ui->widget_4->graph(0)->addData(0,0);
 
     ui->widget_4->addGraph(); // purple line
     ui->widget_4->graph(1)->setPen(QPen(QColor(142, 68, 173)));
@@ -1562,7 +1597,7 @@ void GW2::MainWindow::runMe(){
     axisRectGradient.setFinalStop(0, 350);
     axisRectGradient.setColorAt(0, QColor(80, 80, 80));
     axisRectGradient.setColorAt(1, QColor(30, 30, 30));
-    ui->widget_4->axisRect()->setBackground(axisRectGradient);
+    ui->widget_4->axisRect()->setBackground(Qt::transparent);
 
 
     // make left and bottom axes transfer their ranges to right and top axes:
@@ -1571,11 +1606,12 @@ void GW2::MainWindow::runMe(){
 
     ui->widget_4->replot();
 }
+static double lastPointKey = 0;
 
 void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
     // calculate two new data points:
     double key = msecs/1000;
-    static double lastPointKey = 0;
+
     if (key-lastPointKey > 0.01) // at most add point every 10 ms
     {
       double value0 = dps;
@@ -1591,8 +1627,10 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       ui->widget_4->graph(3)->addData(key, value0);
       ui->widget_4->graph(4)->clearData();
       ui->widget_4->graph(4)->addData(key, value1);
-      if(is_connected == true){ui->widget_4->graph(5)->clearData();
-      ui->widget_4->graph(5)->addData(key, value2);}
+      if(is_connected == true){
+          ui->widget_4->graph(5)->clearData();
+          ui->widget_4->graph(5)->addData(key, value2);
+      }
       // rescale value (vertical) axis to fit the current data:
       ui->widget_4->graph(0)->rescaleValueAxis();
       ui->widget_4->graph(1)->rescaleValueAxis(true);
@@ -1600,7 +1638,25 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       lastPointKey = key;
     }
     // make key axis range scroll with the data (at a constant range size of 8):
-    ui->widget_4->xAxis->setRange(key+0.25, 8, Qt::AlignRight);
+    ui->widget_4->xAxis->setRange(key+0.25, key, Qt::AlignRight);
+    ui->widget_4->xAxis->setTickStep(round(key/5));
+    ui->widget_4->replot();
+}
+
+void GW2::MainWindow::resetGraph(){
+    lastPointKey = 0;
+    ui->widget_4->graph(0)->clearData();
+    ui->widget_4->graph(0)->addData(0,0);
+    ui->widget_4->graph(1)->clearData();
+    ui->widget_4->graph(1)->addData(0,0);
+    ui->widget_4->graph(2)->clearData();
+    ui->widget_4->graph(2)->addData(0,0);
+    ui->widget_4->graph(3)->clearData();
+    ui->widget_4->graph(3)->addData(0,0);
+    ui->widget_4->graph(4)->clearData();
+    ui->widget_4->graph(4)->addData(0,0);
+    ui->widget_4->graph(5)->clearData();
+    ui->widget_4->graph(5)->addData(0,0);
     ui->widget_4->replot();
 }
 

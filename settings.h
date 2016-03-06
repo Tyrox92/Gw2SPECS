@@ -23,6 +23,9 @@ inline static void Write1stRun(QString);
 inline static QString ReadToolbarSettings(void);
 inline static void WriteToolbarSettings(QString);
 
+inline static QString ReadGraphSettings(void);
+inline static void WriteGraphSettings(QString);
+
 
 inline QString Read1stRun(void)
 {
@@ -130,6 +133,25 @@ inline void WriteToolbarSettings(QString text)
 
 }
 
+
+inline QString ReadGraphSettings(void)
+{
+    QString tmpGraph;
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("graphHidden");
+    tmpGraph=settings.value("text").toString();
+    settings.endGroup();
+    return tmpGraph;
+}
+
+
+inline void WriteGraphSettings(QString text)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("graphHidden");
+    settings.setValue("text",text);
+    settings.endGroup();
+}
 
 namespace GW2
 {

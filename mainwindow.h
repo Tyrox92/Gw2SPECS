@@ -35,16 +35,22 @@ public:
         QString time;
         QMenu myMenu;
         QMenu *subMenu = new QMenu("Toggle On/Off", this);
-        QAction *hideShowToolbar = subMenu->addAction("Hide Toolbar"); //Toggle
+
         QAction *resetData = myMenu.addAction("Reset");
-        QAction *extraOptions = subMenu->addAction("Show Details"); //Toggle
-        QAction *transparentWindow = subMenu->addAction("Transparency On"); //Toggle
-        QAction *autoReset = subMenu->addAction("Auto-Reset On"); //Toggle
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *saveToFile = myMenu.addAction("Save File");
         QAction *options = myMenu.addAction("Options");
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
+
+        QAction *hideShowToolbar = subMenu->addAction("Hide Toolbar"); //Toggle
+        QAction *hideShowGraph = subMenu->addAction("Hide Graph"); //Toggle
+        QAction *extraOptions = subMenu->addAction("Show Details"); //Toggle
+        QAction *transparentWindow = subMenu->addAction("Transparency On"); //Toggle
+        QAction *autoReset = subMenu->addAction("Auto-Reset On"); //Toggle
+
+        int m_msecs;
+
 
 
 protected:
@@ -213,6 +219,7 @@ private slots:
     void on_actionShrinkUI_triggered(bool checked);
     bool on_pushButton_toggled(bool toggled);
     bool HideAndShowToolbar(bool);
+    bool HideAndShowGraph(bool);
     void Initialize();
     bool on_actionActionGroupDetails_toggled(bool toggled);
     void on_actionConnect_triggered();
@@ -254,6 +261,7 @@ private slots:
     //bool hideunhideToolbar(bool toggled);
     void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs);
     void runMe();
+    void resetGraph();
 };
 
 }
