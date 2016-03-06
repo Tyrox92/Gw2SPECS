@@ -1629,7 +1629,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       // add data to lines:
       ui->widget_4->graph(0)->addData(key, value0);
       ui->widget_4->graph(1)->addData(key, value1);
-      if(is_connected == true){ui->widget_4->graph(2)->addData(key, value2);}
+      if(is_connected == true){ui->widget_4->graph(2)->addData(key -1, value2);}
       // set data of dots:
       ui->widget_4->graph(3)->clearData();
       ui->widget_4->graph(3)->addData(key, value0);
@@ -1637,7 +1637,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       ui->widget_4->graph(4)->addData(key, value1);
       if(is_connected == true){
           ui->widget_4->graph(5)->clearData();
-          ui->widget_4->graph(5)->addData(key, value2);
+          ui->widget_4->graph(5)->addData(key -1, value2);
       }
       // rescale value (vertical) axis to fit the current data:
       ui->widget_4->graph(0)->rescaleValueAxis();
@@ -1653,18 +1653,10 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
 
 void GW2::MainWindow::resetGraph(){
     lastPointKey = 0;
-    ui->widget_4->graph(0)->clearData();
-    ui->widget_4->graph(0)->addData(0,0);
-    ui->widget_4->graph(1)->clearData();
-    ui->widget_4->graph(1)->addData(0,0);
-    ui->widget_4->graph(2)->clearData();
-    ui->widget_4->graph(2)->addData(0,0);
-    ui->widget_4->graph(3)->clearData();
-    ui->widget_4->graph(3)->addData(0,0);
-    ui->widget_4->graph(4)->clearData();
-    ui->widget_4->graph(4)->addData(0,0);
-    ui->widget_4->graph(5)->clearData();
-    ui->widget_4->graph(5)->addData(0,0);
+    for(int i=0;i<6;i++){
+        ui->widget_4->graph(i)->clearData();
+        ui->widget_4->graph(i)->addData(0,0);
+    }
     ui->widget_4->replot();
 }
 
