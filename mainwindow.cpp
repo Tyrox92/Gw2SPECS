@@ -130,8 +130,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->widget->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->widget_4->setContextMenuPolicy(Qt::CustomContextMenu);
     QObject::connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
     QObject::connect(ui->widget, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuDetails(const QPoint&)));
+    QObject::connect(ui->widget_4, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuGraph(const QPoint&)));
 
     QString readToolbar = ReadToolbarSettings();
     if(readToolbar == "hidden"){
@@ -1455,6 +1457,12 @@ void GW2::MainWindow::ShowContextMenu(const QPoint& pos)
 void GW2::MainWindow::ShowContextMenuDetails(const QPoint& pos)
 {
     QPoint globalPos = ui->widget->mapToGlobal(pos);
+    myMenu.exec(globalPos);
+}
+
+void GW2::MainWindow::ShowContextMenuGraph(const QPoint& pos)
+{
+    QPoint globalPos = ui->widget_4->mapToGlobal(pos);
     myMenu.exec(globalPos);
 }
 

@@ -256,6 +256,7 @@ private slots:
     void writeTxt();
     void ShowContextMenu(const QPoint& pos);
     void ShowContextMenuDetails(const QPoint& pos);
+    void ShowContextMenuGraph(const QPoint& pos);
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
