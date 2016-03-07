@@ -395,10 +395,9 @@ void MainWindow::CheckFirstRun()
         QDialog *dialog1 = new QDialog();
         QHBoxLayout *layout = new QHBoxLayout(dialog1);
         QLabel *label1 = new QLabel(this);
-        label1->setText("Welcome to GW2SPECS!\n\nPlease set up the following options in your Guild Wars 2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!");
+        label1->setText("Welcome to GW2SPECS!\n\nPlease set up the following options in your Guild Wars 2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!\n\n If you need more information please visit gw2specs.com");
         layout->addWidget(label1);
         layout->setMargin(10);
-        //dialog1->setStyleSheet("background:red;");
         dialog1->show();
 
         Write1stRun("OK");
