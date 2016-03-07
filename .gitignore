@@ -51,3 +51,11 @@ Temporary Items
 *.pro.user.*
 Gw2DPS.pro.user
 Gw2DPS.pro.user.*
+*.pro.user
+*.pro.user.*
+*.user
+*.user.*
+*.qbs.user
+*.qbs.user.*
+*.qmlproject.user
+*.qmlproject.user.*

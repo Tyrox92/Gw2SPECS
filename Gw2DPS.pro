@@ -7,12 +7,12 @@
 QT       += core gui
 QT       += network
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 #CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 QMAKE_CXXFLAGS_WARN_ON += -Wno-reorder
-TARGET = Gw2DPS
+TARGET = Gw2SPECS
 TEMPLATE = app
 
 
@@ -27,7 +27,8 @@ SOURCES += main.cpp\
     configurator.cpp \
     settings.cpp \
     mydialog.cpp \
-    global.cpp
+    global.cpp \
+    qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     configurator.h \
     settings.h \
     global.h \
-    mydialog.h
+    mydialog.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
@@ -48,4 +50,4 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     Icons/Icons.qrc
 
-RC_FILE = jaxnX.rc
+RC_FILE = specs.rc

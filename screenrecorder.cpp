@@ -11,7 +11,7 @@ const QString ScreenRecorder::s_Infos[static_cast<int>(CharacterPattern::Control
         "Waiting", // Invalid
         "", // Visible
         "Please unhide chat panel", // Hidden
-        "Please scroll down log" // Scrollbar
+        "Scroll down log" // Scrollbar
         };
 
 void ScreenRecorder::StartRecording()

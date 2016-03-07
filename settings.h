@@ -14,14 +14,23 @@ inline static void WriteNameSettings(QString);
 inline static QString ReadIPSettings(void);
 inline static void WriteIPSettings(QString);
 
+inline static QString ReadPortSettings(void);
+inline static void WritePortSettings(QString);
+
 inline static QString Read1stRun(void);
 inline static void Write1stRun(QString);
+
+inline static QString ReadToolbarSettings(void);
+inline static void WriteToolbarSettings(QString);
+
+inline static QString ReadGraphSettings(void);
+inline static void WriteGraphSettings(QString);
 
 
 inline QString Read1stRun(void)
 {
     QString tmp;
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup("FirstRun");
     tmp=settings.value("text").toString();
     settings.endGroup();
@@ -32,7 +41,7 @@ inline QString Read1stRun(void)
 inline void Write1stRun(QString text)
 {
 
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup("FirstRun");
     settings.setValue("text",text);
     settings.endGroup();
@@ -43,7 +52,7 @@ inline void Write1stRun(QString text)
 inline QString ReadNameSettings(void)
 {
     QString tmp;
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup("Name");
     tmp=settings.value("text").toString();
     settings.endGroup();
@@ -53,7 +62,7 @@ inline QString ReadNameSettings(void)
 inline void WriteNameSettings(QString text)
 {
 
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup("Name");
     settings.setValue("text",text);
     settings.endGroup();
@@ -64,7 +73,7 @@ inline void WriteNameSettings(QString text)
 inline QString ReadIPSettings(void)
 {
     QString tmpip;
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup("IP");
     tmpip=settings.value("text").toString();
     settings.endGroup();
@@ -75,11 +84,73 @@ inline QString ReadIPSettings(void)
 inline void WriteIPSettings(QString text)
 {
 
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup("IP");
     settings.setValue("text",text);
     settings.endGroup();
 
+}
+
+inline QString ReadPortSettings(void)
+{
+    QString tmpPort;
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("Port");
+    tmpPort=settings.value("text").toString();
+    settings.endGroup();
+    return tmpPort;
+}
+
+
+inline void WritePortSettings(QString text)
+{
+
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("Port");
+    settings.setValue("text",text);
+    settings.endGroup();
+
+}
+
+inline QString ReadToolbarSettings(void)
+{
+    QString tmpToolbar;
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("toolBarHidden");
+    tmpToolbar=settings.value("text").toString();
+    settings.endGroup();
+    return tmpToolbar;
+}
+
+
+inline void WriteToolbarSettings(QString text)
+{
+
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("toolBarHidden");
+    settings.setValue("text",text);
+    settings.endGroup();
+
+}
+
+
+inline QString ReadGraphSettings(void)
+{
+    QString tmpGraph;
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("graphHidden");
+    tmpGraph=settings.value("text").toString();
+    settings.endGroup();
+    return tmpGraph;
+}
+
+
+inline void WriteGraphSettings(QString text)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("graphHidden");
+    settings.setValue("text",text);
+    settings.endGroup();
 }
 
 namespace GW2
@@ -110,26 +181,26 @@ private:
 
 /*
     template <>
-    inline void Settings::ReadSettings(QLineEdit* lineEdit)
+    inline void Settings::ReadSettings(QLineEdit* InputName)
     {
         QSettings settings(s_Product);
 
-        settings.beginGroup(lineEdit->objectName());
-        lineEdit->setText(settings.value("text"));
+        settings.beginGroup(InputName->objectName());
+        InputName->setText(settings.value("text"));
         settings.endGroup();
 
-        ReadSettings<QWidget>(lineEdit);
+        ReadSettings<QWidget>(InputName);
     }
 
     template <>
-    inline void Settings::WriteSettings(QLineEdit* lineEdit)
+    inline void Settings::WriteSettings(QLineEdit* InputName)
     {
         QSettings settings(s_Product);
-        settings.beginGroup(lineEdit->objectName());
-        settings.setValue("text",lineEdit->text());
+        settings.beginGroup(InputName->objectName());
+        settings.setValue("text",InputName->text());
         settings.endGroup();
 
-        WriteSettings<QWidget>(lineEdit);
+        WriteSettings<QWidget>(InputName);
     }
 */
 
@@ -137,7 +208,7 @@ private:
 template <>
 inline void Settings::ReadSettings(QWidget* widget)
 {
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup(widget->objectName());
     widget->restoreGeometry(settings.value("geometry").toByteArray());
     settings.endGroup();
@@ -146,7 +217,7 @@ inline void Settings::ReadSettings(QWidget* widget)
 template <>
 inline void Settings::ReadSettings(QComboBox* comboBox)
 {
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup(comboBox->objectName());
     comboBox->setCurrentIndex(settings.value("currentIndex").toInt());
     settings.endGroup();
@@ -157,7 +228,7 @@ inline void Settings::ReadSettings(QComboBox* comboBox)
 template <>
 inline void Settings::ReadSettings(QMainWindow* mainWindow)
 {
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup(mainWindow->objectName());
     mainWindow->restoreState(settings.value("windowState").toByteArray());
     settings.endGroup();
@@ -168,7 +239,7 @@ inline void Settings::ReadSettings(QMainWindow* mainWindow)
 template <>
 inline void Settings::WriteSettings(QWidget* widget)
 {
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup(widget->objectName());
     settings.setValue("geometry", widget->saveGeometry());
     settings.endGroup();
@@ -177,7 +248,7 @@ inline void Settings::WriteSettings(QWidget* widget)
 template <>
 inline void Settings::WriteSettings(QComboBox* comboBox)
 {
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup(comboBox->objectName());
     settings.setValue("currentIndex", comboBox->currentIndex());
     settings.endGroup();
@@ -188,7 +259,7 @@ inline void Settings::WriteSettings(QComboBox* comboBox)
 template <>
 inline void Settings::WriteSettings(QMainWindow* mainWindow)
 {
-    QSettings settings("GW2DPS");
+    QSettings settings("Gw2SPECS");
     settings.beginGroup(mainWindow->objectName());
     settings.setValue("windowState", mainWindow->saveState());
     settings.endGroup();

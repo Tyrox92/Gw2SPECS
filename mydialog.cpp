@@ -14,31 +14,35 @@ MyDialog::MyDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
-    ui->lineEdit->setText(ReadNameSettings());
-    ui->lineEdit_2->setText(ReadIPSettings());
+    ui->InputName->setText(ReadNameSettings());
+    ui->InputIP->setText(ReadIPSettings());
+    ui->InputPort->setText(ReadPortSettings());
     Settings::ReadSettings(ui->professionComboBox);
-
-
 }
 
 MyDialog::~MyDialog()
 {
     Settings::WriteSettings(ui->professionComboBox);
-    if (ui->lineEdit->text().length()>0) delete ui;
+    if (ui->InputName->text().length()>0) delete ui;
 
 }
 
 void MyDialog::on_pushButton_clicked()
 {
 
-    if (ui->lineEdit->text().length()>0)
+    if (ui->InputName->text().length()>0)
     {
-        WriteNameSettings(ui->lineEdit->text());
+        WriteNameSettings(ui->InputName->text());
         accept();
     }
-    if (ui->lineEdit_2->text().length()>0)
+    if (ui->InputIP->text().length()>0)
     {
-        WriteIPSettings(ui->lineEdit_2->text());
+        WriteIPSettings(ui->InputIP->text());
+        accept();
+    }
+    if (ui->InputPort->text().length()>0)
+    {
+        WritePortSettings(ui->InputPort->text());
         accept();
     }
 }
@@ -50,19 +54,19 @@ int MyDialog::getProfession()
 
 QString MyDialog::getName()
 {
-    return ui->lineEdit->text();
+    return ui->InputName->text();
 }
 
 
 QString MyDialog::getIP()
 {
-    return ui->lineEdit_2->text();
+    return ui->InputIP->text();
 }
 
 
-int MyDialog::getPort()
+QString MyDialog::getPort()
 {
-    return ui->lineEdit_3->text().toInt();
+    return ui->InputPort->text();
 }
 
 #endif
