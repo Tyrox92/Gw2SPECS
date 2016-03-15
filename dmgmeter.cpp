@@ -89,6 +89,9 @@ void DmgMeter::Reset()
     emit RequestTimeUpdate(0);
     countCombat = 0;
     combatCourse = "";
+    updateCounter=0;
+    m_rDmg=0;
+    m_rDps=0;
 }
 
 void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
@@ -135,6 +138,13 @@ void DmgMeter::ComputeDps()
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
     if (m_Dps>999999) m_Dps = 1;
+    if (updateCounter<10) updateCounter++;     //10sec for recent DPS update
+        else
+            {
+            updateCounter=0;
+            m_rDps = elapsedSecsSinceCombat == 0.0 ? (m_Dmg-m_rDmg) : (m_Dmg-m_rDmg) / 10.0;
+            m_rDmg=m_Dmg;
+            }
     m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
     if (m_Activity>100) m_Activity = 100;
     if (elapsedSecsSinceEvaluation >= m_SecsInCombat)
@@ -188,6 +198,8 @@ void DmgMeter::EvaluateLine(const QString& params)
     }
 #endif // DMGMETER_DEBUG
 
+    if (LastColor!=4)  //not timestamp color
+    {
     m_Dmg += dmg;
     LastDmg=dmg;
     m_TimeSinceEvaluation.start();
@@ -197,6 +209,9 @@ void DmgMeter::EvaluateLine(const QString& params)
         // Evaluation starts, configure timer and start
         StartEvaluation();
     }
+    }
+   if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
+   //qDebug() << "Adding value : " << dmg;
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)
