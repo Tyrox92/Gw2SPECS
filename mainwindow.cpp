@@ -355,7 +355,7 @@ void GW2::MainWindow::StartupPref()
     labellegenddmg->setText(QString("Damage"));
     labellegendper->setText(QString("%Dmg"));
     labellegenddps->setText(QString("DPS"));
-    labellegendrdps->setText(QString("10sDPS"));
+    labellegendrdps->setText(QString("5sDPS"));
     //labellegendact->setText(QString("Act%"));
 
     //hide all legend labels by default
@@ -1444,7 +1444,7 @@ void MainWindow::writeFile(QString separator)
             }
             stream << "\r\n\r\n\r\n";
         }
-        stream << " Time(hh:mm:ss) " << tableSep << "  DPS  " << tableSep << "  10sDPS  " << tableSep << "  DMG\r\n";
+        stream << " Time(hh:mm:ss) " << tableSep << "  DPS  " << tableSep << "  5sDPS  " << tableSep << "  DMG\r\n";
         if(separator == ";"){
             combatCourse.replace(QString("|"),QString(";"));
         }
@@ -1690,7 +1690,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
 
 void GW2::MainWindow::resetGraph(){
     lastPointKey = 0;
-    for(int i=0;i<4;i++){
+    for(int i=0;i<3;i++){
         ui->widget_4->graph(i)->clearData();
         ui->widget_4->graph(i)->addData(0,0);
     }

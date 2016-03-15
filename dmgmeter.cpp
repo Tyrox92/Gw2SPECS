@@ -138,11 +138,11 @@ void DmgMeter::ComputeDps()
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
     if (m_Dps>999999) m_Dps = 1;
-    if (updateCounter<10) updateCounter++;     //10sec for recent DPS update
+    if (updateCounter<5) updateCounter++;     //5sec for recent DPS update
         else
             {
             updateCounter=0;
-            m_rDps = elapsedSecsSinceCombat == 0.0 ? (m_Dmg-m_rDmg) : (m_Dmg-m_rDmg) / 10.0;
+            m_rDps = elapsedSecsSinceCombat == 0.0 ? (m_Dmg-m_rDmg) : (m_Dmg-m_rDmg) / 5.0;
             m_rDmg=m_Dmg;
             }
     m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
@@ -211,7 +211,7 @@ void DmgMeter::EvaluateLine(const QString& params)
     }
     }
    if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
-   //qDebug() << "Adding value : " << dmg;
+   qDebug() << "Adding value : " << dmg;
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)
