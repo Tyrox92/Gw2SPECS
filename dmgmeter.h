@@ -63,6 +63,7 @@ namespace GW2
 
         QVector<QString> m_OldParams;
         QVector<QString> m_Params;
+        int m_OldParamsMax;
         QTimer m_Timer;
         QTime OffCombatTime;
         QTime m_TimeSinceCombat;
