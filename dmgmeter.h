@@ -82,6 +82,12 @@ namespace GW2
         QByteArray tmp1;
         const char* tmp2;
         unsigned long LastDmg;
+        int dmg_5s_ago;
+        int dmg_4s_ago;
+        int dmg_3s_ago;
+        int dmg_2s_ago;
+        int dmg_1s_ago;
+        int dmg_now;
 
     };
 
