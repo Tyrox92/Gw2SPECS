@@ -202,6 +202,8 @@ void DmgMeter::EvaluateLine(const QString& params)
     {
     m_Dmg += dmg;
     LastDmg=dmg;
+    combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
+    qDebug() << "Adding value : " << dmg;
     m_TimeSinceEvaluation.start();
 
     if (!m_IsActive)
@@ -211,7 +213,7 @@ void DmgMeter::EvaluateLine(const QString& params)
     }
     }
    if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
-   qDebug() << "Adding value : " << dmg;
+
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)
