@@ -36,14 +36,17 @@ void DmgMeter::SetConsideredLineCount(const QString& consideredLineCount)
 {
     m_Params.resize(consideredLineCount.toInt());
     m_OldParams.resize(m_Params.size());
+    m_OldParamsMax=0;
 }
 
 void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAttributes)
 {
     int offset = 0;
     int offsetOld = 0;
+    int lastDiff = 0;
+    int i;
     const int paramCount = m_Params.size();
-    for (int i = 0; i < paramCount; ++i)
+    for (i = 0; i < paramCount; ++i)
     {
         const QString params = m_Reader.ReadLineFromBottom(image, imageAttributes, paramCount, i);
         if (params == "")
@@ -59,11 +62,16 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
                 // Found valid difference, evaluate
                 EvaluateLine(params);
                 ++offsetOld;
-            }
+                lastDiff = 1;
+            } else lastDiff = 0;
         }
+        if ((lastDiff==0) && (i-offsetOld>=m_OldParamsMax))  break;
     }
-
-    m_Params.swap(m_OldParams);
+    if (i-offset!=0)
+        {
+        m_OldParamsMax=i-offset;
+        m_Params.swap(m_OldParams);
+        }
     if (m_IsActive)
     {
         emit RequestTimeUpdate(m_ElapsedTimeSinceCombatInMsec + m_TimeSinceCombat.elapsed());
@@ -92,6 +100,7 @@ void DmgMeter::Reset()
     updateCounter=0;
     m_rDmg=0;
     m_rDps=0;
+    m_OldParamsMax=0;
 }
 
 void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
@@ -203,7 +212,7 @@ void DmgMeter::EvaluateLine(const QString& params)
     m_Dmg += dmg;
     LastDmg=dmg;
     combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
-    qDebug() << "Adding value : " << dmg;
+    //qDebug() << "Adding value : " << dmg;
     m_TimeSinceEvaluation.start();
 
     if (!m_IsActive)
