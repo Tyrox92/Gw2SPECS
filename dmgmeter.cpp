@@ -100,6 +100,7 @@ void DmgMeter::Reset()
     updateCounter=0;
     m_rDmg=0;
     m_rDps=0;
+    m_realDps=0;
     dmg_5s_ago=0;
     dmg_4s_ago=0;
     dmg_3s_ago=0;
@@ -135,7 +136,6 @@ DmgMeter::DmgMeter() :
     dmg_2s_ago(0),
     dmg_1s_ago(0),
     dmg_now(0)
-
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
 
@@ -168,6 +168,7 @@ void DmgMeter::ComputeDps()
 //            }
 
     m_rDmg=m_Dmg;
+    m_realDps = dmg_now - dmg_1s_ago;
 
     dmg_5s_ago = dmg_4s_ago;
     dmg_4s_ago = dmg_3s_ago;
@@ -176,11 +177,14 @@ void DmgMeter::ComputeDps()
     dmg_1s_ago = dmg_now;
     dmg_now = m_rDmg;
 
+    qDebug()<<m_realDps;
+
+
     m_rDps =(5.0f/15.0f*(dmg_now-dmg_1s_ago)+4.0f/15.0f*(dmg_1s_ago-dmg_2s_ago)+3.0f/15.0f*(dmg_2s_ago-dmg_3s_ago)+2.0f/15.0f*(dmg_3s_ago-dmg_4s_ago)+1.0f/15.0f*(dmg_4s_ago-dmg_5s_ago));
-    if(m_rDps>999999999){
-        m_rDps=0;
-    }
-     m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
+    if(m_rDps>999999999){m_rDps=0;}
+    if(m_realDps>999999999){m_realDps=0;}
+
+    m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
     if (m_Activity>100) m_Activity = 100;
     if (elapsedSecsSinceEvaluation >= m_SecsInCombat)
     {

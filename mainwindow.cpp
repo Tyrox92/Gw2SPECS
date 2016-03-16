@@ -532,7 +532,7 @@ void MainWindow::Initialize()
         else is_connected = true;
         //m_MyProfession=0;
         // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_rDps=0;
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_rDps=0;m_realDps=0;
         update_Timer.start(1000);
     }
     else
@@ -560,7 +560,7 @@ void MainWindow::Initialize()
         LastColor=0;
         //m_MyProfession=0;
         // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_rDps=0;
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_rDps=0;m_realDps=0;
         update_Timer.start(1000);
     }
 }
@@ -1048,6 +1048,7 @@ void MainWindow::SendClientInfo(void)
         if (m_Dmg>999999999) m_Dmg = 1;
         if (m_Activity>100) m_Activity = 1;
         if (m_rDps>99999) m_rDps = 1;
+        if (m_realDps>99999)m_realDps =1;
         sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*%u5#%lu*%u6#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity,MyClientSlot, m_MyProfession,MyClientSlot,m_rDps);
         socket->write(writeBuff);
     }
@@ -1341,7 +1342,7 @@ void MainWindow::updateCombatCourse()
 {
     if(countCombat > 0){
         //Filling Up Variable For saving later into the Log
-        combatCourse += m_Time + " | " + QString::number(m_Dps) + " | " + QString::number(m_rDps) + " | " + QString::number(m_Dmg) + "\r\n";
+        combatCourse += m_Time + " | " + QString::number(m_Dps) + " | " + QString::number(m_realDps) + " | " + QString::number(m_Dmg) + "\r\n";
     }
 }
 
@@ -1444,7 +1445,7 @@ void MainWindow::writeFile(QString separator)
             }
             stream << "\r\n\r\n\r\n";
         }
-        stream << " Time(hh:mm:ss) " << tableSep << "  DPS  " << tableSep << "  5sDPS  " << tableSep << "  DMG\r\n";
+        stream << " Time(hh:mm:ss) " << tableSep << "  AvgDPS  " << tableSep << "  RealDPS  " << tableSep << "  DMG\r\n";
         if(separator == ";"){
             combatCourse.replace(QString("|"),QString(";"));
         }
@@ -1603,11 +1604,17 @@ void GW2::MainWindow::runMe(){
     ui->widget_4->addGraph(); // red line
     ui->widget_4->graph(2)->setPen(QPen(QColor(240, 40, 40)));
 
+    ui->widget_4->addGraph(); // blue line
+    ui->widget_4->graph(3)->setPen(QPen(QColor(41,128, 185)));
+
     if(is_connected == true){
         ui->widget_4->addGraph(); // yellow line
-        ui->widget_4->graph(3)->setPen(QPen(QColor(243, 156, 18)));
+        ui->widget_4->graph(4)->setPen(QPen(QColor(243, 156, 18)));
 
     }
+
+
+
 
     ui->widget_4->xAxis->setAutoTickStep(false);
     ui->widget_4->xAxis->setTickStep(1);
@@ -1661,25 +1668,28 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       double value1 = cdps;
       double value2 = avgdps;
       double value3 = m_rDps;
+      double value4 = m_realDps;
 
       // add data to lines:
       ui->widget_4->graph(0)->addData(key, value0);
       ui->widget_4->graph(1)->addData(key, value1);
       ui->widget_4->graph(2)->addData(key, value3);
+      ui->widget_4->graph(3)->addData(key, value4);
 
-      if(is_connected == true){ui->widget_4->graph(3)->addData(key, value2);}
+      if(is_connected == true){ui->widget_4->graph(4)->addData(key, value2);}
 
       // rescale value (vertical) axis to fit the current data:
       ui->widget_4->graph(0)->rescaleValueAxis(true);
       ui->widget_4->graph(1)->rescaleValueAxis(true);
       ui->widget_4->graph(2)->rescaleValueAxis(true);
+      ui->widget_4->graph(3)->rescaleValueAxis(true);
 
       ui->widget_4->graph(0)->rescaleKeyAxis(true);
       ui->widget_4->graph(1)->rescaleKeyAxis(true);
       ui->widget_4->graph(2)->rescaleKeyAxis(true);
+      ui->widget_4->graph(3)->rescaleKeyAxis(true);
 
-
-      if(is_connected == true){ui->widget_4->graph(3)->rescaleValueAxis(true);ui->widget_4->graph(3)->rescaleKeyAxis(true);}
+      if(is_connected == true){ui->widget_4->graph(4)->rescaleValueAxis(true);ui->widget_4->graph(4)->rescaleKeyAxis(true);}
       lastPointKey = key;
     }
     // make key axis range scroll with the data (at a constant range size of 8):
@@ -1690,7 +1700,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
 
 void GW2::MainWindow::resetGraph(){
     lastPointKey = 0;
-    for(int i=0;i<3;i++){
+    for(int i=0;i<4;i++){
         ui->widget_4->graph(i)->clearData();
         ui->widget_4->graph(i)->addData(0,0);
     }
