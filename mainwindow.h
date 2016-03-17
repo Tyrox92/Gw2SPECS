@@ -35,6 +35,7 @@ public:
         QString time;
         QMenu myMenu;
         QMenu *subMenu = new QMenu("Toggle On/Off", this);
+        QMenu *graphMenu = new QMenu("Toggle Graph Settings", this);
 
         QAction *resetData = myMenu.addAction("Reset");
         QAction *connectServer = myMenu.addAction("Connect");
@@ -43,8 +44,10 @@ public:
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
 
+        QAction *hideShowGraph = graphMenu->addAction("Hide Graph"); //Toggle
+        QAction *hideShowRealDPS = graphMenu->addAction("Hide RealDPS");
+
         QAction *hideShowToolbar = subMenu->addAction("Hide Toolbar"); //Toggle
-        QAction *hideShowGraph = subMenu->addAction("Hide Graph"); //Toggle
         QAction *extraOptions = subMenu->addAction("Show Details"); //Toggle
         QAction *transparentWindow = subMenu->addAction("Transparency On"); //Toggle
         QAction *autoReset = subMenu->addAction("Auto-Reset On"); //Toggle
@@ -286,9 +289,10 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
-    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs);
+    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_realDps);
     void runMe();
     void resetGraph();
+    bool action_hideShowRealDPS(bool toggled);
 };
 
 }

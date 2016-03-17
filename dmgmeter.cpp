@@ -168,7 +168,7 @@ void DmgMeter::ComputeDps()
 //            }
 
     m_rDmg=m_Dmg;
-    m_realDps = dmg_now - dmg_1s_ago;
+    //m_realDps = dmg_now - dmg_1s_ago;
 
     dmg_5s_ago = dmg_4s_ago;
     dmg_4s_ago = dmg_3s_ago;
@@ -252,7 +252,7 @@ void DmgMeter::EvaluateLine(const QString& params)
     }
     }
    if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
-
+   m_realDps += dmg;
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)

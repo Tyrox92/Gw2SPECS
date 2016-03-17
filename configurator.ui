@@ -121,7 +121,7 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="soloSettings">
       <property name="geometry">
@@ -135,7 +135,7 @@ color: #8BB2DA;</string>
       <attribute name="label">
        <string>Solo: Player Bar Settings</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -307,7 +307,7 @@ QComboBox QAbstractItemView {
         <item row="4" column="0">
          <widget class="QCheckBox" name="checkBoxSolorDPS">
           <property name="text">
-           <string>Show Last10sDPS</string>
+           <string>Show Last5sDPS</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -516,7 +516,7 @@ QComboBox QAbstractItemView {
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>Show Last10sDPS</string>
+          <string>Show Last5sDPS</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -530,8 +530,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>312</width>
-        <height>201</height>
+        <width>231</width>
+        <height>132</height>
        </rect>
       </property>
       <attribute name="label">

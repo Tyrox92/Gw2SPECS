@@ -78,10 +78,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     myMenu.setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
     subMenu->setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
+    graphMenu->setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
 
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
 
+    hideShowRealDPS->setCheckable(true);
+    hideShowRealDPS->setIconVisibleInMenu(true);
+    QObject::connect(hideShowRealDPS, SIGNAL(triggered(bool)), this, SLOT(action_hideShowRealDPS(bool)));
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
     QObject::connect(exitMenu, SIGNAL(triggered(bool)), this, SLOT(close()));
@@ -129,6 +133,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(hideShowGraph, SIGNAL(toggled(bool)), this, SLOT(HideAndShowGraph(bool)));
 
     myMenu.addMenu(subMenu);
+    myMenu.addMenu(graphMenu);
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->widget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -1146,7 +1151,8 @@ void MainWindow::UpdateTimer(void)
     c4=m_Dmg;
     c1=c2*c3;
     if (m_Dmg>0)c=round(c1/c4);else c=0;
-    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs);
+    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_realDps);
+    m_realDps=0;
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -1517,6 +1523,27 @@ void GW2::MainWindow::ShowContextMenuGraph(const QPoint& pos)
     myMenu.exec(globalPos);
 }
 
+bool GW2::MainWindow::action_hideShowRealDPS(bool toggled){
+    if (toggled)
+    {
+        //RealDPS is hidden
+        hideShowRealDPS->setText("Show RealDPS");
+        ui->widget_4->graph(3)->setVisible(false);
+        toggled = true;
+        qDebug()<<"realdps hidden";
+    }
+    else
+    {
+        //RealDPS is visible
+        hideShowRealDPS->setText("Hide RealDPS");
+        ui->widget_4->graph(3)->setVisible(true);
+        toggled = false;
+        qDebug()<<"realdps shown";
+    }
+    return toggled;
+}
+
+
 bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
 {
     if (toggled)
@@ -1542,7 +1569,7 @@ bool GW2::MainWindow::HideAndShowGraph(bool toggled)
 {
     if (toggled)
     {
-        //Toolbar is hidden
+        //Graph is hidden
         WriteGraphSettings("hidden");
         hideShowGraph->setText("Show Graph");
         ui->widget_4->hide();
@@ -1550,7 +1577,7 @@ bool GW2::MainWindow::HideAndShowGraph(bool toggled)
     }
     else
     {
-        //Toolbar is visible
+        //Graph is visible
         WriteGraphSettings("visible");
         hideShowGraph->setText("Hide Graph");
         ui->widget_4->show();
@@ -1595,22 +1622,30 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
 
 
 void GW2::MainWindow::runMe(){
+    ui->widget_4->addLayer("abovemain", ui->widget_4->layer("main"), QCustomPlot::limAbove);
+
+
     ui->widget_4->addGraph(); // green line
-    ui->widget_4->graph(0)->setPen(QPen(QColor(40,240,40)));
+    ui->widget_4->graph(0)->setPen(QPen(QColor(46, 204, 113)));
+    ui->widget_4->graph(0)->setLayer("abovemain");
 
     ui->widget_4->addGraph(); // purple line
     ui->widget_4->graph(1)->setPen(QPen(QColor(142, 68, 173)));
+    ui->widget_4->graph(1)->setLayer("abovemain");
 
     ui->widget_4->addGraph(); // red line
-    ui->widget_4->graph(2)->setPen(QPen(QColor(240, 40, 40)));
+    ui->widget_4->graph(2)->setPen(QPen(QColor(231, 76, 60, 125)));
+    ui->widget_4->graph(2)->setBrush(QBrush(QColor(231, 76, 60, 125)));
+    ui->widget_4->graph(2)->setLayer("main");
 
     ui->widget_4->addGraph(); // blue line
     ui->widget_4->graph(3)->setPen(QPen(QColor(41,128, 185)));
+    ui->widget_4->graph(3)->setLayer("abovemain");
 
     if(is_connected == true){
         ui->widget_4->addGraph(); // yellow line
         ui->widget_4->graph(4)->setPen(QPen(QColor(243, 156, 18)));
-
+        ui->widget_4->graph(4)->setLayer("abovemain");
     }
 
 
@@ -1658,7 +1693,7 @@ void GW2::MainWindow::runMe(){
 }
 static double lastPointKey = 0;
 
-void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
+void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, int realDps){
     // calculate two new data points:
     double key = msecs/1000;
 
@@ -1668,7 +1703,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       double value1 = cdps;
       double value2 = avgdps;
       double value3 = m_rDps;
-      double value4 = m_realDps;
+      double value4 = realDps;
 
       // add data to lines:
       ui->widget_4->graph(0)->addData(key, value0);
@@ -1704,6 +1739,8 @@ void GW2::MainWindow::resetGraph(){
         ui->widget_4->graph(i)->clearData();
         ui->widget_4->graph(i)->addData(0,0);
     }
+    ui->widget_4->yAxis->setRange(0,7000);
+    ui->widget_4->yAxis2->setRange(0,7000);
     ui->widget_4->replot();
 }
 
