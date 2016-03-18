@@ -1159,11 +1159,12 @@ void MainWindow::UpdateTimer(void)
     if (m_Dmg>0)c=round(c1/c4);else c=0;
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_realDps);
     m_realDps=0;
-    if(fixOnTopCount<1){
+    if(fixOnTopCount<2){
         this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
         this->setAttribute(Qt::WA_TranslucentBackground);
-        this->show();
         this->activateWindow();
+        this->setFocus();
+        this->show();
         fixOnTopCount++;
     }
 }
@@ -1642,8 +1643,9 @@ void GW2::MainWindow::action_fixOnTop(){
     //ui->widget_4->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    this->show();
     this->activateWindow();
+    this->setFocus();
+    this->show();
 }
 
 
