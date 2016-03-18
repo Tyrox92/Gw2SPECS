@@ -83,9 +83,13 @@ MainWindow::MainWindow(QWidget *parent) :
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
 
+    fixOnTop->setIconVisibleInMenu(true);
+    QObject::connect(fixOnTop, SIGNAL(triggered(bool)), this, SLOT(action_fixOnTop()));
+
     hideShowRealDPS->setCheckable(true);
     hideShowRealDPS->setIconVisibleInMenu(true);
     QObject::connect(hideShowRealDPS, SIGNAL(triggered(bool)), this, SLOT(action_hideShowRealDPS(bool)));
+
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
     QObject::connect(exitMenu, SIGNAL(triggered(bool)), this, SLOT(close()));
@@ -210,10 +214,12 @@ MainWindow::MainWindow(QWidget *parent) :
 void GW2::MainWindow::StartupPref()
 {
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    Qt::WindowFlags flags = windowFlags();
+    this->setWindowFlags(flags | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
-
+    this->show();
     runMe();
+    fixOnTopCount=0;
 
     //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
     //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
@@ -1153,6 +1159,13 @@ void MainWindow::UpdateTimer(void)
     if (m_Dmg>0)c=round(c1/c4);else c=0;
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_realDps);
     m_realDps=0;
+    if(fixOnTopCount<1){
+        this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+        this->setAttribute(Qt::WA_TranslucentBackground);
+        this->show();
+        this->activateWindow();
+        fixOnTopCount++;
+    }
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -1620,10 +1633,22 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
 }
 
 
+void GW2::MainWindow::action_fixOnTop(){
+    //Tests for making certain part unclickable/unfocusable
+    //ui->widget_4->setEnabled(false);
+    //ui->widget_4->setAttribute(Qt::WA_ShowWithoutActivating);
+
+    //Deattach graph from main app
+    //ui->widget_4->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    this->show();
+    this->activateWindow();
+}
+
 
 void GW2::MainWindow::runMe(){
     ui->widget_4->addLayer("abovemain", ui->widget_4->layer("main"), QCustomPlot::limAbove);
-
 
     ui->widget_4->addGraph(); // green line
     ui->widget_4->graph(0)->setPen(QPen(QColor(46, 204, 113)));

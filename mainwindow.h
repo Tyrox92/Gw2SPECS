@@ -41,8 +41,10 @@ public:
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *saveToFile = myMenu.addAction("Save File");
         QAction *options = myMenu.addAction("Options");
+        QAction *fixOnTop = myMenu.addAction("Fix onTop");
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
+
 
         QAction *hideShowGraph = graphMenu->addAction("Hide Graph"); //Toggle
         QAction *hideShowRealDPS = graphMenu->addAction("Hide RealDPS");
@@ -79,6 +81,7 @@ private:
     Configurator m_Configurator;
     MyDialog m_MyDialog;
     QPoint m_dragPosition;
+    int fixOnTopCount;
 
     QTcpSocket *socket;
 
@@ -293,6 +296,7 @@ private slots:
     void runMe();
     void resetGraph();
     bool action_hideShowRealDPS(bool toggled);
+    void action_fixOnTop();
 };
 
 }
