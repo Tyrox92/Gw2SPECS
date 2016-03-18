@@ -27,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     // generate ui and so on
     StartupPref();
+    _kc << Qt::Key_Up << Qt::Key_Up << Qt::Key_Down << Qt::Key_Down << Qt::Key_Left << Qt::Key_Right << Qt::Key_Left << Qt::Key_Right << Qt::Key_A << Qt::Key_B;
+    _pos = 0;
 
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
 
@@ -209,6 +211,27 @@ MainWindow::MainWindow(QWidget *parent) :
     CheckFirstRun();
     CheckForUpdate();
     Initialize();
+}
+
+void GW2::MainWindow::keyPressEvent( QKeyEvent * event ){
+    if(_kc.at(_pos) == event->key()){
+        ++_pos;
+        qDebug()<< event->key();
+        qDebug()<< _pos;
+    }else{
+        _pos = 0;
+    }
+    if(_pos>=_kc.size()){
+        QDialog *kC_dialog = new QDialog();
+        QHBoxLayout *layout = new QHBoxLayout(kC_dialog);
+        QLabel *label1 = new QLabel(this);
+        label1->setText("Ketchup\nOr\nNoodles\nAnd\nMayonese\nInside");
+        layout->addWidget(label1);
+        layout->setMargin(50);
+        kC_dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
+        kC_dialog->show();
+        _pos = 0;
+    }
 }
 
 void GW2::MainWindow::StartupPref()

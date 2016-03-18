@@ -55,7 +55,8 @@ public:
         QAction *autoReset = subMenu->addAction("Auto-Reset On"); //Toggle
 
         int m_msecs;
-
+        QList<int> _kc;
+        int _pos;
 
 
 protected:
@@ -297,6 +298,7 @@ private slots:
     void resetGraph();
     bool action_hideShowRealDPS(bool toggled);
     void action_fixOnTop();
+    void keyPressEvent( QKeyEvent * event );
 };
 
 }
