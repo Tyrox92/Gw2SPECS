@@ -1180,7 +1180,9 @@ void MainWindow::UpdateTimer(void)
     c4=m_Dmg;
     c1=c2*c3;
     if (m_Dmg>0)c=round(c1/c4);else c=0;
-    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_realDps);
+    if(AvgDPS>999999){AvgDPS=1;}
+    if(AvgDPS<0){AvgDPS=1;}
+    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_rDps,m_realDps);
     m_realDps=0;
     if(fixOnTopCount<2){
         this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
@@ -1692,19 +1694,15 @@ void GW2::MainWindow::runMe(){
     ui->widget_4->graph(3)->setPen(QPen(QColor(41,128, 185)));
     ui->widget_4->graph(3)->setLayer("abovemain");
 
-    if(is_connected == true){
-        ui->widget_4->addGraph(); // yellow line
-        ui->widget_4->graph(4)->setPen(QPen(QColor(243, 156, 18)));
-        ui->widget_4->graph(4)->setLayer("abovemain");
-    }
-
-
+    ui->widget_4->addGraph();//yellow
+    ui->widget_4->graph(4)->setPen(QPen(QColor(243,156,18)));
+    ui->widget_4->graph(4)->setLayer("abovemain");
 
 
     ui->widget_4->xAxis->setAutoTickStep(false);
     ui->widget_4->xAxis->setTickStep(1);
     ui->widget_4->yAxis->setLabel("DPS");
-   // ui->widget_4->rescaleAxes();
+    //ui->widget_4->rescaleAxes();
     //ui->widget_4->axisRect()->setupFullAxesBox();
     ui->widget_4->yAxis->setRange(0,7000);
     ui->widget_4->yAxis2->setRange(0,7000);
@@ -1743,7 +1741,7 @@ void GW2::MainWindow::runMe(){
 }
 static double lastPointKey = 0;
 
-void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, int realDps){
+void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, int five_sdps, int realDps){
     // calculate two new data points:
     double key = msecs/1000;
 
@@ -1752,7 +1750,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, 
       double value0 = dps;
       double value1 = cdps;
       double value2 = avgdps;
-      double value3 = m_rDps;
+      double value3 = five_sdps;
       double value4 = realDps;
 
       // add data to lines:
@@ -1761,8 +1759,9 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, 
       ui->widget_4->graph(2)->addData(key, value3);
       ui->widget_4->graph(3)->addData(key, value4);
 
-      if(is_connected == true){ui->widget_4->graph(4)->addData(key, value2);}
-
+      if((is_connected == true)){
+          ui->widget_4->graph(4)->addData(key - 1, value2);
+      }
       // rescale value (vertical) axis to fit the current data:
       ui->widget_4->graph(0)->rescaleValueAxis(true);
       ui->widget_4->graph(1)->rescaleValueAxis(true);
@@ -1774,7 +1773,10 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, 
       ui->widget_4->graph(2)->rescaleKeyAxis(true);
       ui->widget_4->graph(3)->rescaleKeyAxis(true);
 
-      if(is_connected == true){ui->widget_4->graph(4)->rescaleValueAxis(true);ui->widget_4->graph(4)->rescaleKeyAxis(true);}
+      if(is_connected == true){
+          ui->widget_4->graph(4)->rescaleValueAxis(true);
+          ui->widget_4->graph(4)->rescaleKeyAxis(true);
+      }
       lastPointKey = key;
     }
     // make key axis range scroll with the data (at a constant range size of 8):
@@ -1785,7 +1787,7 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, 
 
 void GW2::MainWindow::resetGraph(){
     lastPointKey = 0;
-    for(int i=0;i<4;i++){
+    for(int i=0;i<5;i++){
         ui->widget_4->graph(i)->clearData();
         ui->widget_4->graph(i)->addData(0,0);
     }

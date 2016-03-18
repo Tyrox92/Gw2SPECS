@@ -174,9 +174,6 @@ void DmgMeter::ComputeDps()
     dmg_1s_ago = dmg_now;
     dmg_now = m_rDmg;
 
-    qDebug()<<m_realDps;
-
-
     m_rDps =(5.0f/15.0f*(dmg_now-dmg_1s_ago)+4.0f/15.0f*(dmg_1s_ago-dmg_2s_ago)+3.0f/15.0f*(dmg_2s_ago-dmg_3s_ago)+2.0f/15.0f*(dmg_3s_ago-dmg_4s_ago)+1.0f/15.0f*(dmg_4s_ago-dmg_5s_ago));
     if(m_rDps>999999999){m_rDps=0;}
     if(m_realDps>999999999){m_realDps=0;}

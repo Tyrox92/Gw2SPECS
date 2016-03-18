@@ -293,7 +293,7 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
-    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_realDps);
+    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_rDps, int m_realDps);
     void runMe();
     void resetGraph();
     bool action_hideShowRealDPS(bool toggled);
