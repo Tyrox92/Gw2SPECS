@@ -37,6 +37,7 @@ public:
         QMenu *subMenu = new QMenu("Toggle On/Off", this);
         QMenu *graphMenu = new QMenu("Toggle Graph Settings", this);
 
+        QAction *combatMode = myMenu.addAction("CombatMode");
         QAction *resetData = myMenu.addAction("Reset");
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *saveToFile = myMenu.addAction("Save File");
@@ -57,6 +58,8 @@ public:
         int m_msecs;
         QList<int> _kc;
         int _pos;
+        QDialog *combatDialog = new QDialog();
+        QPushButton *resetCombatMode = new QPushButton(this);
 
 
 protected:
@@ -299,6 +302,8 @@ private slots:
     bool action_hideShowRealDPS(bool toggled);
     void action_fixOnTop();
     void keyPressEvent( QKeyEvent * event );
+    void action_combatMode();
+    void action_resetCombatMode();
 };
 
 }

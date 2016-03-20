@@ -14,6 +14,7 @@
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
+#include <qt_windows.h>
 
 using namespace GW2;
 
@@ -76,6 +77,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
+
+    //ResetCombatMode
+    QObject::connect(resetCombatMode,SIGNAL(clicked(bool)),this,SLOT(action_resetCombatMode()));
+
     // context menu
 
     myMenu.setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
@@ -84,6 +89,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
+
+    combatMode->setIconVisibleInMenu(true);
+    QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
 
     fixOnTop->setIconVisibleInMenu(true);
     QObject::connect(fixOnTop, SIGNAL(triggered(bool)), this, SLOT(action_fixOnTop()));
@@ -243,6 +251,7 @@ void GW2::MainWindow::StartupPref()
     this->show();
     runMe();
     fixOnTopCount=0;
+    resetCombatMode->hide();
 
     //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
     //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
@@ -1184,12 +1193,19 @@ void MainWindow::UpdateTimer(void)
     if(AvgDPS<0){AvgDPS=1;}
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_rDps,m_realDps);
     m_realDps=0;
-    if(fixOnTopCount<2){
+    if(fixOnTopCount<1){
         this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
         this->setAttribute(Qt::WA_TranslucentBackground);
         this->activateWindow();
         this->setFocus();
         this->show();
+        fixOnTopCount++;
+    }
+    if(fixOnTopCount == 1){
+        HWND winHandle  = (HWND)winId();
+        ShowWindow(winHandle, SW_HIDE);
+        SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
+        ShowWindow(winHandle, SW_SHOW);
         fixOnTopCount++;
     }
 }
@@ -1660,10 +1676,6 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
 
 
 void GW2::MainWindow::action_fixOnTop(){
-    //Tests for making certain part unclickable/unfocusable
-    //ui->widget_4->setEnabled(false);
-    //ui->widget_4->setAttribute(Qt::WA_ShowWithoutActivating);
-
     //Deattach graph from main app
     //ui->widget_4->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
@@ -1671,6 +1683,46 @@ void GW2::MainWindow::action_fixOnTop(){
     this->activateWindow();
     this->setFocus();
     this->show();
+}
+
+void GW2::MainWindow::action_combatMode(){
+    //Make click-through
+    HWND winHandle  = (HWND)winId();
+    ShowWindow(winHandle, SW_HIDE);
+    SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_APPWINDOW | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
+    ShowWindow(winHandle, SW_SHOW);
+    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    this->activateWindow();
+    this->setFocus();
+    this->show();
+    qDebug()<< "CombatMode Activated";
+
+    QVBoxLayout *layout = new QVBoxLayout(combatDialog);
+    QLabel *label = new QLabel(this);
+    resetCombatMode->setText("Reset Combatmode!");
+    label->setText("Welcome to Gw2SPECS CombatMode\nPlease minimize this window so it cannot interfere anymore.\n Gw2SPECS is no longer clickable and all clicks fall through on the window behind\nIf you want to end CombatMode simply click the Button below!\nEnjoy.");
+    layout->addWidget(label);
+    layout->addWidget(resetCombatMode);
+    layout->setMargin(25);
+    combatDialog->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::CustomizeWindowHint);
+    combatDialog->setStyleSheet("QDialog{background-color: rgb(32, 43, 47);}QLabel{color:#f2f2f2;text-align:center;}QPushButton{background-color: rgb(52, 63, 67);color:#f2f2f2;text-align:center;}");
+    combatDialog->show();
+    resetCombatMode->show();
+}
+
+void GW2::MainWindow::action_resetCombatMode(){
+    HWND winHandle  = (HWND)winId();
+    ShowWindow(winHandle, SW_HIDE);
+    SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
+    ShowWindow(winHandle, SW_SHOW);
+    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    this->activateWindow();
+    this->setFocus();
+    this->show();
+    combatDialog->close();
+    qDebug()<<"CombatMode Deactivated";
 }
 
 
@@ -1795,129 +1847,3 @@ void GW2::MainWindow::resetGraph(){
     ui->widget_4->yAxis2->setRange(0,7000);
     ui->widget_4->replot();
 }
-
-
-
-
-//original Graph functions:
-
-
-/*
-void GW2::MainWindow::runMe(){
-    ui->widget_4->addGraph(); // blue line
-    ui->widget_4->graph(0)->setPen(QPen(QColor(41,128, 185)));
-    ui->widget_4->graph(0)->setBrush(QBrush(QColor(41,128, 185)));
-    ui->widget_4->graph(0)->addData(0,0);
-
-    ui->widget_4->addGraph(); // purple line
-    ui->widget_4->graph(1)->setPen(QPen(QColor(142, 68, 173)));
-    ui->widget_4->graph(1)->setBrush(QBrush(QColor(142, 68, 173)));
-    //ui->widget_4->graph(0)->setChannelFillGraph(ui->widget_4->graph(1)); //Setting color between graphs
-
-    if(is_connected == true){
-        ui->widget_4->addGraph(); // yellow line
-        ui->widget_4->graph(2)->setPen(QPen(QColor(243, 156, 18)));
-        //ui->widget_4->graph(2)->setBrush(QBrush(QColor(243, 156, 18)));
-    }else{}
-    ui->widget_4->addGraph(); // blue dot
-    ui->widget_4->graph(3)->setPen(QPen(QColor(41,128, 185)));
-    ui->widget_4->graph(3)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_4->graph(3)->setScatterStyle(QCPScatterStyle::ssDisc);
-
-    ui->widget_4->addGraph(); // red dot
-    ui->widget_4->graph(4)->setPen(QPen(QColor(142, 68, 173)));
-    ui->widget_4->graph(4)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_4->graph(4)->setScatterStyle(QCPScatterStyle::ssDisc);
-
-    ui->widget_4->addGraph(); // yellow dot
-    ui->widget_4->graph(5)->setPen(QPen(QColor(243, 156, 18)));
-    ui->widget_4->graph(5)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_4->graph(5)->setScatterStyle(QCPScatterStyle::ssDisc);
-
-    ui->widget_4->xAxis->setAutoTickStep(false);
-    ui->widget_4->xAxis->setTickStep(1);
-    ui->widget_4->yAxis->setLabel("DPS");
-   // ui->widget_4->rescaleAxes();
-    //ui->widget_4->axisRect()->setupFullAxesBox();
-    ui->widget_4->yAxis->setRange(0,35000);
-    ui->widget_4->yAxis2->setRange(0,35000);
-    ui->widget_4->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-
-    ui->widget_4->xAxis->setBasePen(QPen(Qt::white, 1));
-    ui->widget_4->yAxis->setBasePen(QPen(Qt::white, 1));
-    ui->widget_4->xAxis->setTickPen(QPen(Qt::white, 1));
-    ui->widget_4->yAxis->setTickPen(QPen(Qt::white, 1));
-    ui->widget_4->xAxis->setSubTickPen(QPen(Qt::white, 1));
-    ui->widget_4->yAxis->setSubTickPen(QPen(Qt::white, 1));
-    ui->widget_4->xAxis->setTickLabelColor(Qt::white);
-    ui->widget_4->yAxis->setTickLabelColor(Qt::white);
-    ui->widget_4->yAxis->setLabelColor(Qt::white);
-    ui->widget_4->xAxis->grid()->setZeroLinePen(Qt::NoPen);
-    ui->widget_4->yAxis->grid()->setZeroLinePen(Qt::NoPen);
-
-
-    //Graph Background Color
-    ui->widget_4->setBackground(Qt::transparent);
-
-    //Graph Axis Color
-    QLinearGradient axisRectGradient;
-    axisRectGradient.setStart(0, 0);
-    axisRectGradient.setFinalStop(0, 350);
-    axisRectGradient.setColorAt(0, QColor(80, 80, 80));
-    axisRectGradient.setColorAt(1, QColor(30, 30, 30));
-    ui->widget_4->axisRect()->setBackground(Qt::transparent);
-
-
-    // make left and bottom axes transfer their ranges to right and top axes:
-    connect(ui->widget_4->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget_4->xAxis2, SLOT(setRange(QCPRange)));
-    connect(ui->widget_4->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->widget_4->yAxis2, SLOT(setRange(QCPRange)));
-
-    ui->widget_4->replot();
-}
-static double lastPointKey = 0;
-
-void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
-    // calculate two new data points:
-    double key = msecs/1000;
-
-    if (key-lastPointKey > 0.01) // at most add point every 10 ms
-    {
-      double value0 = dps;
-      double value1 = cdps;
-      double value2 = avgdps;
-
-      // add data to lines:
-      ui->widget_4->graph(0)->addData(key, value0);
-      ui->widget_4->graph(1)->addData(key, value1);
-      if(is_connected == true){ui->widget_4->graph(2)->addData(key -1, value2);}
-      // set data of dots:
-      ui->widget_4->graph(3)->clearData();
-      ui->widget_4->graph(3)->addData(key, value0);
-      ui->widget_4->graph(4)->clearData();
-      ui->widget_4->graph(4)->addData(key, value1);
-      if(is_connected == true){
-          ui->widget_4->graph(5)->clearData();
-          ui->widget_4->graph(5)->addData(key -1, value2);
-      }
-      // rescale value (vertical) axis to fit the current data:
-      ui->widget_4->graph(0)->rescaleValueAxis();
-      ui->widget_4->graph(1)->rescaleValueAxis(true);
-      if(is_connected == true){ui->widget_4->graph(2)->rescaleValueAxis(true);}
-      lastPointKey = key;
-    }
-    // make key axis range scroll with the data (at a constant range size of 8):
-    ui->widget_4->xAxis->setRange(key+0.25, key, Qt::AlignRight);
-    ui->widget_4->xAxis->setTickStep(round(key/5));
-    ui->widget_4->replot();
-}
-
-void GW2::MainWindow::resetGraph(){
-    lastPointKey = 0;
-    for(int i=0;i<6;i++){
-        ui->widget_4->graph(i)->clearData();
-        ui->widget_4->graph(i)->addData(0,0);
-    }
-    ui->widget_4->replot();
-}
-
-*/
