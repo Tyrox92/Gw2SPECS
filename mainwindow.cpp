@@ -1218,18 +1218,12 @@ void MainWindow::UpdateTimer(void)
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_rDps,m_realDps);
     m_realDps=0;
     if(fixOnTopCount<1){
-        this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-        this->setAttribute(Qt::WA_TranslucentBackground);
-        this->activateWindow();
-        this->setFocus();
-        this->show();
-        fixOnTopCount++;
-    }
-    if(fixOnTopCount == 1){
+        action_fixOnTop();
         HWND winHandle  = (HWND)winId();
         ShowWindow(winHandle, SW_HIDE);
         SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
         ShowWindow(winHandle, SW_SHOW);
+        action_fixOnTop();
         fixOnTopCount++;
     }
 }
@@ -1700,8 +1694,6 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
 
 
 void GW2::MainWindow::action_fixOnTop(){
-    //Deattach graph from main app
-    //ui->widget_4->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->activateWindow();
@@ -1715,11 +1707,7 @@ void GW2::MainWindow::action_combatMode(){
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_APPWINDOW | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
-    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    this->activateWindow();
-    this->setFocus();
-    this->show();
+    action_fixOnTop();
     qDebug()<< "CombatMode Activated";
 
     QVBoxLayout *layout = new QVBoxLayout(combatDialog);
@@ -1740,11 +1728,7 @@ void GW2::MainWindow::action_resetCombatMode(){
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
-    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    this->activateWindow();
-    this->setFocus();
-    this->show();
+    action_fixOnTop();
     combatDialog->close();
     qDebug()<<"CombatMode Deactivated";
 }
