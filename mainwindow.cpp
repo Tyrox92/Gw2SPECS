@@ -60,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxSoloCDamage, SIGNAL(clicked(bool)), this, SLOT(SCDamageChanged()));
     QObject::connect(uiConfig->checkBoxSoloCPerDmg, SIGNAL(clicked(bool)), this, SLOT(SCPerDmgChanged()));
     QObject::connect(uiConfig->checkBoxSoloCDPS, SIGNAL(clicked(bool)), this, SLOT(SCDPSChanged()));
-    QObject::connect(uiConfig->checkBoxSolorDPS, SIGNAL(clicked(bool)), this, SLOT(SrDPSChanged()));
     // connecting configurator - group display settings
     QObject::connect(uiConfig->checkBoxGroupProfColors, SIGNAL(clicked(bool)), this, SLOT(GProfSettingsChanged()));
     QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(GProfChanged(QString)));
@@ -70,7 +69,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxGroupPerDmg, SIGNAL(clicked(bool)), this, SLOT(GPerDmgChanged()));
     QObject::connect(uiConfig->checkBoxGroupDPS, SIGNAL(clicked(bool)), this, SLOT(GDPSChanged()));
     QObject::connect(uiConfig->checkBoxGroupActivity, SIGNAL(clicked(bool)), this, SLOT(GActivityChanged()));
-    QObject::connect(uiConfig->checkBoxGrouprDPS, SIGNAL(clicked(bool)), this, SLOT(GrDPSChanged()));
+    // connecting configuarator - graph settings
+    QObject::connect(uiConfig->checkBoxShowGraph, SIGNAL(clicked(bool)), this, SLOT(ShowGraphChanged()));
+    QObject::connect(uiConfig->checkBoxRealDPS, SIGNAL(clicked(bool)), this, SLOT(RealDPSChanged()));
+    QObject::connect(uiConfig->checkBox5sDPS, SIGNAL(clicked(bool)), this, SLOT(FiveSecRealDPSChanged()));
+    QObject::connect(uiConfig->checkBoxAvgSoloDPS, SIGNAL(clicked(bool)), this, SLOT(AvSDPSChanged()));
+    QObject::connect(uiConfig->checkBoxAvgCDPS, SIGNAL(clicked(bool)), this, SLOT(AvSCDPSChanged()));
+    QObject::connect(uiConfig->checkBoxAvgGroupDPS, SIGNAL(clicked(bool)), this, SLOT(AvGroupDPSChanged()));
     // connecting configurator - accuracy settings
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
@@ -198,7 +203,6 @@ MainWindow::MainWindow(QWidget *parent) :
     displaySCDmg=uiConfig->checkBoxSoloCDamage->isChecked();
     displaySCPer=uiConfig->checkBoxSoloCPerDmg->isChecked();
     displaySCDPS=uiConfig->checkBoxSoloCDPS->isChecked();
-    displaySrDPS=uiConfig->checkBoxSolorDPS->isChecked();
     // group settings
     displayGProfColor=uiConfig->checkBoxGroupProfColors->isChecked();
     displayGPos=uiConfig->checkBoxGroupPosition->isChecked();
@@ -207,8 +211,14 @@ MainWindow::MainWindow(QWidget *parent) :
     displayGDmg=uiConfig->checkBoxGroupDamage->isChecked();
     displayGDPS=uiConfig->checkBoxGroupDPS->isChecked();
     displayGAct=uiConfig->checkBoxGroupActivity->isChecked();
-    displayGrDPS=uiConfig->checkBoxGrouprDPS->isChecked();
     uiConfig->professionComboBox->setCurrentIndex(0);
+    // graph settings
+    displayGraph=uiConfig->checkBoxShowGraph->isChecked();
+    displayRealDPS=uiConfig->checkBoxRealDPS->isChecked();
+    display5sDPS=uiConfig->checkBox5sDPS->isChecked();
+    displayAvSDPS=uiConfig->checkBoxAvgSoloDPS->isChecked();
+    displayAvSCDPS=uiConfig->checkBoxAvgCDPS->isChecked();
+    displayAvGDPS=uiConfig->checkBoxAvgGroupDPS->isChecked();
 
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
     soloMyProfession=uiConfig->professionSoloComboBox->currentIndex();
@@ -643,12 +653,6 @@ void MainWindow::SCDPSChanged()
     if (displaySCDPS==1) displaySCDPS=0; else displaySCDPS=1;
 }
 
-void MainWindow::SrDPSChanged()
-{
-    if (displaySrDPS==1) displaySrDPS=0; else displaySrDPS=1;
-}
-
-
 void MainWindow::GProfChanged(QString prof)
 {
     QStringList proflist;
@@ -684,9 +688,29 @@ void MainWindow::GActivityChanged()
     if (displayGAct==1) displayGAct=0; else displayGAct=1;
 }
 
-void MainWindow::GrDPSChanged()
+void MainWindow::ShowGraphChanged()
 {
-    if (displayGrDPS==1) displayGrDPS=0; else displayGrDPS=1;
+    if (displayGraph==1) displayGraph=0; else displayGraph=1;
+}
+void MainWindow::RealDPSChanged()
+{
+    if (displayRealDPS==1) displayRealDPS=0; else displayRealDPS=1;
+}
+void MainWindow::FiveSecRealDPSChanged()
+{
+    if (display5sDPS==1) display5sDPS=0; else display5sDPS=1;
+}
+void MainWindow::AvSDPSChanged()
+{
+    if (displayAvSDPS==1) displayAvSDPS=0; else displayAvSDPS=1;
+}
+void MainWindow::AvSCDPSChanged()
+{
+    if (displayAvSCDPS==1) displayAvSCDPS=0; else displayAvSCDPS=1;
+}
+void MainWindow::AvGroupDPSChanged()
+{
+    if (displayAvGDPS==1) displayAvGDPS=0; else displayAvGDPS=1;
 }
 
 void MainWindow::SSettingsChanged()
@@ -699,8 +723,8 @@ void MainWindow::SSettingsChanged()
     labelper[0]->hide();
     labellegenddps->setVisible(displaySDPS);
     labeldps[0]->setVisible(displaySDPS);
-    labellegendrdps->setVisible(displaySrDPS);
-    labelrdps[0]->setVisible(displaySrDPS);
+    labellegendrdps->setVisible(displayRealDPS);
+    labelrdps[0]->setVisible(displayRealDPS);
 
     //labellegendact->hide();
     //labelact[0]->hide();
@@ -716,8 +740,8 @@ void MainWindow::GSettingsChanged()
         labelper[n]->setVisible(displayGPer);
         labellegenddps->setVisible(displayGDPS);
         labeldps[n]->setVisible(displayGDPS);
-        labellegendrdps->setVisible(displayGrDPS);
-        labelrdps[n]->setVisible(displayGrDPS);
+        labellegendrdps->setVisible(display5sDPS);
+        labelrdps[n]->setVisible(display5sDPS);
         //labellegendact->setVisible(setVisible(displayGAct);
         //labelact[n]->setVisible(setVisible(displayGAct);
     }
@@ -801,7 +825,7 @@ void MainWindow::UpdateGroupLabels()
         }
         if (displaySDmg==true) labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
         if (displaySDPS==true) labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
-        if (displaySrDPS==true) labelrdps[0]->setText(QString("%L1").arg(PosrDPS[0]));
+        if (displayRealDPS==true) labelrdps[0]->setText(QString("%L1").arg(PosrDPS[0]));
         SSettingsChanged();
     }
     else
@@ -940,7 +964,7 @@ void MainWindow::UpdateGroupLabels()
                 if (displayGPer==true) labelper[n]->setText(QString("%L1%").arg(p));
                 if (displayGDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                 //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
-                if (displayGrDPS==true) labelrdps[n]->setText(QString("%L1").arg(PosrDPS[n]));
+                if (display5sDPS==true) labelrdps[n]->setText(QString("%L1").arg(PosrDPS[n]));
 
                 GSettingsChanged();
             }

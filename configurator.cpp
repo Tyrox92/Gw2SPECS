@@ -34,6 +34,13 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->checkBoxGroupDPS);
     Settings::ReadSettings(ui->checkBoxGroupActivity);
 
+    Settings::ReadSettings(ui->checkBoxShowGraph);
+    Settings::ReadSettings(ui->checkBoxRealDPS);
+    Settings::ReadSettings(ui->checkBox5sDPS);
+    Settings::ReadSettings(ui->checkBoxAvgSoloDPS);
+    Settings::ReadSettings(ui->checkBoxAvgCDPS);
+    Settings::ReadSettings(ui->checkBoxAvgGroupDPS);
+
     Settings::ReadSettings(ui->comboBoxScreenshots);
     Settings::ReadSettings(ui->comboBoxUpdates);
     Settings::ReadSettings(ui->comboBoxSecondsInCombat);
@@ -60,6 +67,13 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxGroupPerDmg);
     Settings::WriteSettings(ui->checkBoxGroupDPS);
     Settings::WriteSettings(ui->checkBoxGroupActivity);
+
+    Settings::WriteSettings(ui->checkBoxShowGraph);
+    Settings::WriteSettings(ui->checkBoxRealDPS);
+    Settings::WriteSettings(ui->checkBox5sDPS);
+    Settings::WriteSettings(ui->checkBoxAvgSoloDPS);
+    Settings::WriteSettings(ui->checkBoxAvgCDPS);
+    Settings::WriteSettings(ui->checkBoxAvgGroupDPS);
 
     Settings::WriteSettings(ui->comboBoxScreenshots);
     Settings::WriteSettings(ui->comboBoxUpdates);

@@ -135,7 +135,6 @@ private:
     bool displaySCDmg;
     bool displaySCPer;
     bool displaySCDPS;
-    bool displaySrDPS;
     // group settings
     bool displayGProfColor;
     bool displayGPos;
@@ -144,7 +143,13 @@ private:
     bool displayGPer;
     bool displayGDPS;
     bool displayGAct;
-    bool displayGrDPS;
+    // graph settings
+    bool displayGraph;
+    bool displayRealDPS;
+    bool display5sDPS;
+    bool displayAvSDPS;
+    bool displayAvSCDPS;
+    bool displayAvGDPS;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);
@@ -268,7 +273,6 @@ private slots:
     void SCDamageChanged();
     void SCPerDmgChanged();
     void SCDPSChanged();
-    void SrDPSChanged();
 
     void GProfChanged(QString);
     void GProfSettingsChanged();
@@ -278,7 +282,13 @@ private slots:
     void GPerDmgChanged();
     void GDPSChanged();
     void GActivityChanged();
-    void GrDPSChanged();
+
+    void ShowGraphChanged();
+    void RealDPSChanged();
+    void FiveSecRealDPSChanged();
+    void AvSDPSChanged();
+    void AvSCDPSChanged();
+    void AvGroupDPSChanged();
 
     void SSettingsChanged();
     void GSettingsChanged();
