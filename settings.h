@@ -6,7 +6,7 @@
 #include <QWidget>
 #include <QMainWindow>
 #include <QSettings>
-
+#include <QCheckBox>
 
 
 inline static QString ReadNameSettings(void);
@@ -37,7 +37,6 @@ inline QString Read1stRun(void)
     return tmp;
 }
 
-
 inline void Write1stRun(QString text)
 {
 
@@ -48,7 +47,6 @@ inline void Write1stRun(QString text)
 
 }
 
-
 inline QString ReadNameSettings(void)
 {
     QString tmp;
@@ -58,7 +56,6 @@ inline QString ReadNameSettings(void)
     settings.endGroup();
     return tmp;
 }
-
 inline void WriteNameSettings(QString text)
 {
 
@@ -69,7 +66,6 @@ inline void WriteNameSettings(QString text)
 
 }
 
-
 inline QString ReadIPSettings(void)
 {
     QString tmpip;
@@ -79,8 +75,6 @@ inline QString ReadIPSettings(void)
     settings.endGroup();
     return tmpip;
 }
-
-
 inline void WriteIPSettings(QString text)
 {
 
@@ -100,8 +94,6 @@ inline QString ReadPortSettings(void)
     settings.endGroup();
     return tmpPort;
 }
-
-
 inline void WritePortSettings(QString text)
 {
 
@@ -121,8 +113,6 @@ inline QString ReadToolbarSettings(void)
     settings.endGroup();
     return tmpToolbar;
 }
-
-
 inline void WriteToolbarSettings(QString text)
 {
 
@@ -143,8 +133,6 @@ inline QString ReadGraphSettings(void)
     settings.endGroup();
     return tmpGraph;
 }
-
-
 inline void WriteGraphSettings(QString text)
 {
     QSettings settings("Gw2SPECS");
