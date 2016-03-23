@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxSoloCDPS, SIGNAL(clicked(bool)), this, SLOT(SCDPSChanged()));
     // connecting configurator - group display settings
     QObject::connect(uiConfig->checkBoxGroupProfColors, SIGNAL(clicked(bool)), this, SLOT(GProfSettingsChanged()));
-    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(GProfChanged(QString)));
+    QObject::connect(uiConfig->professionGroupComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(GProfChanged(QString)));
     QObject::connect(uiConfig->checkBoxGroupPosition, SIGNAL(clicked(bool)), this, SLOT(GPositionChanged()));
     QObject::connect(uiConfig->checkBoxGroupName, SIGNAL(clicked(bool)), this, SLOT(GNameChanged()));
     QObject::connect(uiConfig->checkBoxGroupDamage, SIGNAL(clicked(bool)), this, SLOT(GDamageChanged()));
@@ -211,7 +211,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayGDmg=uiConfig->checkBoxGroupDamage->isChecked();
     displayGDPS=uiConfig->checkBoxGroupDPS->isChecked();
     displayGAct=uiConfig->checkBoxGroupActivity->isChecked();
-    uiConfig->professionComboBox->setCurrentIndex(0);
+    uiConfig->professionGroupComboBox->setCurrentIndex(0);
     // graph settings
     displayGraph=uiConfig->checkBoxShowGraph->isChecked();
     displayRealDPS=uiConfig->checkBoxRealDPS->isChecked();
@@ -220,7 +220,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayAvSCDPS=uiConfig->checkBoxAvgCDPS->isChecked();
     displayAvGDPS=uiConfig->checkBoxAvgGroupDPS->isChecked();
 
-    m_MyProfession=uiConfig->professionComboBox->currentIndex();
+    m_MyProfession=uiConfig->professionGroupComboBox->currentIndex();
     soloMyProfession=uiConfig->professionSoloComboBox->currentIndex();
 
     // We are not connected on start up
@@ -1375,7 +1375,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort().toInt();
         m_MyProfession=mDialog.getProfession();
-        uiConfig->professionComboBox->setCurrentIndex(m_MyProfession);
+        uiConfig->professionGroupComboBox->setCurrentIndex(m_MyProfession);
         Initialize();
     }
     // Otherwise stop the timer and abort the connection

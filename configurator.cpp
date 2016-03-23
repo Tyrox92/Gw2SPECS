@@ -17,7 +17,7 @@ Configurator::Configurator(QWidget *parent) :
     ui->labelVersion->setText(Settings::s_Product);
 
     Settings::ReadSettings(ui->checkBoxSoloProfColors);
-    Settings::ReadSettings(ui->professionComboBox);
+    Settings::ReadSettings(ui->professionSoloComboBox);
     Settings::ReadSettings(ui->checkBoxSoloName);
     Settings::ReadSettings(ui->checkBoxSoloDamage);
     Settings::ReadSettings(ui->checkBoxSoloDPS);
@@ -26,7 +26,7 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->checkBoxSoloCDPS);
 
     Settings::ReadSettings(ui->checkBoxGroupProfColors);
-    Settings::ReadSettings(ui->professionComboBox);
+    Settings::ReadSettings(ui->professionGroupComboBox);
     Settings::ReadSettings(ui->checkBoxGroupPosition);
     Settings::ReadSettings(ui->checkBoxGroupName);
     Settings::ReadSettings(ui->checkBoxGroupDamage);
@@ -51,7 +51,7 @@ Configurator::Configurator(QWidget *parent) :
 Configurator::~Configurator()
 {
     Settings::WriteSettings(ui->checkBoxSoloProfColors);
-    Settings::WriteSettings(ui->professionComboBox);
+    Settings::WriteSettings(ui->professionSoloComboBox);
     Settings::WriteSettings(ui->checkBoxSoloName);
     Settings::WriteSettings(ui->checkBoxSoloDamage);
     Settings::WriteSettings(ui->checkBoxSoloDPS);
@@ -60,7 +60,7 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxSoloCDPS);
 
     Settings::WriteSettings(ui->checkBoxGroupProfColors);
-    Settings::WriteSettings(ui->professionComboBox);
+    Settings::WriteSettings(ui->professionGroupComboBox);
     Settings::WriteSettings(ui->checkBoxGroupPosition);
     Settings::WriteSettings(ui->checkBoxGroupName);
     Settings::WriteSettings(ui->checkBoxGroupDamage);

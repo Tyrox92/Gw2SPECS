@@ -249,7 +249,7 @@ QPushButton#pushButton:pressed {
           </widget>
          </item>
          <item row="2" column="1" colspan="2">
-          <widget class="QComboBox" name="professionComboBox">
+          <widget class="QComboBox" name="professionGroupComboBox">
            <property name="styleSheet">
             <string notr="true">QComboBox {
     background-color: #8BB2DA;

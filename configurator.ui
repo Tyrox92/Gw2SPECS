@@ -44,15 +44,15 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="soloSettings">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>306</width>
-        <height>169</height>
+        <width>281</width>
+        <height>124</height>
        </rect>
       </property>
       <attribute name="label">
@@ -260,7 +260,7 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="professionComboBox">
+        <widget class="QComboBox" name="professionGroupComboBox">
          <property name="styleSheet">
           <string notr="true">QComboBox {
     background-color: #8BB2DA;
@@ -420,8 +420,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>306</width>
-        <height>169</height>
+        <width>301</width>
+        <height>96</height>
        </rect>
       </property>
       <attribute name="label">
@@ -513,8 +513,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>306</width>
-        <height>169</height>
+        <width>231</width>
+        <height>132</height>
        </rect>
       </property>
       <attribute name="label">

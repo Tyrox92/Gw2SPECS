@@ -225,6 +225,17 @@ inline void Settings::ReadSettings(QMainWindow* mainWindow)
 }
 
 template <>
+inline void Settings::ReadSettings(QCheckBox* checkBox)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(checkBox->objectName());
+    checkBox->setChecked(settings.value("checked").toBool());
+    settings.endGroup();
+
+    ReadSettings<QWidget>(checkBox);
+}
+
+template <>
 inline void Settings::WriteSettings(QWidget* widget)
 {
     QSettings settings("Gw2SPECS");
@@ -253,6 +264,17 @@ inline void Settings::WriteSettings(QMainWindow* mainWindow)
     settings.endGroup();
 
     WriteSettings<QWidget>(mainWindow);
+}
+
+template <>
+inline void Settings::WriteSettings(QCheckBox* checkBox)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(checkBox->objectName());
+    settings.setValue("checked", checkBox->isChecked());
+    settings.endGroup();
+
+    WriteSettings<QWidget>(checkBox);
 }
 
 template <typename WidgetType>
