@@ -190,6 +190,37 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Settings::ReadSettings<QMainWindow>(this);
 
+    // ReadSettings
+    Settings::ReadSettings(uiConfig->checkBoxSoloProfColors);
+    Settings::ReadSettings(uiConfig->professionSoloComboBox);
+    Settings::ReadSettings(uiConfig->checkBoxSoloName);
+    Settings::ReadSettings(uiConfig->checkBoxSoloDamage);
+    Settings::ReadSettings(uiConfig->checkBoxSoloDPS);
+    Settings::ReadSettings(uiConfig->checkBoxSoloCDamage);
+    Settings::ReadSettings(uiConfig->checkBoxSoloCPerDmg);
+    Settings::ReadSettings(uiConfig->checkBoxSoloCDPS);
+
+    Settings::ReadSettings(uiConfig->checkBoxGroupProfColors);
+    Settings::ReadSettings(uiConfig->professionGroupComboBox);
+    Settings::ReadSettings(uiConfig->checkBoxGroupPosition);
+    Settings::ReadSettings(uiConfig->checkBoxGroupName);
+    Settings::ReadSettings(uiConfig->checkBoxGroupDamage);
+    Settings::ReadSettings(uiConfig->checkBoxGroupPerDmg);
+    Settings::ReadSettings(uiConfig->checkBoxGroupDPS);
+    Settings::ReadSettings(uiConfig->checkBoxGroupActivity);
+
+    Settings::ReadSettings(uiConfig->checkBoxShowGraph);
+    Settings::ReadSettings(uiConfig->checkBoxRealDPS);
+    Settings::ReadSettings(uiConfig->checkBox5sDPS);
+    Settings::ReadSettings(uiConfig->checkBoxAvgSoloDPS);
+    Settings::ReadSettings(uiConfig->checkBoxAvgCDPS);
+    Settings::ReadSettings(uiConfig->checkBoxAvgGroupDPS);
+
+    Settings::ReadSettings(uiConfig->comboBoxScreenshots);
+    Settings::ReadSettings(uiConfig->comboBoxUpdates);
+    Settings::ReadSettings(uiConfig->comboBoxSecondsInCombat);
+    Settings::ReadSettings(uiConfig->comboBoxConsideredLines);
+
     // Start screenshot timer from separate thread
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());

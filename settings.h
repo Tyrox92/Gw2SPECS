@@ -229,7 +229,10 @@ inline void Settings::ReadSettings(QCheckBox* checkBox)
 {
     QSettings settings("Gw2SPECS");
     settings.beginGroup(checkBox->objectName());
-    checkBox->setChecked(settings.value("checked").toBool());
+
+    if (settings.value("checked").toString()!="") {
+        checkBox->setChecked(settings.value("checked").toBool());
+    }
     settings.endGroup();
 
     ReadSettings<QWidget>(checkBox);
