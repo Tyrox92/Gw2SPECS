@@ -23,7 +23,6 @@ extern unsigned long m_condiDmg;
 extern unsigned int m_critChance;
 extern unsigned long m_MaxDmg;
 extern unsigned long m_MyProfession;
-extern unsigned long soloMyProfession;
 extern unsigned long countCombat;
 extern QString combatCourse;
 extern int updateCounter;

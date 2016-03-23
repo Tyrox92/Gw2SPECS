@@ -136,12 +136,8 @@ private:
     bool displaySCPer;
     bool displaySCDPS;
     // group settings
-    bool displayGProfColor;
     bool displayGPos;
-    bool displayGName;
-    bool displayGDmg;
     bool displayGPer;
-    bool displayGDPS;
     bool displayGAct;
     // graph settings
     bool displayGraph;
@@ -265,7 +261,6 @@ private slots:
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
 
-    void SProfChanged(QString);
     void SProfSettingsChanged();
     void SNameChanged();
     void SDamageChanged();
@@ -275,12 +270,8 @@ private slots:
     void SCDPSChanged();
 
     void GProfChanged(QString);
-    void GProfSettingsChanged();
     void GPositionChanged();
-    void GNameChanged();
-    void GDamageChanged();
     void GPerDmgChanged();
-    void GDPSChanged();
     void GActivityChanged();
 
     void ShowGraphChanged();

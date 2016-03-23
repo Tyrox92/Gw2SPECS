@@ -53,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
     // connecting configurator - solo display settings
     QObject::connect(uiConfig->checkBoxSoloProfColors, SIGNAL(clicked(bool)), this, SLOT(SProfSettingsChanged()));
-    QObject::connect(uiConfig->professionSoloComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SProfChanged(QString)));
     QObject::connect(uiConfig->checkBoxSoloName, SIGNAL(clicked(bool)), this, SLOT(SNameChanged()));
     QObject::connect(uiConfig->checkBoxSoloDamage, SIGNAL(clicked(bool)), this, SLOT(SDamageChanged()));
     QObject::connect(uiConfig->checkBoxSoloDPS, SIGNAL(clicked(bool)), this, SLOT(SDPSChanged()));
@@ -61,13 +60,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxSoloCPerDmg, SIGNAL(clicked(bool)), this, SLOT(SCPerDmgChanged()));
     QObject::connect(uiConfig->checkBoxSoloCDPS, SIGNAL(clicked(bool)), this, SLOT(SCDPSChanged()));
     // connecting configurator - group display settings
-    QObject::connect(uiConfig->checkBoxGroupProfColors, SIGNAL(clicked(bool)), this, SLOT(GProfSettingsChanged()));
     QObject::connect(uiConfig->professionGroupComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(GProfChanged(QString)));
     QObject::connect(uiConfig->checkBoxGroupPosition, SIGNAL(clicked(bool)), this, SLOT(GPositionChanged()));
-    QObject::connect(uiConfig->checkBoxGroupName, SIGNAL(clicked(bool)), this, SLOT(GNameChanged()));
-    QObject::connect(uiConfig->checkBoxGroupDamage, SIGNAL(clicked(bool)), this, SLOT(GDamageChanged()));
     QObject::connect(uiConfig->checkBoxGroupPerDmg, SIGNAL(clicked(bool)), this, SLOT(GPerDmgChanged()));
-    QObject::connect(uiConfig->checkBoxGroupDPS, SIGNAL(clicked(bool)), this, SLOT(GDPSChanged()));
     QObject::connect(uiConfig->checkBoxGroupActivity, SIGNAL(clicked(bool)), this, SLOT(GActivityChanged()));
     // connecting configuarator - graph settings
     QObject::connect(uiConfig->checkBoxShowGraph, SIGNAL(clicked(bool)), this, SLOT(ShowGraphChanged()));
@@ -192,7 +187,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ReadSettings
     Settings::ReadSettings(uiConfig->checkBoxSoloProfColors);
-    Settings::ReadSettings(uiConfig->professionSoloComboBox);
     Settings::ReadSettings(uiConfig->checkBoxSoloName);
     Settings::ReadSettings(uiConfig->checkBoxSoloDamage);
     Settings::ReadSettings(uiConfig->checkBoxSoloDPS);
@@ -200,13 +194,9 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->checkBoxSoloCPerDmg);
     Settings::ReadSettings(uiConfig->checkBoxSoloCDPS);
 
-    Settings::ReadSettings(uiConfig->checkBoxGroupProfColors);
     Settings::ReadSettings(uiConfig->professionGroupComboBox);
     Settings::ReadSettings(uiConfig->checkBoxGroupPosition);
-    Settings::ReadSettings(uiConfig->checkBoxGroupName);
-    Settings::ReadSettings(uiConfig->checkBoxGroupDamage);
     Settings::ReadSettings(uiConfig->checkBoxGroupPerDmg);
-    Settings::ReadSettings(uiConfig->checkBoxGroupDPS);
     Settings::ReadSettings(uiConfig->checkBoxGroupActivity);
 
     Settings::ReadSettings(uiConfig->checkBoxShowGraph);
@@ -235,12 +225,8 @@ MainWindow::MainWindow(QWidget *parent) :
     displaySCPer=uiConfig->checkBoxSoloCPerDmg->isChecked();
     displaySCDPS=uiConfig->checkBoxSoloCDPS->isChecked();
     // group settings
-    displayGProfColor=uiConfig->checkBoxGroupProfColors->isChecked();
     displayGPos=uiConfig->checkBoxGroupPosition->isChecked();
-    displayGName=uiConfig->checkBoxGroupName->isChecked();
     displayGPer=uiConfig->checkBoxGroupPerDmg->isChecked();
-    displayGDmg=uiConfig->checkBoxGroupDamage->isChecked();
-    displayGDPS=uiConfig->checkBoxGroupDPS->isChecked();
     displayGAct=uiConfig->checkBoxGroupActivity->isChecked();
     uiConfig->professionGroupComboBox->setCurrentIndex(0);
     // graph settings
@@ -252,7 +238,6 @@ MainWindow::MainWindow(QWidget *parent) :
     displayAvGDPS=uiConfig->checkBoxAvgGroupDPS->isChecked();
 
     m_MyProfession=uiConfig->professionGroupComboBox->currentIndex();
-    soloMyProfession=uiConfig->professionSoloComboBox->currentIndex();
 
     // We are not connected on start up
     is_connected = false;
@@ -649,12 +634,6 @@ void MainWindow::Initialize()
     }
 }
 
-void MainWindow::SProfChanged(QString prof)
-{
-    QStringList proflist;
-    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
-    soloMyProfession = proflist.indexOf(prof)+1;
-}
 void MainWindow::SProfSettingsChanged()
 {
     if (displaySProfColor==1) displaySProfColor=0; else displaySProfColor=1;
@@ -690,29 +669,13 @@ void MainWindow::GProfChanged(QString prof)
     proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
     m_MyProfession = proflist.indexOf(prof)+1;
 }
-void MainWindow::GProfSettingsChanged()
-{
-    if (displayGProfColor==1) displayGProfColor=0; else displayGProfColor=1;
-}
 void MainWindow::GPositionChanged()
 {
     if (displayGPos==1) displayGPos=0; else displayGPos=1;
 }
-void MainWindow::GNameChanged()
-{
-    if (displayGName==1) displayGName=0; else displayGName=1;
-}
-void MainWindow::GDamageChanged()
-{
-    if (displayGDmg==1) displayGDmg=0; else displayGDmg=1;
-}
 void MainWindow::GPerDmgChanged()
 {
     if (displayGPer==1) displayGPer=0; else displayGPer=1;
-}
-void MainWindow::GDPSChanged()
-{
-    if (displayGDPS==1) displayGDPS=0; else displayGDPS=1;
 }
 void MainWindow::GActivityChanged()
 {
@@ -763,14 +726,14 @@ void MainWindow::SSettingsChanged()
 void MainWindow::GSettingsChanged()
 {
     for(int n=0;n<10;n++) {
-        labellegendname->setVisible(displayGName);
-        labelname[n]->setVisible(displayGName);
-        labellegenddmg->setVisible(displayGDmg);
-        labeldmg[n]->setVisible(displayGDmg);
+        labellegendname->setVisible(displaySName);
+        labelname[n]->setVisible(displaySName);
+        labellegenddmg->setVisible(displaySDmg);
+        labeldmg[n]->setVisible(displaySDmg);
         labellegendper->setVisible(displayGPer);
         labelper[n]->setVisible(displayGPer);
-        labellegenddps->setVisible(displayGDPS);
-        labeldps[n]->setVisible(displayGDPS);
+        labellegenddps->setVisible(displaySDPS);
+        labeldps[n]->setVisible(displaySDPS);
         labellegendrdps->setVisible(display5sDPS);
         labelrdps[n]->setVisible(display5sDPS);
         //labellegendact->setVisible(setVisible(displayGAct);
@@ -813,7 +776,7 @@ void MainWindow::UpdateGroupLabels()
         // profession based bar coloring
         if (displaySProfColor==true)
         {
-            switch (soloMyProfession)
+            switch (m_MyProfession)
             {
             case 0:
                 Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
@@ -947,7 +910,7 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n]->setVisible(true);
 
                 // profession based bar coloring
-                if (displayGProfColor==true)
+                if (displaySProfColor==true)
                 {
                     switch (PosProf[n])
                     {
@@ -987,13 +950,13 @@ void MainWindow::UpdateGroupLabels()
                     if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
                 //display name, position, damage, percental, DPS, Activity
-                if (displayGName==true) {
+                if (displaySName==true) {
                     if (displayGPos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                 }
-                if (displayGDmg==true) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
+                if (displaySDmg==true) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
                 if (displayGPer==true) labelper[n]->setText(QString("%L1%").arg(p));
-                if (displayGDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
+                if (displaySDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                 //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
                 if (display5sDPS==true) labelrdps[n]->setText(QString("%L1").arg(PosrDPS[n]));
 

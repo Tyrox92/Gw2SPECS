@@ -11,13 +11,18 @@ Configurator::Configurator(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // hide not used settings:
+    ui->checkBoxSoloCDamage->setVisible(false);
+    ui->checkBoxSoloCDPS->setVisible(false);
+    ui->checkBoxSoloCPerDmg->setVisible(false);
+    ui->checkBoxGroupActivity->setVisible(false);
+
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
 
     // Set version
     ui->labelVersion->setText(Settings::s_Product);
 
     Settings::ReadSettings(ui->checkBoxSoloProfColors);
-    Settings::ReadSettings(ui->professionSoloComboBox);
     Settings::ReadSettings(ui->checkBoxSoloName);
     Settings::ReadSettings(ui->checkBoxSoloDamage);
     Settings::ReadSettings(ui->checkBoxSoloDPS);
@@ -25,13 +30,9 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->checkBoxSoloCPerDmg);
     Settings::ReadSettings(ui->checkBoxSoloCDPS);
 
-    Settings::ReadSettings(ui->checkBoxGroupProfColors);
     Settings::ReadSettings(ui->professionGroupComboBox);
     Settings::ReadSettings(ui->checkBoxGroupPosition);
-    Settings::ReadSettings(ui->checkBoxGroupName);
-    Settings::ReadSettings(ui->checkBoxGroupDamage);
     Settings::ReadSettings(ui->checkBoxGroupPerDmg);
-    Settings::ReadSettings(ui->checkBoxGroupDPS);
     Settings::ReadSettings(ui->checkBoxGroupActivity);
 
     Settings::ReadSettings(ui->checkBoxShowGraph);
@@ -51,7 +52,6 @@ Configurator::Configurator(QWidget *parent) :
 Configurator::~Configurator()
 {
     Settings::WriteSettings(ui->checkBoxSoloProfColors);
-    Settings::WriteSettings(ui->professionSoloComboBox);
     Settings::WriteSettings(ui->checkBoxSoloName);
     Settings::WriteSettings(ui->checkBoxSoloDamage);
     Settings::WriteSettings(ui->checkBoxSoloDPS);
@@ -59,13 +59,9 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxSoloCPerDmg);
     Settings::WriteSettings(ui->checkBoxSoloCDPS);
 
-    Settings::WriteSettings(ui->checkBoxGroupProfColors);
     Settings::WriteSettings(ui->professionGroupComboBox);
     Settings::WriteSettings(ui->checkBoxGroupPosition);
-    Settings::WriteSettings(ui->checkBoxGroupName);
-    Settings::WriteSettings(ui->checkBoxGroupDamage);
     Settings::WriteSettings(ui->checkBoxGroupPerDmg);
-    Settings::WriteSettings(ui->checkBoxGroupDPS);
     Settings::WriteSettings(ui->checkBoxGroupActivity);
 
     Settings::WriteSettings(ui->checkBoxShowGraph);
