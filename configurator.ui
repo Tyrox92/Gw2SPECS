@@ -275,8 +275,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>301</width>
-        <height>96</height>
+        <width>305</width>
+        <height>201</height>
        </rect>
       </property>
       <attribute name="label">
@@ -355,8 +355,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>231</width>
-        <height>132</height>
+        <width>305</width>
+        <height>201</height>
        </rect>
       </property>
       <attribute name="label">
@@ -693,8 +693,8 @@ QComboBox QAbstractItemView {
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>257</y>
+     <x>313</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>296</x>

@@ -242,9 +242,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // We are not connected on start up
     is_connected = false;
 
+   ui->widget_4->setVisible(displayGraph);
+
     CheckFirstRun();
     CheckForUpdate();
     Initialize();
+
 }
 
 void GW2::MainWindow::keyPressEvent( QKeyEvent * event ){
@@ -259,7 +262,7 @@ void GW2::MainWindow::keyPressEvent( QKeyEvent * event ){
         QDialog *kC_dialog = new QDialog();
         QHBoxLayout *layout = new QHBoxLayout(kC_dialog);
         QLabel *label1 = new QLabel(this);
-        label1->setText("Ketchup\nOr\nNoodles\nAnd\nMayonese\nInside");
+        label1->setText("You found the Easter Egg. Congratz");
         layout->addWidget(label1);
         layout->setMargin(50);
         kC_dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
@@ -684,7 +687,13 @@ void MainWindow::GActivityChanged()
 
 void MainWindow::ShowGraphChanged()
 {
-    if (displayGraph==1) displayGraph=0; else displayGraph=1;
+    if (displayGraph==1){
+        ui->widget_4->hide();
+        displayGraph=0;
+    }else{
+        ui->widget_4->show();
+        displayGraph=1;
+    }
 }
 void MainWindow::RealDPSChanged()
 {
@@ -719,7 +728,6 @@ void MainWindow::SSettingsChanged()
     labeldps[0]->setVisible(displaySDPS);
     labellegendrdps->setVisible(displayRealDPS);
     labelrdps[0]->setVisible(displayRealDPS);
-
     //labellegendact->hide();
     //labelact[0]->hide();
 }
@@ -959,7 +967,6 @@ void MainWindow::UpdateGroupLabels()
                 if (displaySDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                 //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
                 if (display5sDPS==true) labelrdps[n]->setText(QString("%L1").arg(PosrDPS[n]));
-
                 GSettingsChanged();
             }
             else
@@ -1147,6 +1154,10 @@ void MainWindow::UpdatePersonalLabels()
     }
     //Personal Crit Chance Value
     ui->critChance->setText(QString::number(m_critChance));
+    //Personal 5sDPS
+    ui->label5sDPSValue->setText(QString::number(m_rDps));
+    //Personal RealDPS
+    ui->labelRealDPSValue->setText(QString::number(m_realDps));
     //Personal Condi DMG Value
     ui->labelCondiDMGValue->setText(QString::number(m_condiDmg));
     //Personal Condi DPS Value

@@ -235,7 +235,8 @@ void DmgMeter::EvaluateLine(const QString& params)
     {
     m_Dmg += dmg;
     LastDmg=dmg;
-    combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
+    //Adding Each Damage Value done between seconds into the txtFileExport
+    //combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
     //qDebug() << "Adding value : " << dmg;
     m_TimeSinceEvaluation.start();
 

@@ -35,18 +35,17 @@ public:
         QString time;
         QMenu myMenu;
         QMenu *subMenu = new QMenu("Toggle On/Off", this);
-        QMenu *graphMenu = new QMenu("Toggle Graph Settings", this);
+        QMenu *graphMenu = new QMenu("Miscellaneous", this);
 
         QAction *combatMode = myMenu.addAction("CombatMode");
         QAction *resetData = myMenu.addAction("Reset");
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *saveToFile = myMenu.addAction("Save File");
-        QAction *options = myMenu.addAction("Options");
-        QAction *fixOnTop = myMenu.addAction("Fix onTop");
+        QAction *options = myMenu.addAction("Options");        
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
 
-
+        QAction *fixOnTop = graphMenu->addAction("Fix onTop");
         QAction *hideShowGraph = graphMenu->addAction("Hide Graph"); //Toggle
         QAction *hideShowRealDPS = graphMenu->addAction("Hide RealDPS");
 
