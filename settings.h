@@ -205,7 +205,7 @@ inline void Settings::ReadSettings(QWidget* widget)
 {
     QSettings settings("Gw2SPECS");
     settings.beginGroup(widget->objectName());
-    widget->restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
+    widget->restoreGeometry(settings.value("geometry").toByteArray());
     settings.endGroup();
 }
 
