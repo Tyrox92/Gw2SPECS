@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QSettings>
 #include <QCheckBox>
+#include <QDebug>
 
 
 inline static QString ReadNameSettings(void);
@@ -193,14 +194,35 @@ private:
 */
 
 
+/**************************************************
+*                                                 *
+*               Template Widget                   *
+*                                                 *
+***************************************************/
+
 template <>
 inline void Settings::ReadSettings(QWidget* widget)
 {
     QSettings settings("Gw2SPECS");
     settings.beginGroup(widget->objectName());
-    widget->restoreGeometry(settings.value("geometry").toByteArray());
+    widget->restoreGeometry(settings.value("MainWindow/geometry").toByteArray());
     settings.endGroup();
 }
+
+template <>
+inline void Settings::WriteSettings(QWidget* widget)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(widget->objectName());
+    settings.setValue("geometry", widget->saveGeometry());
+    settings.endGroup();
+}
+
+/**************************************************
+*                                                 *
+*               Template Combobox                 *
+*                                                 *
+***************************************************/
 
 template <>
 inline void Settings::ReadSettings(QComboBox* comboBox)
@@ -214,15 +236,49 @@ inline void Settings::ReadSettings(QComboBox* comboBox)
 }
 
 template <>
+inline void Settings::WriteSettings(QComboBox* comboBox)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(comboBox->objectName());
+    settings.setValue("currentIndex", comboBox->currentIndex());
+    settings.endGroup();
+
+    WriteSettings<QWidget>(comboBox);
+}
+
+/**************************************************
+*                                                 *
+*               Template MainWindow               *
+*                                                 *
+***************************************************/
+
+template <>
 inline void Settings::ReadSettings(QMainWindow* mainWindow)
 {
     QSettings settings("Gw2SPECS");
     settings.beginGroup(mainWindow->objectName());
+    mainWindow->restoreGeometry(settings.value("geometry").toByteArray());
     mainWindow->restoreState(settings.value("windowState").toByteArray());
     settings.endGroup();
-
     ReadSettings<QWidget>(mainWindow);
 }
+
+template <>
+inline void Settings::WriteSettings(QMainWindow* mainWindow)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(mainWindow->objectName());
+    settings.setValue("geometry", mainWindow->saveGeometry());
+    settings.setValue("windowState", mainWindow->saveState());
+    settings.endGroup();
+    WriteSettings<QWidget>(mainWindow);
+}
+
+/**************************************************
+*                                                 *
+*               Template Checkbox                 *
+*                                                 *
+***************************************************/
 
 template <>
 inline void Settings::ReadSettings(QCheckBox* checkBox)
@@ -239,37 +295,6 @@ inline void Settings::ReadSettings(QCheckBox* checkBox)
 }
 
 template <>
-inline void Settings::WriteSettings(QWidget* widget)
-{
-    QSettings settings("Gw2SPECS");
-    settings.beginGroup(widget->objectName());
-    settings.setValue("geometry", widget->saveGeometry());
-    settings.endGroup();
-}
-
-template <>
-inline void Settings::WriteSettings(QComboBox* comboBox)
-{
-    QSettings settings("Gw2SPECS");
-    settings.beginGroup(comboBox->objectName());
-    settings.setValue("currentIndex", comboBox->currentIndex());
-    settings.endGroup();
-
-    WriteSettings<QWidget>(comboBox);
-}
-
-template <>
-inline void Settings::WriteSettings(QMainWindow* mainWindow)
-{
-    QSettings settings("Gw2SPECS");
-    settings.beginGroup(mainWindow->objectName());
-    settings.setValue("windowState", mainWindow->saveState());
-    settings.endGroup();
-
-    WriteSettings<QWidget>(mainWindow);
-}
-
-template <>
 inline void Settings::WriteSettings(QCheckBox* checkBox)
 {
     QSettings settings("Gw2SPECS");
@@ -279,6 +304,8 @@ inline void Settings::WriteSettings(QCheckBox* checkBox)
 
     WriteSettings<QWidget>(checkBox);
 }
+
+
 
 template <typename WidgetType>
 void Settings::ReadSettings(WidgetType* /*widget*/)

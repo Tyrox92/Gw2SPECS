@@ -183,7 +183,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_ScreenRecorderThread.start();
 
-    //Settings::ReadSettings<QMainWindow>(this);
+    Settings::ReadSettings<QMainWindow>(this);
 
     // ReadSettings
     Settings::ReadSettings(uiConfig->checkBoxSoloProfColors);
@@ -1217,6 +1217,9 @@ void MainWindow::UpdateTimer(void)
         ShowWindow(winHandle, SW_HIDE);
         SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
         ShowWindow(winHandle, SW_SHOW);
+        fixOnTopCount++;
+    }
+    if(fixOnTopCount==1){
         action_fixOnTop();
         fixOnTopCount++;
     }
