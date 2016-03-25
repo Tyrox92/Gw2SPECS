@@ -290,7 +290,7 @@ void GW2::MainWindow::CheckForOldVerison()
         settings.setValue("version","2.5");
         settings.endGroup();
         qDebug() << "old settings have been removed";
-    } else if (settings.value("version").toString()=="2.5") {
+    } else if (oldversion=="2.5") {
         // this has no use yet, just for future versions
         qDebug() << "version is 2.5";
     } else {
@@ -310,7 +310,7 @@ void GW2::MainWindow::StartupPref()
     resetCombatMode->hide();
 
     //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
-    //ui->toolBar->setAttribute(Qt::WA_TranslucentBack*ground);
+    //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
     ui->widget->hide();
     ui->widgetExtraDetails->hide();
 
