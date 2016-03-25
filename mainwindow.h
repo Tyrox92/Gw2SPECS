@@ -251,10 +251,8 @@ private slots:
     void StartupPref();
 
     void on_actionShrinkUI_triggered(bool checked);
-    bool on_pushButton_toggled(bool toggled);
-    bool HideAndShowToolbar(bool);
     void Initialize();
-    bool on_actionActionGroupDetails_toggled(bool toggled);
+    void on_actionActionGroupDetails_toggled();
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
 
@@ -283,8 +281,6 @@ private slots:
     void AvCDPSChanged();
     void AvGroupDPSChanged();
 
-    void SSettingsChanged();
-    void GSettingsChanged();
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
