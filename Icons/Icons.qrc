@@ -17,5 +17,6 @@
         <file alias="connect">connected.png</file>
         <file>specs_logo.ico</file>
         <file>saveIcon.png</file>
+        <file>combatMode.png</file>
     </qresource>
 </RCC>
