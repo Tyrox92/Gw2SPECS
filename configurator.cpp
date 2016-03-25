@@ -90,6 +90,32 @@ Configurator::~Configurator()
 
 void Configurator::RestoreDefaults()
 {
+    ui->checkBoxToolbar->setChecked(true);
+    ui->checkBoxDetails->setChecked(false);
+    ui->checkBoxExtraDetails->setChecked(false);
+    ui->checkBoxOpacity->setChecked(false);
+
+    ui->checkBoxProfColors->setChecked(false);
+    ui->professionComboBox->setCurrentIndex(0);
+    ui->checkBoxName->setChecked(true);
+    ui->checkBoxDamage->setChecked(true);
+    ui->checkBoxDPS->setChecked(true);
+    ui->checkBox5sDPS->setChecked(false);
+    ui->checkBoxPerDmg->setChecked(false);
+    ui->checkBoxPosition->setChecked(true);
+
+    ui->checkBoxActivity->setChecked(false);
+    ui->checkBoxCDamage->setChecked(false);
+    ui->checkBoxCPerDmg->setChecked(false);
+    ui->checkBoxCDPS->setChecked(false);
+
+    ui->checkBoxGraphShow->setChecked(true);
+    ui->checkBoxGraphRealDPS->setChecked(false);
+    ui->checkBoxGraph5sDPS->setChecked(true);
+    ui->checkBoxGraphAvgDPS->setChecked(true);
+    ui->checkBoxGraphAvgCDPS->setChecked(true);
+    ui->checkBoxGraphAvgGroupDPS->setChecked(true);
+
     ui->comboBoxScreenshots->setCurrentIndex(0);
     ui->comboBoxUpdates->setCurrentIndex(0);
     ui->comboBoxSecondsInCombat->setCurrentIndex(0);

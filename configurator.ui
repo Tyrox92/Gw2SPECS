@@ -121,9 +121,17 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="specsSettings">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>308</width>
+        <height>169</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>Gw2SPECS Settings</string>
       </attribute>
@@ -165,7 +173,7 @@ color: #8BB2DA;</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-52</y>
         <width>300</width>
         <height>204</height>
        </rect>
@@ -241,7 +249,7 @@ color: #8BB2DA;</string>
           <string>Percental Damage</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -268,7 +276,7 @@ color: #8BB2DA;</string>
           <string>Show Last5sDPS</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -417,7 +425,7 @@ QComboBox QAbstractItemView {
           <string>Show RealDPS</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>

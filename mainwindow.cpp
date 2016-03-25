@@ -634,12 +634,13 @@ void MainWindow::Initialize()
     }
 }
 
-void MainWindow::ShowToolbarChanged(){
+void MainWindow::ShowToolbarChanged()
+{
     if (displayToolbar==1) displayToolbar=0; else displayToolbar=1;
     ui->toolBar->setVisible(displayToolbar);
 }
-
-void MainWindow::ShowDetailsChanged(){
+void MainWindow::ShowDetailsChanged()
+{
     if (displayDetails==1) displayDetails=0; else displayDetails=1;
     // If playing solo - show only DPS/DMG/TIME
     ui->avg_DPS->setVisible(is_connected);
@@ -653,15 +654,15 @@ void MainWindow::ShowDetailsChanged(){
     uiConfig->checkBoxDetails->setChecked(displayDetails);
     ui->widget->setVisible(displayDetails);
 }
-
-void MainWindow::ShowExtraDetailsChanged(){
+void MainWindow::ShowExtraDetailsChanged()
+{
     if (displayExtraDetails==1) displayExtraDetails=0; else displayExtraDetails=1;
     Ui::Configurator* uiConfig = m_Configurator.ui;
     uiConfig->checkBoxExtraDetails->setChecked(displayExtraDetails);
     ui->widgetExtraDetails->setVisible(displayExtraDetails);
 }
-
-void MainWindow::ShowOpacityChanged(){
+void MainWindow::ShowOpacityChanged()
+{
     if (displayOpacity==1) displayOpacity=0; else displayOpacity=1;
     EnableTransparency(displayOpacity);
 }
@@ -669,6 +670,12 @@ void MainWindow::ShowOpacityChanged(){
 void MainWindow::ProfSettingsChanged()
 {
     if (displayProfColor==1) displayProfColor=0; else displayProfColor=1;
+}
+void MainWindow::ProfChanged(QString prof)
+{
+    QStringList proflist;
+    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+    m_MyProfession = proflist.indexOf(prof)+1;
 }
 void MainWindow::NameChanged()
 {
@@ -684,16 +691,6 @@ void MainWindow::DamageChanged()
     labellegenddmg->setVisible(displayDmg);
     for(int n=0;n<10;n++) {
         labeldmg[n]->setVisible(displayDmg);
-    }
-}
-void MainWindow::PerDmgChanged()
-{
-    if (displayPerDmg==1) displayPerDmg=0; else displayPerDmg=1;
-    if (is_connected) {
-        labellegendper->setVisible(displayPerDmg);
-        for(int n=0;n<10;n++) {
-            labelper[n]->setVisible(displayPerDmg);
-        }
     }
 }
 void MainWindow::DPSChanged()
@@ -712,6 +709,21 @@ void MainWindow::FiveSecRealDPSChanged()
         label5sdps[n]->setVisible(display5sDPS);
     }
 }
+void MainWindow::PerDmgChanged()
+{
+    if (displayPerDmg==1) displayPerDmg=0; else displayPerDmg=1;
+    if (is_connected) {
+        labellegendper->setVisible(displayPerDmg);
+        for(int n=0;n<10;n++) {
+            labelper[n]->setVisible(displayPerDmg);
+        }
+    }
+}
+void MainWindow::PositionChanged()
+{
+    if (displayPos==1) displayPos=0; else displayPos=1;
+}
+
 void MainWindow::ActivityChanged()
 {
     if (displayAct==1) displayAct=0; else displayAct=1;
@@ -731,16 +743,6 @@ void MainWindow::CPerDmgChanged()
 void MainWindow::CDPSChanged()
 {
     if (displayCDPS==1) displayCDPS=0; else displayCDPS=1;
-}
-void MainWindow::ProfChanged(QString prof)
-{
-    QStringList proflist;
-    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
-    m_MyProfession = proflist.indexOf(prof)+1;
-}
-void MainWindow::PositionChanged()
-{
-    if (displayPos==1) displayPos=0; else displayPos=1;
 }
 
 void MainWindow::ShowGraphChanged()
