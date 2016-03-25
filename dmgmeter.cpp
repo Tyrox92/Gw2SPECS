@@ -3,15 +3,12 @@
 #include "global.h"
 #include "mydialog.h"
 
-
 using namespace GW2;
 
 const QString DmgMeter::s_LowStyle = "color: rgb(255, 255, 255);";
 const QString DmgMeter::s_NormalStyle = "color: rgb(0, 255, 0);";
 const QString DmgMeter::s_HighStyle = "color: rgb(255, 165, 0);";
 const QString DmgMeter::s_UltraStyle = "color: rgb(255, 128, 128);";
-
-
 
 
 void DmgMeter::SetUpdatesPerSecond(const QString& updatesPerSecond)
@@ -36,14 +33,17 @@ void DmgMeter::SetConsideredLineCount(const QString& consideredLineCount)
 {
     m_Params.resize(consideredLineCount.toInt());
     m_OldParams.resize(m_Params.size());
+    m_OldParamsMax=0;
 }
 
 void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAttributes)
 {
     int offset = 0;
     int offsetOld = 0;
+    int lastDiff = 0;
+    int i;
     const int paramCount = m_Params.size();
-    for (int i = 0; i < paramCount; ++i)
+    for (i = 0; i < paramCount; ++i)
     {
         const QString params = m_Reader.ReadLineFromBottom(image, imageAttributes, paramCount, i);
         if (params == "")
@@ -59,11 +59,16 @@ void DmgMeter::EvaluateImage(const QImage& image, const ImageAttributes& imageAt
                 // Found valid difference, evaluate
                 EvaluateLine(params);
                 ++offsetOld;
-            }
+                lastDiff = 1;
+            } else lastDiff = 0;
         }
+        if ((lastDiff==0) && (i-offsetOld>=m_OldParamsMax))  break;
     }
-
-    m_Params.swap(m_OldParams);
+    if (i-offset!=0)
+        {
+        m_OldParamsMax=i-offset;
+        m_Params.swap(m_OldParams);
+        }
     if (m_IsActive)
     {
         emit RequestTimeUpdate(m_ElapsedTimeSinceCombatInMsec + m_TimeSinceCombat.elapsed());
@@ -89,6 +94,17 @@ void DmgMeter::Reset()
     emit RequestTimeUpdate(0);
     countCombat = 0;
     combatCourse = "";
+    updateCounter=0;
+    m_rDmg=0;
+    m_5sDPS=0;
+    m_realDps=0;
+    dmg_5s_ago=0;
+    dmg_4s_ago=0;
+    dmg_3s_ago=0;
+    dmg_2s_ago=0;
+    dmg_1s_ago=0;
+    dmg_now=0;
+    m_OldParamsMax=0;
 }
 
 void DmgMeter::SetIsAutoResetting(bool isAutoResetting)
@@ -110,8 +126,13 @@ DmgMeter::DmgMeter() :
     m_SecsInCombat(0),
     m_IsActive(false),
     m_IsAutoResetting(false),
-    OffCombatTimeInMsec(0)
-
+    OffCombatTimeInMsec(0),
+    dmg_5s_ago(0),
+    dmg_4s_ago(0),
+    dmg_3s_ago(0),
+    dmg_2s_ago(0),
+    dmg_1s_ago(0),
+    dmg_now(0)
 {
     QObject::connect(&m_Timer, SIGNAL(timeout()), this, SLOT(ComputeDps()));
 
@@ -135,6 +156,28 @@ void DmgMeter::ComputeDps()
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
     if (m_Dps>999999) m_Dps = 1;
+//    if (updateCounter<5) updateCounter++;     //5sec for recent DPS update
+//        else
+//            {
+//            updateCounter=0;
+//            m_5sDPS = elapsedSecsSinceCombat == 0.0 ? (m_Dmg-m_rDmg) : (m_Dmg-m_rDmg) / 5.0;
+//            m_rDmg=m_Dmg;
+//            }
+
+    m_rDmg=m_Dmg;
+    //m_realDps = dmg_now - dmg_1s_ago;
+
+    dmg_5s_ago = dmg_4s_ago;
+    dmg_4s_ago = dmg_3s_ago;
+    dmg_3s_ago = dmg_2s_ago;
+    dmg_2s_ago = dmg_1s_ago;
+    dmg_1s_ago = dmg_now;
+    dmg_now = m_rDmg;
+
+    m_5sDPS =(5.0f/15.0f*(dmg_now-dmg_1s_ago)+4.0f/15.0f*(dmg_1s_ago-dmg_2s_ago)+3.0f/15.0f*(dmg_2s_ago-dmg_3s_ago)+2.0f/15.0f*(dmg_3s_ago-dmg_4s_ago)+1.0f/15.0f*(dmg_4s_ago-dmg_5s_ago));
+    if(m_5sDPS>999999999){m_5sDPS=0;}
+    if(m_realDps>999999999){m_realDps=0;}
+
     m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);
     if (m_Activity>100) m_Activity = 100;
     if (elapsedSecsSinceEvaluation >= m_SecsInCombat)
@@ -188,8 +231,14 @@ void DmgMeter::EvaluateLine(const QString& params)
     }
 #endif // DMGMETER_DEBUG
 
+    if (LastColor!=4)  //not timestamp color
+    {
     m_Dmg += dmg;
     LastDmg=dmg;
+    //Adding Each Damage Value done between seconds into the txtFileExport
+    //combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
+    combatCourse+="+"+QString::number(dmg)+"\r\n";
+    //qDebug() << "Adding value : " << dmg;
     m_TimeSinceEvaluation.start();
 
     if (!m_IsActive)
@@ -197,6 +246,9 @@ void DmgMeter::EvaluateLine(const QString& params)
         // Evaluation starts, configure timer and start
         StartEvaluation();
     }
+    }
+   if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
+   m_realDps += dmg;
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)

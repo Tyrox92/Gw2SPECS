@@ -14,6 +14,7 @@
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
+#include <qt_windows.h>
 
 using namespace GW2;
 
@@ -24,9 +25,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MyDialog(this),
     update_Timer(this)
 {
+    CheckForOldVerison();
     ui->setupUi(this);
     // generate ui and so on
     StartupPref();
+    _kc << Qt::Key_Up << Qt::Key_Up << Qt::Key_Down << Qt::Key_Down << Qt::Key_Left << Qt::Key_Right << Qt::Key_Left << Qt::Key_Right << Qt::Key_A << Qt::Key_B;
+    _pos = 0;
 
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
 
@@ -48,37 +52,53 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
+    // connecting configurator - SPECS display settings
+    QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(clicked(bool)), this, SLOT(ShowToolbarChanged()));
+    QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
+    QObject::connect(uiConfig->checkBoxExtraDetails, SIGNAL(clicked(bool)), this, SLOT(ShowExtraDetailsChanged()));
+    QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(ShowExtraDetailsChanged()));
+    QObject::connect(uiConfig->checkBoxOpacity, SIGNAL(clicked(bool)), this, SLOT(ShowOpacityChanged()));
     // connecting configurator - solo display settings
-    QObject::connect(uiConfig->checkBoxSoloProfColors, SIGNAL(clicked(bool)), this, SLOT(SProfSettingsChanged()));
-    QObject::connect(uiConfig->professionSoloComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(SProfChanged(QString)));
-    QObject::connect(uiConfig->checkBoxSoloName, SIGNAL(clicked(bool)), this, SLOT(SNameChanged()));
-    QObject::connect(uiConfig->checkBoxSoloDamage, SIGNAL(clicked(bool)), this, SLOT(SDamageChanged()));
-    QObject::connect(uiConfig->checkBoxSoloDPS, SIGNAL(clicked(bool)), this, SLOT(SDPSChanged()));
-    QObject::connect(uiConfig->checkBoxSoloCDamage, SIGNAL(clicked(bool)), this, SLOT(SCDamageChanged()));
-    QObject::connect(uiConfig->checkBoxSoloCPerDmg, SIGNAL(clicked(bool)), this, SLOT(SCPerDmgChanged()));
-    QObject::connect(uiConfig->checkBoxSoloCDPS, SIGNAL(clicked(bool)), this, SLOT(SCDPSChanged()));
-    // connecting configurator - group display settings
-    QObject::connect(uiConfig->checkBoxGroupProfColors, SIGNAL(clicked(bool)), this, SLOT(GProfSettingsChanged()));
-    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(GProfChanged(QString)));
-    QObject::connect(uiConfig->checkBoxGroupPosition, SIGNAL(clicked(bool)), this, SLOT(GPositionChanged()));
-    QObject::connect(uiConfig->checkBoxGroupName, SIGNAL(clicked(bool)), this, SLOT(GNameChanged()));
-    QObject::connect(uiConfig->checkBoxGroupDamage, SIGNAL(clicked(bool)), this, SLOT(GDamageChanged()));
-    QObject::connect(uiConfig->checkBoxGroupPerDmg, SIGNAL(clicked(bool)), this, SLOT(GPerDmgChanged()));
-    QObject::connect(uiConfig->checkBoxGroupDPS, SIGNAL(clicked(bool)), this, SLOT(GDPSChanged()));
-    QObject::connect(uiConfig->checkBoxGroupActivity, SIGNAL(clicked(bool)), this, SLOT(GActivityChanged()));
+    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
+    QObject::connect(uiConfig->checkBoxName, SIGNAL(clicked(bool)), this, SLOT(NameChanged()));
+    QObject::connect(uiConfig->checkBoxDamage, SIGNAL(clicked(bool)), this, SLOT(DamageChanged()));
+    QObject::connect(uiConfig->checkBoxDPS, SIGNAL(clicked(bool)), this, SLOT(DPSChanged()));
+    QObject::connect(uiConfig->checkBoxCDamage, SIGNAL(clicked(bool)), this, SLOT(CDamageChanged()));
+    QObject::connect(uiConfig->checkBoxCPerDmg, SIGNAL(clicked(bool)), this, SLOT(CPerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxCDPS, SIGNAL(clicked(bool)), this, SLOT(CDPSChanged()));
+    QObject::connect(uiConfig->checkBox5sDPS, SIGNAL(clicked(bool)), this, SLOT(FiveSecRealDPSChanged()));
+    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
+    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
+    QObject::connect(uiConfig->checkBoxPerDmg, SIGNAL(clicked(bool)), this, SLOT(PerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxActivity, SIGNAL(clicked(bool)), this, SLOT(ActivityChanged()));
+    // connecting configuarator - graph settings
+    QObject::connect(uiConfig->checkBoxGraphShow, SIGNAL(clicked(bool)), this, SLOT(ShowGraphChanged()));
+    QObject::connect(uiConfig->checkBoxGraphRealDPS, SIGNAL(clicked(bool)), this, SLOT(RealDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraph5sDPS, SIGNAL(clicked(bool)), this, SLOT(GraphFiveSecRealDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphAvgDPS, SIGNAL(clicked(bool)), this, SLOT(AvDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphAvgCDPS, SIGNAL(clicked(bool)), this, SLOT(AvCDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphAvgGroupDPS, SIGNAL(clicked(bool)), this, SLOT(AvGroupDPSChanged()));
     // connecting configurator - accuracy settings
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxSecondsInCombat, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetSecondsInCombat(QString)));
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
+
+    //ResetCombatMode
+    QObject::connect(resetCombatMode,SIGNAL(clicked(bool)),this,SLOT(action_resetCombatMode()));
+
     // context menu
 
     myMenu.setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
-    subMenu->setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
+    miscMenu->setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
 
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
+
+    combatMode->setIcon(QIcon(":/combatMode"));
+    combatMode->setIconVisibleInMenu(true);
+    QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
@@ -88,16 +108,6 @@ MainWindow::MainWindow(QWidget *parent) :
     resetData->setIconVisibleInMenu(true);
     QObject::connect(resetData, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
     QObject::connect(resetData, SIGNAL(triggered()), this, SLOT(resetGraph()));
-
-    extraOptions->setCheckable(true);
-    extraOptions->setIcon(QIcon(":/moreDetails"));
-    extraOptions->setIconVisibleInMenu(true);
-    QObject::connect(extraOptions, SIGNAL(triggered(bool)), this, SLOT(on_actionActionGroupDetails_toggled(bool)));
-
-    transparentWindow->setCheckable(true);
-    transparentWindow->setIcon(QIcon(":/Transparency"));
-    transparentWindow->setIconVisibleInMenu(true);
-    QObject::connect(transparentWindow, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
 
     autoReset->setCheckable(true);
     autoReset->setIcon(QIcon(":/Auto_Reset"));
@@ -120,13 +130,7 @@ MainWindow::MainWindow(QWidget *parent) :
     options->setIconVisibleInMenu(true);
     QObject::connect(options, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
 
-    hideShowToolbar->setCheckable(true);
-    QObject::connect(hideShowToolbar, SIGNAL(toggled(bool)), this, SLOT(HideAndShowToolbar(bool)));
-
-    hideShowGraph->setCheckable(true);
-    QObject::connect(hideShowGraph, SIGNAL(toggled(bool)), this, SLOT(HideAndShowGraph(bool)));
-
-    myMenu.addMenu(subMenu);
+    myMenu.addMenu(miscMenu);
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->widget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -135,76 +139,175 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->widget, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuDetails(const QPoint&)));
     QObject::connect(ui->widget_4, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuGraph(const QPoint&)));
 
-    QString readToolbar = ReadToolbarSettings();
-    if(readToolbar == "hidden"){
-        HideAndShowToolbar(true);
-        hideShowToolbar->setChecked(true);
-    }else{
-        ui->toolBar->show();
-    }
-
-    QString readGraph = ReadGraphSettings();
-    if(readGraph == "hidden"){
-        HideAndShowGraph(true);
-        hideShowGraph->setChecked(true);
-    }else{
-        ui->widget_4->show();
-    }
-
-
-    // reset button
-    QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(on_pushButton_toggled(bool)));
-
     dmgMeter->SetUpdatesPerSecond(uiConfig->comboBoxUpdates->currentText());
     dmgMeter->SetSecondsInCombat(uiConfig->comboBoxSecondsInCombat->currentText());
     dmgMeter->SetConsideredLineCount(uiConfig->comboBoxConsideredLines->currentText());
-    dmgMeter->Reset(); //Make sure Everything is reset if not set Timer will be set to 2s upon start
+
 
     m_ScreenRecorderThread.start();
 
-    //Settings::ReadSettings<QMainWindow>(this);
+    Settings::ReadSettings<QMainWindow>(this);
+
+    // ReadSettings
+    Settings::ReadSettings(uiConfig->checkBoxToolbar);
+    Settings::ReadSettings(uiConfig->checkBoxDetails);
+    Settings::ReadSettings(uiConfig->checkBoxExtraDetails);
+    Settings::ReadSettings(uiConfig->checkBoxOpacity);
+
+    Settings::ReadSettings(uiConfig->checkBoxProfColors);
+    Settings::ReadSettings(uiConfig->checkBoxName);
+    Settings::ReadSettings(uiConfig->checkBoxDamage);
+    Settings::ReadSettings(uiConfig->checkBoxDPS);
+    Settings::ReadSettings(uiConfig->checkBoxCDamage);
+    Settings::ReadSettings(uiConfig->checkBoxCPerDmg);
+    Settings::ReadSettings(uiConfig->checkBoxCDPS);
+    Settings::ReadSettings(uiConfig->checkBox5sDPS);
+    Settings::ReadSettings(uiConfig->professionComboBox);
+    Settings::ReadSettings(uiConfig->checkBoxPosition);
+    Settings::ReadSettings(uiConfig->checkBoxPerDmg);
+    Settings::ReadSettings(uiConfig->checkBoxActivity);
+
+    Settings::ReadSettings(uiConfig->checkBoxGraphShow);
+    Settings::ReadSettings(uiConfig->checkBoxGraphRealDPS);
+    Settings::ReadSettings(uiConfig->checkBoxGraph5sDPS);
+    Settings::ReadSettings(uiConfig->checkBoxGraphAvgDPS);
+    Settings::ReadSettings(uiConfig->checkBoxGraphAvgCDPS);
+    Settings::ReadSettings(uiConfig->checkBoxGraphAvgGroupDPS);
+
+    Settings::ReadSettings(uiConfig->comboBoxScreenshots);
+    Settings::ReadSettings(uiConfig->comboBoxUpdates);
+    Settings::ReadSettings(uiConfig->comboBoxSecondsInCombat);
+    Settings::ReadSettings(uiConfig->comboBoxConsideredLines);
 
     // Start screenshot timer from separate thread
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
     uiConfig->comboBoxScreenshots->setCurrentIndex(oldIndex);
 
-    // solo settings
-    displaySProfColor=uiConfig->checkBoxSoloProfColors->isChecked();
-    displaySName=uiConfig->checkBoxSoloName->isChecked();
-    displaySDmg=uiConfig->checkBoxSoloDamage->isChecked();
-    displaySDPS=uiConfig->checkBoxSoloDPS->isChecked();
-    displaySCDmg=uiConfig->checkBoxSoloCDamage->isChecked();
-    displaySCPer=uiConfig->checkBoxSoloCPerDmg->isChecked();
-    displaySCDPS=uiConfig->checkBoxSoloCDPS->isChecked();
-    // group settings
-    displayGProfColor=uiConfig->checkBoxGroupProfColors->isChecked();
-    displayGPos=uiConfig->checkBoxGroupPosition->isChecked();
-    displayGName=uiConfig->checkBoxGroupName->isChecked();
-    displayGPer=uiConfig->checkBoxGroupPerDmg->isChecked();
-    displayGDmg=uiConfig->checkBoxGroupDamage->isChecked();
-    displayGDPS=uiConfig->checkBoxGroupDPS->isChecked();
-    displayGAct=uiConfig->checkBoxGroupActivity->isChecked();
+    //SPECS Settings
+    displayToolbar=uiConfig->checkBoxToolbar->isChecked();
+    displayDetails=uiConfig->checkBoxDetails->isChecked();
+    displayExtraDetails=uiConfig->checkBoxExtraDetails->isChecked();
+    displayOpacity=uiConfig->checkBoxOpacity->isChecked();
 
-    uiConfig->professionComboBox->setCurrentIndex(0);
+    // solo settings
+    displayProfColor=uiConfig->checkBoxProfColors->isChecked();
+    displayName=uiConfig->checkBoxName->isChecked();
+    displayDmg=uiConfig->checkBoxDamage->isChecked();
+    displayDPS=uiConfig->checkBoxDPS->isChecked();
+    displayCDmg=uiConfig->checkBoxCDamage->isChecked();
+    displayCPerDmg=uiConfig->checkBoxCPerDmg->isChecked();
+    displayCDPS=uiConfig->checkBoxCDPS->isChecked();
+    display5sDPS=uiConfig->checkBox5sDPS->isChecked();
+    displayPos=uiConfig->checkBoxPosition->isChecked();
+    displayPerDmg=uiConfig->checkBoxPerDmg->isChecked();
+    displayAct=uiConfig->checkBoxActivity->isChecked();
     m_MyProfession=uiConfig->professionComboBox->currentIndex();
-    soloMyProfession=uiConfig->professionSoloComboBox->currentIndex();
+    // graph settings
+    displayGraph=uiConfig->checkBoxGraphShow->isChecked();
+    displayGraphRealDPS=uiConfig->checkBoxGraphRealDPS->isChecked();
+    displayGraph5sDPS=uiConfig->checkBoxGraph5sDPS->isChecked();
+    displayGraphAvDPS=uiConfig->checkBoxGraphAvgDPS->isChecked();
+    displayGraphAvCDPS=uiConfig->checkBoxGraphAvgCDPS->isChecked();
+    displayGraphAvGDPS=uiConfig->checkBoxGraphAvgGroupDPS->isChecked();
+
 
     // We are not connected on start up
     is_connected = false;
 
+    //Make sure on start to show/hide settings
+    ui->widget_4->setVisible(displayGraph);
+    ui->widget_4->graph(0)->setVisible(displayGraphAvDPS);
+    ui->widget_4->graph(1)->setVisible(displayGraphAvCDPS);
+    ui->widget_4->graph(2)->setVisible(displayGraph5sDPS);
+    ui->widget_4->graph(3)->setVisible(displayGraphRealDPS);
+    ui->widget_4->graph(4)->setVisible(displayGraphAvGDPS);
+
+    ui->widgetExtraDetails->setVisible(displayExtraDetails);
+    ui->widget->setVisible(displayDetails);
+
+    ui->toolBar->setVisible(displayToolbar);
+
+    EnableTransparency(displayOpacity);
+
+    // setting labels (in)visible
+    labellegendname->setVisible(displayName);
+    labellegenddmg->setVisible(displayDmg);
+    // solo mode at start
+    labellegendper->setVisible(false);
+    labellegenddps->setVisible(displayDPS);
+    labellegend5sdps->setVisible(display5sDPS);
+    //labellegendact->setVisible(displayAct);
+    for(int n=0;n<10;n++) {
+        labelname[n]->setVisible(displayName);
+        labeldmg[n]->setVisible(displayDmg);
+        // solo mode at start
+        labelper[n]->setVisible(false);
+        labeldps[n]->setVisible(displayDPS);
+        label5sdps[n]->setVisible(display5sDPS);
+        //labelact[n]->setVisible(displayAct);
+    }
+
     CheckFirstRun();
     CheckForUpdate();
     Initialize();
+    dmgMeter->Reset();
+}
+
+void GW2::MainWindow::keyPressEvent( QKeyEvent * event )
+{
+    if(_kc.at(_pos) == event->key()){
+        ++_pos;
+        qDebug()<< event->key();
+        qDebug()<< _pos;
+    }else{
+        _pos = 0;
+    }
+    if(_pos>=_kc.size()){
+        QDialog *kC_dialog = new QDialog();
+        QHBoxLayout *layout = new QHBoxLayout(kC_dialog);
+        QLabel *label1 = new QLabel(this);
+        label1->setText("You found the Easter Egg. Congratz");
+        layout->addWidget(label1);
+        layout->setMargin(50);
+        kC_dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
+        kC_dialog->show();
+        _pos = 0;
+    }
+}
+
+void GW2::MainWindow::CheckForOldVerison()
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("version");
+    QString oldversion = settings.value("version").toString();
+    qDebug() << "old: " << oldversion;
+    if (oldversion=="") {
+        // del old stuff
+        QSettings settings("Gw2SPECS");
+        settings.remove("");
+        settings.beginGroup("version");
+        settings.setValue("version","2.5");
+        settings.endGroup();
+        qDebug() << "old settings have been removed";
+    } else if (oldversion=="2.5") {
+        // this has no use yet, just for future versions
+        qDebug() << "version is 2.5";
+    } else {
+    }
+    settings.endGroup();
 }
 
 void GW2::MainWindow::StartupPref()
 {
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    Qt::WindowFlags flags = windowFlags();
+    this->setWindowFlags(flags | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     this->setAttribute(Qt::WA_TranslucentBackground);
-
+    this->show();
     runMe();
+    fixOnTopCount=0;
+    resetCombatMode->hide();
 
     //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
     //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
@@ -276,6 +379,8 @@ void GW2::MainWindow::StartupPref()
     layoutlegend->addWidget(labellegenddmg);
     layoutlegend->addWidget(labellegendper);
     layoutlegend->addWidget(labellegenddps);
+    layoutlegend->addWidget(labellegend5sdps);
+
     //labellegend->addWidget(labellegendact);
     // names
     layoutprogressbar_0->addWidget(labelname_0);
@@ -321,6 +426,18 @@ void GW2::MainWindow::StartupPref()
     layoutprogressbar_7->addWidget(labeldps_7);
     layoutprogressbar_8->addWidget(labeldps_8);
     layoutprogressbar_9->addWidget(labeldps_9);
+    // rdps
+    layoutprogressbar_0->addWidget(label5sdps_0);
+    layoutprogressbar_1->addWidget(label5sdps_1);
+    layoutprogressbar_2->addWidget(label5sdps_2);
+    layoutprogressbar_3->addWidget(label5sdps_3);
+    layoutprogressbar_4->addWidget(label5sdps_4);
+    layoutprogressbar_5->addWidget(label5sdps_5);
+    layoutprogressbar_6->addWidget(label5sdps_6);
+    layoutprogressbar_7->addWidget(label5sdps_7);
+    layoutprogressbar_8->addWidget(label5sdps_8);
+    layoutprogressbar_9->addWidget(label5sdps_9);
+
 //    //activity
 //    layoutprogressbar_0->addWidget(labelact_0);
 //    layoutprogressbar_1->addWidget(labelact_1);
@@ -337,12 +454,15 @@ void GW2::MainWindow::StartupPref()
     labellegenddmg->setText(QString("Damage"));
     labellegendper->setText(QString("%Dmg"));
     labellegenddps->setText(QString("DPS"));
+    labellegend5sdps->setText(QString("5sDPS"));
+    //labellegendact->setText(QString("Act%"));
 
     //hide all legend labels by default
     labellegendname->hide();
     labellegenddmg->hide();
     labellegendper->hide();
     labellegenddps->hide();
+    labellegend5sdps->hide();
     //labellegendact->hide();
 
     // legend allignment and styling
@@ -350,16 +470,14 @@ void GW2::MainWindow::StartupPref()
     labellegenddmg->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     labellegendper->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     labellegenddps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    labellegend5sdps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     //labellegendact->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-    //labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/");
     labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
-    //labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;");
     labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;min-width:39px;*/font: 87 10pt \"DINPro-Black\";");
-    //labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;");
     labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:37px;min-width:37px;font: 87 10pt \"DINPro-Black\";");
-    //labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;");
     labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
+    labellegend5sdps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
     //labelact[n]->setStyleSheet("color:white;background:none;");
 
     for(int n=0;n<10;n++) {
@@ -369,17 +487,15 @@ void GW2::MainWindow::StartupPref()
         labeldmg[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         labelper[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         labeldps[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        label5sdps[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        // labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
         labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
-        // labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;*/min-width:39px;font: 87 10pt \"DINPro-Black\";");
         labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;min-width:39px;*/font: 87 10pt \"DINPro-Black\";");
-        // labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:32px;min-width:32px;font: 87 10pt \"DINPro-Black\";");
         labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:37px;min-width:37px;font: 87 10pt \"DINPro-Black\";");
-        // labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:34px;min-width:34px;font: 87 10pt \"DINPro-Black\";");
         labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
+        label5sdps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 }
@@ -435,7 +551,7 @@ void GW2::MainWindow::CheckForUpdate()
 
             //Connect Functions to Buttons when clicked
             connect(download, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
-            connect(changelog, SIGNAL(clicked(bool)),this,SLOT(on_pushButton2_clicked()));
+            connect(changelog, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_2_clicked()));
 
             //Add Widgets to the Layout
             layout->addWidget(label);
@@ -476,6 +592,7 @@ void MainWindow::Initialize()
             SlotDPS[i]=0;
             SlotAct[i]=0;
             SlotName[i][0]='\0';
+            SlotrDPS[i]=0;
         }
         GrpDmg=0;
         GrpDPS=0;
@@ -506,7 +623,7 @@ void MainWindow::Initialize()
         else is_connected = true;
         //m_MyProfession=0;
         // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_5sDPS=0;m_realDps=0;
         update_Timer.start(1000);
     }
     else
@@ -524,6 +641,7 @@ void MainWindow::Initialize()
             SlotDPS[i]=0;
             SlotAct[i]=0;
             SlotName[i][0]='\0';
+            SlotrDPS[i]=0;
         }
         GrpDmg=0;
         hitCounter=0;
@@ -533,108 +651,151 @@ void MainWindow::Initialize()
         LastColor=0;
         //m_MyProfession=0;
         // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;
+        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_5sDPS=0;m_realDps=0;
         update_Timer.start(1000);
     }
 }
 
-void MainWindow::SProfChanged(QString prof)
+void MainWindow::ShowToolbarChanged()
 {
-    QStringList proflist;
-    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
-    soloMyProfession = proflist.indexOf(prof)+1;
+    if (displayToolbar==1) displayToolbar=0; else displayToolbar=1;
+    ui->toolBar->setVisible(displayToolbar);
 }
-void MainWindow::SProfSettingsChanged()
+void MainWindow::ShowDetailsChanged()
 {
-    if (displaySProfColor==1) displaySProfColor=0; else displaySProfColor=1;
+    if (displayDetails==1) displayDetails=0; else displayDetails=1;
+    // If playing solo - show only DPS/DMG/TIME
+    ui->avg_DPS->setVisible(is_connected);
+    ui->grp_DPS->setVisible(is_connected);
+    ui->grp_Dmg->setVisible(is_connected);
+    ui->labelDmg_2->setVisible(is_connected);
+    ui->labelDmg_3->setVisible(is_connected);
+    ui->labelDmg_4->setVisible(is_connected);
+
+    Ui::Configurator* uiConfig = m_Configurator.ui;
+    uiConfig->checkBoxDetails->setChecked(displayDetails);
+    ui->widget->setVisible(displayDetails);
 }
-void MainWindow::SNameChanged()
+void MainWindow::ShowExtraDetailsChanged()
 {
-    if (displaySName==1) displaySName=0; else displaySName=1;
+    if (displayExtraDetails==1) displayExtraDetails=0; else displayExtraDetails=1;
+    Ui::Configurator* uiConfig = m_Configurator.ui;
+    uiConfig->checkBoxExtraDetails->setChecked(displayExtraDetails);
+    ui->widgetExtraDetails->setVisible(displayExtraDetails);
 }
-void MainWindow::SDamageChanged()
+void MainWindow::ShowOpacityChanged()
 {
-    if (displaySDmg==1) displaySDmg=0; else displaySDmg=1;
-}
-void MainWindow::SDPSChanged()
-{
-    if (displaySDPS==1) displaySDPS=0; else displaySDPS=1;
-}
-void MainWindow::SCDamageChanged()
-{
-    if (displaySCDmg==1) displaySDmg=0; else displaySCDmg=1;
-}
-void MainWindow::SCPerDmgChanged()
-{
-    if (displaySCPer==1) displaySCPer=0; else displaySCPer=1;
-}
-void MainWindow::SCDPSChanged()
-{
-    if (displaySCDPS==1) displaySCDPS=0; else displaySCDPS=1;
+    if (displayOpacity==1) displayOpacity=0; else displayOpacity=1;
+    EnableTransparency(displayOpacity);
 }
 
-void MainWindow::GProfChanged(QString prof)
+void MainWindow::ProfSettingsChanged()
+{
+    if (displayProfColor==1) displayProfColor=0; else displayProfColor=1;
+}
+void MainWindow::ProfChanged(QString prof)
 {
     QStringList proflist;
     proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
     m_MyProfession = proflist.indexOf(prof)+1;
 }
-void MainWindow::GProfSettingsChanged()
+void MainWindow::NameChanged()
 {
-    if (displayGProfColor==1) displayGProfColor=0; else displayGProfColor=1;
+    if (displayName==1) displayName=0; else displayName=1;
+    labellegendname->setVisible(displayName);
+    for(int n=0;n<10;n++) {
+        labelname[n]->setVisible(displayName);
+    }
 }
-void MainWindow::GPositionChanged()
+void MainWindow::DamageChanged()
 {
-    if (displayGPos==1) displayGPos=0; else displayGPos=1;
+    if (displayDmg==1) displayDmg=0; else displayDmg=1;
+    labellegenddmg->setVisible(displayDmg);
+    for(int n=0;n<10;n++) {
+        labeldmg[n]->setVisible(displayDmg);
+    }
 }
-void MainWindow::GNameChanged()
+void MainWindow::DPSChanged()
 {
-    if (displayGName==1) displayGName=0; else displayGName=1;
+    if (displayDPS==1) displayDPS=0; else displayDPS=1;
+    labellegenddps->setVisible(displayDPS);
+    for(int n=0;n<10;n++) {
+        labeldps[n]->setVisible(displayDPS);
+    }
 }
-void MainWindow::GDamageChanged()
+void MainWindow::FiveSecRealDPSChanged()
 {
-    if (displayGDmg==1) displayGDmg=0; else displayGDmg=1;
+    if (display5sDPS==1) display5sDPS=0; else display5sDPS=1;
+    labellegend5sdps->setVisible(display5sDPS);
+    for(int n=0;n<10;n++) {
+        label5sdps[n]->setVisible(display5sDPS);
+    }
 }
-void MainWindow::GPerDmgChanged()
+void MainWindow::PerDmgChanged()
 {
-    if (displayGPer==1) displayGPer=0; else displayGPer=1;
+    if (displayPerDmg==1) displayPerDmg=0; else displayPerDmg=1;
+    if (is_connected) {
+        labellegendper->setVisible(displayPerDmg);
+        for(int n=0;n<10;n++) {
+            labelper[n]->setVisible(displayPerDmg);
+        }
+    }
 }
-void MainWindow::GDPSChanged()
+void MainWindow::PositionChanged()
 {
-    if (displayGDPS==1) displayGDPS=0; else displayGDPS=1;
-}
-void MainWindow::GActivityChanged()
-{
-    if (displayGAct==1) displayGAct=0; else displayGAct=1;
+    if (displayPos==1) displayPos=0; else displayPos=1;
 }
 
-void MainWindow::SSettingsChanged()
+void MainWindow::ActivityChanged()
 {
-    labellegendname->setVisible(displaySName);
-    labelname[0]->setVisible(displaySName);
-    labellegenddmg->setVisible(displaySDmg);
-    labeldmg[0]->setVisible(displaySDmg);
-    labellegendper->hide();
-    labelper[0]->hide();
-    labellegenddps->setVisible(displaySDPS);
-    labeldps[0]->setVisible(displaySDPS);
-    //labellegendact->hide();
-    //labelact[0]->hide();
+    if (displayAct==1) displayAct=0; else displayAct=1;
+    // labellegendact->setVisible(displayAct);
+    // for(int n=0;n<10;n++) {
+    //     labelact[n]->setVisible(displayAct);
+    // }
 }
-void MainWindow::GSettingsChanged()
+void MainWindow::CDamageChanged()
 {
-    for(int n=0;n<10;n++) {
-        labellegendname->setVisible(displayGName);
-        labelname[n]->setVisible(displayGName);
-        labellegenddmg->setVisible(displayGDmg);
-        labeldmg[n]->setVisible(displayGDmg);
-        labellegendper->setVisible(displayGPer);
-        labelper[n]->setVisible(displayGPer);
-        labellegenddps->setVisible(displayGDPS);
-        labeldps[n]->setVisible(displayGDPS);
-        //labellegendact->setVisible(setVisible(displayGAct);
-        //labelact[n]->setVisible(setVisible(displayGAct);
-    }
+    if (displayCDmg==1) displayCDmg=0; else displayCDmg=1;
+}
+void MainWindow::CPerDmgChanged()
+{
+    if (displayCPerDmg==1) displayCPerDmg=0; else displayCPerDmg=1;
+}
+void MainWindow::CDPSChanged()
+{
+    if (displayCDPS==1) displayCDPS=0; else displayCDPS=1;
+}
+
+void MainWindow::ShowGraphChanged()
+{
+    if (displayGraph==1)displayGraph=0; else displayGraph=1;
+    ui->widget_4->setVisible(displayGraph);
+}
+void MainWindow::RealDPSChanged()
+{
+    if (displayGraphRealDPS==1)displayGraphRealDPS=0; else displayGraphRealDPS=1;
+    ui->widget_4->graph(3)->setVisible(displayGraphRealDPS);
+}
+void MainWindow::GraphFiveSecRealDPSChanged()
+{
+    if (displayGraph5sDPS==1) displayGraph5sDPS=0; else displayGraph5sDPS=1;
+    ui->widget_4->graph(2)->setVisible(displayGraph5sDPS);
+}
+void MainWindow::AvDPSChanged()
+{
+    if (displayGraphAvDPS==1) displayGraphAvDPS=0; else displayGraphAvDPS=1;
+    ui->widget_4->graph(0)->setVisible(displayGraphAvDPS);
+}
+void MainWindow::AvCDPSChanged()
+{
+    if (displayGraphAvCDPS==1) displayGraphAvCDPS=0; else displayGraphAvCDPS=1;
+    ui->widget_4->graph(1)->setVisible(displayGraphAvCDPS);
+}
+void MainWindow::AvGroupDPSChanged()
+{
+    if (displayGraphAvGDPS==1) displayGraphAvGDPS=0; else displayGraphAvGDPS=1;
+    ui->widget_4->graph(4)->setVisible(displayGraphAvGDPS);
 }
 
 void MainWindow::UpdateGroupLabels()
@@ -659,6 +820,7 @@ void MainWindow::UpdateGroupLabels()
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
+        PosrDPS[0]=m_5sDPS;
         // PosAct[0]=m_Activity;
         if (PosDmg[0]>0)
             i=PosDmg[0]*100.0/PosDmg[0];
@@ -669,9 +831,9 @@ void MainWindow::UpdateGroupLabels()
         Bar[0]->setVisible(true);
 
         // profession based bar coloring
-        if (displaySProfColor==true)
+        if (displayProfColor==true)
         {
-            switch (soloMyProfession)
+            switch (m_MyProfession)
             {
             case 0:
                 Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
@@ -708,14 +870,13 @@ void MainWindow::UpdateGroupLabels()
         else
             Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
         // set name, damage, DPS
-        if (displaySName==true) {
+        if (displayName==true) {
             if (ReadNameSettings()!="") labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
             else labelname[0]->setText(QString("Myself"));
         }
-        if (displaySDmg==true) labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
-        if (displaySDPS==true) labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
-
-        SSettingsChanged();
+        if (displayDmg==true) labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
+        if (displayDPS==true) labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
+        if (display5sDPS==true) label5sdps[0]->setText(QString("%L1").arg(PosrDPS[0]));
     }
     else
     {
@@ -742,6 +903,7 @@ void MainWindow::UpdateGroupLabels()
             PosDPS[j]=SlotDPS[j];
             //PosAct[j]=SlotAct[j];
             PosProf[j]=SlotProf[j];
+            PosrDPS[j]=SlotrDPS[j];
         }
 
         // reseting empty/disconnected slot to 0
@@ -754,6 +916,7 @@ void MainWindow::UpdateGroupLabels()
                 PosDPS[p]=0;
                 //PosAct[p]=0;
                 PosProf[p]=0;
+                PosrDPS[p]=0;
             }
         }
 
@@ -780,6 +943,9 @@ void MainWindow::UpdateGroupLabels()
                     strcpy(tmp1,PosName[i]);
                     strcpy(PosName[i],PosName[j]);
                     strcpy(PosName[j],tmp1);
+                    k=PosrDPS[i];
+                    PosrDPS[i]=PosrDPS[j];
+                    PosrDPS[j]=k;
                 }
             }
         }
@@ -800,7 +966,7 @@ void MainWindow::UpdateGroupLabels()
                 Bar[n]->setVisible(true);
 
                 // profession based bar coloring
-                if (displayGProfColor==true)
+                if (displayProfColor==true)
                 {
                     switch (PosProf[n])
                     {
@@ -840,22 +1006,25 @@ void MainWindow::UpdateGroupLabels()
                     if (n%2==0) Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                     else Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;border-radius:0px;font: 87 10pt DINPro-Black;color: rgb(255, 255, 255);text-align: center;min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(4,165,183, 60%);}");
                 //display name, position, damage, percental, DPS, Activity
-                if (displayGName==true) {
-                    if (displayGPos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
+                if (displayName==true) {
+                    if (displayPos==true) labelname[n]->setText(QString("%1. %2").arg(n+1).arg(PosName[n]));
                     else labelname[n]->setText(QString("%1").arg(PosName[n]));
                 }
-                if (displayGDmg==true) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
-                if (displayGPer==true) labelper[n]->setText(QString("%L1%").arg(p));
-                if (displayGDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
-                //if (displayGAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
-
-                GSettingsChanged();
+                if (displayDmg==true) labeldmg[n]->setText(QString("%L1").arg(PosDmg[n]));
+                if (displayPerDmg==true) labelper[n]->setText(QString("%L1%").arg(p));
+                if (displayDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
+                //if (displayAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
+                if (display5sDPS==true) label5sdps[n]->setText(QString("%L1").arg(PosrDPS[n]));
             }
             else
                 Bar[n] ->setVisible(false);
         }
     }
     updateCombatCourse();
+
+    // hiding Bars if everything in Settings is off
+    // bool showBarsAtAll = !(displayName==false & displayDmg==false &  displayDPS==false &  display5sDPS==false & displayPerDmg==false);
+    // ui->widget_3->setVisible(showBarsAtAll);
 }
 
 void MainWindow::ready2Read()
@@ -886,7 +1055,7 @@ void MainWindow::ready2Read()
             if ((incData2[i]=='*') && (incData2[i+3]=='#'))
             {
 
-                if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<54))
+                if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<55))
                 {
                     CurrentPos=incData2[i+1]-48;
                     CurrentMeta=incData2[i+2]-48;
@@ -900,7 +1069,7 @@ void MainWindow::ready2Read()
                 {
 
                     j=i+1;
-                    while ((j-i-1<13) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
+                    while ((j-i-1<15) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
                     if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
                     i=j;
 
@@ -918,6 +1087,7 @@ void MainWindow::ready2Read()
                         if  (CurrentMeta==3) SlotDmg[CurrentPos]=k;
                         if  (CurrentMeta==4) SlotAct[CurrentPos]=k;
                         if  (CurrentMeta==5) SlotProf[CurrentPos]=k;
+                        if  (CurrentMeta==6) SlotrDPS[CurrentPos]=k;
 
                     }
                     i=j;
@@ -965,7 +1135,6 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->grp_DPS->setStyleSheet("");
-        transparentWindow->setText("Transparency Off");
         this->show();
     }
     else
@@ -973,7 +1142,6 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->grp_DPS->setStyleSheet("");
-        transparentWindow->setText("Transparency On");
         this->show();
     }
 }
@@ -996,8 +1164,9 @@ void MainWindow::SendClientInfo(void)
         if (m_Dps>99999) m_Dps = 1;
         if (m_Dmg>999999999) m_Dmg = 1;
         if (m_Activity>100) m_Activity = 1;
-
-        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*%u5#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity,MyClientSlot, m_MyProfession);
+        if (m_5sDPS>99999) m_5sDPS = 1;
+        if (m_realDps>99999)m_realDps =1;
+        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*%u5#%lu*%u6#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity,MyClientSlot, m_MyProfession,MyClientSlot,m_5sDPS);
         socket->write(writeBuff);
     }
 }
@@ -1034,6 +1203,10 @@ void MainWindow::UpdatePersonalLabels()
     }
     //Personal Crit Chance Value
     ui->critChance->setText(QString::number(m_critChance));
+    //Personal 5sDPS
+    ui->label5sDPSValue->setText(QString::number(m_5sDPS));
+    //Personal RealDPS
+    ui->labelRealDPSValue->setText(QString::number(m_realDps));
     //Personal Condi DMG Value
     ui->labelCondiDMGValue->setText(QString::number(m_condiDmg));
     //Personal Condi DPS Value
@@ -1067,11 +1240,10 @@ void MainWindow::UpdatePersonalLabels()
 
 void MainWindow::UpdateTimer(void)
 {
-    // Always on top fix
-    //this->raise();
-    //myMenu.raise();
-    //subMenu->raise();
-    // Need to raise every element to work properly - also doesnt work 100%
+    // Always on top fix for Menues
+    myMenu.raise();
+    miscMenu->raise();
+
 
     if ((is_connected == true))
     {
@@ -1094,7 +1266,22 @@ void MainWindow::UpdateTimer(void)
     c4=m_Dmg;
     c1=c2*c3;
     if (m_Dmg>0)c=round(c1/c4);else c=0;
-    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs);
+    if(AvgDPS>999999){AvgDPS=1;}
+    if(AvgDPS<0){AvgDPS=1;}
+    realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_5sDPS,m_realDps);
+    m_realDps=0;
+    if(fixOnTopCount<1){
+        action_fixOnTop();
+        HWND winHandle  = (HWND)winId();
+        ShowWindow(winHandle, SW_HIDE);
+        SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
+        ShowWindow(winHandle, SW_SHOW);
+        fixOnTopCount++;
+    }
+    if(fixOnTopCount==1){
+        action_fixOnTop();
+        fixOnTopCount++;
+    }
 }
 
 void MainWindow::UpdateTime(int timeInMsecs)
@@ -1154,71 +1341,10 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
     }
 }
 
-//Show Condi DPS/Crit%/Condi DMG/Highest Hit if ". . ." icon is actionActionGroupDetails is toggled on/off.
-bool GW2::MainWindow::on_pushButton_toggled(bool toggled)
-{
-    if (toggled)
-    {
-        ui->widgetExtraDetails->show();
-        toggled = true;
-    }
-    else
-    {
-        ui->widgetExtraDetails->hide();
-        toggled = false;
-    }
-    return toggled;
-}
-
 //Show player/group details
-bool GW2::MainWindow::on_actionActionGroupDetails_toggled(bool toggled)
+void GW2::MainWindow::on_actionActionGroupDetails_toggled()
 {
-    // Check if this user is playing on a server or not
-    if ((is_connected == true))
-    {
-        if (toggled)
-        {
-            ui->avg_DPS->show();
-            ui->grp_DPS->show();
-            ui->grp_Dmg->show();
-            ui->labelDmg_2->show();
-            ui->labelDmg_3->show();
-            ui->labelDmg_3->setText("Grp DPS");
-            ui->labelDmg_4->show();
-            MainWindow::ui->widget->show();
-            extraOptions->setText("Hide Details");
-            toggled = true;
-        }
-        else
-        {
-            ui->widget->hide();
-            extraOptions->setText("Show Details");
-            toggled = false;
-        }
-    }
-    // If playing solo - show only DPS/DMG/TIME
-    else
-    {
-        if (toggled)
-        {
-            ui->avg_DPS->hide();
-            ui->grp_DPS->hide();
-            ui->labelDmg_3->hide();
-            ui->labelDmg_4->hide();
-            ui->grp_Dmg->hide();
-            ui->labelDmg_2->hide();
-            MainWindow::ui->widget->show();
-            extraOptions->setText("Hide Details");
-            toggled = true;
-        }
-        else
-        {
-            ui->widget->hide();
-            extraOptions->setText("Show Details");
-            toggled = false;
-        }
-    }
-    return toggled;
+    ShowDetailsChanged();
 }
 
 void GW2::MainWindow::on_actionConnect_triggered()
@@ -1277,12 +1403,12 @@ void GW2::MainWindow::on_actionClose_triggered()
 }
 
 void GW2::MainWindow::on_pushButton_clicked(){
-    QString downloadlink = "http://gw2dps.com/download";
+    QString downloadlink = "http://gw2specs.com/download";
     QDesktopServices::openUrl(QUrl(downloadlink));
 }
 
-void GW2::MainWindow::on_pushButton2_clicked(){
-    QString changeloglink = "http://gw2dps.com/changelog";
+void GW2::MainWindow::on_pushButton_2_clicked(){
+    QString changeloglink = "http://gw2specs.com/changelog";
     QDesktopServices::openUrl(QUrl(changeloglink));
 }
 
@@ -1290,7 +1416,7 @@ void MainWindow::updateCombatCourse()
 {
     if(countCombat > 0){
         //Filling Up Variable For saving later into the Log
-        combatCourse += m_Time + " | " + QString::number(m_Dps) + " | " + QString::number(m_Dmg) + "\r\n";
+        combatCourse += m_Time + " | " + QString::number(m_Dps) + " | " + QString::number(m_realDps) + " | " + QString::number(m_Dmg) + "\r\n";
     }
 }
 
@@ -1393,7 +1519,7 @@ void MainWindow::writeFile(QString separator)
             }
             stream << "\r\n\r\n\r\n";
         }
-        stream << " Time(hh:mm:ss) " << tableSep << "  DPS  " << tableSep << "  DMG\r\n";
+        stream << " Time(hh:mm:ss) " << tableSep << "  AvgDPS  " << tableSep << "  RealDPS  " << tableSep << "  DMG\r\n";
         if(separator == ";"){
             combatCourse.replace(QString("|"),QString(";"));
         }
@@ -1465,49 +1591,6 @@ void GW2::MainWindow::ShowContextMenuGraph(const QPoint& pos)
     myMenu.exec(globalPos);
 }
 
-bool GW2::MainWindow::HideAndShowToolbar(bool toggled)
-{
-    if (toggled)
-    {
-        //Toolbar is hidden
-        WriteToolbarSettings("hidden");
-        hideShowToolbar->setText("Show Toolbar");
-        ui->toolBar->hide();
-        toggled = true;
-    }
-    else
-    {
-        //Toolbar is visible
-        WriteToolbarSettings("visible");
-        hideShowToolbar->setText("Hide Toolbar");
-        ui->toolBar->show();
-        toggled = false;
-    }
-    return toggled;
-}
-
-bool GW2::MainWindow::HideAndShowGraph(bool toggled)
-{
-    if (toggled)
-    {
-        //Toolbar is hidden
-        WriteGraphSettings("hidden");
-        hideShowGraph->setText("Show Graph");
-        ui->widget_4->hide();
-        toggled = true;
-    }
-    else
-    {
-        //Toolbar is visible
-        WriteGraphSettings("visible");
-        hideShowGraph->setText("Hide Graph");
-        ui->widget_4->show();
-        toggled = false;
-    }
-    return toggled;
-}
-
-
 bool GW2::MainWindow::connectToServ(bool toggled){
     if (toggled)
     {
@@ -1541,45 +1624,79 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
 }
 
 
+void GW2::MainWindow::action_fixOnTop(){
+    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    this->activateWindow();
+    this->setFocus();
+    this->show();
+}
+
+void GW2::MainWindow::action_combatMode(){
+    //Make click-through
+    HWND winHandle  = (HWND)winId();
+    ShowWindow(winHandle, SW_HIDE);
+    SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_APPWINDOW | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
+    ShowWindow(winHandle, SW_SHOW);
+    action_fixOnTop();
+    qDebug()<< "CombatMode Activated";
+
+    QVBoxLayout *layout = new QVBoxLayout(combatDialog);
+    QLabel *label = new QLabel(this);
+    resetCombatMode->setText("Reset Combatmode!");
+    label->setText("Welcome to Gw2SPECS CombatMode\nPlease minimize this window so it cannot interfere anymore.\n Gw2SPECS is no longer clickable and all clicks fall through on the window behind\nIf you want to end CombatMode simply click the Button below!\nEnjoy.");
+    layout->addWidget(label);
+    layout->addWidget(resetCombatMode);
+    layout->setMargin(25);
+    combatDialog->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::CustomizeWindowHint);
+    combatDialog->setStyleSheet("QDialog{background-color: rgb(32, 43, 47);}QLabel{color:#f2f2f2;text-align:center;}QPushButton{background-color: rgb(52, 63, 67);color:#f2f2f2;text-align:center;}");
+    combatDialog->show();
+    resetCombatMode->show();
+}
+
+void GW2::MainWindow::action_resetCombatMode(){
+    HWND winHandle  = (HWND)winId();
+    ShowWindow(winHandle, SW_HIDE);
+    SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
+    ShowWindow(winHandle, SW_SHOW);
+    action_fixOnTop();
+    combatDialog->close();
+    qDebug()<<"CombatMode Deactivated";
+}
+
 
 void GW2::MainWindow::runMe(){
-    ui->widget_4->addGraph(); // blue line
-    ui->widget_4->graph(0)->setPen(QPen(QColor(41,128, 185)));
-    ui->widget_4->graph(0)->setBrush(QBrush(QColor(41,128, 185)));
-    ui->widget_4->graph(0)->addData(0,0);
+    ui->widget_4->addLayer("abovemain", ui->widget_4->layer("main"), QCustomPlot::limAbove);
+
+    ui->widget_4->addGraph(); // green line
+    ui->widget_4->graph(0)->setPen(QPen(QColor(46, 204, 113)));
+    ui->widget_4->graph(0)->setLayer("abovemain");
 
     ui->widget_4->addGraph(); // purple line
     ui->widget_4->graph(1)->setPen(QPen(QColor(142, 68, 173)));
-    ui->widget_4->graph(1)->setBrush(QBrush(QColor(142, 68, 173)));
-    //ui->widget_4->graph(0)->setChannelFillGraph(ui->widget_4->graph(1)); //Setting color between graphs
+    ui->widget_4->graph(1)->setLayer("abovemain");
 
-    if(is_connected == true){
-        ui->widget_4->addGraph(); // yellow line
-        ui->widget_4->graph(2)->setPen(QPen(QColor(243, 156, 18)));
-        //ui->widget_4->graph(2)->setBrush(QBrush(QColor(243, 156, 18)));
-    }else{}
-    ui->widget_4->addGraph(); // blue dot
+    ui->widget_4->addGraph(); // red line
+    ui->widget_4->graph(2)->setPen(QPen(QColor(231, 76, 60, 125)));
+    ui->widget_4->graph(2)->setBrush(QBrush(QColor(231, 76, 60, 125)));
+    ui->widget_4->graph(2)->setLayer("main");
+
+    ui->widget_4->addGraph(); // blue line
     ui->widget_4->graph(3)->setPen(QPen(QColor(41,128, 185)));
-    ui->widget_4->graph(3)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_4->graph(3)->setScatterStyle(QCPScatterStyle::ssDisc);
+    ui->widget_4->graph(3)->setLayer("abovemain");
 
-    ui->widget_4->addGraph(); // red dot
-    ui->widget_4->graph(4)->setPen(QPen(QColor(142, 68, 173)));
-    ui->widget_4->graph(4)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_4->graph(4)->setScatterStyle(QCPScatterStyle::ssDisc);
+    ui->widget_4->addGraph();//yellow
+    ui->widget_4->graph(4)->setPen(QPen(QColor(243,156,18)));
+    ui->widget_4->graph(4)->setLayer("abovemain");
 
-    ui->widget_4->addGraph(); // yellow dot
-    ui->widget_4->graph(5)->setPen(QPen(QColor(243, 156, 18)));
-    ui->widget_4->graph(5)->setLineStyle(QCPGraph::lsNone);
-    ui->widget_4->graph(5)->setScatterStyle(QCPScatterStyle::ssDisc);
 
     ui->widget_4->xAxis->setAutoTickStep(false);
     ui->widget_4->xAxis->setTickStep(1);
     ui->widget_4->yAxis->setLabel("DPS");
-   // ui->widget_4->rescaleAxes();
+    //ui->widget_4->rescaleAxes();
     //ui->widget_4->axisRect()->setupFullAxesBox();
-    ui->widget_4->yAxis->setRange(0,35000);
-    ui->widget_4->yAxis2->setRange(0,35000);
+    ui->widget_4->yAxis->setRange(0,7000);
+    ui->widget_4->yAxis2->setRange(0,7000);
     ui->widget_4->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 
     ui->widget_4->xAxis->setBasePen(QPen(Qt::white, 1));
@@ -1615,7 +1732,7 @@ void GW2::MainWindow::runMe(){
 }
 static double lastPointKey = 0;
 
-void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
+void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs, int five_sdps, int realDps){
     // calculate two new data points:
     double key = msecs/1000;
 
@@ -1624,24 +1741,33 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
       double value0 = dps;
       double value1 = cdps;
       double value2 = avgdps;
+      double value3 = five_sdps;
+      double value4 = realDps;
 
       // add data to lines:
       ui->widget_4->graph(0)->addData(key, value0);
       ui->widget_4->graph(1)->addData(key, value1);
-      if(is_connected == true){ui->widget_4->graph(2)->addData(key -1, value2);}
-      // set data of dots:
-      ui->widget_4->graph(3)->clearData();
-      ui->widget_4->graph(3)->addData(key, value0);
-      ui->widget_4->graph(4)->clearData();
-      ui->widget_4->graph(4)->addData(key, value1);
-      if(is_connected == true){
-          ui->widget_4->graph(5)->clearData();
-          ui->widget_4->graph(5)->addData(key -1, value2);
+      ui->widget_4->graph(2)->addData(key, value3);
+      ui->widget_4->graph(3)->addData(key, value4);
+
+      if((is_connected == true)){
+          ui->widget_4->graph(4)->addData(key - 1, value2);
       }
       // rescale value (vertical) axis to fit the current data:
-      ui->widget_4->graph(0)->rescaleValueAxis();
+      ui->widget_4->graph(0)->rescaleValueAxis(true);
       ui->widget_4->graph(1)->rescaleValueAxis(true);
-      if(is_connected == true){ui->widget_4->graph(2)->rescaleValueAxis(true);}
+      ui->widget_4->graph(2)->rescaleValueAxis(true);
+      ui->widget_4->graph(3)->rescaleValueAxis(true);
+
+      ui->widget_4->graph(0)->rescaleKeyAxis(true);
+      ui->widget_4->graph(1)->rescaleKeyAxis(true);
+      ui->widget_4->graph(2)->rescaleKeyAxis(true);
+      ui->widget_4->graph(3)->rescaleKeyAxis(true);
+
+      if(is_connected == true){
+          ui->widget_4->graph(4)->rescaleValueAxis(true);
+          ui->widget_4->graph(4)->rescaleKeyAxis(true);
+      }
       lastPointKey = key;
     }
     // make key axis range scroll with the data (at a constant range size of 8):
@@ -1652,11 +1778,11 @@ void GW2::MainWindow::realTimeDataSlot(int dps, int cdps,int avgdps, int msecs){
 
 void GW2::MainWindow::resetGraph(){
     lastPointKey = 0;
-    for(int i=0;i<6;i++){
+    for(int i=0;i<5;i++){
         ui->widget_4->graph(i)->clearData();
         ui->widget_4->graph(i)->addData(0,0);
     }
+    ui->widget_4->yAxis->setRange(0,7000);
+    ui->widget_4->yAxis2->setRange(0,7000);
     ui->widget_4->replot();
 }
-
-

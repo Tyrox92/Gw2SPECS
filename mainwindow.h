@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define MAINWINDOW_WEBSITE_URL "http://gw2dps.com"
+#define MAINWINDOW_WEBSITE_URL "http://gw2specs.com"
 
 #include <QMainWindow>
 #include <QThread>
@@ -34,23 +34,23 @@ public:
     ~MainWindow();
         QString time;
         QMenu myMenu;
-        QMenu *subMenu = new QMenu("Toggle On/Off", this);
+        QMenu *miscMenu = new QMenu("Miscellaneous", this);
 
         QAction *resetData = myMenu.addAction("Reset");
+        QAction *combatMode = myMenu.addAction("CombatMode");
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *saveToFile = myMenu.addAction("Save File");
-        QAction *options = myMenu.addAction("Options");
+        QAction *options = myMenu.addAction("Options");        
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
 
-        QAction *hideShowToolbar = subMenu->addAction("Hide Toolbar"); //Toggle
-        QAction *hideShowGraph = subMenu->addAction("Hide Graph"); //Toggle
-        QAction *extraOptions = subMenu->addAction("Show Details"); //Toggle
-        QAction *transparentWindow = subMenu->addAction("Transparency On"); //Toggle
-        QAction *autoReset = subMenu->addAction("Auto-Reset On"); //Toggle
+        QAction *autoReset = miscMenu->addAction("Auto-Reset On"); //Toggle
 
         int m_msecs;
-
+        QList<int> _kc;
+        int _pos;
+        QDialog *combatDialog = new QDialog();
+        QPushButton *resetCombatMode = new QPushButton();
 
 
 protected:
@@ -76,6 +76,7 @@ private:
     Configurator m_Configurator;
     MyDialog m_MyDialog;
     QPoint m_dragPosition;
+    int fixOnTopCount;
 
     QTcpSocket *socket;
 
@@ -88,17 +89,24 @@ private:
     long PosDmg[10];
     int PosAct[10];
     int PosProf[10];
+    int PosrDPS[10];
 
     char SlotName[10][15];
     int SlotDPS[10];
     long SlotDmg[10];
     int SlotAct[10];
     int SlotProf[10];
+    int SlotrDPS[10];
 
 
     long GrpDmg;
     int GrpDPS;
     int AvgDPS;
+
+
+    int GrprDPS;
+    int AvgrDPS;
+
 
     QByteArray incData;
     int incDataSize;
@@ -110,22 +118,31 @@ private:
     char writeBuff[128];
     bool is_connected;
 
+    //SPECS Settings
+    bool displayToolbar;
+    bool displayDetails;
+    bool displayExtraDetails;
+    bool displayOpacity;
+
     // solo settings
-    bool displaySProfColor;
-    bool displaySName;
-    bool displaySDmg;
-    bool displaySDPS;
-    bool displaySCDmg;
-    bool displaySCPer;
-    bool displaySCDPS;
-    // group settings
-    bool displayGProfColor;
-    bool displayGPos;
-    bool displayGName;
-    bool displayGDmg;
-    bool displayGPer;
-    bool displayGDPS;
-    bool displayGAct;
+    bool displayProfColor;
+    bool displayName;
+    bool displayDmg;
+    bool displayDPS;
+    bool displayCDmg;
+    bool displayCPerDmg;
+    bool displayCDPS;
+    bool display5sDPS;
+    bool displayPos;
+    bool displayPerDmg;
+    bool displayAct;
+    // graph settings
+    bool displayGraph;
+    bool displayGraphRealDPS;
+    bool displayGraph5sDPS;
+    bool displayGraphAvDPS;
+    bool displayGraphAvCDPS;
+    bool displayGraphAvGDPS;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);
@@ -175,6 +192,20 @@ private:
     QLabel *labeldps_8 = new QLabel(this);
     QLabel *labeldps_9 = new QLabel(this);
 
+
+    // single rdps over time labels (in group mode)
+    QLabel *label5sdps_0 = new QLabel(this);
+    QLabel *label5sdps_1 = new QLabel(this);
+    QLabel *label5sdps_2 = new QLabel(this);
+    QLabel *label5sdps_3 = new QLabel(this);
+    QLabel *label5sdps_4 = new QLabel(this);
+    QLabel *label5sdps_5 = new QLabel(this);
+    QLabel *label5sdps_6 = new QLabel(this);
+    QLabel *label5sdps_7 = new QLabel(this);
+    QLabel *label5sdps_8 = new QLabel(this);
+    QLabel *label5sdps_9 = new QLabel(this);
+
+
     // activity labels (in group mode)
     QLabel *labelact_0 = new QLabel(this);
     QLabel *labelact_1 = new QLabel(this);
@@ -193,6 +224,7 @@ private:
     QLabel *labellegendper = new QLabel(this);
     QLabel *labellegenddps = new QLabel(this);
     QLabel *labellegendact = new QLabel(this);
+    QLabel *labellegend5sdps = new QLabel(this);
 
     // label arrays
     QLabel* labelname [10] = {labelname_0,labelname_1,labelname_2,labelname_3,labelname_4,labelname_5,labelname_6,labelname_7,labelname_8,labelname_9};
@@ -200,6 +232,7 @@ private:
     QLabel* labelper [10] = {labelper_0,labelper_1,labelper_2,labelper_3,labelper_4,labelper_5,labelper_6,labelper_7,labelper_8,labelper_9};
     QLabel* labeldps [10] = {labeldps_0,labeldps_1,labeldps_2,labeldps_3,labeldps_4,labeldps_5,labeldps_6,labeldps_7,labeldps_8,labeldps_9};
     QLabel* labelact [10] = {labelact_0,labelact_1,labelact_2,labelact_3,labelact_4,labelact_5,labelact_6,labelact_7,labelact_8,labelact_9};
+    QLabel* label5sdps [10] = {label5sdps_0,label5sdps_1,label5sdps_2,label5sdps_3,label5sdps_4,label5sdps_5,label5sdps_6,label5sdps_7,label5sdps_8,label5sdps_9};
 
     char tmp1[20];
     QTimer update_Timer;
@@ -217,38 +250,40 @@ private slots:
     void StartupPref();
 
     void on_actionShrinkUI_triggered(bool checked);
-    bool on_pushButton_toggled(bool toggled);
-    bool HideAndShowToolbar(bool);
-    bool HideAndShowGraph(bool);
     void Initialize();
-    bool on_actionActionGroupDetails_toggled(bool toggled);
+    void on_actionActionGroupDetails_toggled();
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
 
-    void SProfChanged(QString);
-    void SProfSettingsChanged();
-    void SNameChanged();
-    void SDamageChanged();
-    void SDPSChanged();
-    void SCDamageChanged();
-    void SCPerDmgChanged();
-    void SCDPSChanged();
-    
+    void ShowToolbarChanged();
+    void ShowDetailsChanged();
+    void ShowExtraDetailsChanged();
+    void ShowOpacityChanged();
 
-    void GProfChanged(QString);
-    void GProfSettingsChanged();
-    void GPositionChanged();
-    void GNameChanged();
-    void GDamageChanged();
-    void GPerDmgChanged();
-    void GDPSChanged();
-    void GActivityChanged();
+    void ProfSettingsChanged();
+    void NameChanged();
+    void DamageChanged();
+    void DPSChanged();
+    void CDamageChanged();
+    void CPerDmgChanged();
+    void CDPSChanged();
+    void FiveSecRealDPSChanged();
+    void ProfChanged(QString);
+    void PositionChanged();
+    void PerDmgChanged();
+    void ActivityChanged();
 
-    void SSettingsChanged();
-    void GSettingsChanged();
+    void ShowGraphChanged();
+    void RealDPSChanged();
+    void GraphFiveSecRealDPSChanged();
+    void AvDPSChanged();
+    void AvCDPSChanged();
+    void AvGroupDPSChanged();
+
+    void CheckForOldVerison();
     void CheckFirstRun();
     void on_pushButton_clicked();
-    void on_pushButton2_clicked();
+    void on_pushButton_2_clicked();
     void writeFile(QString);
     void on_actionActionSave_triggered();
     void updateCombatCourse();
@@ -260,9 +295,13 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
-    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs);
+    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_5sDPS, int m_realDps);
     void runMe();
     void resetGraph();
+    void action_fixOnTop();
+    void keyPressEvent( QKeyEvent * event );
+    void action_combatMode();
+    void action_resetCombatMode();
 };
 
 }

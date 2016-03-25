@@ -18,12 +18,16 @@ namespace GW2
         explicit Configurator(QWidget *parent = 0);
         ~Configurator();
 
+    protected:
+        void mouseMoveEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent *event);
+
     private slots:
         void RestoreDefaults();
 
     private:
         Ui::Configurator *ui;
-
+        QPoint m_dragPosition;
         friend class MainWindow;
     };
 }

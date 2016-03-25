@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
-    <height>320</height>
+    <width>326</width>
+    <height>371</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
     <width>330</width>
-    <height>320</height>
+    <height>400</height>
    </size>
   </property>
   <property name="font">
@@ -28,8 +28,8 @@
    <string notr="true">background-color: rgb(32, 43, 47);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="2" column="4">
-    <widget class="QPushButton" name="pushButtonReset_2">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButtonReset">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -45,11 +45,11 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Close</string>
+      <string>Restore defaults</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="5">
+   <item row="2" column="1">
     <widget class="QLabel" name="labelVersion">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -84,8 +84,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="3">
-    <widget class="QPushButton" name="pushButtonReset">
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButtonReset_2">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -101,11 +101,11 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Restore defaults</string>
+      <string>Close</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="5">
+   <item row="0" column="0" colspan="2">
     <widget class="QToolBox" name="settingsToolbox">
      <property name="font">
       <font>
@@ -121,152 +121,103 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
-     <widget class="QWidget" name="soloSettings">
+     <widget class="QWidget" name="specsSettings">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>312</width>
-        <height>150</height>
+        <width>308</width>
+        <height>169</height>
        </rect>
       </property>
       <attribute name="label">
-       <string>Solo: Player Bar Settings</string>
+       <string>Gw2SPECS Settings</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="1">
-        <widget class="QComboBox" name="professionSoloComboBox">
-         <property name="styleSheet">
-          <string notr="true">QComboBox {
-    background-color: #8BB2DA;
-	color: rgb(255, 255, 255);
-    border: 1px solid #AAA;
-	font-size: 14px;
-}
-QComboBox:editable {
-    background: #8BB2DA;
-	color: rgb(255, 255, 255);
-}
-
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-	color: rgb(255, 255, 255);
-	border:none;
-
-
-}
-QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-    top: 1px;
-    left: 1px;
-}
-QComboBox QAbstractItemView {
-    border: 2px solid darkgray;
-    selection-background-color:#8BB2DA;
-	color: rgb(255, 255, 255);
-}</string>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="checkBoxOpacity">
+         <property name="text">
+          <string>Toggle Opacity</string>
          </property>
-         <property name="editable">
-          <bool>false</bool>
-         </property>
-         <property name="currentText">
-          <string>Select Profession</string>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <property name="maxVisibleItems">
-          <number>10</number>
-         </property>
-         <item>
-          <property name="text">
-           <string>Select Profession</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Elementalist</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Enigneer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Guardian</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Mesmer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Necromancer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ranger</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Revenant</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Thief</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Warrior</string>
-          </property>
-         </item>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloProfColors">
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxDetails">
          <property name="text">
-          <string>Color</string>
+          <string>Show Details</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="checkBoxToolbar">
+         <property name="text">
+          <string>Show Toolbar</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBoxSoloCDamage">
+        <widget class="QCheckBox" name="checkBoxExtraDetails">
          <property name="text">
-          <string>(Show CondiDmg)</string>
+          <string>Show Additional Details</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoxSoloCPerDmg">
-         <property name="text">
-          <string>(Percental Condi)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="checkBoxSoloCDPS">
+      </layout>
+     </widget>
+     <widget class="QWidget" name="soloSettings">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-52</y>
+        <width>300</width>
+        <height>204</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>Player Bar Settings</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="checkBoxCDPS">
          <property name="text">
           <string>(Show CondiDPS)</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloDamage">
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="checkBoxActivity">
+         <property name="text">
+          <string>(Show Activity)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="checkBoxPosition">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Show Position</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QCheckBox" name="checkBoxCPerDmg">
+         <property name="text">
+          <string>(Percental Condi)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxDamage">
          <property name="text">
           <string>Show Damage</string>
          </property>
@@ -275,8 +226,15 @@ QComboBox QAbstractItemView {
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloDPS">
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="checkBoxCDamage">
+         <property name="text">
+          <string>(Show CondiDmg)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBoxDPS">
          <property name="text">
           <string>Show DPS</string>
          </property>
@@ -286,7 +244,17 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloName">
+        <widget class="QCheckBox" name="checkBoxPerDmg">
+         <property name="text">
+          <string>Percental Damage</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBoxName">
          <property name="text">
           <string>Show Name</string>
          </property>
@@ -295,31 +263,20 @@ QComboBox QAbstractItemView {
          </property>
         </widget>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="groupSettings">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>294</width>
-        <height>124</height>
-       </rect>
-      </property>
-      <attribute name="label">
-       <string>Group: Player Bar Settings</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBoxGroupProfColors">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+       <item row="3" column="0">
+        <widget class="QLabel" name="groupOnly">
          <property name="text">
-          <string>Show Profession</string>
+          <string>Group only:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBox5sDPS">
+         <property name="text">
+          <string>Show Last5sDPS</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -424,59 +381,32 @@ QComboBox QAbstractItemView {
          </item>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="checkBoxGroupDamage">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBoxProfColors">
          <property name="text">
-          <string>Show Damage</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
+          <string>Show Profession</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBoxGroupPosition">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="graphSettings">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>308</width>
+        <height>169</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>Graph Settings</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBoxGraphShow">
          <property name="text">
-          <string>Show Position</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBoxGroupName">
-         <property name="text">
-          <string>Show Name</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="checkBoxGroupDPS">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Show DPS</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="checkBoxGroupPerDmg">
-         <property name="text">
-          <string>Percental Damage</string>
+          <string>Show Graph</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -484,9 +414,70 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoxGroupActivity">
+        <widget class="QCheckBox" name="checkBoxGraphRealDPS">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blue Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <property name="text">
-          <string>(Show Activity)</string>
+          <string>Show RealDPS</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBoxGraphAvgCDPS">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Average CondiDPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxGraphAvgGroupDPS">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Average GrDPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBoxGraphAvgDPS">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Average PersDPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="checkBoxGraph5sDPS">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Last5sDPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -497,8 +488,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>231</width>
-        <height>132</height>
+        <width>308</width>
+        <height>169</height>
        </rect>
       </property>
       <attribute name="label">
@@ -758,8 +749,8 @@ QComboBox QAbstractItemView {
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>257</y>
+     <x>313</x>
+     <y>337</y>
     </hint>
     <hint type="destinationlabel">
      <x>296</x>
