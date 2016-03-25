@@ -28,6 +28,83 @@
    <string notr="true">background-color: rgb(32, 43, 47);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButtonReset">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Restore defaults</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="labelVersion">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>version</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButtonReset_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="2">
     <widget class="QToolBox" name="settingsToolbox">
      <property name="font">
@@ -46,6 +123,44 @@ color: #8BB2DA;</string>
      <property name="currentIndex">
       <number>0</number>
      </property>
+     <widget class="QWidget" name="specsSettings">
+      <attribute name="label">
+       <string>Gw2SPECS Settings</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="checkBoxOpacity">
+         <property name="text">
+          <string>Toggle Opacity</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxDetails">
+         <property name="text">
+          <string>Show Details</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="checkBoxToolbar">
+         <property name="text">
+          <string>Show Toolbar</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBoxExtraDetails">
+         <property name="text">
+          <string>Show Additional Details</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="soloSettings">
       <property name="geometry">
        <rect>
@@ -59,6 +174,13 @@ color: #8BB2DA;</string>
        <string>Player Bar Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
+       <item row="6" column="0">
+        <widget class="QCheckBox" name="checkBoxCDPS">
+         <property name="text">
+          <string>(Show CondiDPS)</string>
+         </property>
+        </widget>
+       </item>
        <item row="6" column="1">
         <widget class="QCheckBox" name="checkBoxActivity">
          <property name="text">
@@ -76,13 +198,6 @@ color: #8BB2DA;</string>
          </property>
          <property name="checked">
           <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QCheckBox" name="checkBoxCDPS">
-         <property name="text">
-          <string>(Show CondiDPS)</string>
          </property>
         </widget>
        </item>
@@ -110,10 +225,10 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBoxName">
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBoxDPS">
          <property name="text">
-          <string>Show Name</string>
+          <string>Show DPS</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -130,17 +245,10 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBoxProfColors">
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBoxName">
          <property name="text">
-          <string>Show Profession</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBoxDPS">
-         <property name="text">
-          <string>Show DPS</string>
+          <string>Show Name</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -151,6 +259,16 @@ color: #8BB2DA;</string>
         <widget class="QLabel" name="groupOnly">
          <property name="text">
           <string>Group only:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBox5sDPS">
+         <property name="text">
+          <string>Show Last5sDPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -255,13 +373,10 @@ QComboBox QAbstractItemView {
          </item>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBox5sDPS">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBoxProfColors">
          <property name="text">
-          <string>Show Last5sDPS</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
+          <string>Show Profession</string>
          </property>
         </widget>
        </item>
@@ -273,7 +388,7 @@ QComboBox QAbstractItemView {
         <x>0</x>
         <y>0</y>
         <width>308</width>
-        <height>201</height>
+        <height>169</height>
        </rect>
       </property>
       <attribute name="label">
@@ -366,7 +481,7 @@ QComboBox QAbstractItemView {
         <x>0</x>
         <y>0</y>
         <width>308</width>
-        <height>201</height>
+        <height>169</height>
        </rect>
       </property>
       <attribute name="label">
@@ -613,83 +728,6 @@ QComboBox QAbstractItemView {
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QPushButton" name="pushButtonReset">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>Restore defaults</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="pushButtonReset_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>Close</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="labelVersion">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="text">
-      <string>version</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
     </widget>
    </item>
   </layout>

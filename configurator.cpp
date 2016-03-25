@@ -22,6 +22,11 @@ Configurator::Configurator(QWidget *parent) :
     // Set version
     ui->labelVersion->setText(Settings::s_Product);
 
+    Settings::ReadSettings(ui->checkBoxToolbar);
+    Settings::ReadSettings(ui->checkBoxDetails);
+    Settings::ReadSettings(ui->checkBoxExtraDetails);
+    Settings::ReadSettings(ui->checkBoxOpacity);
+
     Settings::ReadSettings(ui->checkBoxProfColors);
     Settings::ReadSettings(ui->checkBoxName);
     Settings::ReadSettings(ui->checkBoxDamage);
@@ -51,6 +56,11 @@ Configurator::Configurator(QWidget *parent) :
 
 Configurator::~Configurator()
 {
+    Settings::WriteSettings(ui->checkBoxToolbar);
+    Settings::WriteSettings(ui->checkBoxDetails);
+    Settings::WriteSettings(ui->checkBoxExtraDetails);
+    Settings::WriteSettings(ui->checkBoxOpacity);
+
     Settings::WriteSettings(ui->checkBoxProfColors);
     Settings::WriteSettings(ui->checkBoxName);
     Settings::WriteSettings(ui->checkBoxDamage);

@@ -34,31 +34,24 @@ public:
     ~MainWindow();
         QString time;
         QMenu myMenu;
-        QMenu *subMenu = new QMenu("Toggle On/Off", this);
-        QMenu *graphMenu = new QMenu("Miscellaneous", this);
+        QMenu *miscMenu = new QMenu("Miscellaneous", this);
 
-        QAction *combatMode = myMenu.addAction("CombatMode");
         QAction *resetData = myMenu.addAction("Reset");
+        QAction *combatMode = myMenu.addAction("CombatMode");
         QAction *connectServer = myMenu.addAction("Connect");
         QAction *saveToFile = myMenu.addAction("Save File");
         QAction *options = myMenu.addAction("Options");        
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
 
-        QAction *fixOnTop = graphMenu->addAction("Fix onTop");
-        QAction *hideShowGraph = graphMenu->addAction("Hide Graph"); //Toggle
-        QAction *hideShowRealDPS = graphMenu->addAction("Hide RealDPS");
-
-        QAction *hideShowToolbar = subMenu->addAction("Hide Toolbar"); //Toggle
-        QAction *extraOptions = subMenu->addAction("Show Details"); //Toggle
-        QAction *transparentWindow = subMenu->addAction("Transparency On"); //Toggle
-        QAction *autoReset = subMenu->addAction("Auto-Reset On"); //Toggle
+        QAction *fixOnTop = miscMenu->addAction("Fix onTop");
+        QAction *autoReset = miscMenu->addAction("Auto-Reset On"); //Toggle
 
         int m_msecs;
         QList<int> _kc;
         int _pos;
         QDialog *combatDialog = new QDialog();
-        QPushButton *resetCombatMode = new QPushButton(this);
+        QPushButton *resetCombatMode = new QPushButton();
 
 
 protected:
@@ -125,6 +118,12 @@ private:
 
     char writeBuff[128];
     bool is_connected;
+
+    //SPECS Settings
+    bool displayToolbar;
+    bool displayDetails;
+    bool displayExtraDetails;
+    bool displayOpacity;
 
     // solo settings
     bool displayProfColor;
@@ -254,11 +253,15 @@ private slots:
     void on_actionShrinkUI_triggered(bool checked);
     bool on_pushButton_toggled(bool toggled);
     bool HideAndShowToolbar(bool);
-    bool HideAndShowGraph(bool);
     void Initialize();
     bool on_actionActionGroupDetails_toggled(bool toggled);
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
+
+    void ShowToolbarChanged();
+    void ShowDetailsChanged();
+    void ShowExtraDetailsChanged();
+    void ShowOpacityChanged();
 
     void ProfSettingsChanged();
     void NameChanged();
@@ -284,7 +287,7 @@ private slots:
     void GSettingsChanged();
     void CheckFirstRun();
     void on_pushButton_clicked();
-    void on_pushButton2_clicked();
+    void on_pushButton_2_clicked();
     void writeFile(QString);
     void on_actionActionSave_triggered();
     void updateCombatCourse();
@@ -299,7 +302,6 @@ private slots:
     void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_5sDPS, int m_realDps);
     void runMe();
     void resetGraph();
-    bool action_hideShowRealDPS(bool toggled);
     void action_fixOnTop();
     void keyPressEvent( QKeyEvent * event );
     void action_combatMode();
