@@ -95,11 +95,9 @@ MainWindow::MainWindow(QWidget *parent) :
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
 
+    combatMode->setIcon(QIcon(":/combatMode"));
     combatMode->setIconVisibleInMenu(true);
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
-
-    fixOnTop->setIconVisibleInMenu(true);
-    QObject::connect(fixOnTop, SIGNAL(triggered(bool)), this, SLOT(action_fixOnTop()));
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);

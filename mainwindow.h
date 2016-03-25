@@ -44,7 +44,6 @@ public:
         QAction *exitSeparator = new QAction(this);
         QAction *exitMenu = myMenu.addAction("Exit");
 
-        QAction *fixOnTop = miscMenu->addAction("Fix onTop");
         QAction *autoReset = miscMenu->addAction("Auto-Reset On"); //Toggle
 
         int m_msecs;
