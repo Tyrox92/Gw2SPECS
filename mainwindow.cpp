@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MyDialog(this),
     update_Timer(this)
 {
+    CheckForOldVerison();
     ui->setupUi(this);
     // generate ui and so on
     StartupPref();
@@ -253,7 +254,8 @@ MainWindow::MainWindow(QWidget *parent) :
     dmgMeter->Reset();
 }
 
-void GW2::MainWindow::keyPressEvent( QKeyEvent * event ){
+void GW2::MainWindow::keyPressEvent( QKeyEvent * event )
+{
     if(_kc.at(_pos) == event->key()){
         ++_pos;
         qDebug()<< event->key();
@@ -274,6 +276,28 @@ void GW2::MainWindow::keyPressEvent( QKeyEvent * event ){
     }
 }
 
+void GW2::MainWindow::CheckForOldVerison()
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("version");
+    QString oldversion = settings.value("version").toString();
+    qDebug() << "old: " << oldversion;
+    if (oldversion=="") {
+        // del old stuff
+        QSettings settings("Gw2SPECS");
+        settings.remove("");
+        settings.beginGroup("version");
+        settings.setValue("version","2.5");
+        settings.endGroup();
+        qDebug() << "old settings have been removed";
+    } else if (settings.value("version").toString()=="2.5") {
+        // this has no use yet, just for future versions
+        qDebug() << "version is 2.5";
+    } else {
+    }
+    settings.endGroup();
+}
+
 void GW2::MainWindow::StartupPref()
 {
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -286,7 +310,7 @@ void GW2::MainWindow::StartupPref()
     resetCombatMode->hide();
 
     //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
-    //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
+    //ui->toolBar->setAttribute(Qt::WA_TranslucentBack*ground);
     ui->widget->hide();
     ui->widgetExtraDetails->hide();
 

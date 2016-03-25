@@ -280,6 +280,7 @@ private slots:
     void AvCDPSChanged();
     void AvGroupDPSChanged();
 
+    void CheckForOldVerison();
     void CheckFirstRun();
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
