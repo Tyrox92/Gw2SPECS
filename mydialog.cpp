@@ -24,7 +24,6 @@ MyDialog::~MyDialog()
 {
     Settings::WriteSettings(ui->professionComboBox);
     if (ui->InputName->text().length()>0) delete ui;
-
 }
 
 void MyDialog::on_pushButton_clicked()

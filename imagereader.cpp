@@ -99,6 +99,7 @@ QString ImageReader::ReadLineFromBottom(const QImage& image, const ImageAttribut
             if ((lred>150)&& (lgreen<60) && (lblue<60)) LastColor=1;
             if ((lred>100)&& (lgreen>70) && (lblue<40)) LastColor=2;
             if ((lred>100)&& (lgreen<80) && (lblue>100)) LastColor=3;
+            if (((lred>90) && (lred<140)) && ((lgreen>90) && (lgreen<140)) && ((lblue>90) && (lblue<140))) LastColor=4;  //timestamp color
             x = qMax(x, m_CharacterGrid.GetXOffset() + offsetAdd + imageAttributes.GetCharacterWidth() - 1);
         }
     }
