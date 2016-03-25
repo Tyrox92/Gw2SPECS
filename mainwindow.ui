@@ -567,7 +567,7 @@
              <string notr="true">color: rgb(0, 255, 0);</string>
             </property>
             <property name="text">
-             <string>DPS</string>
+             <string>Grp DPS</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

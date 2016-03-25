@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>323</width>
+    <width>326</width>
     <height>371</height>
    </rect>
   </property>
@@ -60,14 +60,14 @@ color: #8BB2DA;</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="6" column="1">
-        <widget class="QCheckBox" name="checkBoxGroupActivity">
+        <widget class="QCheckBox" name="checkBoxActivity">
          <property name="text">
           <string>(Show Activity)</string>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoxGroupPosition">
+        <widget class="QCheckBox" name="checkBoxPosition">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -80,21 +80,21 @@ color: #8BB2DA;</string>
         </widget>
        </item>
        <item row="6" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloCDPS">
+        <widget class="QCheckBox" name="checkBoxCDPS">
          <property name="text">
           <string>(Show CondiDPS)</string>
          </property>
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QCheckBox" name="checkBoxSoloCPerDmg">
+        <widget class="QCheckBox" name="checkBoxCPerDmg">
          <property name="text">
           <string>(Percental Condi)</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QCheckBox" name="checkBoxSoloDamage">
+        <widget class="QCheckBox" name="checkBoxDamage">
          <property name="text">
           <string>Show Damage</string>
          </property>
@@ -104,14 +104,14 @@ color: #8BB2DA;</string>
         </widget>
        </item>
        <item row="5" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloCDamage">
+        <widget class="QCheckBox" name="checkBoxCDamage">
          <property name="text">
           <string>(Show CondiDmg)</string>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloName">
+        <widget class="QCheckBox" name="checkBoxName">
          <property name="text">
           <string>Show Name</string>
          </property>
@@ -121,7 +121,7 @@ color: #8BB2DA;</string>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QCheckBox" name="checkBoxGroupPerDmg">
+        <widget class="QCheckBox" name="checkBoxPerDmg">
          <property name="text">
           <string>Percental Damage</string>
          </property>
@@ -131,14 +131,14 @@ color: #8BB2DA;</string>
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloProfColors">
+        <widget class="QCheckBox" name="checkBoxProfColors">
          <property name="text">
           <string>Show Profession</string>
          </property>
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBoxSoloDPS">
+        <widget class="QCheckBox" name="checkBoxDPS">
          <property name="text">
           <string>Show DPS</string>
          </property>
@@ -148,14 +148,14 @@ color: #8BB2DA;</string>
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="groupOnly">
          <property name="text">
           <string>Group only:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="professionGroupComboBox">
+        <widget class="QComboBox" name="professionComboBox">
          <property name="styleSheet">
           <string notr="true">QComboBox {
     background-color: #8BB2DA;
@@ -257,9 +257,6 @@ QComboBox QAbstractItemView {
        </item>
        <item row="2" column="1">
         <widget class="QCheckBox" name="checkBox5sDPS">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
          <property name="text">
           <string>Show Last5sDPS</string>
          </property>
@@ -275,7 +272,7 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>305</width>
+        <width>308</width>
         <height>201</height>
        </rect>
       </property>
@@ -284,7 +281,7 @@ QComboBox QAbstractItemView {
       </attribute>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBoxShowGraph">
+        <widget class="QCheckBox" name="checkBoxGraphShow">
          <property name="text">
           <string>Show Graph</string>
          </property>
@@ -294,7 +291,7 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoxRealDPS">
+        <widget class="QCheckBox" name="checkBoxGraphRealDPS">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -310,7 +307,7 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBoxAvgCDPS">
+        <widget class="QCheckBox" name="checkBoxGraphAvgCDPS">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -323,7 +320,7 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QCheckBox" name="checkBoxAvgGroupDPS">
+        <widget class="QCheckBox" name="checkBoxGraphAvgGroupDPS">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -336,12 +333,25 @@ QComboBox QAbstractItemView {
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBoxAvgSoloDPS">
+        <widget class="QCheckBox" name="checkBoxGraphAvgDPS">
          <property name="toolTip">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string>Average SoloDPS</string>
+          <string>Average PersDPS</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="checkBoxGraph5sDPS">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Last5sDPS</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -355,7 +365,7 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>305</width>
+        <width>308</width>
         <height>201</height>
        </rect>
       </property>

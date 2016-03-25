@@ -96,7 +96,7 @@ void DmgMeter::Reset()
     combatCourse = "";
     updateCounter=0;
     m_rDmg=0;
-    m_rDps=0;
+    m_5sDPS=0;
     m_realDps=0;
     dmg_5s_ago=0;
     dmg_4s_ago=0;
@@ -160,7 +160,7 @@ void DmgMeter::ComputeDps()
 //        else
 //            {
 //            updateCounter=0;
-//            m_rDps = elapsedSecsSinceCombat == 0.0 ? (m_Dmg-m_rDmg) : (m_Dmg-m_rDmg) / 5.0;
+//            m_5sDPS = elapsedSecsSinceCombat == 0.0 ? (m_Dmg-m_rDmg) : (m_Dmg-m_rDmg) / 5.0;
 //            m_rDmg=m_Dmg;
 //            }
 
@@ -174,8 +174,8 @@ void DmgMeter::ComputeDps()
     dmg_1s_ago = dmg_now;
     dmg_now = m_rDmg;
 
-    m_rDps =(5.0f/15.0f*(dmg_now-dmg_1s_ago)+4.0f/15.0f*(dmg_1s_ago-dmg_2s_ago)+3.0f/15.0f*(dmg_2s_ago-dmg_3s_ago)+2.0f/15.0f*(dmg_3s_ago-dmg_4s_ago)+1.0f/15.0f*(dmg_4s_ago-dmg_5s_ago));
-    if(m_rDps>999999999){m_rDps=0;}
+    m_5sDPS =(5.0f/15.0f*(dmg_now-dmg_1s_ago)+4.0f/15.0f*(dmg_1s_ago-dmg_2s_ago)+3.0f/15.0f*(dmg_2s_ago-dmg_3s_ago)+2.0f/15.0f*(dmg_3s_ago-dmg_4s_ago)+1.0f/15.0f*(dmg_4s_ago-dmg_5s_ago));
+    if(m_5sDPS>999999999){m_5sDPS=0;}
     if(m_realDps>999999999){m_realDps=0;}
 
     m_Activity=100.0f*elapsedTimeSinceCombat/(OffCombatTimeInMsec+elapsedTimeSinceCombat+1);

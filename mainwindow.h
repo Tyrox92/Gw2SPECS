@@ -127,24 +127,24 @@ private:
     bool is_connected;
 
     // solo settings
-    bool displaySProfColor;
-    bool displaySName;
-    bool displaySDmg;
-    bool displaySDPS;
-    bool displaySCDmg;
-    bool displaySCPer;
-    bool displaySCDPS;
-    // group settings
-    bool displayGPos;
-    bool displayGPer;
-    bool displayGAct;
+    bool displayProfColor;
+    bool displayName;
+    bool displayDmg;
+    bool displayDPS;
+    bool displayCDmg;
+    bool displayCPerDmg;
+    bool displayCDPS;
+    bool display5sDPS;
+    bool displayPos;
+    bool displayPerDmg;
+    bool displayAct;
     // graph settings
     bool displayGraph;
-    bool displayRealDPS;
-    bool display5sDPS;
-    bool displayAvSDPS;
-    bool displayAvSCDPS;
-    bool displayAvGDPS;
+    bool displayGraphRealDPS;
+    bool displayGraph5sDPS;
+    bool displayGraphAvDPS;
+    bool displayGraphAvCDPS;
+    bool displayGraphAvGDPS;
 
     // name labels (in group mode)
     QLabel *labelname_0 = new QLabel(this);
@@ -196,16 +196,16 @@ private:
 
 
     // single rdps over time labels (in group mode)
-    QLabel *labelrdps_0 = new QLabel(this);
-    QLabel *labelrdps_1 = new QLabel(this);
-    QLabel *labelrdps_2 = new QLabel(this);
-    QLabel *labelrdps_3 = new QLabel(this);
-    QLabel *labelrdps_4 = new QLabel(this);
-    QLabel *labelrdps_5 = new QLabel(this);
-    QLabel *labelrdps_6 = new QLabel(this);
-    QLabel *labelrdps_7 = new QLabel(this);
-    QLabel *labelrdps_8 = new QLabel(this);
-    QLabel *labelrdps_9 = new QLabel(this);
+    QLabel *label5sdps_0 = new QLabel(this);
+    QLabel *label5sdps_1 = new QLabel(this);
+    QLabel *label5sdps_2 = new QLabel(this);
+    QLabel *label5sdps_3 = new QLabel(this);
+    QLabel *label5sdps_4 = new QLabel(this);
+    QLabel *label5sdps_5 = new QLabel(this);
+    QLabel *label5sdps_6 = new QLabel(this);
+    QLabel *label5sdps_7 = new QLabel(this);
+    QLabel *label5sdps_8 = new QLabel(this);
+    QLabel *label5sdps_9 = new QLabel(this);
 
 
     // activity labels (in group mode)
@@ -226,7 +226,7 @@ private:
     QLabel *labellegendper = new QLabel(this);
     QLabel *labellegenddps = new QLabel(this);
     QLabel *labellegendact = new QLabel(this);
-    QLabel *labellegendrdps = new QLabel(this);
+    QLabel *labellegend5sdps = new QLabel(this);
 
     // label arrays
     QLabel* labelname [10] = {labelname_0,labelname_1,labelname_2,labelname_3,labelname_4,labelname_5,labelname_6,labelname_7,labelname_8,labelname_9};
@@ -234,7 +234,7 @@ private:
     QLabel* labelper [10] = {labelper_0,labelper_1,labelper_2,labelper_3,labelper_4,labelper_5,labelper_6,labelper_7,labelper_8,labelper_9};
     QLabel* labeldps [10] = {labeldps_0,labeldps_1,labeldps_2,labeldps_3,labeldps_4,labeldps_5,labeldps_6,labeldps_7,labeldps_8,labeldps_9};
     QLabel* labelact [10] = {labelact_0,labelact_1,labelact_2,labelact_3,labelact_4,labelact_5,labelact_6,labelact_7,labelact_8,labelact_9};
-    QLabel* labelrdps [10] = {labelrdps_0,labelrdps_1,labelrdps_2,labelrdps_3,labelrdps_4,labelrdps_5,labelrdps_6,labelrdps_7,labelrdps_8,labelrdps_9};
+    QLabel* label5sdps [10] = {label5sdps_0,label5sdps_1,label5sdps_2,label5sdps_3,label5sdps_4,label5sdps_5,label5sdps_6,label5sdps_7,label5sdps_8,label5sdps_9};
 
     char tmp1[20];
     QTimer update_Timer;
@@ -260,24 +260,24 @@ private slots:
     void on_actionConnect_triggered();
     void on_actionClose_triggered();
 
-    void SProfSettingsChanged();
-    void SNameChanged();
-    void SDamageChanged();
-    void SDPSChanged();
-    void SCDamageChanged();
-    void SCPerDmgChanged();
-    void SCDPSChanged();
-
-    void GProfChanged(QString);
-    void GPositionChanged();
-    void GPerDmgChanged();
-    void GActivityChanged();
+    void ProfSettingsChanged();
+    void NameChanged();
+    void DamageChanged();
+    void DPSChanged();
+    void CDamageChanged();
+    void CPerDmgChanged();
+    void CDPSChanged();
+    void FiveSecRealDPSChanged();
+    void ProfChanged(QString);
+    void PositionChanged();
+    void PerDmgChanged();
+    void ActivityChanged();
 
     void ShowGraphChanged();
     void RealDPSChanged();
-    void FiveSecRealDPSChanged();
-    void AvSDPSChanged();
-    void AvSCDPSChanged();
+    void GraphFiveSecRealDPSChanged();
+    void AvDPSChanged();
+    void AvCDPSChanged();
     void AvGroupDPSChanged();
 
     void SSettingsChanged();
@@ -296,7 +296,7 @@ private slots:
     bool connectToServ(bool);
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
-    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_rDps, int m_realDps);
+    void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_5sDPS, int m_realDps);
     void runMe();
     void resetGraph();
     bool action_hideShowRealDPS(bool toggled);

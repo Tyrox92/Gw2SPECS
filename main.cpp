@@ -13,7 +13,7 @@ using namespace GW2;
 
 int MyClientSlot;
 unsigned long m_Dps;
-unsigned long m_rDps;
+unsigned long m_5sDPS;
 unsigned long m_realDps;
 unsigned long m_Dmg;
 unsigned long m_rDmg;
