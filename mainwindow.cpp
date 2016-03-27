@@ -525,7 +525,7 @@ void GW2::MainWindow::CheckForUpdate()
     QString curVersion = Settings::s_Version;
 
     QNetworkAccessManager *nam = new QNetworkAccessManager();
-    QUrl data_url("http://www.gw2dps.com/version/version_check.txt");
+    QUrl data_url("http://version.gw2specs.com/version_check");
     QNetworkReply* reply = nam->get(QNetworkRequest(data_url));
     QEventLoop eventLoop;
     QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
