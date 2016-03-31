@@ -28,6 +28,14 @@ MainWindow::MainWindow(QWidget *parent) :
     CheckForOldVerison();
     ui->setupUi(this);
     // generate ui and so on
+
+    //Must be called before StartupPref() to Enable/Disable mode
+    Ui::Configurator* uiConfig = m_Configurator.ui;
+
+    Settings::ReadSettings(uiConfig->checkBoxOBS);
+    displayOBS=uiConfig->checkBoxOBS->isChecked();
+
+
     StartupPref();
     _kc << Qt::Key_Up << Qt::Key_Up << Qt::Key_Down << Qt::Key_Down << Qt::Key_Left << Qt::Key_Right << Qt::Key_Left << Qt::Key_Right << Qt::Key_A << Qt::Key_B;
     _pos = 0;
@@ -37,8 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ScreenRecorder* screenRecorder = new ScreenRecorder;
     DmgMeter* dmgMeter = &screenRecorder->GetDmgMeter();
     screenRecorder->moveToThread(&m_ScreenRecorderThread);
-
-    Ui::Configurator* uiConfig = m_Configurator.ui;
 
     dmgMeter->moveToThread(&m_ScreenRecorderThread);
 
@@ -58,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxExtraDetails, SIGNAL(clicked(bool)), this, SLOT(ShowExtraDetailsChanged()));
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(ShowExtraDetailsChanged()));
     QObject::connect(uiConfig->checkBoxOpacity, SIGNAL(clicked(bool)), this, SLOT(ShowOpacityChanged()));
+    QObject::connect(uiConfig->checkBoxOBS, SIGNAL(clicked(bool)), this, SLOT(ShowOBSChanged()));
     // connecting configurator - solo display settings
     QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
     QObject::connect(uiConfig->checkBoxName, SIGNAL(clicked(bool)), this, SLOT(NameChanged()));
@@ -154,6 +161,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->checkBoxExtraDetails);
     Settings::ReadSettings(uiConfig->checkBoxOpacity);
 
+
     Settings::ReadSettings(uiConfig->checkBoxProfColors);
     Settings::ReadSettings(uiConfig->checkBoxName);
     Settings::ReadSettings(uiConfig->checkBoxDamage);
@@ -189,6 +197,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayDetails=uiConfig->checkBoxDetails->isChecked();
     displayExtraDetails=uiConfig->checkBoxExtraDetails->isChecked();
     displayOpacity=uiConfig->checkBoxOpacity->isChecked();
+
 
     // solo settings
     displayProfColor=uiConfig->checkBoxProfColors->isChecked();
@@ -253,7 +262,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Initialize();
     dmgMeter->Reset();
 }
-
 void GW2::MainWindow::keyPressEvent( QKeyEvent * event )
 {
     if(_kc.at(_pos) == event->key()){
@@ -301,10 +309,11 @@ void GW2::MainWindow::CheckForOldVerison()
 void GW2::MainWindow::StartupPref()
 {
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-    Qt::WindowFlags flags = windowFlags();
-    this->setWindowFlags(flags | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    this->show();
+//    Qt::WindowFlags flags = windowFlags();
+//    this->setWindowFlags(flags | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+//    this->setAttribute(Qt::WA_TranslucentBackground);
+//    this->show();
+    action_widgetMode();
     runMe();
     fixOnTopCount=0;
     resetCombatMode->hide();
@@ -687,6 +696,12 @@ void MainWindow::ShowOpacityChanged()
 {
     if (displayOpacity==1) displayOpacity=0; else displayOpacity=1;
     EnableTransparency(displayOpacity);
+}
+
+void MainWindow::ShowOBSChanged()
+{
+    if (displayOBS==1) displayOBS=0; else displayOBS=1;
+    action_widgetMode();
 }
 
 void MainWindow::ProfSettingsChanged()
@@ -1271,7 +1286,7 @@ void MainWindow::UpdateTimer(void)
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_5sDPS,m_realDps);
     m_realDps=0;
     if(fixOnTopCount<1){
-        action_fixOnTop();
+        action_widgetMode();
         HWND winHandle  = (HWND)winId();
         ShowWindow(winHandle, SW_HIDE);
         SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
@@ -1279,7 +1294,7 @@ void MainWindow::UpdateTimer(void)
         fixOnTopCount++;
     }
     if(fixOnTopCount==1){
-        action_fixOnTop();
+        action_widgetMode();
         fixOnTopCount++;
     }
 }
@@ -1624,9 +1639,14 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
 }
 
 
-void GW2::MainWindow::action_fixOnTop(){
+void GW2::MainWindow::action_widgetMode(){
+    if(displayOBS ==0){
+        this->setAttribute(Qt::WA_TranslucentBackground,true);
+    }else{
+        this->setAttribute(Qt::WA_TranslucentBackground,false);
+    }
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
+
     this->activateWindow();
     this->setFocus();
     this->show();
@@ -1638,7 +1658,7 @@ void GW2::MainWindow::action_combatMode(){
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_APPWINDOW | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
-    action_fixOnTop();
+    action_widgetMode();
     qDebug()<< "CombatMode Activated";
 
     QVBoxLayout *layout = new QVBoxLayout(combatDialog);
@@ -1659,7 +1679,7 @@ void GW2::MainWindow::action_resetCombatMode(){
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
-    action_fixOnTop();
+    action_widgetMode();
     combatDialog->close();
     qDebug()<<"CombatMode Deactivated";
 }

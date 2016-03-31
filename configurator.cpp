@@ -26,6 +26,7 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->checkBoxDetails);
     Settings::ReadSettings(ui->checkBoxExtraDetails);
     Settings::ReadSettings(ui->checkBoxOpacity);
+    Settings::ReadSettings(ui->checkBoxOBS);
 
     Settings::ReadSettings(ui->checkBoxProfColors);
     Settings::ReadSettings(ui->checkBoxName);
@@ -60,6 +61,7 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxDetails);
     Settings::WriteSettings(ui->checkBoxExtraDetails);
     Settings::WriteSettings(ui->checkBoxOpacity);
+    Settings::WriteSettings(ui->checkBoxOBS);
 
     Settings::WriteSettings(ui->checkBoxProfColors);
     Settings::WriteSettings(ui->checkBoxName);
@@ -94,6 +96,7 @@ void Configurator::RestoreDefaults()
     ui->checkBoxDetails->setChecked(false);
     ui->checkBoxExtraDetails->setChecked(false);
     ui->checkBoxOpacity->setChecked(false);
+    ui->checkBoxOBS->setChecked(false);
 
     ui->checkBoxProfColors->setChecked(false);
     ui->professionComboBox->setCurrentIndex(0);

@@ -121,7 +121,7 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="specsSettings">
       <property name="geometry">
@@ -136,17 +136,17 @@ color: #8BB2DA;</string>
        <string>Gw2SPECS Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBoxExtraDetails">
+         <property name="text">
+          <string>Show Additional Details</string>
+         </property>
+        </widget>
+       </item>
        <item row="3" column="1">
         <widget class="QCheckBox" name="checkBoxOpacity">
          <property name="text">
           <string>Toggle Opacity</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QCheckBox" name="checkBoxDetails">
-         <property name="text">
-          <string>Show Details</string>
          </property>
         </widget>
        </item>
@@ -160,10 +160,17 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="checkBoxExtraDetails">
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBoxDetails">
          <property name="text">
-          <string>Show Additional Details</string>
+          <string>Show Details</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="checkBoxOBS">
+         <property name="text">
+          <string>Enable OBS Mode</string>
          </property>
         </widget>
        </item>
@@ -173,7 +180,7 @@ color: #8BB2DA;</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-52</y>
+        <y>0</y>
         <width>300</width>
         <height>204</height>
        </rect>

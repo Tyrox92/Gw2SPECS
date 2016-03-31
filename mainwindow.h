@@ -123,6 +123,7 @@ private:
     bool displayDetails;
     bool displayExtraDetails;
     bool displayOpacity;
+    bool displayOBS;
 
     // solo settings
     bool displayProfColor;
@@ -241,6 +242,8 @@ private:
     QPushButton *changelog;
     QString m_Time;
 
+
+
 private slots:
     void UpdateTime(int);
     void SendClientInfo();
@@ -259,6 +262,7 @@ private slots:
     void ShowDetailsChanged();
     void ShowExtraDetailsChanged();
     void ShowOpacityChanged();
+    void ShowOBSChanged();
 
     void ProfSettingsChanged();
     void NameChanged();
@@ -298,7 +302,7 @@ private slots:
     void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_5sDPS, int m_realDps);
     void runMe();
     void resetGraph();
-    void action_fixOnTop();
+    void action_widgetMode(); // Switch between OBS and "Normal" Version
     void keyPressEvent( QKeyEvent * event );
     void action_combatMode();
     void action_resetCombatMode();
