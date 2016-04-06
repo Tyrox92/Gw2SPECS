@@ -22,7 +22,6 @@ namespace GW2
         QString getName();
         QString getIP();
         QString getPort();
-        int getProfession();
 
     private slots:
         void on_pushButton_clicked();

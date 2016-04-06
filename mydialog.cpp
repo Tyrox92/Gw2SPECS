@@ -17,19 +17,17 @@ MyDialog::MyDialog(QWidget *parent) :
     ui->InputName->setText(ReadNameSettings());
     ui->InputIP->setText(ReadIPSettings());
     ui->InputPort->setText(ReadPortSettings());
-    Settings::ReadSettings(ui->professionComboBox);
 }
 
 MyDialog::~MyDialog()
 {
-    Settings::WriteSettings(ui->professionComboBox);
     if (ui->InputName->text().length()>0) delete ui;
 }
 
 void MyDialog::on_pushButton_clicked()
 {
 
-    if (ui->InputName->text().length()>0)
+    if (ui->InputName->text().length()>=0)
     {
         WriteNameSettings(ui->InputName->text());
         accept();
@@ -44,11 +42,6 @@ void MyDialog::on_pushButton_clicked()
         WritePortSettings(ui->InputPort->text());
         accept();
     }
-}
-
-int MyDialog::getProfession()
-{
-    return ui->professionComboBox->currentIndex();
 }
 
 QString MyDialog::getName()

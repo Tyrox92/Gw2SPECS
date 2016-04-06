@@ -33,10 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Must be called before StartupPref() to Enable/Disable mode
     Ui::Configurator* uiConfig = m_Configurator.ui;
 
-    Settings::ReadSettings(uiConfig->checkBoxOBS);
-    displayOBS=uiConfig->checkBoxOBS->isChecked();
-
-
     StartupPref();
     _kc << Qt::Key_Up << Qt::Key_Up << Qt::Key_Down << Qt::Key_Down << Qt::Key_Left << Qt::Key_Right << Qt::Key_Left << Qt::Key_Right << Qt::Key_A << Qt::Key_B;
     _pos = 0;
@@ -75,7 +71,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->checkBoxCPerDmg, SIGNAL(clicked(bool)), this, SLOT(CPerDmgChanged()));
     QObject::connect(uiConfig->checkBoxCDPS, SIGNAL(clicked(bool)), this, SLOT(CDPSChanged()));
     QObject::connect(uiConfig->checkBox5sDPS, SIGNAL(clicked(bool)), this, SLOT(FiveSecRealDPSChanged()));
-    QObject::connect(uiConfig->professionComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(ProfChanged(QString)));
     QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
     QObject::connect(uiConfig->checkBoxPerDmg, SIGNAL(clicked(bool)), this, SLOT(PerDmgChanged()));
     QObject::connect(uiConfig->checkBoxActivity, SIGNAL(clicked(bool)), this, SLOT(ActivityChanged()));
@@ -161,7 +156,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->checkBoxDetails);
     Settings::ReadSettings(uiConfig->checkBoxExtraDetails);
     Settings::ReadSettings(uiConfig->checkBoxOpacity);
-
+    Settings::ReadSettings(uiConfig->checkBoxOBS);
 
     Settings::ReadSettings(uiConfig->checkBoxProfColors);
     Settings::ReadSettings(uiConfig->checkBoxName);
@@ -171,7 +166,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->checkBoxCPerDmg);
     Settings::ReadSettings(uiConfig->checkBoxCDPS);
     Settings::ReadSettings(uiConfig->checkBox5sDPS);
-    Settings::ReadSettings(uiConfig->professionComboBox);
     Settings::ReadSettings(uiConfig->checkBoxPosition);
     Settings::ReadSettings(uiConfig->checkBoxPerDmg);
     Settings::ReadSettings(uiConfig->checkBoxActivity);
@@ -198,7 +192,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayDetails=uiConfig->checkBoxDetails->isChecked();
     displayExtraDetails=uiConfig->checkBoxExtraDetails->isChecked();
     displayOpacity=uiConfig->checkBoxOpacity->isChecked();
-
+    displayOBS=uiConfig->checkBoxOBS->isChecked();
 
     // solo settings
     displayProfColor=uiConfig->checkBoxProfColors->isChecked();
@@ -212,7 +206,6 @@ MainWindow::MainWindow(QWidget *parent) :
     displayPos=uiConfig->checkBoxPosition->isChecked();
     displayPerDmg=uiConfig->checkBoxPerDmg->isChecked();
     displayAct=uiConfig->checkBoxActivity->isChecked();
-    m_MyProfession=uiConfig->professionComboBox->currentIndex();
     // graph settings
     displayGraph=uiConfig->checkBoxGraphShow->isChecked();
     displayGraphRealDPS=uiConfig->checkBoxGraphRealDPS->isChecked();
@@ -221,6 +214,8 @@ MainWindow::MainWindow(QWidget *parent) :
     displayGraphAvCDPS=uiConfig->checkBoxGraphAvgCDPS->isChecked();
     displayGraphAvGDPS=uiConfig->checkBoxGraphAvgGroupDPS->isChecked();
 
+    // name
+    MyName = ReadNameSettings();
 
     // We are not connected on start up
     is_connected = false;
@@ -710,12 +705,7 @@ void MainWindow::ProfSettingsChanged()
 {
     if (displayProfColor==1) displayProfColor=0; else displayProfColor=1;
 }
-void MainWindow::ProfChanged(QString prof)
-{
-    QStringList proflist;
-    proflist << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
-    m_MyProfession = proflist.indexOf(prof)+1;
-}
+
 void MainWindow::NameChanged()
 {
     if (displayName==1) displayName=0; else displayName=1;
@@ -856,31 +846,40 @@ void MainWindow::UpdateGroupLabels()
                 Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                 break;
             case 1:
-                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
-                break;
-            case 2:
-                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
-                break;
-            case 3:
+                // Guardian
                 Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
                 break;
+            case 2:
+                // Warrior
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                break;
+            case 3:
+                // Engineer
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                break;
             case 4:
-                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
-                break;
-            case 5:
-                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
-                break;
-            case 6:
+                // Ranger
                 Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
                 break;
-            case 7:
-                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
-                break;
-            case 8:
+            case 5:
+                // Thief
                 Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
                 break;
+            case 6:
+                // Elementalist
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                break;
+            case 7:
+                // Mesmer
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                break;
+            case 8:
+                // Necromancer
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                break;
             case 9:
-                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                // Revenant
+                Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
                 break;
             }
         }
@@ -888,8 +887,11 @@ void MainWindow::UpdateGroupLabels()
             Bar[0]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
         // set name, damage, DPS
         if (displayName==true) {
-            if (ReadNameSettings()!="") labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
-            else labelname[0]->setText(QString("Myself"));
+            if (MyName=="") {
+                labelname[0]->setText(QString("%1").arg(ReadNameSettings()));
+            } else {
+                labelname[0]->setText(MyName);
+            }
         }
         if (displayDmg==true) labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
         if (displayDPS==true) labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
@@ -991,31 +993,40 @@ void MainWindow::UpdateGroupLabels()
                         Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                         break;
                     case 1:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
-                        break;
-                    case 2:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
-                        break;
-                    case 3:
+                        // Guardian
                         Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,204, 70%);}");
                         break;
+                    case 2:
+                        // Warrior
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                        break;
+                    case 3:
+                        // Engineer
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,102,51, 70%);}");
+                        break;
                     case 4:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
-                        break;
-                    case 5:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
-                        break;
-                    case 6:
+                        // Ranger
                         Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(102,204,51, 70%);}");
                         break;
-                    case 7:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
-                        break;
-                    case 8:
+                    case 5:
+                        // Thief
                         Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,102,102, 70%);}");
                         break;
+                    case 6:
+                        // Elementalist
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(236, 87, 82, 70%);}");
+                        break;
+                    case 7:
+                        // Mesmer
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(153,51,153, 70%);}");
+                        break;
+                    case 8:
+                        // Necromancer
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(51,153,102, 70%);}");
+                        break;
                     case 9:
-                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(255,153,51, 70%);}");
+                        // Revenant
+                        Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(204,99,66, 70%);}");
                         break;
                     }
                 }
@@ -1086,7 +1097,7 @@ void MainWindow::ready2Read()
                 {
 
                     j=i+1;
-                    while ((j-i-1<15) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
+                    while ((j-i-1<19) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
                     if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
                     i=j;
 
@@ -1261,7 +1272,6 @@ void MainWindow::UpdateTimer(void)
     myMenu.raise();
     miscMenu->raise();
 
-
     if ((is_connected == true))
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
@@ -1274,8 +1284,6 @@ void MainWindow::UpdateTimer(void)
         connectServer->setIcon(QIcon(":/connect"));
         connectServer->setText("Connect");
     }
-    UpdateGroupLabels();
-    UpdatePersonalLabels();
 
     //Autoconnect Mumble
     MumbleLink mL;
@@ -1283,15 +1291,24 @@ void MainWindow::UpdateTimer(void)
 
     if(is_startup!=1){
         mL.updateMumble();
+        // wait for "0;0" to get replaced
+        Sleep(100);
         is_startup = 1;
     }
 
+    // "defaultName;defaultProfession"
     QString myLoggedInChar = "0;0";
     myLoggedInChar = mL.getIdent();
-
     m_MyProfession = myLoggedInChar.split(";")[1].toInt();
-    // name = myLoggedInChar.split(";")[0];
-    qDebug() << myLoggedInChar;
+    // only get name from MumbleAPI if no name is set manually
+    qDebug() << "MyName: " << MyName;
+    if (MyName=="") {
+        MyName = myLoggedInChar.split(";")[0];
+    }
+    qDebug() << "myLoggedInChar: " << myLoggedInChar;
+
+    UpdateGroupLabels();
+    UpdatePersonalLabels();
 
     unsigned long c;
     double c1,c2,c3,c4;
@@ -1403,8 +1420,6 @@ void GW2::MainWindow::on_actionConnect_triggered()
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort().toInt();
-        m_MyProfession=mDialog.getProfession();
-        uiConfig->professionComboBox->setCurrentIndex(m_MyProfession);
         Initialize();
     }
     // Otherwise stop the timer and abort the connection
@@ -1521,7 +1536,7 @@ void MainWindow::writeFile(QString separator)
             stream << "GroupDMG " << separator << GrpDmg << "\r\n";
             stream << "\r\n\r\n\r\n";
             QStringList profList;
-            profList << "None" << "Elementalist" << "Engineer" << "Guardian" << "Mesmer" << "Necromancer" << "Ranger" << "Revenant" << "Thief" << "Warrior";
+            profList << "None" << "Guardian" << "Warrior" << "Engineer" << "Ranger" << "Thief" << "Elementalist" << "Mesmer" << "Necromancer" << "Revenant";
             stream <<  "Name       " << tableSep << "   DPS  " << tableSep << "    DMG    " << tableSep << " Class\r\n";
             for(int i=0;i<10;i++){
                 if(PosName[i][0] !=0){

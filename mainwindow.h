@@ -273,7 +273,6 @@ private slots:
     void CPerDmgChanged();
     void CDPSChanged();
     void FiveSecRealDPSChanged();
-    void ProfChanged(QString);
     void PositionChanged();
     void PerDmgChanged();
     void ActivityChanged();

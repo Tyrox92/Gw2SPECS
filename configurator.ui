@@ -121,7 +121,7 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="specsSettings">
       <property name="geometry">
@@ -287,107 +287,6 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="professionComboBox">
-         <property name="styleSheet">
-          <string notr="true">QComboBox {
-    background-color: #8BB2DA;
-	color: rgb(255, 255, 255);
-    border: 1px solid #AAA;
-	font-size: 14px;
-}
-QComboBox:editable {
-    background: #8BB2DA;
-	color: rgb(255, 255, 255);
-}
-
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-	color: rgb(255, 255, 255);
-	border:none;
-
-
-}
-QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-    top: 1px;
-    left: 1px;
-}
-QComboBox QAbstractItemView {
-    border: 2px solid darkgray;
-    selection-background-color:#8BB2DA;
-	color: rgb(255, 255, 255);
-}</string>
-         </property>
-         <property name="editable">
-          <bool>false</bool>
-         </property>
-         <property name="currentText">
-          <string>Select Profession</string>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <property name="maxVisibleItems">
-          <number>10</number>
-         </property>
-         <item>
-          <property name="text">
-           <string>Select Profession</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Elementalist</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Engineer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Guardian</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Mesmer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Necromancer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ranger</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Revenant</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Thief</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Warrior</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QCheckBox" name="checkBoxProfColors">
          <property name="text">
@@ -402,8 +301,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>308</width>
-        <height>169</height>
+        <width>303</width>
+        <height>96</height>
        </rect>
       </property>
       <attribute name="label">
@@ -495,8 +394,8 @@ QComboBox QAbstractItemView {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>308</width>
-        <height>169</height>
+        <width>231</width>
+        <height>132</height>
        </rect>
       </property>
       <attribute name="label">

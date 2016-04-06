@@ -36,7 +36,6 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->checkBoxCPerDmg);
     Settings::ReadSettings(ui->checkBoxCDPS);
     Settings::ReadSettings(ui->checkBox5sDPS);
-    Settings::ReadSettings(ui->professionComboBox);
     Settings::ReadSettings(ui->checkBoxPosition);
     Settings::ReadSettings(ui->checkBoxPerDmg);
     Settings::ReadSettings(ui->checkBoxActivity);
@@ -71,7 +70,6 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxCPerDmg);
     Settings::WriteSettings(ui->checkBoxCDPS);
     Settings::WriteSettings(ui->checkBox5sDPS);
-    Settings::WriteSettings(ui->professionComboBox);
     Settings::WriteSettings(ui->checkBoxPosition);
     Settings::WriteSettings(ui->checkBoxPerDmg);
     Settings::WriteSettings(ui->checkBoxActivity);
@@ -99,7 +97,6 @@ void Configurator::RestoreDefaults()
     ui->checkBoxOBS->setChecked(false);
 
     ui->checkBoxProfColors->setChecked(false);
-    ui->professionComboBox->setCurrentIndex(0);
     ui->checkBoxName->setChecked(true);
     ui->checkBoxDamage->setChecked(true);
     ui->checkBoxDPS->setChecked(true);

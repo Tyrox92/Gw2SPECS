@@ -103,7 +103,7 @@ QLineEdit {
          <bool>false</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="5" column="1">
+         <item row="4" column="1">
           <widget class="QLineEdit" name="InputIP">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -123,20 +123,21 @@ border:1px solid #fff;</string>
          <item row="0" column="1" colspan="2">
           <widget class="QLabel" name="label">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Your Name (max 10 chars)</string>
+            <string>Your Name (max 19 chars)
+Leave empty for Character Name</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
-         <item row="4" column="2">
+         <item row="3" column="2">
           <widget class="QLabel" name="label_5">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -152,7 +153,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="2">
+         <item row="4" column="2">
           <widget class="QLineEdit" name="InputPort">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -184,7 +185,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
+         <item row="3" column="1">
           <widget class="QLabel" name="label_2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -200,7 +201,7 @@ border:1px solid #fff;</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="1" colspan="2">
+         <item row="5" column="1" colspan="2">
           <widget class="QPushButton" name="pushButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -248,107 +249,6 @@ QPushButton#pushButton:pressed {
            </property>
           </widget>
          </item>
-         <item row="2" column="1" colspan="2">
-          <widget class="QComboBox" name="professionComboBox">
-           <property name="styleSheet">
-            <string notr="true">QComboBox {
-    background-color: #8BB2DA;
-	color: rgb(255, 255, 255);
-    border: 1px solid #AAA;
-	font-size: 14px;
-}
-QComboBox:editable {
-    background: #8BB2DA;
-	color: rgb(255, 255, 255);
-}
-
-QComboBox:on { /* shift the text when the popup opens */
-    padding-top: 3px;
-    padding-left: 4px;
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-	color: rgb(255, 255, 255);
-	border:none;
-
-
-}
-QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-    top: 1px;
-    left: 1px;
-}
-QComboBox QAbstractItemView {
-    border: 2px solid darkgray;
-    selection-background-color:#8BB2DA;
-	color: rgb(255, 255, 255);
-}</string>
-           </property>
-           <property name="editable">
-            <bool>false</bool>
-           </property>
-           <property name="currentText">
-            <string>Select Profession</string>
-           </property>
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <property name="maxVisibleItems">
-            <number>10</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>Select Profession</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Elementalist</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Engineer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Guardian</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Mesmer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Necromancer</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Ranger</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Revenant</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Thief</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Warrior</string>
-            </property>
-           </item>
-          </widget>
-         </item>
          <item row="1" column="1" colspan="2">
           <widget class="QLineEdit" name="InputName">
            <property name="sizePolicy">
@@ -362,7 +262,7 @@ QComboBox QAbstractItemView {
 border:1px solid #fff;</string>
            </property>
            <property name="maxLength">
-            <number>15</number>
+            <number>19</number>
            </property>
            <property name="readOnly">
             <bool>false</bool>
