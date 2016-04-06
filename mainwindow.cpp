@@ -1302,7 +1302,8 @@ void MainWindow::UpdateTimer(void)
     m_MyProfession = myLoggedInChar.split(";")[1].toInt();
     // only get name from MumbleAPI if no name is set manually
     qDebug() << "MyName: " << MyName;
-    if (MyName=="") {
+    QString tmpFieldContents = ReadNameSettings();
+    if (tmpFieldContents=="") {
         MyName = myLoggedInChar.split(";")[0];
     }
     qDebug() << "myLoggedInChar: " << myLoggedInChar;
