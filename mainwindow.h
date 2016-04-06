@@ -116,6 +116,7 @@ private:
     int CurrentMeta;
 
     char writeBuff[128];
+    int is_startup;
     bool is_connected;
 
     //SPECS Settings

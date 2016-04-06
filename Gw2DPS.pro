@@ -41,7 +41,8 @@ HEADERS  += mainwindow.h \
     settings.h \
     global.h \
     mydialog.h \
-    qcustomplot.h
+    qcustomplot.h \
+    mumblelink.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \

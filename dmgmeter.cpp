@@ -85,6 +85,7 @@ void DmgMeter::Reset()
     m_Dmg = 0;
     m_Dps = 0;
     m_MaxDmg = 0;
+    m_healing = 0;
     m_ElapsedTimeSinceCombatInMsec = 0;
     OffCombatTimeInMsec=0;
     m_IsActive=0;
@@ -215,6 +216,11 @@ void DmgMeter::EvaluateLine(const QString& params)
         if (LastColor==3)
         {
             m_condiDmg+=dmg;
+        }
+        if (LastColor==5)
+        {
+            m_healing+=dmg;
+            qDebug()<< m_healing;
         }
     }
     if (dmg > m_MaxDmg)

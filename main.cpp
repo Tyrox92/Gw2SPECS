@@ -22,6 +22,7 @@ int LastColor;
 unsigned long hitCounter;
 unsigned long critCounter;
 unsigned int m_critChance;
+unsigned int m_healing;
 unsigned long m_condiDmg;
 unsigned long m_MaxDmg;
 unsigned long m_MyProfession;

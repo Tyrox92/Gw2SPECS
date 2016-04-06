@@ -15,6 +15,7 @@
 #include <QUrl>
 #include <qcustomplot.h>
 #include <qt_windows.h>
+#include "mumblelink.h"
 
 using namespace GW2;
 
@@ -611,6 +612,7 @@ void MainWindow::Initialize()
         critCounter=0;
         m_condiDmg=0;
         LastColor=0;
+        m_healing=0;
         combatCourse = "";
 
         socket->connectToHost(HostIP, HostPort);
@@ -1274,6 +1276,23 @@ void MainWindow::UpdateTimer(void)
     }
     UpdateGroupLabels();
     UpdatePersonalLabels();
+
+    //Autoconnect Mumble
+    MumbleLink mL;
+    mL.initLink();
+
+    if(is_startup!=1){
+        mL.updateMumble();
+        is_startup = 1;
+    }
+
+    QString myLoggedInChar = "0;0";
+    myLoggedInChar = mL.getIdent();
+
+    m_MyProfession = myLoggedInChar.split(";")[1].toInt();
+    // name = myLoggedInChar.split(";")[0];
+    qDebug() << myLoggedInChar;
+
     unsigned long c;
     double c1,c2,c3,c4;
     c2=m_condiDmg;

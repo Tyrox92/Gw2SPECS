@@ -21,6 +21,7 @@ extern unsigned long hitCounter;
 extern unsigned long critCounter;
 extern unsigned long m_condiDmg;
 extern unsigned int m_critChance;
+extern unsigned int m_healing;
 extern unsigned long m_MaxDmg;
 extern unsigned long m_MyProfession;
 extern unsigned long countCombat;
