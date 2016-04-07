@@ -1237,6 +1237,8 @@ void MainWindow::UpdatePersonalLabels()
     ui->labelRealDPSValue->setText(QString::number(m_realDps));
     //Personal Condi DMG Value
     ui->labelCondiDMGValue->setText(QString::number(m_condiDmg));
+    //Personal Healing Value
+    ui->labelHealingDoneValue->setText(QString::number(m_healing));
     //Personal Condi DPS Value
     c2=m_condiDmg;
     c3=m_Dps;
