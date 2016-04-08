@@ -17,6 +17,7 @@
 #include <QMenu>
 #include <QProgressBar>
 #include "qcustomplot.h"
+#include "mumblelink.h"
 
 namespace Ui
 {
@@ -51,6 +52,8 @@ public:
         int _pos;
         QDialog *combatDialog = new QDialog();
         QPushButton *resetCombatMode = new QPushButton();
+
+        MumbleLink mL;
 
 
 protected:

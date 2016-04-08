@@ -15,7 +15,7 @@
 #include <QUrl>
 #include <qcustomplot.h>
 #include <qt_windows.h>
-#include "mumblelink.h"
+
 
 using namespace GW2;
 
@@ -30,8 +30,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     // generate ui and so on
 
-    //Must be called before StartupPref() to Enable/Disable mode
+    //If the following 3 lines are called before StartupPref()the Tool will bug and not work properly!!!!
     Ui::Configurator* uiConfig = m_Configurator.ui;
+    Settings::ReadSettings(uiConfig->checkBoxOBS);
+    displayOBS=uiConfig->checkBoxOBS->isChecked();
+    // ^^^^^^^^^^^^DONT MOVE THIS ^^^^^^^^^^^^^^^^
+
 
     StartupPref();
     _kc << Qt::Key_Up << Qt::Key_Up << Qt::Key_Down << Qt::Key_Down << Qt::Key_Left << Qt::Key_Right << Qt::Key_Left << Qt::Key_Right << Qt::Key_A << Qt::Key_B;
@@ -156,7 +160,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->checkBoxDetails);
     Settings::ReadSettings(uiConfig->checkBoxExtraDetails);
     Settings::ReadSettings(uiConfig->checkBoxOpacity);
-    Settings::ReadSettings(uiConfig->checkBoxOBS);
+
 
     Settings::ReadSettings(uiConfig->checkBoxProfColors);
     Settings::ReadSettings(uiConfig->checkBoxName);
@@ -192,7 +196,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayDetails=uiConfig->checkBoxDetails->isChecked();
     displayExtraDetails=uiConfig->checkBoxExtraDetails->isChecked();
     displayOpacity=uiConfig->checkBoxOpacity->isChecked();
-    displayOBS=uiConfig->checkBoxOBS->isChecked();
+
 
     // solo settings
     displayProfColor=uiConfig->checkBoxProfColors->isChecked();
@@ -580,6 +584,8 @@ void GW2::MainWindow::CheckForUpdate()
 
 void MainWindow::Initialize()
 {
+    mL.initLink();
+    mL.updateMumble();
     if (HostIP != "" && (is_connected == false))
     {
         socket = new QTcpSocket(this);
@@ -1287,17 +1293,6 @@ void MainWindow::UpdateTimer(void)
         connectServer->setText("Connect");
     }
 
-    //Autoconnect Mumble
-    MumbleLink mL;
-    mL.initLink();
-
-    if(is_startup!=1){
-        mL.updateMumble();
-        // wait for "0;0" to get replaced
-        Sleep(100);
-        is_startup = 1;
-    }
-
     // "defaultName;defaultProfession"
     QString myLoggedInChar = "0;0";
     myLoggedInChar = mL.getIdent();
@@ -1403,7 +1398,7 @@ void GW2::MainWindow::on_actionActionGroupDetails_toggled()
 
 void GW2::MainWindow::on_actionConnect_triggered()
 {
-    Ui::Configurator* uiConfig = m_Configurator.ui;
+    //Ui::Configurator* uiConfig = m_Configurator.ui;
 
     if (ui->actionActionGroupDetails->isChecked())
         ui->actionActionGroupDetails->setChecked(false);
