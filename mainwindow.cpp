@@ -309,19 +309,11 @@ void GW2::MainWindow::CheckForOldVerison()
 void GW2::MainWindow::StartupPref()
 {
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
-//    Qt::WindowFlags flags = windowFlags();
-//    this->setWindowFlags(flags | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
-//    this->setAttribute(Qt::WA_TranslucentBackground);
-//    this->show();
+
     action_widgetMode();
-    runMe();
+    initializeGraph();
     fixOnTopCount=0;
     resetCombatMode->hide();
-
-    //ui->toolBar->setWindowFlags(Qt::WindowStaysOnTopHint);
-    //ui->toolBar->setAttribute(Qt::WA_TranslucentBackground);
-    ui->widget->hide();
-    ui->widgetExtraDetails->hide();
 
     // Resize Option
     // Using gridLayout here which is the main layout
@@ -1676,8 +1668,21 @@ void GW2::MainWindow::action_widgetMode(){
         this->setAttribute(Qt::WA_TranslucentBackground,true);
     }else{
         this->setAttribute(Qt::WA_TranslucentBackground,false);
+//        this->setAttribute(Qt::WA_NoSystemBackground,false);
+//        this->setAttribute(Qt::WA_NoBackground, false);
+//        this->setAutoFillBackground(true);
     }
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+
+    // is this nescessary?
+    //this->update();
+//    QPainter painter(this);
+//    painter.end();
+//    RenderFlags renderflags = RenderFlags(DrawWindowBackground);
+//    this->render(this, renderflags);
+//    this->repaint();
+//    qApp->processEvents();
+
 
     this->activateWindow();
     this->setFocus();
@@ -1717,7 +1722,7 @@ void GW2::MainWindow::action_resetCombatMode(){
 }
 
 
-void GW2::MainWindow::runMe(){
+void GW2::MainWindow::initializeGraph(){
     ui->widget_4->addLayer("abovemain", ui->widget_4->layer("main"), QCustomPlot::limAbove);
 
     ui->widget_4->addGraph(); // green line

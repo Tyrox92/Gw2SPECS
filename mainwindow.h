@@ -303,7 +303,7 @@ private slots:
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
     void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_5sDPS, int m_realDps);
-    void runMe();
+    void initializeGraph();
     void resetGraph();
     void action_widgetMode(); // Switch between OBS and "Normal" Version
     void keyPressEvent( QKeyEvent * event );
