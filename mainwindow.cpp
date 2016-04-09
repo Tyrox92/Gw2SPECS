@@ -1159,13 +1159,15 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
     if (isAlmostTransparent)
     {
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
-        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+        ui->widget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
+        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 0%); } QToolButton { background-color: rgba(32, 43, 47, 0%); }");
         ui->grp_DPS->setStyleSheet("");
         this->show();
     }
     else
     {
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
+        //ui->widget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
         ui->grp_DPS->setStyleSheet("");
         this->show();
