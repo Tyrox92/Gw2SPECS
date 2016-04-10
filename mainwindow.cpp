@@ -12,6 +12,7 @@
 #include <QToolButton>
 #include "ui_mydialog.h"
 #include "ui_firststart.h"
+#include "ui_combatmode.h"
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Configurator(this),
     m_MyDialog(this),
     m_firstStart(this),
+    m_combatMode(this),
     update_Timer(this)
 {
     CheckForOldVerison();
@@ -1699,6 +1701,15 @@ void GW2::MainWindow::action_combatMode(){
     action_widgetMode();
     qDebug()<< "CombatMode Activated";
 
+    // new (del this comment after migration from old)
+    // only Debug Output atm -> cahnge button function
+    // make it moveable like configurator
+    CombatMode cMode;
+    cMode.setModal(true);
+    cMode.exec();
+
+
+    // old (del after migration to new)
     QVBoxLayout *layout = new QVBoxLayout(combatDialog);
     QLabel *label = new QLabel(this);
     resetCombatMode->setText("Reset Combatmode!");

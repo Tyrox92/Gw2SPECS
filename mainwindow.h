@@ -13,6 +13,7 @@
 #include <QMouseEvent>
 #include "mydialog.h"
 #include "firststart.h"
+#include "combatmode.h"
 #include <QLabel>
 #include <QPoint>
 #include <QMenu>
@@ -80,6 +81,7 @@ private:
     Configurator m_Configurator;
     MyDialog m_MyDialog;
     firstStart m_firstStart;
+    CombatMode m_combatMode;
     QPoint m_dragPosition;
     int fixOnTopCount;
 

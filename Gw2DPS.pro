@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     mydialog.cpp \
     global.cpp \
     qcustomplot.cpp \
-    firststart.cpp
+    firststart.cpp \
+    combatmode.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -44,12 +45,14 @@ HEADERS  += mainwindow.h \
     mydialog.h \
     qcustomplot.h \
     mumblelink.h \
-    firststart.h
+    firststart.h \
+    combatmode.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
     mydialog.ui \
-    firststart.ui
+    firststart.ui \
+    combatmode.ui
 
 RESOURCES += \
     Icons/Icons.qrc
