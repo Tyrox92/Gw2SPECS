@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>firstStart</class>
+ <widget class="QWidget" name="firstStart">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>587</width>
+    <height>268</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Welcome to Gw2SPECS!</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="welcomeText">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Welcome to GW2SPECS!
+
+Please set up the following options in your Guild Wars 2:
+
+ - Options/Graphics Options: Interface Size= Small/Normal
+ - Options/Graphics Options: Resolution=Windowed Fullscreen
+ - Chatbox/options: Text Size=Medium
+ - Chatbox/options: Disable Timestamps
+ - Chatbox/Combat page/options: enable only:
+   • Outgoing Buff Damage
+   • Outgoing Damage
+   • Outgoing Mitigated Damage
+ - Make sure your combat log has more then 12+ lines and always visible
+ 
+ Have fun!
+ 
+ If you need more information please visit gw2specs.com</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="welcomeConfirm">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Ok, I understood</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>welcomeConfirm</sender>
+   <signal>clicked()</signal>
+   <receiver>firstStart</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

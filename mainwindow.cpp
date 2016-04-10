@@ -11,6 +11,7 @@
 #include <QToolBar>
 #include <QToolButton>
 #include "ui_mydialog.h"
+#include "ui_firststart.h"
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
@@ -24,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_Configurator(this),
     m_MyDialog(this),
+    m_firstStart(this),
     update_Timer(this)
 {
     CheckForOldVerison();
@@ -509,13 +511,9 @@ void MainWindow::CheckFirstRun()
     {
         //show a new window with explanation of the correct gw2 settings
 
-        QDialog *dialog1 = new QDialog();
-        QHBoxLayout *layout = new QHBoxLayout(dialog1);
-        QLabel *label1 = new QLabel(this);
-        label1->setText("Welcome to GW2SPECS!\n\nPlease set up the following options in your Guild Wars 2:\n\n -Options/Graphics Options: Interface Size= Small/Normal\n -Options/Graphics Options: Resolution=Windowed Fullscreen\n -Chatbox/options: Text Size=Medium\n -Chatbox/options: Disable Timestamps\n -Chatbox/Combat page/options: enable only : Outgoing Buff Damage+Outgoing Damage+Outgoing Mitigated Damage\n -Make sure your combat log has more then 12+ lines and always visible\n\n Have fun!\n\n If you need more information please visit gw2specs.com");
-        layout->addWidget(label1);
-        layout->setMargin(10);
-        dialog1->show();
+        firstStart fStart;
+        fStart.setModal(true);
+        fStart.exec();
 
         Write1stRun("OK");
     }
@@ -1677,6 +1675,7 @@ void GW2::MainWindow::action_widgetMode(){
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
 
     // is this nescessary?
+    //this->close();
     //this->update();
 //    QPainter painter(this);
 //    painter.end();

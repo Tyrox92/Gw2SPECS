@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     settings.cpp \
     mydialog.cpp \
     global.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    firststart.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -42,11 +43,13 @@ HEADERS  += mainwindow.h \
     global.h \
     mydialog.h \
     qcustomplot.h \
-    mumblelink.h
+    mumblelink.h \
+    firststart.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
-    mydialog.ui
+    mydialog.ui \
+    firststart.ui
 
 RESOURCES += \
     Icons/Icons.qrc

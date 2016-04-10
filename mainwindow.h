@@ -12,6 +12,7 @@
 #include <QTime>
 #include <QMouseEvent>
 #include "mydialog.h"
+#include "firststart.h"
 #include <QLabel>
 #include <QPoint>
 #include <QMenu>
@@ -78,6 +79,7 @@ private:
     QThread m_ScreenRecorderThread;
     Configurator m_Configurator;
     MyDialog m_MyDialog;
+    firstStart m_firstStart;
     QPoint m_dragPosition;
     int fixOnTopCount;
 
