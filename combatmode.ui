@@ -13,6 +13,20 @@
   <property name="windowTitle">
    <string>Gw2SPECS CombatMode</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+	background-color: rgba(32, 43, 47, 60%);
+}
+QWidget#widget {
+	background-color: rgba(32, 43, 47, 0%);
+}
+QLabel {
+	background-color: rgba(32, 43, 47, 0%);
+	color: rgb(255, 255, 255);
+}
+
+</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="label">
