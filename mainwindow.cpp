@@ -478,11 +478,11 @@ void GW2::MainWindow::StartupPref()
     labellegend5sdps->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     //labellegendact->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
-    labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
-    labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;min-width:39px;*/font: 87 10pt \"DINPro-Black\";");
-    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:37px;min-width:37px;font: 87 10pt \"DINPro-Black\";");
-    labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
-    labellegend5sdps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
+    labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:7.07em;*/font: 87 10pt \"DINPro-Black\";");
+    labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;min-width:2.44em;*/font: 87 10pt \"DINPro-Black\";");
+    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
+    labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
+    labellegend5sdps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
     //labelact[n]->setStyleSheet("color:white;background:none;");
 
     for(int n=0;n<10;n++) {
@@ -496,11 +496,11 @@ void GW2::MainWindow::StartupPref()
         //labelact[n]->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
         // styling labels
-        labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:113px;*/font: 87 10pt \"DINPro-Black\";");
-        labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;min-width:39px;*/font: 87 10pt \"DINPro-Black\";");
-        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:37px;min-width:37px;font: 87 10pt \"DINPro-Black\";");
-        labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
-        label5sdps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:39px;min-width:39px;font: 87 10pt \"DINPro-Black\";");
+        labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:7.07em;*/font: 87 10pt \"DINPro-Black\";");
+        labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;min-width:2.44em;*/font: 87 10pt \"DINPro-Black\";");
+        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
+        labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
+        label5sdps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 }
