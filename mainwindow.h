@@ -14,6 +14,8 @@
 #include "mydialog.h"
 #include "firststart.h"
 #include "combatmode.h"
+#include "connectionfailed.h"
+#include "savelog.h"
 #include <QLabel>
 #include <QPoint>
 #include <QMenu>
@@ -52,8 +54,6 @@ public:
         int m_msecs;
         QList<int> _kc;
         int _pos;
-        QDialog *combatDialog = new QDialog();
-        QPushButton *resetCombatMode = new QPushButton();
 
         MumbleLink mL;
 
@@ -82,6 +82,8 @@ private:
     MyDialog m_MyDialog;
     firstStart m_firstStart;
     CombatMode m_combatMode;
+    connectionfailed m_connectionfailed;
+    saveLog m_saveLog;
     QPoint m_dragPosition;
     int fixOnTopCount;
 

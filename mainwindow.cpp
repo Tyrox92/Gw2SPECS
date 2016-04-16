@@ -13,6 +13,8 @@
 #include "ui_mydialog.h"
 #include "ui_firststart.h"
 #include "ui_combatmode.h"
+#include "ui_connectionfailed.h"
+#include "ui_savelog.h"
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
@@ -28,14 +30,17 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MyDialog(this),
     m_firstStart(this),
     m_combatMode(this),
+    m_connectionfailed(this),
+    m_saveLog(this),
     update_Timer(this)
 {
     CheckForOldVerison();
     ui->setupUi(this);
     // generate ui and so on
 
-    //If the following 3 lines are called before StartupPref()the Tool will bug and not work properly!!!!
+    //If the following 4 lines are called before StartupPref()the Tool will bug and not work properly!!!!
     Ui::Configurator* uiConfig = m_Configurator.ui;
+    Ui::CombatMode* uiCMode = m_combatMode.ui;
     Settings::ReadSettings(uiConfig->checkBoxOBS);
     displayOBS=uiConfig->checkBoxOBS->isChecked();
     // ^^^^^^^^^^^^DONT MOVE THIS ^^^^^^^^^^^^^^^^
@@ -96,9 +101,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiConfig->comboBoxConsideredLines, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetConsideredLineCount(QString)));
     QObject::connect(uiConfig->pushButtonReset, SIGNAL(clicked(bool)), &m_Configurator, SLOT(RestoreDefaults()));
 
-    //ResetCombatMode
-    QObject::connect(resetCombatMode,SIGNAL(clicked(bool)),this,SLOT(action_resetCombatMode()));
-
     // context menu
 
     myMenu.setStyleSheet("QMenu{background-color: rgb(32, 43, 47);color:#f2f2f2;}QMenu::item:selected{background-color: rgb(52, 63, 67);}");
@@ -110,6 +112,8 @@ MainWindow::MainWindow(QWidget *parent) :
     combatMode->setIcon(QIcon(":/combatMode"));
     combatMode->setIconVisibleInMenu(true);
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
+    QObject::connect(combatMode, SIGNAL(triggered()), &m_combatMode, SLOT(exec()));
+    QObject::connect(uiCMode->buttonResetCombatMode,SIGNAL(pressed()),this,SLOT(action_resetCombatMode()));
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
@@ -317,7 +321,6 @@ void GW2::MainWindow::StartupPref()
     action_widgetMode();
     initializeGraph();
     fixOnTopCount=0;
-    resetCombatMode->hide();
 
     // Resize Option
     // Using gridLayout here which is the main layout
@@ -1291,13 +1294,14 @@ void MainWindow::UpdateTimer(void)
     QString myLoggedInChar = "0;0";
     myLoggedInChar = mL.getIdent();
     m_MyProfession = myLoggedInChar.split(";")[1].toInt();
+
     // only get name from MumbleAPI if no name is set manually
-    qDebug() << "MyName: " << MyName;
     QString tmpFieldContents = ReadNameSettings();
     if (tmpFieldContents=="") {
         MyName = myLoggedInChar.split(";")[0];
+        // setting default "name" if no logged in character is detected
+        if (MyName == "0") MyName = "No logged in character";
     }
-    qDebug() << "myLoggedInChar: " << myLoggedInChar;
 
     UpdateGroupLabels();
     UpdatePersonalLabels();
@@ -1700,27 +1704,6 @@ void GW2::MainWindow::action_combatMode(){
     ShowWindow(winHandle, SW_SHOW);
     action_widgetMode();
     qDebug()<< "CombatMode Activated";
-
-    // new (del this comment after migration from old)
-    // only Debug Output atm -> cahnge button function
-    // make it moveable like configurator
-    CombatMode cMode;
-    cMode.setModal(true);
-    cMode.exec();
-
-
-    // old (del after migration to new)
-    QVBoxLayout *layout = new QVBoxLayout(combatDialog);
-    QLabel *label = new QLabel(this);
-    resetCombatMode->setText("Reset Combatmode!");
-    label->setText("Welcome to Gw2SPECS CombatMode\nPlease minimize this window so it cannot interfere anymore.\n Gw2SPECS is no longer clickable and all clicks fall through on the window behind\nIf you want to end CombatMode simply click the Button below!\nEnjoy.");
-    layout->addWidget(label);
-    layout->addWidget(resetCombatMode);
-    layout->setMargin(25);
-    combatDialog->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint | Qt::CustomizeWindowHint);
-    combatDialog->setStyleSheet("QDialog{background-color: rgb(32, 43, 47);}QLabel{color:#f2f2f2;text-align:center;}QPushButton{background-color: rgb(52, 63, 67);color:#f2f2f2;text-align:center;}");
-    combatDialog->show();
-    resetCombatMode->show();
 }
 
 void GW2::MainWindow::action_resetCombatMode(){
@@ -1729,7 +1712,7 @@ void GW2::MainWindow::action_resetCombatMode(){
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
     action_widgetMode();
-    combatDialog->close();
+    m_combatMode.close();
     qDebug()<<"CombatMode Deactivated";
 }
 

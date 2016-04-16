@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     global.cpp \
     qcustomplot.cpp \
     firststart.cpp \
-    combatmode.cpp
+    combatmode.cpp \
+    connectionfailed.cpp \
+    savelog.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -46,13 +48,17 @@ HEADERS  += mainwindow.h \
     qcustomplot.h \
     mumblelink.h \
     firststart.h \
-    combatmode.h
+    combatmode.h \
+    connectionfailed.h \
+    savelog.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
     mydialog.ui \
     firststart.ui \
-    combatmode.ui
+    combatmode.ui \
+    connectionfailed.ui \
+    savelog.ui
 
 RESOURCES += \
     Icons/Icons.qrc

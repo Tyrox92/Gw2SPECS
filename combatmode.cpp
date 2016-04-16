@@ -20,5 +20,23 @@ CombatMode::~CombatMode()
 
 void CombatMode::on_buttonResetCombatMode_clicked()
 {
-    qDebug() << "Debug working";
+
+}
+
+// Give movement access to CombatMode
+void CombatMode::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        move(event->globalPos() - m_dragPosition);
+        event->accept();
+    }
+}
+
+// Give movement access to CombatMode
+void CombatMode::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        event->accept();
+    }
 }

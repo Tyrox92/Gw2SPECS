@@ -122,7 +122,7 @@ void Configurator::RestoreDefaults()
     ui->comboBoxConsideredLines->setCurrentIndex(0);
 }
 
-// Give movement access to MainWindow
+// Give movement access to Configurator
 void Configurator::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() & Qt::LeftButton) {
@@ -131,7 +131,7 @@ void Configurator::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-// Give movement access to MainWindow
+// Give movement access to Configurator
 void Configurator::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
