@@ -17,7 +17,7 @@ saveLog::~saveLog()
     delete ui;
 }
 
-// Give movement access to CombatMode
+// Give movement access to SaveLog
 void saveLog::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() & Qt::LeftButton) {
@@ -26,7 +26,7 @@ void saveLog::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-// Give movement access to CombatMode
+// Give movement access to SaveLog
 void saveLog::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {

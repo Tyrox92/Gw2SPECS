@@ -620,16 +620,10 @@ void MainWindow::Initialize()
 
         if(!socket->waitForConnected(5000))
         {
+            Ui::connectionfailed* uiConFail = m_connectionfailed.ui;
             qDebug() << "Error: " << socket->errorString();
-            QDialog *dialog = new QDialog();
-            QHBoxLayout *layout = new QHBoxLayout(dialog);
-            QLabel *label = new QLabel(this);
-            label->setText("Connection to " + HostIP + " failed");
-            layout->addWidget(label);
-            layout->setMargin(50);
-            dialog->setStyleSheet("background:red;");
-            dialog->setWindowFlags(Qt::WindowStaysOnTopHint);
-            dialog->show();
+            uiConFail->errorMessage->setText("Connection to " + HostIP + " failed");
+            m_connectionfailed.exec();
             is_connected = false;
         }
         else is_connected = true;

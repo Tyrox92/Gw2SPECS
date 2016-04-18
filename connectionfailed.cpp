@@ -16,3 +16,21 @@ connectionfailed::~connectionfailed()
 {
     delete ui;
 }
+
+// Give movement access to ConnectionFailed
+void connectionfailed::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        move(event->globalPos() - m_dragPosition);
+        event->accept();
+    }
+}
+
+// Give movement access to ConnectionFailed
+void connectionfailed::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        event->accept();
+    }
+}

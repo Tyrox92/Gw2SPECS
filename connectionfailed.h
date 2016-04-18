@@ -17,9 +17,13 @@ namespace GW2
         explicit connectionfailed(QWidget *parent = 0);
         ~connectionfailed();
 
+    protected:
+        void mouseMoveEvent(QMouseEvent *event);
+        void mousePressEvent(QMouseEvent *event);
+
     private:
         Ui::connectionfailed *ui;
-
+        QPoint m_dragPosition;
         friend class MainWindow;
     };
 }
