@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //If the following 4 lines are called before StartupPref()the Tool will bug and not work properly!!!!
     Ui::Configurator* uiConfig = m_Configurator.ui;
     Ui::CombatMode* uiCMode = m_combatMode.ui;
+    Ui::saveLog* uiSaveLog = m_saveLog.ui;
     Settings::ReadSettings(uiConfig->checkBoxOBS);
     displayOBS=uiConfig->checkBoxOBS->isChecked();
     // ^^^^^^^^^^^^DONT MOVE THIS ^^^^^^^^^^^^^^^^
@@ -68,6 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionEnableTransparency, SIGNAL(triggered(bool)), this, SLOT(EnableTransparency(bool)));
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
+    QObject::connect(ui->actionActionSave,SIGNAL(triggered()),&m_saveLog, SLOT(exec()));
     // connecting configurator - SPECS display settings
     QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(clicked(bool)), this, SLOT(ShowToolbarChanged()));
     QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
@@ -139,7 +141,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     saveToFile->setIcon(QIcon(":/saveIcon"));
     saveToFile->setIconVisibleInMenu(true);
-    QObject::connect(saveToFile, SIGNAL(triggered()), this, SLOT(on_actionActionSave_triggered()));
+    QObject::connect(saveToFile, SIGNAL(triggered()), &m_saveLog, SLOT(exec()));
+    QObject::connect(uiSaveLog->saveTXT, SIGNAL(pressed()), this, SLOT(writeTxt()));
+    QObject::connect(uiSaveLog->saveCSV, SIGNAL(pressed()), this, SLOT(writeCsv()));
+    //QObject::connect(saveToFile, SIGNAL(triggered()), this, SLOT(on_actionActionSave_triggered()));
 
     options->setIcon(QIcon(":/Config"));
     options->setIconVisibleInMenu(true);
@@ -1576,34 +1581,7 @@ void MainWindow::writeFile(QString separator)
 
 void GW2::MainWindow::on_actionActionSave_triggered()
 {
-    //Show Popup here to choose between TXT and CSV
-        QDialog *savePopup= new QDialog();
-        QVBoxLayout *layout = new QVBoxLayout(savePopup);
-        QPushButton *txtButton = new QPushButton(this);
-        QPushButton *csvButton = new QPushButton(this);
-        QLabel *chooseLabel = new QLabel(this);
 
-        layout->addWidget(chooseLabel);
-        layout->addWidget(txtButton);
-        layout->addWidget(csvButton);
-
-        layout->setMargin(10);
-        chooseLabel->setText("Choose the File Format you like!");
-        txtButton->setText("*.txt");
-        csvButton->setText("*.csv");
-
-        savePopup->setWindowTitle("Gw2SPECS Save v1.0");
-        savePopup->setStyleSheet("background:#f2f2f2;");
-        savePopup->setWindowFlags(Qt::WindowStaysOnTopHint| Qt::WindowCloseButtonHint);
-        savePopup->show();
-
-        //need to create 2 Buttons
-        //set dialog settings to always on top frameless
-        //connect Buttons to functions
-        QObject::connect(txtButton, SIGNAL(clicked(bool)), this, SLOT(writeTxt()));
-        QObject::connect(txtButton, SIGNAL(clicked(bool)), savePopup, SLOT(hide()));
-        QObject::connect(csvButton, SIGNAL(clicked(bool)), this, SLOT(writeCsv()));
-        QObject::connect(csvButton, SIGNAL(clicked(bool)), savePopup, SLOT(hide()));
 }
 
 void GW2::MainWindow::writeTxt()

@@ -16,3 +16,31 @@ saveLog::~saveLog()
 {
     delete ui;
 }
+
+// Give movement access to CombatMode
+void saveLog::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton) {
+        move(event->globalPos() - m_dragPosition);
+        event->accept();
+    }
+}
+
+// Give movement access to CombatMode
+void saveLog::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_dragPosition = event->globalPos() - frameGeometry().topLeft();
+        event->accept();
+    }
+}
+
+void GW2::saveLog::on_saveTXT_clicked()
+{
+    this->close();
+}
+
+void GW2::saveLog::on_saveCSV_clicked()
+{
+    this->close();
+}
