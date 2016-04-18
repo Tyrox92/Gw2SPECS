@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     firststart.cpp \
     combatmode.cpp \
     connectionfailed.cpp \
-    savelog.cpp
+    savelog.cpp \
+    updatecheck.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     firststart.h \
     combatmode.h \
     connectionfailed.h \
-    savelog.h
+    savelog.h \
+    updatecheck.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
@@ -58,7 +60,8 @@ FORMS    += mainwindow.ui \
     firststart.ui \
     combatmode.ui \
     connectionfailed.ui \
-    savelog.ui
+    savelog.ui \
+    updatecheck.ui
 
 RESOURCES += \
     Icons/Icons.qrc

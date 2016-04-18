@@ -16,6 +16,7 @@
 #include "combatmode.h"
 #include "connectionfailed.h"
 #include "savelog.h"
+#include "updatecheck.h"
 #include <QLabel>
 #include <QPoint>
 #include <QMenu>
@@ -84,6 +85,7 @@ private:
     CombatMode m_combatMode;
     connectionfailed m_connectionfailed;
     saveLog m_saveLog;
+    updateCheck m_updateCheck;
     QPoint m_dragPosition;
     int fixOnTopCount;
 
@@ -295,8 +297,8 @@ private slots:
 
     void CheckForOldVerison();
     void CheckFirstRun();
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    void downloadLink();
+    void changelogLink();
     void writeFile(QString);
     void on_actionActionSave_triggered();
     void updateCombatCourse();

@@ -15,6 +15,7 @@
 #include "ui_combatmode.h"
 #include "ui_connectionfailed.h"
 #include "ui_savelog.h"
+#include "ui_updateCheck.h"
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_combatMode(this),
     m_connectionfailed(this),
     m_saveLog(this),
+    m_updateCheck(this),
     update_Timer(this)
 {
     CheckForOldVerison();
@@ -552,32 +554,17 @@ void GW2::MainWindow::CheckForUpdate()
         if(curVersion < ver)
         {
             qDebug() << "You need to Update";
-            QDialog *checkUpdate = new QDialog();
-            QVBoxLayout *layout = new QVBoxLayout(checkUpdate);
-            QPushButton *download = new QPushButton("Get latest Version!", this);
-            QPushButton *changelog = new QPushButton("Check the Changelog!", this);
-            QLabel *label = new QLabel("<center>Your Version: <strong style='color:red;'>" + curVersion + "</strong></center><center>New Version: <strong style='color:green';>" + ver + "</strong></center><br>" + "A new Version of GW2SPECS is available!", this);
+            Ui::updateCheck* uiUpdateCheck = m_updateCheck.ui;
+            //Change LabelText
+            uiUpdateCheck->curVersionLabel->setText(curVersion);
+            uiUpdateCheck->newVersionLabel->setText(ver);
 
             //Connect Functions to Buttons when clicked
-            connect(download, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_clicked()));
-            connect(changelog, SIGNAL(clicked(bool)),this,SLOT(on_pushButton_2_clicked()));
+            QObject::connect(uiUpdateCheck->download, SIGNAL(pressed()),this,SLOT(downloadLink()));
+            QObject::connect(uiUpdateCheck->changelog, SIGNAL(pressed()),this,SLOT(changelogLink()));
 
-            //Add Widgets to the Layout
-            layout->addWidget(label);
-            layout->addWidget(download);
-            layout->addWidget(changelog);
-
-            //Style the Dialog
-            layout->setMargin(30);
-
-            checkUpdate->setStyleSheet("background:#f4f4f4;");
-            checkUpdate->setWindowFlags(Qt::WindowStaysOnTopHint);
-
-            //Style Other Elements
-            download->setStyleSheet("background:#8BB2DA;");
-
-            //Display Dialog
-            checkUpdate->show();
+            //Open updateCheck
+            m_updateCheck.exec();
         }
     }
 }
@@ -1446,12 +1433,12 @@ void GW2::MainWindow::on_actionClose_triggered()
     if ((is_connected == true)) socket->abort();
 }
 
-void GW2::MainWindow::on_pushButton_clicked(){
+void GW2::MainWindow::downloadLink(){
     QString downloadlink = "http://gw2specs.com/download";
     QDesktopServices::openUrl(QUrl(downloadlink));
 }
 
-void GW2::MainWindow::on_pushButton_2_clicked(){
+void GW2::MainWindow::changelogLink(){
     QString changeloglink = "http://gw2specs.com/changelog";
     QDesktopServices::openUrl(QUrl(changeloglink));
 }
