@@ -212,7 +212,6 @@ MainWindow::MainWindow(QWidget *parent) :
     displayExtraDetails=uiConfig->checkBoxExtraDetails->isChecked();
     displayOpacity=uiConfig->checkBoxOpacity->isChecked();
 
-
     // solo settings
     displayProfColor=uiConfig->checkBoxProfColors->isChecked();
     displayName=uiConfig->checkBoxName->isChecked();
@@ -1139,6 +1138,14 @@ MainWindow::~MainWindow()
         m_ScreenRecorderThread.terminate();
         m_ScreenRecorderThread.wait();
     }
+    //Combobox Resetting Randomly in Configuartor Delete Function
+    //there it will be called twice, one the real value, and then reset to old
+    //Here only once. FOR NOW
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("language");
+    Ui::Configurator* uiConfig = m_Configurator.ui;
+    settings.setValue("currentIndex", uiConfig->comboBoxLanguage->currentIndex());
+    settings.endGroup();
 
     delete ui;
 }

@@ -27,7 +27,6 @@ inline static void WriteToolbarSettings(QString);
 inline static QString ReadGraphSettings(void);
 inline static void WriteGraphSettings(QString);
 
-
 inline QString Read1stRun(void)
 {
     QString tmp;
@@ -224,27 +223,27 @@ inline void Settings::WriteSettings(QWidget* widget)
 *                                                 *
 ***************************************************/
 
-template <>
-inline void Settings::ReadSettings(QComboBox* comboBox)
-{
-    QSettings settings("Gw2SPECS");
-    settings.beginGroup(comboBox->objectName());
-    comboBox->setCurrentIndex(settings.value("currentIndex").toInt());
-    settings.endGroup();
+//template <>
+//inline void Settings::ReadSettings(QComboBox* comboBox)
+//{
+//    QSettings settings("Gw2SPECS");
+//    settings.beginGroup(comboBox->objectName());
+//    comboBox->setCurrentIndex(settings.value("currentIndex").toInt());
+//    settings.endGroup();
 
-    ReadSettings<QWidget>(comboBox);
-}
+//    ReadSettings<QWidget>(comboBox);
+//}
 
-template <>
-inline void Settings::WriteSettings(QComboBox* comboBox)
-{
-    QSettings settings("Gw2SPECS");
-    settings.beginGroup(comboBox->objectName());
-    settings.setValue("currentIndex", comboBox->currentIndex());
-    settings.endGroup();
+//template <>
+//inline void Settings::WriteSettings(QComboBox* comboBox)
+//{
+//    QSettings settings("Gw2SPECS");
+//    settings.beginGroup(comboBox->objectName());
+//    settings.setValue("currentIndex", comboBox->currentIndex());
+//    settings.endGroup();
 
-    WriteSettings<QWidget>(comboBox);
-}
+//    WriteSettings<QWidget>(comboBox);
+//}
 
 /**************************************************
 *                                                 *

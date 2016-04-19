@@ -57,7 +57,7 @@ public:
         int _pos;
 
         MumbleLink mL;
-
+        Configurator m_Configurator;
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
@@ -79,7 +79,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QThread m_ScreenRecorderThread;
-    Configurator m_Configurator;
+
     MyDialog m_MyDialog;
     firstStart m_firstStart;
     CombatMode m_combatMode;

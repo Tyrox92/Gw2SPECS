@@ -52,6 +52,11 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->comboBoxSecondsInCombat);
     Settings::ReadSettings(ui->comboBoxConsideredLines);
 
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("language");
+    ui->comboBoxLanguage->setCurrentIndex(settings.value("currentIndex").toInt());
+    settings.endGroup();
+
 }
 
 Configurator::~Configurator()
@@ -85,6 +90,8 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->comboBoxUpdates);
     Settings::WriteSettings(ui->comboBoxSecondsInCombat);
     Settings::WriteSettings(ui->comboBoxConsideredLines);
+    Settings::WriteSettings(ui->comboBoxLanguage);
+
     delete ui;
 }
 
@@ -95,6 +102,7 @@ void Configurator::RestoreDefaults()
     ui->checkBoxExtraDetails->setChecked(false);
     ui->checkBoxOpacity->setChecked(false);
     ui->checkBoxOBS->setChecked(false);
+    ui->comboBoxLanguage->setCurrentIndex(0);
 
     ui->checkBoxProfColors->setChecked(false);
     ui->checkBoxName->setChecked(true);

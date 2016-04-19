@@ -121,15 +121,15 @@
 color: #8BB2DA;</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="specsSettings">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>308</width>
-        <height>169</height>
+        <width>291</width>
+        <height>182</height>
        </rect>
       </property>
       <attribute name="label">
@@ -174,13 +174,32 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="comboBoxLanguage">
+         <item>
+          <property name="text">
+           <string>en</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>de</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>fr</string>
+          </property>
+         </item>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="soloSettings">
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-52</y>
         <width>300</width>
         <height>204</height>
        </rect>
@@ -301,8 +320,8 @@ color: #8BB2DA;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>303</width>
-        <height>96</height>
+        <width>308</width>
+        <height>169</height>
        </rect>
       </property>
       <attribute name="label">
@@ -394,8 +413,8 @@ color: #8BB2DA;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>231</width>
-        <height>132</height>
+        <width>308</width>
+        <height>169</height>
        </rect>
       </property>
       <attribute name="label">
