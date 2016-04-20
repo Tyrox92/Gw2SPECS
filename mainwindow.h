@@ -40,17 +40,17 @@ public:
     ~MainWindow();
         QString time;
         QMenu myMenu;
-        QMenu *miscMenu = new QMenu("Miscellaneous", this);
+        QMenu *miscMenu = new QMenu(MainWindow::tr("Miscellaneous"), this);
 
-        QAction *resetData = myMenu.addAction("Reset");
-        QAction *combatMode = myMenu.addAction("CombatMode");
-        QAction *connectServer = myMenu.addAction("Connect");
-        QAction *saveToFile = myMenu.addAction("Save File");
-        QAction *options = myMenu.addAction("Options");        
+        QAction *resetData = myMenu.addAction(MainWindow::tr("Reset"));
+        QAction *combatMode = myMenu.addAction(MainWindow::tr("CombatMode"));
+        QAction *connectServer = myMenu.addAction(MainWindow::tr("Connect"));
+        QAction *saveToFile = myMenu.addAction(MainWindow::tr("Save File"));
+        QAction *options = myMenu.addAction(MainWindow::tr("Options"));
         QAction *exitSeparator = new QAction(this);
-        QAction *exitMenu = myMenu.addAction("Exit");
+        QAction *exitMenu = myMenu.addAction(MainWindow::tr("Exit"));
 
-        QAction *autoReset = miscMenu->addAction("Auto-Reset On"); //Toggle
+        QAction *autoReset = miscMenu->addAction(MainWindow::tr("Auto-Reset On")); //Toggle
 
         int m_msecs;
         QList<int> _kc;

@@ -464,12 +464,12 @@ void GW2::MainWindow::StartupPref()
 //    layoutprogressbar_8->addWidget(labelact_8);
 //    layoutprogressbar_9->addWidget(labelact_9);
 
-    labellegendname->setText(QString("Name"));
-    labellegenddmg->setText(QString("Damage"));
-    labellegendper->setText(QString("%Dmg"));
-    labellegenddps->setText(QString("DPS"));
-    labellegend5sdps->setText(QString("5sDPS"));
-    //labellegendact->setText(QString("Act%"));
+    labellegendname->setText(QString(MainWindow::tr("Name")));
+    labellegenddmg->setText(QString(MainWindow::tr("Damage")));
+    labellegendper->setText(QString(MainWindow::tr("%Dmg")));
+    labellegenddps->setText(QString(MainWindow::tr("DPS")));
+    labellegend5sdps->setText(QString(MainWindow::tr("5sDPS")));
+    //labellegendact->setText(QString(MainWindow::tr("Act%")));
 
     //hide all legend labels by default
     labellegendname->hide();
@@ -608,7 +608,7 @@ void MainWindow::Initialize()
         {
             Ui::connectionfailed* uiConFail = m_connectionfailed.ui;
             qDebug() << "Error: " << socket->errorString();
-            uiConFail->errorMessage->setText("Connection to " + HostIP + " failed");
+            uiConFail->errorMessage->setText(MainWindow::tr("Connection to ") + HostIP + MainWindow::tr(" failed"));
             m_connectionfailed.exec();
             is_connected = false;
         }
@@ -914,7 +914,7 @@ void MainWindow::UpdateGroupLabels()
         // reseting empty/disconnected slot to 0
         for (int p=0;p<10;p++)
         {
-            if (PosName[p]==QString("Disconnected"))
+            if (PosName[p]==QString(MainWindow::tr("Disconnected")))
             {
                 PosName[p][0]=0;
                 PosDmg[p]=0;
@@ -1274,13 +1274,13 @@ void MainWindow::UpdateTimer(void)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
         connectServer->setIcon(QIcon(":/connected"));
-        connectServer->setText("Disconnect");
+        connectServer->setText(MainWindow::tr("Disconnect"));
         SendClientInfo();
     }
     else{
         ui->actionConnect->setIcon(QIcon(":/connect"));
         connectServer->setIcon(QIcon(":/connect"));
-        connectServer->setText("Connect");
+        connectServer->setText(MainWindow::tr("Connect"));
     }
 
     // "defaultName;defaultProfession"
@@ -1293,7 +1293,7 @@ void MainWindow::UpdateTimer(void)
     if (tmpFieldContents=="") {
         MyName = myLoggedInChar.split(";")[0];
         // setting default "name" if no logged in character is detected
-        if (MyName == "0") MyName = "No logged in character";
+        if (MyName == "0") MyName = MainWindow::tr("No logged in character");
     }
 
     UpdateGroupLabels();
@@ -1498,31 +1498,31 @@ void MainWindow::writeFile(QString separator)
             stream << "\r\n";
         }
         if(separator == ";"){
-            stream << "Personal Data\r\n";
+            stream << MainWindow::tr("Personal Data\r\n");
         }
 
-        stream << "Time" << separator << m_Time << "\r\n";
-        stream << "Hitcounter" << separator << hitCounter << "\r\n";
-        stream << "Highest Hit" << separator << m_MaxDmg << "\r\n";
-        stream << "CritChance" << separator << m_critChance << "%" << "\r\n";
+        stream << MainWindow::tr("Time") << separator << m_Time << "\r\n";
+        stream << MainWindow::tr("Hitcounter") << separator << hitCounter << "\r\n";
+        stream << MainWindow::tr("Highest Hit") << separator << m_MaxDmg << "\r\n";
+        stream << MainWindow::tr("CritChance") << separator << m_critChance << "%" << "\r\n";
         stream << "\r\n";
-        stream << "DPS" << separator << m_Dps << "\r\n";
-        stream << "DMG" << separator << m_Dmg << "\r\n";
+        stream << MainWindow::tr("DPS") << separator << m_Dps << "\r\n";
+        stream << MainWindow::tr("DMG") << separator << m_Dmg << "\r\n";
         stream << "\r\n";
-        stream << "CondiDPS" << separator << c << "\r\n";
-        stream << "CondiDMG" << separator << m_condiDmg << "\r\n";
+        stream << MainWindow::tr("CondiDPS") << separator << c << "\r\n";
+        stream << MainWindow::tr("CondiDMG") << separator << m_condiDmg << "\r\n";
         stream << "\r\n\r\n";
 
         if(is_connected == true){
             if(separator == ": "){
                 stream << "*************************************\r\n";
-                stream << "*            Group Info             *\r\n";
+                stream << MainWindow::tr("*            Group Info             *\r\n");
                 stream << "*************************************\r\n";
             }
             stream << "\r\n";
-            stream << "AvgDPS" << separator << AvgDPS << "\r\n";
-            stream << "GroupDPS" << separator << GrpDPS << "\r\n";
-            stream << "GroupDMG " << separator << GrpDmg << "\r\n";
+            stream << MainWindow::tr("AvgDPS") << separator << AvgDPS << "\r\n";
+            stream << MainWindow::tr("GroupDPS") << separator << GrpDPS << "\r\n";
+            stream << MainWindow::tr("GroupDMG") << separator << GrpDmg << "\r\n";
             stream << "\r\n\r\n\r\n";
             QStringList profList;
             profList << "None" << "Guardian" << "Warrior" << "Engineer" << "Ranger" << "Thief" << "Elementalist" << "Mesmer" << "Necromancer" << "Revenant";
@@ -1557,7 +1557,7 @@ void MainWindow::writeFile(QString separator)
             }
             stream << "\r\n\r\n\r\n";
         }
-        stream << " Time(hh:mm:ss) " << tableSep << "  AvgDPS  " << tableSep << "  RealDPS  " << tableSep << "  DMG\r\n";
+        stream << MainWindow::tr(" Time(hh:mm:ss) ") << tableSep << MainWindow::tr("  AvgDPS  ") << tableSep << MainWindow::tr("  RealDPS  ") << tableSep << MainWindow::tr("  DMG\r\n");
         if(separator == ";"){
             combatCourse.replace(QString("|"),QString(";"));
         }
@@ -1606,13 +1606,13 @@ bool GW2::MainWindow::connectToServ(bool toggled){
     if (toggled)
     {
         connectServer->setIcon(QIcon(":/connected"));
-        connectServer->setText("Disconnect");
+        connectServer->setText(MainWindow::tr("Disconnect"));
         toggled = true;
     }
     else
     {
         connectServer->setIcon(QIcon(":/connect"));
-        connectServer->setText("Connect");
+        connectServer->setText(MainWindow::tr("Connect"));
         toggled = false;
     }
     return toggled;
@@ -1622,13 +1622,13 @@ bool GW2::MainWindow::resetAutomatic(bool toggled){
     if (toggled)
     {
         autoReset->setIcon(QIcon(":/Auto_Reset_Active"));
-        autoReset->setText("Auto Reset Off");
+        autoReset->setText(MainWindow::tr("Auto Reset Off"));
         toggled = true;
     }
     else
     {
         autoReset->setIcon(QIcon(":/Auto_Reset"));
-        autoReset->setText("Auto Reset On");
+        autoReset->setText(MainWindow::tr("Auto Reset On"));
         toggled = false;
     }
     return toggled;
@@ -1710,7 +1710,7 @@ void GW2::MainWindow::initializeGraph(){
 
     ui->widget_4->xAxis->setAutoTickStep(false);
     ui->widget_4->xAxis->setTickStep(1);
-    ui->widget_4->yAxis->setLabel("DPS");
+    ui->widget_4->yAxis->setLabel(MainWindow::tr("DPS"));
     //ui->widget_4->rescaleAxes();
     //ui->widget_4->axisRect()->setupFullAxesBox();
     ui->widget_4->yAxis->setRange(0,7000);

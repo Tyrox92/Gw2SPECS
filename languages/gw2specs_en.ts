@@ -81,215 +81,230 @@ Enjoy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="189"/>
+        <location filename="../configurator.ui" line="181"/>
+        <source>en</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="186"/>
+        <source>de</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="191"/>
+        <source>fr</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="208"/>
         <source>Player Bar Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="195"/>
+        <location filename="../configurator.ui" line="214"/>
         <source>(Show CondiDPS)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="202"/>
+        <location filename="../configurator.ui" line="221"/>
         <source>(Show Activity)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="212"/>
+        <location filename="../configurator.ui" line="231"/>
         <source>Show Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="222"/>
+        <location filename="../configurator.ui" line="241"/>
         <source>(Percental Condi)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="229"/>
+        <location filename="../configurator.ui" line="248"/>
         <source>Show Damage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="239"/>
+        <location filename="../configurator.ui" line="258"/>
         <source>(Show CondiDmg)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="246"/>
+        <location filename="../configurator.ui" line="265"/>
         <source>Show DPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="256"/>
+        <location filename="../configurator.ui" line="275"/>
         <source>Percental Damage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="266"/>
+        <location filename="../configurator.ui" line="285"/>
         <source>Show Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="276"/>
+        <location filename="../configurator.ui" line="295"/>
         <source>Group only:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="283"/>
+        <location filename="../configurator.ui" line="302"/>
         <source>Show Last5sDPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="293"/>
+        <location filename="../configurator.ui" line="312"/>
         <source>Show Profession</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="309"/>
+        <location filename="../configurator.ui" line="328"/>
         <source>Graph Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="315"/>
+        <location filename="../configurator.ui" line="334"/>
         <source>Show Graph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="328"/>
+        <location filename="../configurator.ui" line="347"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blue Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="331"/>
+        <location filename="../configurator.ui" line="350"/>
         <source>Show RealDPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="341"/>
+        <location filename="../configurator.ui" line="360"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="344"/>
+        <location filename="../configurator.ui" line="363"/>
         <source>Average CondiDPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="354"/>
+        <location filename="../configurator.ui" line="373"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="357"/>
+        <location filename="../configurator.ui" line="376"/>
         <source>Average GrDPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="367"/>
+        <location filename="../configurator.ui" line="386"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="370"/>
+        <location filename="../configurator.ui" line="389"/>
         <source>Average PersDPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="380"/>
+        <location filename="../configurator.ui" line="399"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="383"/>
+        <location filename="../configurator.ui" line="402"/>
         <source>Last5sDPS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="402"/>
+        <location filename="../configurator.ui" line="421"/>
         <source>Accuracy Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="420"/>
+        <location filename="../configurator.ui" line="439"/>
         <source>Screenshots per second</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="442"/>
-        <location filename="../configurator.ui" line="449"/>
+        <location filename="../configurator.ui" line="461"/>
+        <location filename="../configurator.ui" line="468"/>
         <source>15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="454"/>
-        <location filename="../configurator.ui" line="584"/>
+        <location filename="../configurator.ui" line="473"/>
+        <location filename="../configurator.ui" line="603"/>
         <source>20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="459"/>
+        <location filename="../configurator.ui" line="478"/>
         <source>25</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="483"/>
+        <location filename="../configurator.ui" line="502"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="507"/>
+        <location filename="../configurator.ui" line="526"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="512"/>
+        <location filename="../configurator.ui" line="531"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="532"/>
+        <location filename="../configurator.ui" line="551"/>
         <source>Seconds in combat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="557"/>
-        <location filename="../configurator.ui" line="564"/>
+        <location filename="../configurator.ui" line="576"/>
+        <location filename="../configurator.ui" line="583"/>
         <source>10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="569"/>
+        <location filename="../configurator.ui" line="588"/>
         <source>12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="574"/>
+        <location filename="../configurator.ui" line="593"/>
         <source>14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="579"/>
+        <location filename="../configurator.ui" line="598"/>
         <source>16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="589"/>
+        <location filename="../configurator.ui" line="608"/>
         <source>24</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="594"/>
+        <location filename="../configurator.ui" line="613"/>
         <source>27</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="614"/>
+        <location filename="../configurator.ui" line="633"/>
         <source># of Lines in Combat Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="636"/>
+        <location filename="../configurator.ui" line="655"/>
         <source>Updates per second</source>
         <translation type="unfinished"></translation>
     </message>
@@ -297,8 +312,191 @@ Enjoy.</source>
 <context>
     <name>GW2::MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="468"/>
+        <location filename="../mainwindow.cpp" line="467"/>
         <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="468"/>
+        <source>Damage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="469"/>
+        <source>%Dmg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="470"/>
+        <location filename="../mainwindow.cpp" line="1509"/>
+        <location filename="../mainwindow.cpp" line="1713"/>
+        <source>DPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="471"/>
+        <source>5sDPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="611"/>
+        <source>Connection to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="611"/>
+        <source> failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="917"/>
+        <source>Disconnected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1277"/>
+        <location filename="../mainwindow.cpp" line="1609"/>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1283"/>
+        <location filename="../mainwindow.cpp" line="1615"/>
+        <location filename="../mainwindow.h" line="47"/>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1296"/>
+        <source>No logged in character</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1501"/>
+        <source>Personal Data
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1504"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1505"/>
+        <source>Hitcounter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1506"/>
+        <source>Highest Hit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1507"/>
+        <source>CritChance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1510"/>
+        <source>DMG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1512"/>
+        <source>CondiDPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1513"/>
+        <source>CondiDMG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1519"/>
+        <source>*            Group Info             *
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1523"/>
+        <source>AvgDPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1524"/>
+        <source>GroupDPS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1525"/>
+        <source>GroupDMG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1560"/>
+        <source> Time(hh:mm:ss) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1560"/>
+        <source>  AvgDPS  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1560"/>
+        <source>  RealDPS  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1560"/>
+        <source>  DMG
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1625"/>
+        <source>Auto Reset Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1631"/>
+        <source>Auto Reset On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="43"/>
+        <source>Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="45"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="46"/>
+        <source>CombatMode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="48"/>
+        <source>Save File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="49"/>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="51"/>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="53"/>
+        <source>Auto-Reset On</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
