@@ -142,7 +142,7 @@ Amusez-vous.</translation>
     <message>
         <location filename="../configurator.ui" line="275"/>
         <source>Percental Damage</source>
-        <translation></translation>Pourcentage de dégâts</translation>
+        <translation>Pourcentage de dégâts</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="285"/>
