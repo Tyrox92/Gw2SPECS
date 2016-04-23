@@ -1311,14 +1311,11 @@ void MainWindow::UpdateTimer(void)
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_5sDPS,m_realDps);
     m_realDps=0;
     if(fixOnTopCount<1){
-        action_widgetMode();
         HWND winHandle  = (HWND)winId();
+        SetForegroundWindow(winHandle);
         ShowWindow(winHandle, SW_HIDE);
         SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
         ShowWindow(winHandle, SW_SHOW);
-        fixOnTopCount++;
-    }
-    if(fixOnTopCount==1){
         action_widgetMode();
         fixOnTopCount++;
     }
@@ -1665,6 +1662,7 @@ void GW2::MainWindow::action_widgetMode(){
 void GW2::MainWindow::action_combatMode(){
     //Make click-through
     HWND winHandle  = (HWND)winId();
+    SetForegroundWindow(winHandle);
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_APPWINDOW | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
@@ -1674,6 +1672,7 @@ void GW2::MainWindow::action_combatMode(){
 
 void GW2::MainWindow::action_resetCombatMode(){
     HWND winHandle  = (HWND)winId();
+    SetForegroundWindow(winHandle);
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
