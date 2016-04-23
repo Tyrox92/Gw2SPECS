@@ -57,7 +57,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="136"/>
         <source>Gw2SPECS Settings</source>
-        <translation>Gw2SPECS Einstellungen</translation>
+        <translation>Gw2SPECS-Einstellungen</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="142"/>
@@ -82,7 +82,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="173"/>
         <source>Enable OBS Mode</source>
-        <translation>OBS Modus aktivieren</translation>
+        <translation>OBS-Modus aktivieren</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="181"/>
@@ -102,7 +102,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="208"/>
         <source>Player Bar Settings</source>
-        <translation>Spieler Einstellungen</translation>
+        <translation>Spielereinstellungen</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="214"/>
@@ -167,17 +167,17 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="328"/>
         <source>Graph Settings</source>
-        <translation>Diagramm Einstellungen</translation>
+        <translation>Grapheinstellungen</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="334"/>
         <source>Show Graph</source>
-        <translation>Diagramm anzeigen</translation>
+        <translation>Graph anzeigen</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="347"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blue Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blaues Diagramm&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blaues Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="350"/>
@@ -187,7 +187,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="360"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Lila Diagramm&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Lila Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="363"/>
@@ -197,7 +197,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="373"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gelbes Diagramm&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gelbes Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="376"/>
@@ -207,7 +207,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="386"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grünes Diagramm&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Grünes Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="389"/>
@@ -217,7 +217,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="399"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotes Diagramm&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rotes Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="402"/>
@@ -227,7 +227,7 @@ Viel Spaß.</translation>
     <message>
         <location filename="../configurator.ui" line="421"/>
         <source>Accuracy Settings</source>
-        <translation>Genauigkeits Einstellungen</translation>
+        <translation>Genauigkeitseinstellungen</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="439"/>
@@ -379,7 +379,24 @@ Viel Spaß.</translation>
         <location filename="../mainwindow.cpp" line="1501"/>
         <source>Personal Data
 </source>
-        <translation>Persönliche Daten</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1519"/>
+        <source>*            Group Info             *
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1560"/>
+        <source>  DMG
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal Data
+</source>
+        <translation type="vanished">Persönliche Daten</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1504"/>
@@ -417,10 +434,9 @@ Viel Spaß.</translation>
         <translation>Zustands Schaden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1519"/>
         <source>*            Group Info             *
 </source>
-        <translation>*          Gruppen Info           *
+        <translation type="vanished">*          Gruppen Info           *
 </translation>
     </message>
     <message>
@@ -454,10 +470,9 @@ Viel Spaß.</translation>
         <translation>Echter DPS</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1560"/>
         <source>  DMG
 </source>
-        <translation>Schaden</translation>
+        <translation type="vanished">Schaden</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1625"/>
