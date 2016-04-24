@@ -95,14 +95,14 @@ private:
     QString HostIP;
     int HostPort;
 
-    char PosName[10][15];
+    char PosName[10][25];
     int PosDPS[10];
     long PosDmg[10];
     int PosAct[10];
     int PosProf[10];
     int PosrDPS[10];
 
-    char SlotName[10][15];
+    char SlotName[10][25];
     int SlotDPS[10];
     long SlotDmg[10];
     int SlotAct[10];

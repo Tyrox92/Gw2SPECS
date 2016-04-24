@@ -914,7 +914,7 @@ void MainWindow::UpdateGroupLabels()
         // reseting empty/disconnected slot to 0
         for (int p=0;p<10;p++)
         {
-            if (PosName[p]==QString(MainWindow::tr("Disconnected")))
+            if (PosName[p]==QString("Disconnected"))
             {
                 PosName[p][0]=0;
                 PosDmg[p]=0;
@@ -1083,7 +1083,8 @@ void MainWindow::ready2Read()
                 {
 
                     j=i+1;
-                    while ((j-i-1<19) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
+                    // has to be PosName/SlotName length +1
+                    while ((j-i-1<26) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
                     if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
                     i=j;
 
@@ -1180,7 +1181,7 @@ void MainWindow::SendClientInfo(void)
     QByteArray tmp1;
     const char* tmp2;
 
-    tmp1 = MyName.toLatin1();
+    tmp1 = MyName.toUtf8();
     tmp2 = tmp1.data();
     if (MyClientSlot!=10)  //connected and semi-handshaked
     {
