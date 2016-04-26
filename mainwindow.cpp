@@ -73,31 +73,31 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
     QObject::connect(ui->actionActionSave,SIGNAL(triggered()),&m_saveLog, SLOT(exec()));
     // connecting configurator - SPECS display settings
-    QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(clicked(bool)), this, SLOT(ShowToolbarChanged()));
-    QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
-    QObject::connect(uiConfig->checkBoxExtraDetails, SIGNAL(clicked(bool)), this, SLOT(ShowExtraDetailsChanged()));
+    QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(stateChanged(int)), this, SLOT(ShowToolbarChanged()));
+    QObject::connect(uiConfig->checkBoxDetails, SIGNAL(stateChanged(int)), this, SLOT(ShowDetailsChanged()));
+    QObject::connect(uiConfig->checkBoxExtraDetails, SIGNAL(stateChanged(int)), this, SLOT(ShowExtraDetailsChanged()));
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(ShowExtraDetailsChanged()));
-    QObject::connect(uiConfig->checkBoxOpacity, SIGNAL(clicked(bool)), this, SLOT(ShowOpacityChanged()));
-    QObject::connect(uiConfig->checkBoxOBS, SIGNAL(clicked(bool)), this, SLOT(ShowOBSChanged()));
+    QObject::connect(uiConfig->checkBoxOpacity, SIGNAL(stateChanged(int)), this, SLOT(ShowOpacityChanged()));
+    QObject::connect(uiConfig->checkBoxOBS, SIGNAL(stateChanged(int)), this, SLOT(ShowOBSChanged()));
     // connecting configurator - solo display settings
-    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(clicked(bool)), this, SLOT(ProfSettingsChanged()));
-    QObject::connect(uiConfig->checkBoxName, SIGNAL(clicked(bool)), this, SLOT(NameChanged()));
-    QObject::connect(uiConfig->checkBoxDamage, SIGNAL(clicked(bool)), this, SLOT(DamageChanged()));
-    QObject::connect(uiConfig->checkBoxDPS, SIGNAL(clicked(bool)), this, SLOT(DPSChanged()));
-    QObject::connect(uiConfig->checkBoxCDamage, SIGNAL(clicked(bool)), this, SLOT(CDamageChanged()));
-    QObject::connect(uiConfig->checkBoxCPerDmg, SIGNAL(clicked(bool)), this, SLOT(CPerDmgChanged()));
-    QObject::connect(uiConfig->checkBoxCDPS, SIGNAL(clicked(bool)), this, SLOT(CDPSChanged()));
-    QObject::connect(uiConfig->checkBox5sDPS, SIGNAL(clicked(bool)), this, SLOT(FiveSecRealDPSChanged()));
-    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(clicked(bool)), this, SLOT(PositionChanged()));
-    QObject::connect(uiConfig->checkBoxPerDmg, SIGNAL(clicked(bool)), this, SLOT(PerDmgChanged()));
-    QObject::connect(uiConfig->checkBoxActivity, SIGNAL(clicked(bool)), this, SLOT(ActivityChanged()));
+    QObject::connect(uiConfig->checkBoxProfColors, SIGNAL(stateChanged(int)), this, SLOT(ProfSettingsChanged()));
+    QObject::connect(uiConfig->checkBoxName, SIGNAL(stateChanged(int)), this, SLOT(NameChanged()));
+    QObject::connect(uiConfig->checkBoxDamage, SIGNAL(stateChanged(int)), this, SLOT(DamageChanged()));
+    QObject::connect(uiConfig->checkBoxDPS, SIGNAL(stateChanged(int)), this, SLOT(DPSChanged()));
+    QObject::connect(uiConfig->checkBoxCDamage, SIGNAL(stateChanged(int)), this, SLOT(CDamageChanged()));
+    QObject::connect(uiConfig->checkBoxCPerDmg, SIGNAL(stateChanged(int)), this, SLOT(CPerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxCDPS, SIGNAL(stateChanged(int)), this, SLOT(CDPSChanged()));
+    QObject::connect(uiConfig->checkBox5sDPS, SIGNAL(stateChanged(int)), this, SLOT(FiveSecRealDPSChanged()));
+    QObject::connect(uiConfig->checkBoxPosition, SIGNAL(stateChanged(int)), this, SLOT(PositionChanged()));
+    QObject::connect(uiConfig->checkBoxPerDmg, SIGNAL(stateChanged(int)), this, SLOT(PerDmgChanged()));
+    QObject::connect(uiConfig->checkBoxActivity, SIGNAL(stateChanged(int)), this, SLOT(ActivityChanged()));
     // connecting configuarator - graph settings
-    QObject::connect(uiConfig->checkBoxGraphShow, SIGNAL(clicked(bool)), this, SLOT(ShowGraphChanged()));
-    QObject::connect(uiConfig->checkBoxGraphRealDPS, SIGNAL(clicked(bool)), this, SLOT(RealDPSChanged()));
-    QObject::connect(uiConfig->checkBoxGraph5sDPS, SIGNAL(clicked(bool)), this, SLOT(GraphFiveSecRealDPSChanged()));
-    QObject::connect(uiConfig->checkBoxGraphAvgDPS, SIGNAL(clicked(bool)), this, SLOT(AvDPSChanged()));
-    QObject::connect(uiConfig->checkBoxGraphAvgCDPS, SIGNAL(clicked(bool)), this, SLOT(AvCDPSChanged()));
-    QObject::connect(uiConfig->checkBoxGraphAvgGroupDPS, SIGNAL(clicked(bool)), this, SLOT(AvGroupDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphShow, SIGNAL(stateChanged(int)), this, SLOT(ShowGraphChanged()));
+    QObject::connect(uiConfig->checkBoxGraphRealDPS, SIGNAL(stateChanged(int)), this, SLOT(RealDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraph5sDPS, SIGNAL(stateChanged(int)), this, SLOT(GraphFiveSecRealDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphAvgDPS, SIGNAL(stateChanged(int)), this, SLOT(AvDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphAvgCDPS, SIGNAL(stateChanged(int)), this, SLOT(AvCDPSChanged()));
+    QObject::connect(uiConfig->checkBoxGraphAvgGroupDPS, SIGNAL(stateChanged(int)), this, SLOT(AvGroupDPSChanged()));
     // connecting configurator - accuracy settings
     QObject::connect(uiConfig->comboBoxScreenshots, SIGNAL(currentIndexChanged(QString)), screenRecorder, SLOT(SetScreenshotsPerSecond(QString)));
     QObject::connect(uiConfig->comboBoxUpdates, SIGNAL(currentIndexChanged(QString)), dmgMeter, SLOT(SetUpdatesPerSecond(QString)));
