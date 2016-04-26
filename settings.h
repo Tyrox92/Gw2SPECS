@@ -223,27 +223,27 @@ inline void Settings::WriteSettings(QWidget* widget)
 *                                                 *
 ***************************************************/
 
-//template <>
-//inline void Settings::ReadSettings(QComboBox* comboBox)
-//{
-//    QSettings settings("Gw2SPECS");
-//    settings.beginGroup(comboBox->objectName());
-//    comboBox->setCurrentIndex(settings.value("currentIndex").toInt());
-//    settings.endGroup();
+template <>
+inline void Settings::ReadSettings(QComboBox* comboBox)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(comboBox->objectName());
+    comboBox->setCurrentText(settings.value("currentText").toString());
+    settings.endGroup();
 
-//    ReadSettings<QWidget>(comboBox);
-//}
+    ReadSettings<QWidget>(comboBox);
+}
 
-//template <>
-//inline void Settings::WriteSettings(QComboBox* comboBox)
-//{
-//    QSettings settings("Gw2SPECS");
-//    settings.beginGroup(comboBox->objectName());
-//    settings.setValue("currentIndex", comboBox->currentIndex());
-//    settings.endGroup();
+template <>
+inline void Settings::WriteSettings(QComboBox* comboBox)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(comboBox->objectName());
+    settings.setValue("currentText", comboBox->currentText());
+    settings.endGroup();
 
-//    WriteSettings<QWidget>(comboBox);
-//}
+    WriteSettings<QWidget>(comboBox);
+}
 
 /**************************************************
 *                                                 *

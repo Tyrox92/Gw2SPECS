@@ -41,16 +41,11 @@ int main(int argc, char *argv[])
 #endif // QT_DEBUG
     QApplication a(argc, argv);
 
-    Configurator m_Config;
-    Ui::Configurator* uiConfig = m_Config.ui;
-
     QSettings settings("Gw2SPECS");
-    settings.beginGroup("language");
-    uiConfig->comboBoxLanguage->setCurrentIndex(settings.value("currentIndex").toInt());
+    settings.beginGroup("comboBoxLanguage");
+    QString lang = settings.value("currentText").toString();
     settings.endGroup();
 
-    QString lang = uiConfig->comboBoxLanguage->currentText();
-    qDebug()<<"Language: " << lang;
     QTranslator * qt_translator = new QTranslator;
     QString file_translator = QApplication::applicationDirPath() + "/languages/" + "gw2specs_" + lang + ".qm";
 

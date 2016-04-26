@@ -27,6 +27,7 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->checkBoxExtraDetails);
     Settings::ReadSettings(ui->checkBoxOpacity);
     Settings::ReadSettings(ui->checkBoxOBS);
+    Settings::ReadSettings(ui->comboBoxLanguage);
 
     Settings::ReadSettings(ui->checkBoxProfColors);
     Settings::ReadSettings(ui->checkBoxName);
@@ -51,12 +52,6 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->comboBoxUpdates);
     Settings::ReadSettings(ui->comboBoxSecondsInCombat);
     Settings::ReadSettings(ui->comboBoxConsideredLines);
-
-    QSettings settings("Gw2SPECS");
-    settings.beginGroup("language");
-    ui->comboBoxLanguage->setCurrentIndex(settings.value("currentIndex").toInt());
-    settings.endGroup();
-
 }
 
 Configurator::~Configurator()
@@ -66,6 +61,7 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->checkBoxExtraDetails);
     Settings::WriteSettings(ui->checkBoxOpacity);
     Settings::WriteSettings(ui->checkBoxOBS);
+    Settings::WriteSettings(ui->comboBoxLanguage);
 
     Settings::WriteSettings(ui->checkBoxProfColors);
     Settings::WriteSettings(ui->checkBoxName);
@@ -90,7 +86,6 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->comboBoxUpdates);
     Settings::WriteSettings(ui->comboBoxSecondsInCombat);
     Settings::WriteSettings(ui->comboBoxConsideredLines);
-    Settings::WriteSettings(ui->comboBoxLanguage);
 
     delete ui;
 }
