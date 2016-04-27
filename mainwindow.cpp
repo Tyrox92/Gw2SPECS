@@ -1047,11 +1047,21 @@ void MainWindow::ready2Read()
     int i,j;
     long k;
 
-
     incData = socket->readAll();
     incDataSize = incData.size();
     memcpy(incData2, incData.data(), incDataSize);
-
+    QString incDataString(incData);
+    QStringList userArray[10];
+    if(incDataString[0] == '*'){
+        qDebug()<< "Strange Value found: " << incDataString;
+    }else{
+        QString userData = incDataString.mid(1, incDataSize-2);
+        QStringList groupArray = userData.split("||");
+        for (i=0; i < groupArray.length(); i++) {
+            userArray[i] = groupArray[i].split(";");
+            qDebug()<< userArray[i][1];
+        }
+    }
     i=0;
 
     if (MyClientSlot==10)
@@ -1183,7 +1193,7 @@ void MainWindow::SendClientInfo(void)
         if (m_Activity>100) m_Activity = 1;
         if (m_5sDPS>99999) m_5sDPS = 1;
         if (m_realDps>99999)m_realDps =1;
-        sprintf(writeBuff, "*%u1#%s*%u2#%lu*%u3#%lu*%u4#%lu*%u5#%lu*%u6#%lu*", MyClientSlot, tmp2 , MyClientSlot, m_Dps, MyClientSlot, m_Dmg, MyClientSlot, m_Activity,MyClientSlot, m_MyProfession,MyClientSlot,m_5sDPS);
+        sprintf(writeBuff, "|%u;%s;%lu;%lu;%lu;%lu;%lu|", MyClientSlot, tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
         socket->write(writeBuff);
     }
 }
