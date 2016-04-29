@@ -74,8 +74,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionActionSave,SIGNAL(triggered()),&m_saveLog, SLOT(exec()));
     // connecting configurator - SPECS display settings
     QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(stateChanged(int)), this, SLOT(ShowToolbarChanged()));
-    QObject::connect(uiConfig->checkBoxDetails, SIGNAL(stateChanged(int)), this, SLOT(ShowDetailsChanged()));
-    QObject::connect(uiConfig->checkBoxExtraDetails, SIGNAL(stateChanged(int)), this, SLOT(ShowExtraDetailsChanged()));
+    QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
+    QObject::connect(uiConfig->checkBoxExtraDetails, SIGNAL(clicked(bool)), this, SLOT(ShowExtraDetailsChanged()));
     QObject::connect(ui->pushButton, SIGNAL(toggled(bool)), this, SLOT(ShowExtraDetailsChanged()));
     QObject::connect(uiConfig->checkBoxOpacity, SIGNAL(stateChanged(int)), this, SLOT(ShowOpacityChanged()));
     QObject::connect(uiConfig->checkBoxOBS, SIGNAL(stateChanged(int)), this, SLOT(ShowOBSChanged()));
