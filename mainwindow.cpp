@@ -901,15 +901,15 @@ void MainWindow::UpdateGroupLabels()
         ui->avg_DPS->setText(QString::number(AvgDPS));
 
         // setting input from server to local Slots
-        for (j=0;j<10;j++)
-        {
-            strcpy(PosName[j],SlotName[j]);
-            PosDmg[j]=SlotDmg[j];
-            PosDPS[j]=SlotDPS[j];
-            //PosAct[j]=SlotAct[j];
-            PosProf[j]=SlotProf[j];
-            PosrDPS[j]=SlotrDPS[j];
-        }
+//        for (j=0;j<10;j++)
+//        {
+//            strcpy(PosName[j],SlotName[j]);
+//            PosDmg[j]=SlotDmg[j];
+//            PosDPS[j]=SlotDPS[j];
+//            //PosAct[j]=SlotAct[j];
+//            PosProf[j]=SlotProf[j];
+//            PosrDPS[j]=SlotrDPS[j];
+//        }
 
         // reseting empty/disconnected slot to 0
         for (int p=0;p<10;p++)
@@ -927,33 +927,36 @@ void MainWindow::UpdateGroupLabels()
 
         // sorting the slots
         k=0;
-        for (i=0;i<9;i++)
-        {
-            for (j=i+1;j<10;j++)
-            {
-                if (PosDmg[j]>PosDmg[i])
-                {
-                    k=PosDmg[i];
-                    PosDmg[i]=PosDmg[j];
-                    PosDmg[j]=k;
-                    k=PosDPS[i];
-                    PosDPS[i]=PosDPS[j];
-                    PosDPS[j]=k;
-                    //k=PosAct[i];
-                    //PosAct[i]=PosAct[j];
-                    //PosAct[j]=k;
-                    k=PosProf[i];
-                    PosProf[i]=PosProf[j];
-                    PosProf[j]=k;
-                    strcpy(tmp1,PosName[i]);
-                    strcpy(PosName[i],PosName[j]);
-                    strcpy(PosName[j],tmp1);
-                    k=PosrDPS[i];
-                    PosrDPS[i]=PosrDPS[j];
-                    PosrDPS[j]=k;
-                }
-            }
-        }
+//        for (i=0;i<9;i++)
+//        {
+//            for (j=i+1;j<10;j++)
+//            {
+//                if (PosDmg[j]>PosDmg[i])
+//                {
+//                    k=PosDmg[i];
+//                    PosDmg[i]=PosDmg[j];
+//                    PosDmg[j]=k;
+//                    k=PosDPS[i];
+//                    PosDPS[i]=PosDPS[j];
+//                    PosDPS[j]=k;
+//                    //k=PosAct[i];
+//                    //PosAct[i]=PosAct[j];
+//                    //PosAct[j]=k;
+//                    k=PosProf[i];
+//                    PosProf[i]=PosProf[j];
+//                    PosProf[j]=k;
+//                    tmp1=PosName[i];
+//                    PosName[i]=PosName[j];
+//                    PosName[j]=tmp1;
+//                    //strcpy(tmp1,PosName[i]);
+//                    //strcpy(PosName[i],PosName[j]);
+//                    //strcpy(PosName[j],tmp1);
+//                    k=PosrDPS[i];
+//                    PosrDPS[i]=PosrDPS[j];
+//                    PosrDPS[j]=k;
+//                }
+//            }
+//        }
 
         // doing the math and setting the labels
         for(int n=0;n<10;n++) {
@@ -1043,88 +1046,48 @@ void MainWindow::UpdateGroupLabels()
 
 void MainWindow::ready2Read()
 {
-
-    int i,j;
-    long k;
-
+    int i;
     incData = socket->readAll();
     incDataSize = incData.size();
     memcpy(incData2, incData.data(), incDataSize);
     QString incDataString(incData);
-    QStringList userArray[10];
-    if(incDataString[0] == '*'){
+    if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
+        QString tmpSlot(incDataString[3]);
+        MyClientSlot = tmpSlot.toInt();
     }else{
         QString userData = incDataString.mid(1, incDataSize-2);
-        QStringList groupArray = userData.split("||");
-        for (i=0; i < groupArray.length(); i++) {
-            userArray[i] = groupArray[i].split(";");
-            qDebug()<< userArray[i][1];
-        }
-    }
-    i=0;
-
-    if (MyClientSlot==10)
-    {
-        if ((incDataSize==4) && (incData2[0]=='*') && (incData2[1]=='*') && (incData2[2]=='*'))
-        {
-            MyClientSlot= incData2[3]-48;
-
-        }
-    }
-    else
-    {
-        while (i<incDataSize)
-        {
-            if ((incData2[i]=='*') && (incData2[i+3]=='#'))
-            {
-
-                if ((incData2[i+1]<58) && (incData2[i+1]>47) && (incData2[i+2]>48) && (incData2[i+2]<55))
-                {
-                    CurrentPos=incData2[i+1]-48;
-                    CurrentMeta=incData2[i+2]-48;
-                }
-                i+=3;
-
-            }
-            else if (incData2[i]=='#')
-            {
-                if (CurrentMeta==1)
-                {
-
-                    j=i+1;
-                    // has to be PosName/SlotName length +1
-                    while ((j-i-1<26) && (j<incDataSize) && (incData2[j]!='*')) { SlotName[CurrentPos][j-i-1]=incData2[j];j++; }
-                    if (incData2[j]=='*') SlotName[CurrentPos][j-i-1]=0; else SlotName[CurrentPos][0]=0;
-                    i=j;
-
-                }else
-                {
-
-
-
-                    j=i+1;k=0;
-                    while ((j-i-1<12) && (j<incDataSize) && (incData2[j]!='*')&& (incData2[j]>47)&& (incData2[j]<58)) { k=k*10+incData2[j]-48;j++; }
-                    if  (incData2[j]=='*')
-                    {
-
-                        if  (CurrentMeta==2) SlotDPS[CurrentPos]=k;
-                        if  (CurrentMeta==3) SlotDmg[CurrentPos]=k;
-                        if  (CurrentMeta==4) SlotAct[CurrentPos]=k;
-                        if  (CurrentMeta==5) SlotProf[CurrentPos]=k;
-                        if  (CurrentMeta==6) SlotrDPS[CurrentPos]=k;
-
-                    }
-                    i=j;
-                }
-            }
-            else { i++; while((i<incDataSize) && (incData2[i])!='*') i++; }
-
+        firstArray = userData.split("||");
+        qDebug()<< "userData " << userData;
+        qDebug()<< "firstArray " << firstArray;
+        qDebug()<< "firstArray[0] " << firstArray[0];
+        for (i=0; i < firstArray.length(); i++) {
+            //qDebug() << endl << "before secondArray " << secondArray;
+            //qDebug() << "before secondArray[i] " << secondArray[i];
+            //qDebug()<< "firstArray[i] " << firstArray[i];
+            secondArray[i] = firstArray[i].split(";");
+            qDebug()<< "after secondArray[i] "<< secondArray[i];
         }
 
+        // could be integrated in for loop in 1060
+        for (i=0; i < firstArray.length(); i++) {
+            //QString tmpslot0(secondArray[i][0]);
+            //MyClientSlot = tmpslot0.toInt();
+            QString tmpslot0(secondArray[i][0]);
+            QString tmpslot1(secondArray[i][1]);
+            PosName[tmpslot0.toInt()] = tmpslot1.toUtf8();
+            QString tmpslot2(secondArray[i][2]);
+            PosDPS[tmpslot0.toInt()] = tmpslot2.toInt();
+            QString tmpslot3(secondArray[i][3]);
+            PosDmg[tmpslot0.toInt()] = tmpslot3.toInt();
+            //QString tmpslot4(secondArray[i][4]);
+            //PosAct[tmpslot0.toInt()] = tmpslot4.toInt();
+            QString tmpslot5(secondArray[i][5]);
+            PosProf[tmpslot0.toInt()] = tmpslot5.toInt();
+            QString tmpslot6(secondArray[i][6]);
+            PosrDPS[tmpslot0.toInt()] = tmpslot6.toInt(); // this is 5sDPS (why ever, fix if possible in the future)
+        }
     }
-
-
 }
 
 void MainWindow::connected()

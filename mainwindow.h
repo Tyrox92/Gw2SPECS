@@ -95,7 +95,10 @@ private:
     QString HostIP;
     int HostPort;
 
-    char PosName[10][25];
+    QStringList firstArray;     // 1 slot per player (max 10) and every slot hast all infos
+    QStringList secondArray[10];    // 2 dimensional array with same data like firstArray but splitted further more
+
+    QString PosName[10];
     int PosDPS[10];
     long PosDmg[10];
     int PosAct[10];
@@ -247,7 +250,7 @@ private:
     QLabel* labelact [10] = {labelact_0,labelact_1,labelact_2,labelact_3,labelact_4,labelact_5,labelact_6,labelact_7,labelact_8,labelact_9};
     QLabel* label5sdps [10] = {label5sdps_0,label5sdps_1,label5sdps_2,label5sdps_3,label5sdps_4,label5sdps_5,label5sdps_6,label5sdps_7,label5sdps_8,label5sdps_9};
 
-    char tmp1[20];
+    QString tmp1;
     QTimer update_Timer;
     void CheckForUpdate();
     QPushButton *download;
