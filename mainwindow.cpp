@@ -914,9 +914,9 @@ void MainWindow::UpdateGroupLabels()
         // reseting empty/disconnected slot to 0
         for (int p=0;p<10;p++)
         {
-            if (PosName[p]==QString("Disconnected"))
+            if (PosName[p]==QString(""))
             {
-                PosName[p][0]=0;
+                PosName[p]="";
                 PosDmg[p]=0;
                 PosDPS[p]=0;
                 //PosAct[p]=0;
@@ -927,38 +927,35 @@ void MainWindow::UpdateGroupLabels()
 
         // sorting the slots
         k=0;
-//        for (i=0;i<9;i++)
-//        {
-//            for (j=i+1;j<10;j++)
-//            {
-//                if (PosDmg[j]>PosDmg[i])
-//                {
-//                    k=PosDmg[i];
-//                    PosDmg[i]=PosDmg[j];
-//                    PosDmg[j]=k;
-//                    k=PosDPS[i];
-//                    PosDPS[i]=PosDPS[j];
-//                    PosDPS[j]=k;
-//                    //k=PosAct[i];
-//                    //PosAct[i]=PosAct[j];
-//                    //PosAct[j]=k;
-//                    k=PosProf[i];
-//                    PosProf[i]=PosProf[j];
-//                    PosProf[j]=k;
-//                    tmp1=PosName[i];
-//                    PosName[i]=PosName[j];
-//                    PosName[j]=tmp1;
-//                    //strcpy(tmp1,PosName[i]);
-//                    //strcpy(PosName[i],PosName[j]);
-//                    //strcpy(PosName[j],tmp1);
-//                    k=PosrDPS[i];
-//                    PosrDPS[i]=PosrDPS[j];
-//                    PosrDPS[j]=k;
-//                }
-//            }
-//        }
-        for (i=0;i<10;i++) {
-            qDebug() << "PosName["<<i<<"]: "<<PosName[i];
+        for (i=0;i<9;i++)
+        {
+            for (j=i+1;j<10;j++)
+            {
+                if (PosDmg[j]>PosDmg[i])
+                {
+                    k=PosDmg[i];
+                    PosDmg[i]=PosDmg[j];
+                    PosDmg[j]=k;
+                    k=PosDPS[i];
+                    PosDPS[i]=PosDPS[j];
+                    PosDPS[j]=k;
+                    //k=PosAct[i];
+                    //PosAct[i]=PosAct[j];
+                    //PosAct[j]=k;
+                    k=PosProf[i];
+                    PosProf[i]=PosProf[j];
+                    PosProf[j]=k;
+                    tmp1=PosName[i];
+                    PosName[i]=PosName[j];
+                    PosName[j]=tmp1;
+                    //strcpy(tmp1,PosName[i]);
+                    //strcpy(PosName[i],PosName[j]);
+                    //strcpy(PosName[j],tmp1);
+                    k=PosrDPS[i];
+                    PosrDPS[i]=PosrDPS[j];
+                    PosrDPS[j]=k;
+                }
+            }
         }
 
         // doing the math and setting the labels
@@ -982,6 +979,7 @@ void MainWindow::UpdateGroupLabels()
                     switch (PosProf[n])
                     {
                     case 0:
+                        // default
                         Bar[n]->setStyleSheet("QProgressBar {border: 0px solid grey;color: rgb(255, 255, 255);min-height: 15px;margin: 0.5px;}QProgressBar::chunk {background-color: rgba(3, 132, 146 , 60%);}");
                         break;
                     case 1:
