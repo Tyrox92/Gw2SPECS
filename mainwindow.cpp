@@ -813,7 +813,7 @@ void MainWindow::UpdateGroupLabels()
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
-        PosrDPS[0]=m_5sDPS;
+        Pos5sDPS[0]=m_5sDPS;
         // PosAct[0]=m_Activity;
         if (PosDmg[0]>0)
             i=PosDmg[0]*100.0/PosDmg[0];
@@ -881,7 +881,7 @@ void MainWindow::UpdateGroupLabels()
         }
         if (displayDmg==true) labeldmg[0]->setText(QString("%L1").arg(PosDmg[0]));
         if (displayDPS==true) labeldps[0]->setText(QString("%L1").arg(PosDPS[0]));
-        if (display5sDPS==true) label5sdps[0]->setText(QString("%L1").arg(PosrDPS[0]));
+        if (display5sDPS==true) label5sdps[0]->setText(QString("%L1").arg(Pos5sDPS[0]));
     }
     else
     {
@@ -908,7 +908,7 @@ void MainWindow::UpdateGroupLabels()
 //            PosDPS[j]=SlotDPS[j];
 //            //PosAct[j]=SlotAct[j];
 //            PosProf[j]=SlotProf[j];
-//            PosrDPS[j]=SlotrDPS[j];
+//            Pos5sDPS[j]=SlotrDPS[j];
 //        }
 
         // reseting empty/disconnected slot to 0
@@ -921,7 +921,7 @@ void MainWindow::UpdateGroupLabels()
                 PosDPS[p]=0;
                 //PosAct[p]=0;
                 PosProf[p]=0;
-                PosrDPS[p]=0;
+                Pos5sDPS[p]=0;
             }
         }
 
@@ -951,9 +951,9 @@ void MainWindow::UpdateGroupLabels()
                     //strcpy(tmp1,PosName[i]);
                     //strcpy(PosName[i],PosName[j]);
                     //strcpy(PosName[j],tmp1);
-                    k=PosrDPS[i];
-                    PosrDPS[i]=PosrDPS[j];
-                    PosrDPS[j]=k;
+                    k=Pos5sDPS[i];
+                    Pos5sDPS[i]=Pos5sDPS[j];
+                    Pos5sDPS[j]=k;
                 }
             }
         }
@@ -1032,7 +1032,7 @@ void MainWindow::UpdateGroupLabels()
                 if (displayPerDmg==true) labelper[n]->setText(QString("%L1%").arg(p));
                 if (displayDPS==true) labeldps[n]->setText(QString("%L1").arg(PosDPS[n]));
                 //if (displayAct==true) labelact[n]->setText(QString("%L1%").arg(PosAct[n]));
-                if (display5sDPS==true) label5sdps[n]->setText(QString("%L1").arg(PosrDPS[n]));
+                if (display5sDPS==true) label5sdps[n]->setText(QString("%L1").arg(Pos5sDPS[n]));
             }
             else
                 Bar[n] ->setVisible(false);
@@ -1057,7 +1057,7 @@ void MainWindow::ready2Read()
         QString tmpSlot(incDataString[3]);
         MyClientSlot = tmpSlot.toInt();
     }else{
-        QString userData = incDataString.mid(1, incDataSize-2);
+        QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
         //qDebug()<< "userData " << userData;
         //qDebug()<< "firstArray " << firstArray;
@@ -1072,8 +1072,6 @@ void MainWindow::ready2Read()
 
         // could be integrated in for loop in 1060
         for (i=0; i < firstArray.length(); i++) {
-            //QString tmpslot0(secondArray[i][0]);
-            //MyClientSlot = tmpslot0.toInt();
             QString tmpslot0(secondArray[i][0]);
             QString tmpslot1(secondArray[i][1]);
             PosName[tmpslot0.toInt()] = tmpslot1.toUtf8();
@@ -1086,11 +1084,10 @@ void MainWindow::ready2Read()
             QString tmpslot5(secondArray[i][5]);
             PosProf[tmpslot0.toInt()] = tmpslot5.toInt();
             QString tmpslot6(secondArray[i][6]);
-            PosrDPS[tmpslot0.toInt()] = tmpslot6.toInt(); // this is 5sDPS (why ever, fix if possible in the future)
+            Pos5sDPS[tmpslot0.toInt()] = tmpslot6.toInt();
         }
     }
-    qDebug() << "incDataString: " << incDataString;
-    qDebug() << "MyClientSlot: " << MyClientSlot;
+    qDebug() << "MySlot: " << MyClientSlot << " incDataString: " << incDataString;
 }
 
 void MainWindow::connected()

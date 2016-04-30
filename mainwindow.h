@@ -103,7 +103,7 @@ private:
     long PosDmg[10];
     int PosAct[10];
     int PosProf[10];
-    int PosrDPS[10];
+    int Pos5sDPS[10];
 
     char SlotName[10][25];
     int SlotDPS[10];
