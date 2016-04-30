@@ -957,6 +957,9 @@ void MainWindow::UpdateGroupLabels()
 //                }
 //            }
 //        }
+        for (i=0;i<10;i++) {
+            qDebug() << "PosName["<<i<<"]: "<<PosName[i];
+        }
 
         // doing the math and setting the labels
         for(int n=0;n<10;n++) {
@@ -1058,15 +1061,15 @@ void MainWindow::ready2Read()
     }else{
         QString userData = incDataString.mid(1, incDataSize-2);
         firstArray = userData.split("||");
-        qDebug()<< "userData " << userData;
-        qDebug()<< "firstArray " << firstArray;
-        qDebug()<< "firstArray[0] " << firstArray[0];
+        //qDebug()<< "userData " << userData;
+        //qDebug()<< "firstArray " << firstArray;
+        //qDebug()<< "firstArray[0] " << firstArray[0];
         for (i=0; i < firstArray.length(); i++) {
             //qDebug() << endl << "before secondArray " << secondArray;
             //qDebug() << "before secondArray[i] " << secondArray[i];
             //qDebug()<< "firstArray[i] " << firstArray[i];
             secondArray[i] = firstArray[i].split(";");
-            qDebug()<< "after secondArray[i] "<< secondArray[i];
+            //qDebug()<< "after secondArray[i] "<< secondArray[i];
         }
 
         // could be integrated in for loop in 1060
@@ -1088,6 +1091,8 @@ void MainWindow::ready2Read()
             PosrDPS[tmpslot0.toInt()] = tmpslot6.toInt(); // this is 5sDPS (why ever, fix if possible in the future)
         }
     }
+    qDebug() << "incDataString: " << incDataString;
+    qDebug() << "MyClientSlot: " << MyClientSlot;
 }
 
 void MainWindow::connected()
