@@ -899,14 +899,14 @@ void MainWindow::UpdateGroupLabels()
         GrpDmg=0;
         GrpDPS=0;
         // add up all dmg/dps and set the labels
-        for (j=0;j<10;j++) GrpDmg+=SlotDmg[j];
+        for (j=0;j<10;j++) GrpDmg+=PosDmg[j];
         ui->grp_Dmg->setText(QString::number(GrpDmg));
-        for (j=0;j<10;j++) GrpDPS+=SlotDPS[j];
+        for (j=0;j<10;j++) GrpDPS+=PosDPS[j];
         ui->grp_DPS->setText(QString::number(GrpDPS));
 
         // reset number of player; set
         i=0;
-        for (j=0;j<10;j++) if (SlotDPS[j]>0) i++;
+        for (j=0;j<10;j++) if (PosDPS[j]>0) i++;
         if (i>0) AvgDPS=GrpDPS/i; else AvgDPS=0;
         ui->avg_DPS->setText(QString::number(AvgDPS));
 
