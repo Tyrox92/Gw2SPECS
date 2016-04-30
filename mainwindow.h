@@ -95,7 +95,7 @@ private:
     QString HostIP;
     int HostPort;
 
-    QStringList firstArray;     // 1 slot per player (max 10) and every slot hast all infos
+    QStringList firstArray;         // 1 slot per player (max 10) and every slot hast all infos
     QStringList secondArray[10];    // 2 dimensional array with same data like firstArray but splitted further more
 
     QString PosName[10];
@@ -105,29 +105,16 @@ private:
     int PosProf[10];
     int Pos5sDPS[10];
 
-    char SlotName[10][25];
-    int SlotDPS[10];
-    long SlotDmg[10];
-    int SlotAct[10];
-    int SlotProf[10];
-    int SlotrDPS[10];
-
-
     long GrpDmg;
     int GrpDPS;
     int AvgDPS;
 
-
     int GrprDPS;
     int AvgrDPS;
-
 
     QByteArray incData;
     int incDataSize;
     char incData2[800];
-
-    int CurrentPos;
-    int CurrentMeta;
 
     char writeBuff[128];
     int is_startup;

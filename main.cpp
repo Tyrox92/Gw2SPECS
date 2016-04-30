@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 #endif // QT_DEBUG
     QApplication a(argc, argv);
 
+    // get saved language
     QSettings settings("Gw2SPECS");
     settings.beginGroup("comboBoxLanguage");
     QString lang = settings.value("currentText").toString();

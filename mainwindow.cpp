@@ -586,15 +586,14 @@ void MainWindow::Initialize()
         connect(socket, SIGNAL(readyRead()),this, SLOT(ready2Read()));
         qDebug() << "connecting to : " << HostIP << ":" << HostPort;
 
-        CurrentMeta=0;CurrentPos=0;
         int i;
         for (i=0;i<10;i++)
         {
-            SlotDmg[i]=0;
-            SlotDPS[i]=0;
-            SlotAct[i]=0;
-            SlotName[i][0]='\0';
-            SlotrDPS[i]=0;
+            PosDmg[i]=0;
+            PosDPS[i]=0;
+            PosAct[i]=0;
+            PosName[i]="";
+            Pos5sDPS[i]=0;
         }
         GrpDmg=0;
         GrpDPS=0;
@@ -618,26 +617,28 @@ void MainWindow::Initialize()
             is_connected = false;
         }
         else is_connected = true;
-        //m_MyProfession=0;
+
         // we need to wait...
-        m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_5sDPS=0;m_realDps=0;
+        m_Dps=0;
+        m_Dmg=0;
+        m_Activity=0;
+        m_MaxDmg=0;
+        m_5sDPS=0;
+        m_realDps=0;
         update_Timer.start(1000);
     }
     else
     {
         is_connected = false;
 
-        // this is not blocking call
-        CurrentMeta=0;CurrentPos=0;
-
         int i;
         for (i=0;i<10;i++)
         {
-            SlotDmg[i]=0;
-            SlotDPS[i]=0;
-            SlotAct[i]=0;
-            SlotName[i][0]='\0';
-            SlotrDPS[i]=0;
+            PosDmg[i]=0;
+            PosDPS[i]=0;
+            //PosAct[i]=0;
+            PosName[i]="";
+            Pos5sDPS[i]=0;
         }
         GrpDmg=0;
         hitCounter=0;
@@ -910,32 +911,6 @@ void MainWindow::UpdateGroupLabels()
         if (i>0) AvgDPS=GrpDPS/i; else AvgDPS=0;
         ui->avg_DPS->setText(QString::number(AvgDPS));
 
-        // setting input from server to local Slots
-//        for (j=0;j<10;j++)
-//        {
-//            strcpy(PosName[j],SlotName[j]);
-//            PosDmg[j]=SlotDmg[j];
-//            PosDPS[j]=SlotDPS[j];
-//            //PosAct[j]=SlotAct[j];
-//            PosProf[j]=SlotProf[j];
-//            Pos5sDPS[j]=SlotrDPS[j];
-//        }
-
-        // reseting empty/disconnected slot to 0
-//        for (int p=0;p<10;p++)
-//        {
-//            qDebug() << "PosName[p]: " << PosName[p];
-//            if (PosName[p]==QString(""))
-//            {
-//                PosName[p]="";
-//                PosDmg[p]=0;
-//                PosDPS[p]=0;
-//                //PosAct[p]=0;
-//                PosProf[p]=0;
-//                Pos5sDPS[p]=0;
-//            }
-//        }
-
         // sorting the slots
         k=0;
         for (i=0;i<firstArray.length()-1;i++)
@@ -961,9 +936,6 @@ void MainWindow::UpdateGroupLabels()
                     tmp1=PosName[i];
                     PosName[i]=PosName[j];
                     PosName[j]=tmp1;
-                    //strcpy(tmp1,PosName[i]);
-                    //strcpy(PosName[i],PosName[j]);
-                    //strcpy(PosName[j],tmp1);
                     k=Pos5sDPS[i];
                     Pos5sDPS[i]=Pos5sDPS[j];
                     Pos5sDPS[j]=k;
@@ -1054,8 +1026,8 @@ void MainWindow::UpdateGroupLabels()
     updateCombatCourse();
 
     // hiding Bars if everything in Settings is off
-    // bool showBarsAtAll = !(displayName==false & displayDmg==false &  displayDPS==false &  display5sDPS==false & displayPerDmg==false);
-    // ui->widget_3->setVisible(showBarsAtAll);
+    //bool showBarsAtAll = !(displayName==false && displayDmg==false &&  displayDPS==false &&  display5sDPS==false && displayPerDmg==false);
+    //ui->widget_3->setVisible(showBarsAtAll);
 }
 
 void MainWindow::ready2Read()
@@ -1065,23 +1037,20 @@ void MainWindow::ready2Read()
     incDataSize = incData.size();
     memcpy(incData2, incData.data(), incDataSize);
     QString incDataString(incData);
+
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
         //QString tmpSlot(incDataString[3]);
         //MyClientSlot = tmpSlot.toInt();
         // MyClientSlot was removed since it was no longer nescessary with the new protocol
-    }else{
+    } else {
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
         for (i=0; i < firstArray.length(); i++) {
             secondArray[i] = firstArray[i].split(";");
         }
 
-        qDebug() << "firstArray.length(): " << firstArray.length();
-        // could be integrated in for loop in 1060
         for (i=0; i < firstArray.length(); i++) {
-            //QString tmpslot0(secondArray[i][0]);
-
             QString tmpslot0(secondArray[i][0]);
             PosName[i] = tmpslot0.toUtf8();
             QString tmpslot1(secondArray[i][1]);
@@ -1102,7 +1071,6 @@ void MainWindow::ready2Read()
             //PosAct[i]=0;
             PosProf[i]=0;
             Pos5sDPS[i]=0;
-
         }
     }
 }
