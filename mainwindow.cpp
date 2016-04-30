@@ -237,6 +237,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // We are not connected on start up
     is_connected = false;
+    ui->avg_DPS->setVisible(is_connected);
+    ui->grp_DPS->setVisible(is_connected);
+    ui->grp_Dmg->setVisible(is_connected);
+    ui->labelDmg_2->setVisible(is_connected);
+    ui->labelDmg_3->setVisible(is_connected);
+    ui->labelDmg_4->setVisible(is_connected);
 
     //Make sure on start to show/hide settings
     ui->widget_4->setVisible(displayGraph);
@@ -644,6 +650,12 @@ void MainWindow::Initialize()
         m_Dps=0;m_Dmg=0;m_Activity=0;m_MaxDmg=0;m_5sDPS=0;m_realDps=0;
         update_Timer.start(1000);
     }
+    ui->avg_DPS->setVisible(is_connected);
+    ui->grp_DPS->setVisible(is_connected);
+    ui->grp_Dmg->setVisible(is_connected);
+    ui->labelDmg_2->setVisible(is_connected);
+    ui->labelDmg_3->setVisible(is_connected);
+    ui->labelDmg_4->setVisible(is_connected);
 }
 
 void MainWindow::ShowToolbarChanged()
