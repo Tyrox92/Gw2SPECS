@@ -6,7 +6,6 @@
 #define _GLOBALS_H
 
 
-extern int MyClientSlot;
 extern QString MyName;
 extern QString HostIP;
 extern int HostPort;

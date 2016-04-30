@@ -580,7 +580,6 @@ void MainWindow::Initialize()
         connect(socket, SIGNAL(readyRead()),this, SLOT(ready2Read()));
         qDebug() << "connecting to : " << HostIP << ":" << HostPort;
 
-        MyClientSlot=10; //no semi-handshake yet
         CurrentMeta=0;CurrentPos=0;
         int i;
         for (i=0;i<10;i++)
@@ -623,7 +622,6 @@ void MainWindow::Initialize()
         is_connected = false;
 
         // this is not blocking call
-        MyClientSlot=10; //no semi-handshake yet
         CurrentMeta=0;CurrentPos=0;
 
         int i;
@@ -808,7 +806,7 @@ void MainWindow::UpdateGroupLabels()
 
     // If playing without a server
     // Display only the solo user information
-    if ((is_connected == false) && MyClientSlot == 10)
+    if (!is_connected)
     {
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
@@ -912,24 +910,27 @@ void MainWindow::UpdateGroupLabels()
 //        }
 
         // reseting empty/disconnected slot to 0
-        for (int p=0;p<10;p++)
-        {
-            if (PosName[p]==QString(""))
-            {
-                PosName[p]="";
-                PosDmg[p]=0;
-                PosDPS[p]=0;
-                //PosAct[p]=0;
-                PosProf[p]=0;
-                Pos5sDPS[p]=0;
-            }
-        }
+//        for (int p=0;p<10;p++)
+//        {
+//            qDebug() << "PosName[p]: " << PosName[p];
+//            if (PosName[p]==QString(""))
+//            {
+//                PosName[p]="";
+//                PosDmg[p]=0;
+//                PosDPS[p]=0;
+//                //PosAct[p]=0;
+//                PosProf[p]=0;
+//                Pos5sDPS[p]=0;
+//            }
+//        }
 
         // sorting the slots
         k=0;
-        for (i=0;i<9;i++)
+        for (i=0;i<firstArray.length()-1;i++)
+        //for (i=0;i<9;i++)
         {
-            for (j=i+1;j<10;j++)
+            for (j=i+1;j<firstArray.length();j++)
+            //for (j=i+1;j<10;j++)
             {
                 if (PosDmg[j]>PosDmg[i])
                 {
@@ -1054,50 +1055,53 @@ void MainWindow::ready2Read()
     QString incDataString(incData);
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
-        QString tmpSlot(incDataString[3]);
-        MyClientSlot = tmpSlot.toInt();
+        //QString tmpSlot(incDataString[3]);
+        //MyClientSlot = tmpSlot.toInt();
+        // MyClientSlot was removed since it was no longer nescessary with the new protocol
     }else{
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
-        //qDebug()<< "userData " << userData;
-        //qDebug()<< "firstArray " << firstArray;
-        //qDebug()<< "firstArray[0] " << firstArray[0];
         for (i=0; i < firstArray.length(); i++) {
-            //qDebug() << endl << "before secondArray " << secondArray;
-            //qDebug() << "before secondArray[i] " << secondArray[i];
-            //qDebug()<< "firstArray[i] " << firstArray[i];
             secondArray[i] = firstArray[i].split(";");
-            //qDebug()<< "after secondArray[i] "<< secondArray[i];
         }
 
+        qDebug() << "firstArray.length(): " << firstArray.length();
         // could be integrated in for loop in 1060
         for (i=0; i < firstArray.length(); i++) {
+            //QString tmpslot0(secondArray[i][0]);
+
             QString tmpslot0(secondArray[i][0]);
+            PosName[i] = tmpslot0.toUtf8();
             QString tmpslot1(secondArray[i][1]);
-            PosName[tmpslot0.toInt()] = tmpslot1.toUtf8();
+            PosDPS[i] = tmpslot1.toInt();
             QString tmpslot2(secondArray[i][2]);
-            PosDPS[tmpslot0.toInt()] = tmpslot2.toInt();
-            QString tmpslot3(secondArray[i][3]);
-            PosDmg[tmpslot0.toInt()] = tmpslot3.toInt();
-            //QString tmpslot4(secondArray[i][4]);
-            //PosAct[tmpslot0.toInt()] = tmpslot4.toInt();
+            PosDmg[i] = tmpslot2.toInt();
+            //QString tmpslot3(secondArray[i][3]);
+            //PosAct[i] = tmpslot3.toInt();
+            QString tmpslot4(secondArray[i][4]);
+            PosProf[i] = tmpslot4.toInt();
             QString tmpslot5(secondArray[i][5]);
-            PosProf[tmpslot0.toInt()] = tmpslot5.toInt();
-            QString tmpslot6(secondArray[i][6]);
-            Pos5sDPS[tmpslot0.toInt()] = tmpslot6.toInt();
+            Pos5sDPS[i] = tmpslot5.toInt();
+        }
+        for (i=firstArray.length(); i<10; i++) {
+            PosName[i]="";
+            PosDPS[i]=0;
+            PosDmg[i]=0;
+            //PosAct[i]=0;
+            PosProf[i]=0;
+            Pos5sDPS[i]=0;
+
         }
     }
-    qDebug() << "MySlot: " << MyClientSlot << " incDataString: " << incDataString;
 }
 
 void MainWindow::connected()
 {
     qDebug() << "connected...";
-    MyClientSlot=10;  //no handshake yet
 }
 void MainWindow::disconnected()
 {
-    is_connected = false;MyClientSlot=10;
+    is_connected = false;
     qDebug() << "disconnected...";
     //so what now? exit?
 }
@@ -1148,7 +1152,7 @@ void MainWindow::SendClientInfo(void)
 
     tmp1 = MyName.toUtf8();
     tmp2 = tmp1.data();
-    if (MyClientSlot!=10)  //connected and semi-handshaked
+    if (is_connected)  //connected and semi-handshaked
     {
         //Failsafe Checks
         if (m_Dps>99999) m_Dps = 1;
@@ -1156,7 +1160,7 @@ void MainWindow::SendClientInfo(void)
         if (m_Activity>100) m_Activity = 1;
         if (m_5sDPS>99999) m_5sDPS = 1;
         if (m_realDps>99999)m_realDps =1;
-        sprintf(writeBuff, "|%u;%s;%lu;%lu;%lu;%lu;%lu|", MyClientSlot, tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
+        sprintf(writeBuff, "|%s;%lu;%lu;%lu;%lu;%lu|", tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
         socket->write(writeBuff);
     }
 }
