@@ -17,11 +17,15 @@ MyDialog::MyDialog(QWidget *parent) :
     ui->InputName->setText(ReadNameSettings());
     ui->InputIP->setText(ReadIPSettings());
     ui->InputPort->setText(ReadPortSettings());
+
+    QRegExp rx("^[^;|*#]*$");
+    QValidator *validator = new QRegExpValidator(rx, this);
+    ui->InputName->setValidator(validator);
 }
 
 MyDialog::~MyDialog()
 {
-    if (ui->InputName->text().length()>0) delete ui;
+    delete ui;
 }
 
 void MyDialog::on_pushButton_clicked()
@@ -46,19 +50,20 @@ void MyDialog::on_pushButton_clicked()
 
 QString MyDialog::getName()
 {
-    return ui->InputName->text();
+    return ui->InputName->text().trimmed();
 }
 
 
 QString MyDialog::getIP()
 {
-    return ui->InputIP->text();
+    // for future: delete all whitespace in between
+    return ui->InputIP->text().trimmed();
 }
 
 
 QString MyDialog::getPort()
 {
-    return ui->InputPort->text();
+    return ui->InputPort->text().trimmed();
 }
 
 #endif
