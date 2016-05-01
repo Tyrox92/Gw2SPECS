@@ -22,8 +22,8 @@ namespace GW2
 
     private slots:
         void on_saveTXT_clicked();
-
         void on_saveCSV_clicked();
+        void on_saveALL_clicked();
 
     private:
         Ui::saveLog *ui;

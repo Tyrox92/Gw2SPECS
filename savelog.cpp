@@ -44,3 +44,8 @@ void GW2::saveLog::on_saveCSV_clicked()
 {
     this->close();
 }
+
+void GW2::saveLog::on_saveALL_clicked()
+{
+    this->close();
+}

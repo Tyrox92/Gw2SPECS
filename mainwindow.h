@@ -294,6 +294,7 @@ private slots:
     void updateCombatCourse();
     void writeCsv();
     void writeTxt();
+    void writeAll();
     void ShowContextMenu(const QPoint& pos);
     void ShowContextMenuDetails(const QPoint& pos);
     void ShowContextMenuGraph(const QPoint& pos);

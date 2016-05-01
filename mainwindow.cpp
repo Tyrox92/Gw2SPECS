@@ -146,6 +146,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(saveToFile, SIGNAL(triggered()), &m_saveLog, SLOT(exec()));
     QObject::connect(uiSaveLog->saveTXT, SIGNAL(pressed()), this, SLOT(writeTxt()));
     QObject::connect(uiSaveLog->saveCSV, SIGNAL(pressed()), this, SLOT(writeCsv()));
+    QObject::connect(uiSaveLog->saveALL, SIGNAL(pressed()), this, SLOT(writeAll()));
     //QObject::connect(saveToFile, SIGNAL(triggered()), this, SLOT(on_actionActionSave_triggered()));
 
     options->setIcon(QIcon(":/Config"));
@@ -1529,6 +1530,12 @@ void GW2::MainWindow::writeCsv()
 {
     QString csvSep = ";";
     writeFile(csvSep);
+}
+
+void GW2::MainWindow::writeAll()
+{
+    writeTxt();
+    writeCsv();
 }
 
 void GW2::MainWindow::ShowContextMenu(const QPoint& pos)
