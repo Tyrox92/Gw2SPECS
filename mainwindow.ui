@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>340</width>
-    <height>322</height>
+    <width>256</width>
+    <height>514</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -290,17 +290,63 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item row="1" column="0">
-     <widget class="QCustomPlot" name="widget_4" native="true">
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>125</height>
-       </size>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QWidget" name="widget_5" native="true">
+      <property name="styleSheet">
+       <string notr="true">QWidget {
+	background-color: rgba(32, 43, 47, 0%);
+}
+QLabel {
+	background-color: rgba(32, 43, 47, 0%);
+	color: rgb(255, 255, 255);
+}
+QLineEdit {
+	background-color: #202B2F;
+	color: #FFFFFF;
+	border-style: outset;
+	border-width: 2px;
+	border-radius: 3px;
+	border-color: beige;
+	font: bold 10px;
+}</string>
       </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
+       <item row="2" column="0" colspan="2">
+        <widget class="QPushButton" name="globalReset">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #8BB2DA;
+}
+QPushButton#pushButton:pressed {
+    background-color: rgb(197,216,236);
+	border-style: inset;
+ 
+}</string>
+         </property>
+         <property name="text">
+          <string>Reset Everyone</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="0" column="0">
+    <item row="1" column="0">
      <widget class="QWidget" name="widget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -400,6 +446,36 @@
             </property>
            </spacer>
           </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="labelDmg_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>DINPro-Black</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Grp DMG</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
           <item row="2" column="2">
            <widget class="QLabel" name="labelInfo">
             <property name="sizePolicy">
@@ -456,63 +532,6 @@
           </item>
           <item row="1" column="5">
            <widget class="QLabel" name="avg_DPS">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>DINPro-Black</family>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>0</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="labelDmg_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>DINPro-Black</family>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="autoFillBackground">
-             <bool>false</bool>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="text">
-             <string>Grp DMG</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="5">
-           <widget class="QLabel" name="grp_DPS">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -635,8 +654,8 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="grp_Dmg">
+          <item row="0" column="5">
+           <widget class="QLabel" name="grp_DPS">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -662,8 +681,8 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <spacer name="horizontalSpacer_3">
+          <item row="0" column="6">
+           <spacer name="horizontalSpacer_6">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -716,8 +735,8 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="6">
-           <spacer name="horizontalSpacer_6">
+          <item row="0" column="0">
+           <spacer name="horizontalSpacer_3">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
@@ -731,6 +750,33 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="grp_Dmg">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>DINPro-Black</family>
+              <pointsize>10</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -1235,6 +1281,16 @@
      </widget>
     </item>
     <item row="2" column="0">
+     <widget class="QCustomPlot" name="widget_4" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>125</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
      <widget class="QWidget" name="widget_3" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1307,8 +1363,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>323</width>
-            <height>180</height>
+            <width>256</width>
+            <height>210</height>
            </rect>
           </property>
           <property name="sizePolicy">

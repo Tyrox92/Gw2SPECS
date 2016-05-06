@@ -23,6 +23,7 @@
 #include <QProgressBar>
 #include "qcustomplot.h"
 #include "mumblelink.h"
+#include "dmgmeter.h"
 
 namespace Ui
 {
@@ -79,6 +80,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QThread m_ScreenRecorderThread;
+    DmgMeter* dmgMeter;
 
     MyDialog m_MyDialog;
     firstStart m_firstStart;
@@ -249,6 +251,7 @@ private:
 private slots:
     void UpdateTime(int);
     void SendClientInfo();
+    void SendResetEchoRequest();
     void UpdateTimer();
     void UpdateGroupLabels();
     void UpdatePersonalLabels();

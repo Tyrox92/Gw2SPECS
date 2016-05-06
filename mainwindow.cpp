@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(&update_Timer, SIGNAL(timeout()), this, SLOT(UpdateTimer()));
 
     ScreenRecorder* screenRecorder = new ScreenRecorder;
-    DmgMeter* dmgMeter = &screenRecorder->GetDmgMeter();
+    dmgMeter = &screenRecorder->GetDmgMeter();
     screenRecorder->moveToThread(&m_ScreenRecorderThread);
 
     dmgMeter->moveToThread(&m_ScreenRecorderThread);
@@ -72,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
     QObject::connect(ui->actionActionSave,SIGNAL(triggered()),&m_saveLog, SLOT(exec()));
+    QObject::connect(ui->globalReset, SIGNAL(triggered()), this, SLOT(SendResetEchoRequest()));
     // connecting configurator - SPECS display settings
     QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(stateChanged(int)), this, SLOT(ShowToolbarChanged()));
     QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
@@ -158,6 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->widget->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->widget_4->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->widget_5->setContextMenuPolicy(Qt::CustomContextMenu);
     QObject::connect(ui->scrollArea, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenu(const QPoint&)));
     QObject::connect(ui->widget, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuDetails(const QPoint&)));
     QObject::connect(ui->widget_4, SIGNAL(customContextMenuRequested(const QPoint&)),this, SLOT(ShowContextMenuGraph(const QPoint&)));
@@ -244,6 +246,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->labelDmg_2->setVisible(is_connected);
     ui->labelDmg_3->setVisible(is_connected);
     ui->labelDmg_4->setVisible(is_connected);
+    ui->widget_5->setVisible(is_connected);
 
     //Make sure on start to show/hide settings
     ui->widget_4->setVisible(displayGraph);
@@ -658,6 +661,7 @@ void MainWindow::Initialize()
     ui->labelDmg_2->setVisible(is_connected);
     ui->labelDmg_3->setVisible(is_connected);
     ui->labelDmg_4->setVisible(is_connected);
+    ui->widget_5->setVisible(is_connected);
 }
 
 void MainWindow::ShowToolbarChanged()
@@ -692,13 +696,11 @@ void MainWindow::ShowOpacityChanged()
     if (displayOpacity==1) displayOpacity=0; else displayOpacity=1;
     EnableTransparency(displayOpacity);
 }
-
 void MainWindow::ShowOBSChanged()
 {
     if (displayOBS==1) displayOBS=0; else displayOBS=1;
     action_widgetMode();
 }
-
 void MainWindow::ProfSettingsChanged()
 {
     if (displayProfColor==1) displayProfColor=0; else displayProfColor=1;
@@ -1044,6 +1046,9 @@ void MainWindow::ready2Read()
         //QString tmpSlot(incDataString[3]);
         //MyClientSlot = tmpSlot.toInt();
         // MyClientSlot was removed since it was no longer nescessary with the new protocol
+    } else if (incDataString[0] == 'r' && incDataString[1] == 'e' && incDataString[2] == 's') {
+        // reset
+        dmgMeter->Reset();
     } else {
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
@@ -1144,6 +1149,15 @@ void MainWindow::SendClientInfo(void)
         sprintf(writeBuff, "|%s;%lu;%lu;%lu;%lu;%lu|", tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
         socket->write(writeBuff);
     }
+}
+
+void MainWindow::SendResetEchoRequest(void)
+{
+    // replace hardcoded authcode with user input
+    int authcode = 123456;
+
+    sprintf(writeBuff, "res%u", authcode);
+    socket->write(writeBuff);
 }
 
 void MainWindow::UpdatePersonalLabels()
