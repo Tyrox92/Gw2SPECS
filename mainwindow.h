@@ -24,6 +24,7 @@
 #include "qcustomplot.h"
 #include "mumblelink.h"
 #include "dmgmeter.h"
+#include "authenticate.h"
 
 namespace Ui
 {
@@ -44,6 +45,7 @@ public:
         QMenu *miscMenu = new QMenu(MainWindow::tr("Miscellaneous"), this);
 
         QAction *resetData = myMenu.addAction(MainWindow::tr("Reset"));
+        QAction *auth = myMenu.addAction(MainWindow::tr("Authenticate"));
         QAction *combatMode = myMenu.addAction(MainWindow::tr("CombatMode"));
         QAction *connectServer = myMenu.addAction(MainWindow::tr("Connect"));
         QAction *saveToFile = myMenu.addAction(MainWindow::tr("Save File"));
@@ -84,6 +86,7 @@ private:
 
     MyDialog m_MyDialog;
     firstStart m_firstStart;
+    authenticate m_authenticate;
     CombatMode m_combatMode;
     connectionfailed m_connectionfailed;
     saveLog m_saveLog;
@@ -93,6 +96,7 @@ private:
 
     QTcpSocket *socket;
 
+    QString MyAuthCode;
     QString MyName;
     QString HostIP;
     int HostPort;

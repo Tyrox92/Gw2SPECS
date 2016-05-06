@@ -20,6 +20,8 @@
 #include <QUrl>
 #include <qcustomplot.h>
 #include <qt_windows.h>
+#include "authenticate.h"
+#include "ui_authenticate.h"
 
 
 using namespace GW2;
@@ -30,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Configurator(this),
     m_MyDialog(this),
     m_firstStart(this),
+    m_authenticate(this),
     m_combatMode(this),
     m_connectionfailed(this),
     m_saveLog(this),
@@ -128,6 +131,10 @@ MainWindow::MainWindow(QWidget *parent) :
     resetData->setIconVisibleInMenu(true);
     QObject::connect(resetData, SIGNAL(triggered()), dmgMeter, SLOT(Reset()));
     QObject::connect(resetData, SIGNAL(triggered()), this, SLOT(resetGraph()));
+
+    auth->setIcon(QIcon(":/auth"));
+    auth->setIconVisibleInMenu(true);
+    QObject::connect(auth, SIGNAL(triggered()), &m_authenticate, SLOT(exec()));
 
     autoReset->setCheckable(true);
     autoReset->setIcon(QIcon(":/Auto_Reset"));
@@ -807,6 +814,9 @@ void MainWindow::AvGroupDPSChanged()
 
 void MainWindow::UpdateGroupLabels()
 {
+    MyAuthCode = m_authenticate.getAuthCode();
+    qDebug()<< "My Auth Code: " << MyAuthCode;
+
     long p,i,j,k;
     QProgressBar* Bar0 = ui->progressBar_0;
     QProgressBar* Bar1 = ui->progressBar_1;

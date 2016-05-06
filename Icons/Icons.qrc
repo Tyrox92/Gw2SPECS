@@ -18,5 +18,6 @@
         <file>specs_logo.ico</file>
         <file>saveIcon.png</file>
         <file>combatMode.png</file>
+        <file>auth.png</file>
     </qresource>
 </RCC>

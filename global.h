@@ -5,7 +5,7 @@
 #ifndef _GLOBALS_H
 #define _GLOBALS_H
 
-
+extern QString MyAuthCode;
 extern QString MyName;
 extern QString HostIP;
 extern int HostPort;

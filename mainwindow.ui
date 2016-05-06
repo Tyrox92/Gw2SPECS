@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>256</width>
-    <height>514</height>
+    <height>345</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -640,7 +640,7 @@ QPushButton#pushButton:pressed {
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="Icons/Icons.qrc">
+             <iconset>
               <normaloff>:/moreDetails.png</normaloff>:/moreDetails.png</iconset>
             </property>
             <property name="checkable">
@@ -1363,8 +1363,8 @@ QPushButton#pushButton:pressed {
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>256</width>
-            <height>210</height>
+            <width>239</width>
+            <height>180</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -1887,7 +1887,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Auto_Reset.png</normaloff>
      <normalon>:/Auto_Reset_Active.png</normalon>:/Auto_Reset.png</iconset>
    </property>
@@ -1909,7 +1909,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionReset">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Reset.png</normaloff>:/Reset.png</iconset>
    </property>
    <property name="text">
@@ -1924,7 +1924,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Transparency.png</normaloff>:/Transparency.png</iconset>
    </property>
    <property name="text">
@@ -1936,7 +1936,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Help.png</normaloff>:/Help.png</iconset>
    </property>
    <property name="text">
@@ -1948,7 +1948,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionConfig">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Config.png</normaloff>:/Config.png</iconset>
    </property>
    <property name="text">
@@ -1960,7 +1960,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionClose">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/Exit.png</normaloff>:/Exit.png</iconset>
    </property>
    <property name="text">
@@ -1975,7 +1975,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/shrink_up.png</normaloff>
      <normalon>:/shrink_down.png</normalon>:/shrink_up.png</iconset>
    </property>
@@ -1991,7 +1991,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/moreDetails.png</normaloff>:/moreDetails.png</iconset>
    </property>
    <property name="text">
@@ -2015,7 +2015,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionActionSave">
    <property name="icon">
-    <iconset resource="Icons/Icons.qrc">
+    <iconset>
      <normaloff>:/saveIcon.png</normaloff>:/saveIcon.png</iconset>
    </property>
    <property name="text">
@@ -2035,9 +2035,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="Icons/Icons.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>actionClose</sender>
