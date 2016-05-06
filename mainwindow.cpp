@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
     QObject::connect(ui->actionActionSave,SIGNAL(triggered()),&m_saveLog, SLOT(exec()));
-    QObject::connect(ui->globalReset, SIGNAL(triggered()), this, SLOT(SendResetEchoRequest()));
+    QObject::connect(ui->globalReset, SIGNAL(pressed()), this, SLOT(SendResetEchoRequest()));
     // connecting configurator - SPECS display settings
     QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(stateChanged(int)), this, SLOT(ShowToolbarChanged()));
     QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
@@ -814,9 +814,6 @@ void MainWindow::AvGroupDPSChanged()
 
 void MainWindow::UpdateGroupLabels()
 {
-    MyAuthCode = m_authenticate.getAuthCode();
-    qDebug()<< "My Auth Code: " << MyAuthCode;
-
     long p,i,j,k;
     QProgressBar* Bar0 = ui->progressBar_0;
     QProgressBar* Bar1 = ui->progressBar_1;
@@ -1053,10 +1050,7 @@ void MainWindow::ready2Read()
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
-        //QString tmpSlot(incDataString[3]);
-        //MyClientSlot = tmpSlot.toInt();
-        // MyClientSlot was removed since it was no longer nescessary with the new protocol
-    } else if (incDataString[0] == 'r' && incDataString[1] == 'e' && incDataString[2] == 's') {
+    } else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S') {
         // reset
         dmgMeter->Reset();
     } else {
@@ -1163,8 +1157,8 @@ void MainWindow::SendClientInfo(void)
 
 void MainWindow::SendResetEchoRequest(void)
 {
-    // replace hardcoded authcode with user input
-    int authcode = 123456;
+    MyAuthCode = m_authenticate.getAuthCode();
+    int authcode = MyAuthCode.toInt();
 
     sprintf(writeBuff, "res%u", authcode);
     socket->write(writeBuff);
