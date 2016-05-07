@@ -25,6 +25,7 @@ MyDialog::MyDialog(QWidget *parent) :
 
 MyDialog::~MyDialog()
 {
+    reject();
     delete ui;
 }
 

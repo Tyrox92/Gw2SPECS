@@ -1048,6 +1048,8 @@ void MainWindow::ready2Read()
     memcpy(incData2, incData.data(), incDataSize);
     QString incDataString(incData);
 
+    qDebug() << "incDataString " <<incDataString;
+
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
     } else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S') {
@@ -1255,6 +1257,7 @@ void MainWindow::UpdateTimer(void)
     myMenu.raise();
     miscMenu->raise();
 
+    qDebug() << "is_connected" <<is_connected;
     if (is_connected)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
@@ -1385,13 +1388,14 @@ void GW2::MainWindow::on_actionConnect_triggered()
         update_Timer.stop();
         MyDialog mDialog;
         mDialog.setModal(true);
+        QObject::connect(&mDialog, SIGNAL(accepted()),this, SLOT(Initialize()));
 
         mDialog.exec();
 
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort().toInt();
-        Initialize();
+        //Initialize();
     }
     // Otherwise stop the timer and abort the connection
     else
