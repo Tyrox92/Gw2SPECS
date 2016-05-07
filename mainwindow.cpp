@@ -1240,7 +1240,7 @@ void MainWindow::UpdateTimer(void)
     myMenu.raise();
     miscMenu->raise();
 
-    if ((is_connected == true))
+    if (is_connected)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
         connectServer->setIcon(QIcon(":/connected"));
@@ -1365,7 +1365,7 @@ void GW2::MainWindow::on_actionConnect_triggered()
 
     // If not connected to a server when triggered
     // Then open myDialog
-    if ((is_connected == false))
+    if (!is_connected)
     {
         update_Timer.stop();
         MyDialog mDialog;

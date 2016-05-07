@@ -10,14 +10,16 @@ authenticate::authenticate(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint | Qt::Dialog);
+
+    QRegExp authRx("^\\s*[\\d]*[\\s]*$");
+    QValidator *authVal = new QRegExpValidator(authRx, this);
+    ui->authCode->setValidator(authVal);
 }
 
 authenticate::~authenticate()
 {
     delete ui;
 }
-
-
 
 QString authenticate::getAuthCode()
 {
