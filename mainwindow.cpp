@@ -1053,6 +1053,7 @@ void MainWindow::ready2Read()
     } else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S') {
         // reset
         dmgMeter->Reset();
+        resetGraph();
     } else {
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
@@ -1160,7 +1161,7 @@ void MainWindow::SendResetEchoRequest(void)
     MyAuthCode = m_authenticate.getAuthCode();
     int authcode = MyAuthCode.toInt();
 
-    sprintf(writeBuff, "res%u", authcode);
+    sprintf(writeBuff, "|res%u|", authcode);
     socket->write(writeBuff);
 }
 
