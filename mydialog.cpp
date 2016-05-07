@@ -34,18 +34,16 @@ void MyDialog::on_pushButton_clicked()
     if (ui->InputName->text().length()>=0)
     {
         WriteNameSettings(ui->InputName->text());
-        accept();
     }
     if (ui->InputIP->text().length()>0)
     {
         WriteIPSettings(ui->InputIP->text());
-        accept();
     }
     if (ui->InputPort->text().length()>0)
     {
         WritePortSettings(ui->InputPort->text());
-        accept();
     }
+    accept();
 }
 
 QString MyDialog::getName()

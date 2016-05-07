@@ -1092,9 +1092,24 @@ void MainWindow::connected()
 }
 void MainWindow::disconnected()
 {
+    update_Timer.stop();
+    socket->abort();
+    ui->progressBar_0->setVisible(false);
+    ui->progressBar_1->setVisible(false);
+    ui->progressBar_2->setVisible(false);
+    ui->progressBar_3->setVisible(false);
+    ui->progressBar_4->setVisible(false);
+    ui->progressBar_5->setVisible(false);
+    ui->progressBar_6->setVisible(false);
+    ui->progressBar_7->setVisible(false);
+    ui->progressBar_8->setVisible(false);
+    ui->progressBar_9->setVisible(false);
     is_connected = false;
+    HostIP="";
+
+    //Go back to the initializer
+    Initialize();
     qDebug() << "disconnected...";
-    //so what now? exit?
 }
 
 MainWindow::~MainWindow()
