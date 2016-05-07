@@ -25,9 +25,14 @@ MyDialog::MyDialog(QWidget *parent) :
 
 MyDialog::~MyDialog()
 {
-    reject();
     delete ui;
 }
+
+void MyDialog::reject(){
+    qDebug()<<"Connect has been rejected by pressing 'ESC'...";
+    QDialog::reject();
+}
+
 
 void MyDialog::on_pushButton_clicked()
 {

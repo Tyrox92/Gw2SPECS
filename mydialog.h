@@ -25,6 +25,7 @@ namespace GW2
 
     private slots:
         void on_pushButton_clicked();
+        void reject();
 
     private:
         Ui::MyDialog *ui;

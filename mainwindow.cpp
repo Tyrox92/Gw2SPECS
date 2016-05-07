@@ -1257,7 +1257,6 @@ void MainWindow::UpdateTimer(void)
     myMenu.raise();
     miscMenu->raise();
 
-    qDebug() << "is_connected" <<is_connected;
     if (is_connected)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
@@ -1387,15 +1386,21 @@ void GW2::MainWindow::on_actionConnect_triggered()
     {
         update_Timer.stop();
         MyDialog mDialog;
-        mDialog.setModal(true);
-        QObject::connect(&mDialog, SIGNAL(accepted()),this, SLOT(Initialize()));
 
         mDialog.exec();
+        mDialog.setModal(true);
 
         MyName=mDialog.getName();
         HostIP = mDialog.getIP();
         HostPort=mDialog.getPort().toInt();
-        //Initialize();
+
+        //Check if window is Accepted 1 or Rejected 0
+        if(mDialog.result() == 1){
+            qDebug()<< "Accepted - trying to connect";
+            Initialize();
+        }else{
+            update_Timer.start(1000); // Needed to Start timer again.
+        }
     }
     // Otherwise stop the timer and abort the connection
     else
