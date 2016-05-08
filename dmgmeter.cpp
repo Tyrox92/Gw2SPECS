@@ -220,7 +220,6 @@ void DmgMeter::EvaluateLine(const QString& params)
         if (LastColor==5)
         {
             m_healing+=dmg;
-            qDebug()<< m_healing;
         }
     }
     if (dmg > m_MaxDmg)
