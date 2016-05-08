@@ -125,6 +125,7 @@ private:
     char writeBuff[128];
     int is_startup;
     bool is_connected;
+    bool is_admin;
 
     //SPECS Settings
     bool displayToolbar;

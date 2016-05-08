@@ -287,6 +287,8 @@ MainWindow::MainWindow(QWidget *parent) :
         label5sdps[n]->setVisible(display5sDPS);
         //labelact[n]->setVisible(displayAct);
     }
+    //Set Adminflag to False on each start
+    is_admin = false;
 
     CheckFirstRun();
     CheckForUpdate();
@@ -668,7 +670,6 @@ void MainWindow::Initialize()
     ui->labelDmg_2->setVisible(is_connected);
     ui->labelDmg_3->setVisible(is_connected);
     ui->labelDmg_4->setVisible(is_connected);
-    ui->widget_5->setVisible(is_connected);
 }
 
 void MainWindow::ShowToolbarChanged()
@@ -831,6 +832,8 @@ void MainWindow::UpdateGroupLabels()
     // Display only the solo user information
     if (!is_connected)
     {
+        is_admin = false;
+        ui->widget_5->setVisible(is_admin);
         //StartupHideProgressBars();
         PosDmg[0]=m_Dmg;
         PosDPS[0]=m_Dps;
@@ -906,6 +909,8 @@ void MainWindow::UpdateGroupLabels()
     }
     else
     {
+        is_admin = true;
+        ui->widget_5->setVisible(is_admin);
         // reset total dmg,dps
         GrpDmg=0;
         GrpDPS=0;
