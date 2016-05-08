@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //If the following 4 lines are called before StartupPref()the Tool will bug and not work properly!!!!
     Ui::Configurator* uiConfig = m_Configurator.ui;
     Ui::CombatMode* uiCMode = m_combatMode.ui;
+    Ui::authenticate* uiAuth = m_authenticate.ui;
     Ui::saveLog* uiSaveLog = m_saveLog.ui;
     Settings::ReadSettings(uiConfig->checkBoxOBS);
     displayOBS=uiConfig->checkBoxOBS->isChecked();
@@ -135,6 +136,7 @@ MainWindow::MainWindow(QWidget *parent) :
     auth->setIcon(QIcon(":/auth"));
     auth->setIconVisibleInMenu(true);
     QObject::connect(auth, SIGNAL(triggered()), &m_authenticate, SLOT(exec()));
+    QObject::connect(uiAuth->authMe,SIGNAL(pressed()),this,SLOT(validateAdmin()));
 
     autoReset->setCheckable(true);
     autoReset->setIcon(QIcon(":/Auto_Reset"));
@@ -289,6 +291,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     //Set Adminflag to False on each start
     is_admin = false;
+    auth->setVisible(is_connected);
 
     CheckFirstRun();
     CheckForUpdate();
@@ -670,6 +673,7 @@ void MainWindow::Initialize()
     ui->labelDmg_2->setVisible(is_connected);
     ui->labelDmg_3->setVisible(is_connected);
     ui->labelDmg_4->setVisible(is_connected);
+    auth->setVisible(is_connected);
 }
 
 void MainWindow::ShowToolbarChanged()
@@ -909,7 +913,6 @@ void MainWindow::UpdateGroupLabels()
     }
     else
     {
-        is_admin = true;
         ui->widget_5->setVisible(is_admin);
         // reset total dmg,dps
         GrpDmg=0;
@@ -1061,7 +1064,10 @@ void MainWindow::ready2Read()
         // reset
         dmgMeter->Reset();
         resetGraph();
-    } else {
+    } else if(incDataString[0] == 'O' && incDataString[1] == 'K' && incDataString[2] == 'E'){
+        is_admin = true;
+        ui->widget_5->setVisible(is_admin);
+    }else {
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
         for (i=0; i < firstArray.length(); i++) {
@@ -1807,4 +1813,14 @@ void GW2::MainWindow::resetGraph(){
     ui->widget_4->yAxis->setRange(0,7000);
     ui->widget_4->yAxis2->setRange(0,7000);
     ui->widget_4->replot();
+}
+
+
+void GW2::MainWindow::validateAdmin(){
+    qDebug() << "I try to validate myself as an Admin...";
+    MyAuthCode = m_authenticate.getAuthCode();
+    int authcode = MyAuthCode.toInt();
+
+    sprintf(writeBuff, "|admin%u|", authcode);
+    socket->write(writeBuff);
 }

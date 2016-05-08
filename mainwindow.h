@@ -316,6 +316,7 @@ private slots:
     void keyPressEvent( QKeyEvent * event );
     void action_combatMode();
     void action_resetCombatMode();
+    void validateAdmin();
 };
 
 }
