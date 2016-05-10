@@ -23,6 +23,7 @@ namespace GW2
 
     private slots:
         void on_buttonResetCombatMode_clicked();
+        void reject();
 
     private:
         Ui::CombatMode *ui;

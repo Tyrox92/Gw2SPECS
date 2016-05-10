@@ -45,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //If the following 4 lines are called before StartupPref()the Tool will bug and not work properly!!!!
     Ui::Configurator* uiConfig = m_Configurator.ui;
-    Ui::CombatMode* uiCMode = m_combatMode.ui;
     Ui::authenticate* uiAuth = m_authenticate.ui;
     Ui::saveLog* uiSaveLog = m_saveLog.ui;
     Settings::ReadSettings(uiConfig->checkBoxOBS);
@@ -121,8 +120,7 @@ MainWindow::MainWindow(QWidget *parent) :
     combatMode->setIcon(QIcon(":/combatMode"));
     combatMode->setIconVisibleInMenu(true);
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
-    QObject::connect(combatMode, SIGNAL(triggered()), &m_combatMode, SLOT(exec()));
-    QObject::connect(uiCMode->buttonResetCombatMode,SIGNAL(pressed()),this,SLOT(action_resetCombatMode()));
+    QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(openCombatModeWindow()));
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
@@ -1380,6 +1378,20 @@ void GW2::MainWindow::on_actionShrinkUI_triggered(bool checked)
 void GW2::MainWindow::on_actionActionGroupDetails_toggled()
 {
     ShowDetailsChanged();
+}
+
+void GW2::MainWindow::openCombatModeWindow()
+{
+    CombatMode mCombatMode;
+    mCombatMode.exec();
+
+    //Check if window is Accepted 1 or Rejected 0
+    if(mCombatMode.result() == 1){
+        qDebug()<< "CombatMode closed with Button";
+    } else {
+        qDebug()<< "CombatMode closed with ESC";
+    }
+    action_resetCombatMode();
 }
 
 void GW2::MainWindow::on_actionConnect_triggered()

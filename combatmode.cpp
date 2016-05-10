@@ -20,7 +20,7 @@ CombatMode::~CombatMode()
 
 void CombatMode::on_buttonResetCombatMode_clicked()
 {
-
+    accept();
 }
 
 // Give movement access to CombatMode
@@ -39,4 +39,9 @@ void CombatMode::mousePressEvent(QMouseEvent *event)
         m_dragPosition = event->globalPos() - frameGeometry().topLeft();
         event->accept();
     }
+}
+
+void CombatMode::reject()
+{
+    QDialog::reject();
 }
