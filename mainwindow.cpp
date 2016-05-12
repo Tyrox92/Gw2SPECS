@@ -1141,18 +1141,15 @@ void MainWindow::EnableTransparency(bool isAlmostTransparent)
 {
     if (isAlmostTransparent)
     {
-        this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
-        ui->widget->setStyleSheet("background-color: rgba(32, 43, 47, 0%);");
-        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 0%); } QToolButton { background-color: rgba(32, 43, 47, 0%); }");
-        ui->grp_DPS->setStyleSheet("");
+        this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 1%);");
+        ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 1%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
+        ui->widget->setStyleSheet("QWidget { background-color: rgba(32,43,47,0%); } QLabel{background-color:transparent;}");
         this->show();
     }
     else
     {
         this->ui->centralWidget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
-        //ui->widget->setStyleSheet("background-color: rgba(32, 43, 47, 60%);");
         ui->toolBar->setStyleSheet("QWidget { background-color: rgba(32, 43, 47, 60%); } QToolButton { background-color: rgba(32, 43, 47, 1%); }");
-        ui->grp_DPS->setStyleSheet("");
         this->show();
     }
 }
@@ -1753,7 +1750,7 @@ void GW2::MainWindow::initializeGraph(){
 
 
     //Graph Background Color
-    ui->widget_4->setBackground(Qt::transparent);
+    ui->widget_4->setBackground(QColor(32,43,47,1));
 
     //Graph Axis Color
     QLinearGradient axisRectGradient;
@@ -1761,7 +1758,7 @@ void GW2::MainWindow::initializeGraph(){
     axisRectGradient.setFinalStop(0, 350);
     axisRectGradient.setColorAt(0, QColor(80, 80, 80));
     axisRectGradient.setColorAt(1, QColor(30, 30, 30));
-    ui->widget_4->axisRect()->setBackground(Qt::transparent);
+    ui->widget_4->axisRect()->setBackground(QColor(32,43,47,1));
 
 
     // make left and bottom axes transfer their ranges to right and top axes:

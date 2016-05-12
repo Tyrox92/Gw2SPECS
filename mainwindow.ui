@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>256</width>
-    <height>345</height>
+    <width>470</width>
+    <height>413</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -296,10 +296,7 @@
     <item row="0" column="0">
      <widget class="QWidget" name="widget_5" native="true">
       <property name="styleSheet">
-       <string notr="true">QWidget {
-	background-color: rgba(32, 43, 47, 0%);
-}
-QLabel {
+       <string notr="true">QLabel {
 	background-color: rgba(32, 43, 47, 0%);
 	color: rgb(255, 255, 255);
 }
@@ -361,7 +358,7 @@ QPushButton#pushButton:pressed {
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgba(32, 43, 47, 1%);</string>
+       <string notr="true"/>
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <property name="leftMargin">
@@ -640,7 +637,7 @@ QPushButton#pushButton:pressed {
              <string/>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="Icons/Icons.qrc">
               <normaloff>:/moreDetails.png</normaloff>:/moreDetails.png</iconset>
             </property>
             <property name="checkable">
@@ -1013,6 +1010,9 @@ QPushButton#pushButton:pressed {
             <property name="layoutDirection">
              <enum>Qt::LeftToRight</enum>
             </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
             <property name="styleSheet">
              <string notr="true">color: rgb(255, 255, 255);</string>
             </property>
@@ -1299,7 +1299,7 @@ QPushButton#pushButton:pressed {
        </sizepolicy>
       </property>
       <property name="styleSheet">
-       <string notr="true"> background-color: rgba(32, 43, 47, 60%);</string>
+       <string notr="true"/>
       </property>
       <layout class="QGridLayout" name="gridLayout_5">
        <property name="leftMargin">
@@ -1363,7 +1363,7 @@ QPushButton#pushButton:pressed {
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>239</width>
+            <width>453</width>
             <height>180</height>
            </rect>
           </property>
@@ -1887,7 +1887,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/Auto_Reset.png</normaloff>
      <normalon>:/Auto_Reset_Active.png</normalon>:/Auto_Reset.png</iconset>
    </property>
@@ -1909,7 +1909,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionReset">
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/Reset.png</normaloff>:/Reset.png</iconset>
    </property>
    <property name="text">
@@ -1924,7 +1924,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/Transparency.png</normaloff>:/Transparency.png</iconset>
    </property>
    <property name="text">
@@ -1936,7 +1936,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/Help.png</normaloff>:/Help.png</iconset>
    </property>
    <property name="text">
@@ -1948,7 +1948,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionConfig">
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/Config.png</normaloff>:/Config.png</iconset>
    </property>
    <property name="text">
@@ -1960,7 +1960,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionClose">
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/Exit.png</normaloff>:/Exit.png</iconset>
    </property>
    <property name="text">
@@ -1975,7 +1975,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/shrink_up.png</normaloff>
      <normalon>:/shrink_down.png</normalon>:/shrink_up.png</iconset>
    </property>
@@ -1991,7 +1991,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/moreDetails.png</normaloff>:/moreDetails.png</iconset>
    </property>
    <property name="text">
@@ -2015,7 +2015,7 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
   </action>
   <action name="actionActionSave">
    <property name="icon">
-    <iconset>
+    <iconset resource="Icons/Icons.qrc">
      <normaloff>:/saveIcon.png</normaloff>:/saveIcon.png</iconset>
    </property>
    <property name="text">
@@ -2035,7 +2035,9 @@ QToolBar { background-color: rgba(32, 43, 47, 60%); }</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="Icons/Icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionClose</sender>
