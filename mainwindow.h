@@ -124,7 +124,7 @@ private:
 
     char writeBuff[128];
     char writeAuthCode[128];
-    char writeVersion[128];
+    char writeprotocolVersion[128];
     char writeValAdmin[128];
     int is_startup;
     bool is_connected;

@@ -159,6 +159,7 @@ public:
 
     static const QString s_Product;
     static const QString s_Version;
+    static const QString s_protocolVersion;
 
 private:
     Settings();

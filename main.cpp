@@ -30,7 +30,6 @@ unsigned long m_MyProfession;
 unsigned long countCombat;
 int updateCounter;
 QString combatCourse;
-//QString curVersion = Settings::s_Version;
 
 int main(int argc, char *argv[])
 {

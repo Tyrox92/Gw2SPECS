@@ -342,6 +342,12 @@ void GW2::MainWindow::CheckForOldVerison()
 
 void GW2::MainWindow::StartupPref()
 {
+    // for differentiating label sizes in different languages
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup("comboBoxLanguage");
+    QString lang = settings.value("currentText").toString();
+    settings.endGroup();
+
     ui->toolBar->setContextMenuPolicy(Qt::PreventContextMenu);
 
     action_widgetMode();
@@ -509,9 +515,15 @@ void GW2::MainWindow::StartupPref()
 
     labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:7.07em;*/font: 87 10pt \"DINPro-Black\";");
     labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;min-width:2.44em;*/font: 87 10pt \"DINPro-Black\";");
-    labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
+    if (lang == "fr") {
+        labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.2em;min-width:3.2em;font: 87 10pt \"DINPro-Black\";");
+    } else if (lang == "de") {
+        labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.82em;min-width:3.82em;font: 87 10pt \"DINPro-Black\";");
+    } else {
+        labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
+    }
     labellegenddps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
-    labellegend5sdps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
+    labellegend5sdps->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.7em;min-width:2.7em;font: 87 10pt \"DINPro-Black\";");
     //labelact[n]->setStyleSheet("color:white;background:none;");
 
     for(int n=0;n<10;n++) {
@@ -527,9 +539,15 @@ void GW2::MainWindow::StartupPref()
         // styling labels
         labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:7.07em;*/font: 87 10pt \"DINPro-Black\";");
         labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;min-width:2.44em;*/font: 87 10pt \"DINPro-Black\";");
-        labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
+        if (lang == "fr") {
+            labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.2em;min-width:3.2em;font: 87 10pt \"DINPro-Black\";");
+        } else if (lang == "de") {
+            labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.82em;min-width:3.82em;font: 87 10pt \"DINPro-Black\";");
+        } else {
+            labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
+        }
         labeldps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
-        label5sdps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.44em;min-width:2.44em;font: 87 10pt \"DINPro-Black\";");
+        label5sdps[n]->setStyleSheet("color:white;background:none;/*background-color:black;*/max-width:2.7em;min-width:2.7em;font: 87 10pt \"DINPro-Black\";");
         //labelact[n]->setStyleSheet("color:white;background:none;");
     }
 }
@@ -672,6 +690,17 @@ void MainWindow::Initialize()
     ui->labelDmg_3->setVisible(is_connected);
     ui->labelDmg_4->setVisible(is_connected);
     auth->setVisible(is_connected);
+    if (is_connected) {
+        labellegendper->setVisible(displayPerDmg);
+        for(int n=0;n<10;n++) {
+            labelper[n]->setVisible(displayPerDmg);
+        }
+    } else {
+        labellegendper->setVisible(false);
+        for(int n=0;n<10;n++) {
+            labelper[n]->setVisible(false);
+        }
+    }
 }
 
 void MainWindow::ShowToolbarChanged()
@@ -1058,13 +1087,13 @@ void MainWindow::ready2Read()
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
-    }else if(incDataString[0] == '2' && incDataString[1] == '.' && incDataString[2] == '5'){
-        qDebug()<< "Version is up2date!!!!";
+    //}else if(incDataString[0] == '1' && incDataString[1] == '.' && incDataString[2] == '0'){
+    //    qDebug()<< "Version is up2date!!!!";
     }else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S'){
         // reset
         dmgMeter->Reset();
         resetGraph();
-    }else if(incDataString[0] == 'O' && incDataString[1] == 'K' && incDataString[2] == 'E'){
+    }else if(incDataString[0] == 'A' && incDataString[1] == 'C' && incDataString[2] == 'K'){
         is_admin = true;
         ui->widget_5->setVisible(is_admin);
     }else {
@@ -1102,15 +1131,15 @@ void MainWindow::ready2Read()
 void MainWindow::connected()
 {
     qDebug() << "connected...";
-    QString curVersion = Settings::s_Version;
+    QString curprotocolVersion = Settings::s_protocolVersion;
     QByteArray temp1;
     const char* temp2;
 
-    temp1 = curVersion.toUtf8();
+    temp1 = curprotocolVersion.toUtf8();
     temp2 = temp1.data();
 
-    sprintf(writeVersion, "%s" , temp2);
-    socket->write(writeVersion);
+    sprintf(writeprotocolVersion, "%s" , temp2);
+    socket->write(writeprotocolVersion);
     qDebug()<< "temp2: " << temp2;
 }
 void MainWindow::disconnected()
