@@ -1060,11 +1060,11 @@ void MainWindow::ready2Read()
         qDebug()<< "Strange Value found: " << incDataString;
     }else if(incDataString[0] == '2' && incDataString[1] == '.' && incDataString[2] == '5'){
         qDebug()<< "Version is up2date!!!!";
-    }else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S') {
+    }else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S'){
         // reset
         dmgMeter->Reset();
         resetGraph();
-    } else if(incDataString[0] == 'O' && incDataString[1] == 'K' && incDataString[2] == 'E'){
+    }else if(incDataString[0] == 'O' && incDataString[1] == 'K' && incDataString[2] == 'E'){
         is_admin = true;
         ui->widget_5->setVisible(is_admin);
     }else {
@@ -1196,8 +1196,8 @@ void MainWindow::SendResetEchoRequest(void)
     MyAuthCode = m_authenticate.getAuthCode();
     int authcode = MyAuthCode.toInt();
 
-    sprintf(writeBuff, "|res%u|", authcode);
-    socket->write(writeBuff);
+    sprintf(writeAuthCode, "|res%u|", authcode);
+    socket->write(writeAuthCode);
 }
 
 void MainWindow::UpdatePersonalLabels()
@@ -1842,6 +1842,6 @@ void GW2::MainWindow::validateAdmin(){
     MyAuthCode = m_authenticate.getAuthCode();
     int authcode = MyAuthCode.toInt();
 
-    sprintf(writeBuff, "|admin%u|", authcode);
-    socket->write(writeBuff);
+    sprintf(writeValAdmin, "|admin%u|", authcode);
+    socket->write(writeValAdmin);
 }
