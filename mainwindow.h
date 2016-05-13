@@ -123,6 +123,7 @@ private:
     char incData2[800];
 
     char writeBuff[128];
+    char writeVersion[128];
     int is_startup;
     bool is_connected;
     bool is_admin;

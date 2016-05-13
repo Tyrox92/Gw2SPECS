@@ -1058,7 +1058,9 @@ void MainWindow::ready2Read()
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
-    } else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S') {
+    }else if(incDataString[0] == '2' && incDataString[1] == '.' && incDataString[2] == '5'){
+        qDebug()<< "Version is up2date!!!!";
+    }else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S') {
         // reset
         dmgMeter->Reset();
         resetGraph();
@@ -1100,6 +1102,16 @@ void MainWindow::ready2Read()
 void MainWindow::connected()
 {
     qDebug() << "connected...";
+    QString curVersion = Settings::s_Version;
+    QByteArray temp1;
+    const char* temp2;
+
+    temp1 = curVersion.toUtf8();
+    temp2 = temp1.data();
+
+    sprintf(writeVersion, "%s" , temp2);
+    socket->write(writeVersion);
+    qDebug()<< "temp2: " << temp2;
 }
 void MainWindow::disconnected()
 {
