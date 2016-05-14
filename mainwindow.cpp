@@ -1083,7 +1083,10 @@ void MainWindow::ready2Read()
     memcpy(incData2, incData.data(), incDataSize);
     QString incDataString(incData);
 
+    myAuth = m_authenticate.getAuthCode();
+
     qDebug() << "incDataString " <<incDataString;
+    qDebug() << myAuth[0];
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;
@@ -1094,8 +1097,12 @@ void MainWindow::ready2Read()
         dmgMeter->Reset();
         resetGraph();
     }else if(incDataString[0] == 'A' && incDataString[1] == 'C' && incDataString[2] == 'K'){
-        is_admin = true;
-        ui->widget_5->setVisible(is_admin);
+        if(incDataString[3] == myAuth[0] && incDataString[4] == myAuth[1] && incDataString[5] == myAuth[2] && incDataString[6] == myAuth[3] && incDataString[7] == myAuth[4]){
+            is_admin = true;
+            ui->widget_5->setVisible(is_admin);
+        }else{
+            qDebug() << "This seems weird: " << incDataString;
+        }
     }else {
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");

@@ -93,6 +93,7 @@ private:
     updateCheck m_updateCheck;
     QPoint m_dragPosition;
     int fixOnTopCount;
+    QString myAuth;
 
     QTcpSocket *socket;
 
