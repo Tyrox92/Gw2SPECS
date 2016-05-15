@@ -322,6 +322,7 @@ private slots:
     void action_resetCombatMode();
     void openCombatModeWindow();
     void validateAdmin();
+    void checkKeyState();
 };
 
 }

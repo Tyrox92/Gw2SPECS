@@ -1086,12 +1086,9 @@ void MainWindow::ready2Read()
     myAuth = m_authenticate.getAuthCode();
 
     qDebug() << "incDataString " <<incDataString;
-    qDebug() << myAuth[0];
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
-        qDebug()<< "Strange Value found: " << incDataString;
-    //}else if(incDataString[0] == '1' && incDataString[1] == '.' && incDataString[2] == '0'){
-    //    qDebug()<< "Version is up2date!!!!";
+        qDebug()<< "Strange Value found: " << incDataString;;
     }else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S'){
         // reset
         dmgMeter->Reset();
@@ -1232,7 +1229,7 @@ void MainWindow::SendClientInfo(void)
     }
 }
 
-void MainWindow::SendResetEchoRequest(void)
+void MainWindow::SendResetEchoRequest()
 {
     MyAuthCode = m_authenticate.getAuthCode();
     int authcode = MyAuthCode.toInt();
@@ -1315,6 +1312,7 @@ void MainWindow::UpdateTimer(void)
     // Always on top fix for Menues
     myMenu.raise();
     miscMenu->raise();
+    checkKeyState();
 
     if (is_connected)
     {
@@ -1885,4 +1883,28 @@ void GW2::MainWindow::validateAdmin(){
 
     sprintf(writeValAdmin, "|admin%u|", authcode);
     socket->write(writeValAdmin);
+}
+
+void GW2::MainWindow::checkKeyState(){
+    //List of KeyValues: http://www.kbdedit.com/manual/low_level_vk_list.html
+
+
+    // Standard Actions
+
+    // Reset
+    if(GetAsyncKeyState(VK_LMENU) && GetAsyncKeyState(0x52)){
+        dmgMeter->Reset();
+        resetGraph();
+    }
+    //Toggle Combat Mode On/Off
+
+    //Save Log
+
+
+    //Admin Menu
+    if(is_admin){
+        if(GetAsyncKeyState(VK_UP)){
+            SendResetEchoRequest();
+        }
+    }
 }
