@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(LinkToWebsite()));
     QObject::connect(ui->actionConfig, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
     QObject::connect(ui->actionActionSave,SIGNAL(triggered()),&m_saveLog, SLOT(exec()));
-    QObject::connect(ui->globalReset, SIGNAL(pressed()), this, SLOT(SendResetEchoRequest()));
+    QObject::connect(ui->globalReset, SIGNAL(clicked()), this, SLOT(SendResetEchoRequest()));
     // connecting configurator - SPECS display settings
     QObject::connect(uiConfig->checkBoxToolbar, SIGNAL(stateChanged(int)), this, SLOT(ShowToolbarChanged()));
     QObject::connect(uiConfig->checkBoxDetails, SIGNAL(clicked(bool)), this, SLOT(ShowDetailsChanged()));
@@ -1085,14 +1085,10 @@ void MainWindow::ready2Read()
 
     myAuth = m_authenticate.getAuthCode();
 
-    qDebug() << "incDataString " <<incDataString;
+    qDebug() << "incDataString " << incDataString;
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;;
-    }else if (incDataString[0] == 'R' && incDataString[1] == 'E' && incDataString[2] == 'S'){
-        // reset
-        dmgMeter->Reset();
-        resetGraph();
     }else if(incDataString[0] == 'A' && incDataString[1] == 'C' && incDataString[2] == 'K'){
         if(incDataString[3] == myAuth[0] && incDataString[4] == myAuth[1] && incDataString[5] == myAuth[2] && incDataString[6] == myAuth[3] && incDataString[7] == myAuth[4]){
             is_admin = true;
@@ -1106,29 +1102,48 @@ void MainWindow::ready2Read()
         for (i=0; i < firstArray.length(); i++) {
             secondArray[i] = firstArray[i].split(";");
         }
+        // example arrays:
+        // firstArray = ["0","a;b;c","d;e;f","g;h;i"]
+        // secondArray =[["0"],["a","b","c"],["d","e","f"],["g","h","i"]]
 
-        for (i=0; i < firstArray.length(); i++) {
-            QString tmpslot0(secondArray[i][0]);
-            PosName[i] = tmpslot0.toUtf8();
-            QString tmpslot1(secondArray[i][1]);
-            PosDPS[i] = tmpslot1.toInt();
-            QString tmpslot2(secondArray[i][2]);
-            PosDmg[i] = tmpslot2.toInt();
-            //QString tmpslot3(secondArray[i][3]);
-            //PosAct[i] = tmpslot3.toInt();
-            QString tmpslot4(secondArray[i][4]);
-            PosProf[i] = tmpslot4.toInt();
-            QString tmpslot5(secondArray[i][5]);
-            Pos5sDPS[i] = tmpslot5.toInt();
+        QString tmpslotadmin(secondArray[0][0]);
+        Admin[0] = tmpslotadmin.toInt();
+        // by default is Admin[0] = 0
+        // for the future this can be expanded on, e.g. kick (not nescessary atm)
+
+        if (Admin[0]==1) {
+            //reset
+            dmgMeter->Reset();
+            resetGraph();
+
+            //more options for later if Admin[0] is >=2
+        } else {
+            // fill varibale arrays with values from the input string
+            for (i=1; i < firstArray.length(); i++) {
+                QString tmpslot0(secondArray[i][0]);
+                PosName[i-1] = tmpslot0.toUtf8();
+                QString tmpslot1(secondArray[i][1]);
+                PosDPS[i-1] = tmpslot1.toInt();
+                QString tmpslot2(secondArray[i][2]);
+                PosDmg[i-1] = tmpslot2.toInt();
+                //QString tmpslot3(secondArray[i][3]);
+                //PosAct[i-1] = tmpslot3.toInt();
+                QString tmpslot4(secondArray[i][4]);
+                PosProf[i-1] = tmpslot4.toInt();
+                QString tmpslot5(secondArray[i][5]);
+                Pos5sDPS[i-1] = tmpslot5.toInt();
+            }
+            // filling unused/disconnected slots with 0
+            for (i=firstArray.length(); i<11; i++) {
+                PosName[i-1]="";
+                PosDPS[i-1]=0;
+                PosDmg[i-1]=0;
+                //PosAct[i-1]=0;
+                PosProf[i-1]=0;
+                Pos5sDPS[i-1]=0;
+            }
         }
-        for (i=firstArray.length(); i<10; i++) {
-            PosName[i]="";
-            PosDPS[i]=0;
-            PosDmg[i]=0;
-            //PosAct[i]=0;
-            PosProf[i]=0;
-            Pos5sDPS[i]=0;
-        }
+
     }
 }
 
@@ -1211,26 +1226,37 @@ void MainWindow::LinkToWebsite()
 
 void MainWindow::SendClientInfo(void)
 {
-    QByteArray tmp1;
-    const char* tmp2;
-
-    tmp1 = MyName.toUtf8();
-    tmp2 = tmp1.data();
-    if (is_connected)  //connected and semi-handshaked
+    if (resetrequestsent >0 && resetrequestsent <3)
     {
-        //Failsafe Checks
-        if (m_Dps>99999) m_Dps = 1;
-        if (m_Dmg>999999999) m_Dmg = 1;
-        if (m_Activity>100) m_Activity = 1;
-        if (m_5sDPS>99999) m_5sDPS = 1;
-        if (m_realDps>99999)m_realDps =1;
-        sprintf(writeBuff, "|%s;%lu;%lu;%lu;%lu;%lu|", tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
-        socket->write(writeBuff);
+        resetrequestsent++;
+        // sometimes the variable read in server (sent from client) will be overwritten before being processed by the server
+        // this results in an unsucessfull reset
+        // to prevent this there is no data being sent for a while after resetting
+    } else {
+        QByteArray tmp1;
+        const char* tmp2;
+
+        tmp1 = MyName.toUtf8();
+        tmp2 = tmp1.data();
+        if (is_connected)  //connected and semi-handshaked
+        {
+            //Failsafe Checks
+            if (m_Dps>99999) m_Dps = 1;
+            if (m_Dmg>999999999) m_Dmg = 1;
+            if (m_Activity>100) m_Activity = 1;
+            if (m_5sDPS>99999) m_5sDPS = 1;
+            if (m_realDps>99999)m_realDps =1;
+            sprintf(writeBuff, "|%s;%lu;%lu;%lu;%lu;%lu|", tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
+            socket->write(writeBuff);
+
+            resetrequestsent=0;
+        }
     }
 }
 
 void MainWindow::SendResetEchoRequest()
 {
+    resetrequestsent = 1;
     MyAuthCode = m_authenticate.getAuthCode();
     int authcode = MyAuthCode.toInt();
 

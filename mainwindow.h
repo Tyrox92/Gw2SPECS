@@ -105,7 +105,10 @@ private:
     QStringList firstArray;         // 1 slot per player (max 10) and every slot hast all infos
     QStringList secondArray[10];    // 2 dimensional array with same data like firstArray but splitted further more
 
+    int Admin[1];
     QString PosName[10];
+    int resetrequestsent = 0;
+
     int PosDPS[10];
     long PosDmg[10];
     int PosAct[10];
