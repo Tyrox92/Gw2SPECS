@@ -24,6 +24,8 @@ namespace GW2
 
     private slots:
         void RestoreDefaults();
+        void on_shortcut1_pressed();
+        void listentoKeys();
 
     private:
 

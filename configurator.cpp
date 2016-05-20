@@ -143,3 +143,18 @@ void Configurator::mousePressEvent(QMouseEvent *event)
     }
 }
 
+void Configurator::on_shortcut1_pressed()
+{
+    // change button label
+    // trigger listen mode
+
+    listentoKeys();
+
+    // set shortcut
+    // set new button label
+}
+
+void Configurator::listentoKeys()
+{
+
+}
