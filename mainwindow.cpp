@@ -22,7 +22,8 @@
 #include <qt_windows.h>
 #include "authenticate.h"
 #include "ui_authenticate.h"
-
+#include "startserver.h"
+#include "ui_startserver.h"
 
 using namespace GW2;
 
@@ -33,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MyDialog(this),
     m_firstStart(this),
     m_authenticate(this),
+    m_startServer(this),
     m_combatMode(this),
     m_connectionfailed(this),
     m_saveLog(this),
@@ -133,8 +135,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     auth->setIcon(QIcon(":/auth"));
     auth->setIconVisibleInMenu(true);
-    QObject::connect(auth, SIGNAL(triggered()), &m_authenticate, SLOT(exec()));
+    QObject::connect(auth, SIGNAL(triggered()), &m_authenticate, SLOT(exec())); 
     QObject::connect(uiAuth->authMe,SIGNAL(pressed()),this,SLOT(validateAdmin()));
+
+
+    //serverStart->setIcon(":/startServer");
+    serverStart->setIconVisibleInMenu(true);
+    QObject::connect(serverStart, SIGNAL(triggered()), &m_startServer, SLOT(exec()));
 
     autoReset->setCheckable(true);
     autoReset->setIcon(QIcon(":/Auto_Reset"));
@@ -1914,6 +1921,53 @@ void GW2::MainWindow::validateAdmin(){
 void GW2::MainWindow::checkKeyState(){
     //List of KeyValues: http://www.kbdedit.com/manual/low_level_vk_list.html
 
+//    QString specialKey = m_startServer.ui->keySequenceEdit->keySequence().toString();
+//    char mypressedKey = specialKey.data()->toLatin1();
+//    if(GetAsyncKeyState(mypressedKey)){
+//        qDebug()<< "You pressed the right button :)";
+//    }
+
+    //Reset
+    SHORT keycode;
+    bool resetAltPressed, resetShiftPressed, resetCtrlPressed;
+
+    QString resetVal = m_startServer.ui->keySequenceEdit->keySequence().toString();
+    QStringList resetValArray = resetVal.split('+');
+    if(resetValArray.length() > 1){
+        //Find the modifiers Ctrl, Alt, Shift
+    }else if(resetValArray.length() == 1){
+        //Only one Character A-Z or 0-9
+        QString lowerChar = resetVal.toLower();
+        char meinChar = lowerChar.data()->toLatin1();
+        keycode = VkKeyScan(meinChar);
+    }else{
+        qDebug()<< "Dafuq did you get here?";
+    }
+
+    bool altpressed;
+    if (alt==1) {
+        altpressed = GetAsyncKeyState(VK_LMENU);
+    } else {
+        altpressed = true;
+    }
+
+    if(GetAsyncKeyState(MapVirtualKey(keycode,2)) && altpressed){
+        qDebug()<< " DU bist cute";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Standard Actions
 
@@ -1925,6 +1979,7 @@ void GW2::MainWindow::checkKeyState(){
     //Toggle Combat Mode On/Off
 
     //Save Log
+
 
 
     //Admin Menu

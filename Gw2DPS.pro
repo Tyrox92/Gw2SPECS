@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     connectionfailed.cpp \
     savelog.cpp \
     updatecheck.cpp \
-    authenticate.cpp
+    authenticate.cpp \
+    startserver.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -54,7 +55,8 @@ HEADERS  += mainwindow.h \
     connectionfailed.h \
     savelog.h \
     updatecheck.h \
-    authenticate.h
+    authenticate.h \
+    startserver.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
@@ -64,7 +66,8 @@ FORMS    += mainwindow.ui \
     connectionfailed.ui \
     savelog.ui \
     updatecheck.ui \
-    authenticate.ui
+    authenticate.ui \
+    startserver.ui
 
 RESOURCES += \
     Icons/Icons.qrc

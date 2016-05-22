@@ -25,6 +25,7 @@
 #include "mumblelink.h"
 #include "dmgmeter.h"
 #include "authenticate.h"
+#include "startserver.h"
 
 namespace Ui
 {
@@ -43,7 +44,7 @@ public:
         QString time;
         QMenu myMenu;
         QMenu *miscMenu = new QMenu(MainWindow::tr("Miscellaneous"), this);
-
+        QAction *serverStart = myMenu.addAction(MainWindow::tr("Start Server"));
         QAction *resetData = myMenu.addAction(MainWindow::tr("Reset"));
         QAction *auth = myMenu.addAction(MainWindow::tr("Authenticate"));
         QAction *combatMode = myMenu.addAction(MainWindow::tr("CombatMode"));
@@ -87,6 +88,7 @@ private:
     MyDialog m_MyDialog;
     firstStart m_firstStart;
     authenticate m_authenticate;
+    startserver m_startServer;
     CombatMode m_combatMode;
     connectionfailed m_connectionfailed;
     saveLog m_saveLog;
@@ -257,7 +259,6 @@ private:
     QPushButton *download;
     QPushButton *changelog;
     QString m_Time;
-
 
 
 private slots:
