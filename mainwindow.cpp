@@ -1921,28 +1921,26 @@ void GW2::MainWindow::validateAdmin(){
 void GW2::MainWindow::checkKeyState(){
     //List of KeyValues: http://www.kbdedit.com/manual/low_level_vk_list.html
 
-//    QString specialKey = m_startServer.ui->keySequenceEdit->keySequence().toString();
-//    char mypressedKey = specialKey.data()->toLatin1();
-//    if(GetAsyncKeyState(mypressedKey)){
-//        qDebug()<< "You pressed the right button :)";
-//    }
-
     //Reset
     SHORT keycode;
-    bool resetAltPressed, resetShiftPressed, resetCtrlPressed;
+    bool resetAltPressed, resetShiftPressed, resetCtrlPressed, resetAlt, resetShift, resetCtrl;
+    char resetCharacter;
+    int resetMod;
 
     QString resetVal = m_startServer.ui->keySequenceEdit->keySequence().toString();
     QStringList resetValArray = resetVal.split('+');
     if(resetValArray.length() > 1){
         //Find the modifiers Ctrl, Alt, Shift
+
     }else if(resetValArray.length() == 1){
         //Only one Character A-Z or 0-9
         QString lowerChar = resetVal.toLower();
-        char meinChar = lowerChar.data()->toLatin1();
-        keycode = VkKeyScan(meinChar);
+        char resetCharacter = lowerChar.data()->toLatin1();
+        keycode = VkKeyScan(resetCharacter);
     }else{
         qDebug()<< "Dafuq did you get here?";
     }
+
 
     bool altpressed;
     if (alt==1) {
