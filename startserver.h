@@ -2,6 +2,7 @@
 #define STARTSERVER_H
 
 #include <QDialog>
+#include <windows.h>
 
 namespace Ui {
 class startserver;
@@ -16,8 +17,7 @@ namespace GW2
         explicit startserver(QWidget *parent = 0);
         ~startserver();
 
-    private slots:
-        void on_keySequenceEdit_editingFinished();
+    //private slots:
 
     private:
         Ui::startserver *ui;

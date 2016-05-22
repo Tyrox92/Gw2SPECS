@@ -26,6 +26,10 @@ namespace GW2
         void RestoreDefaults();
         void on_shortcut1_pressed();
         void listentoKeys();
+        void on_seqEditCombatMode_editingFinished();
+        void on_seqEditReset_editingFinished();
+        void on_seqEditGlobalReset_editingFinished();
+        void on_seqEditSave_editingFinished();
 
     private:
 

@@ -1,5 +1,6 @@
 #include <QString>
 #include <QTcpSocket>
+#include <windows.h>
 
 
 #ifndef _GLOBALS_H
@@ -26,6 +27,14 @@ extern unsigned long m_MyProfession;
 extern unsigned long countCombat;
 extern QString combatCourse;
 extern int updateCounter;
+extern int resetMod;
+extern SHORT resetKeycode;
+extern int combatmodeMod;
+extern SHORT combatmodeKeycode;
+extern int savelogMod;
+extern SHORT savelogKeycode;
+extern int globalresetMod;
+extern SHORT globalresetKeycode;
 
 
 

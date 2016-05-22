@@ -1,6 +1,7 @@
 #include "startserver.h"
 #include "ui_startserver.h"
 #include <QDebug>
+#include <global.h>
 
 using namespace GW2;
 
@@ -15,9 +16,3 @@ startserver::~startserver()
 {
     delete ui;
 }
-
-void GW2::startserver::on_keySequenceEdit_editingFinished()
-{
-    qDebug()<< "DONE CHANGING: " << ui->keySequenceEdit->keySequence().toString();
-}
-

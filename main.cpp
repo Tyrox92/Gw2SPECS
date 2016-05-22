@@ -30,6 +30,14 @@ unsigned long m_MyProfession;
 unsigned long countCombat;
 int updateCounter;
 QString combatCourse;
+int resetMod;
+SHORT resetKeycode;
+int combatmodeMod;
+SHORT combatmodeKeycode;
+int savelogMod;
+SHORT savelogKeycode;
+int globalresetMod;
+SHORT globalresetKeycode;
 
 int main(int argc, char *argv[])
 {

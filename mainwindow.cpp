@@ -1921,69 +1921,250 @@ void GW2::MainWindow::validateAdmin(){
 void GW2::MainWindow::checkKeyState(){
     //List of KeyValues: http://www.kbdedit.com/manual/low_level_vk_list.html
 
-    //Reset
-    SHORT keycode;
-    bool resetAltPressed, resetShiftPressed, resetCtrlPressed, resetAlt, resetShift, resetCtrl;
-    char resetCharacter;
-    int resetMod;
-
-    QString resetVal = m_startServer.ui->keySequenceEdit->keySequence().toString();
-    QStringList resetValArray = resetVal.split('+');
-    if(resetValArray.length() > 1){
-        //Find the modifiers Ctrl, Alt, Shift
-
-    }else if(resetValArray.length() == 1){
-        //Only one Character A-Z or 0-9
-        QString lowerChar = resetVal.toLower();
-        char resetCharacter = lowerChar.data()->toLatin1();
-        keycode = VkKeyScan(resetCharacter);
-    }else{
-        qDebug()<< "Dafuq did you get here?";
-    }
-
-
-    bool altpressed;
-    if (alt==1) {
-        altpressed = GetAsyncKeyState(VK_LMENU);
-    } else {
-        altpressed = true;
-    }
-
-    if(GetAsyncKeyState(MapVirtualKey(keycode,2)) && altpressed){
-        qDebug()<< " DU bist cute";
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Standard Actions
 
     // Reset
-    if(GetAsyncKeyState(VK_LMENU) && GetAsyncKeyState(0x52)){
+    bool resetCtrlPressed, resetAltPressed, resetShiftPressed;
+    // ctrl:1; alt:2; shift:4
+    switch (resetMod)
+    {
+    case 7:
+        // cas
+        resetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        resetAltPressed = GetAsyncKeyState(VK_MENU);
+        resetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 6:
+        // as
+        resetCtrlPressed = true;
+        resetAltPressed = GetAsyncKeyState(VK_MENU);
+        resetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 5:
+        // cs
+        resetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        resetAltPressed = true;
+        resetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 4:
+        // s
+        resetCtrlPressed = true;
+        resetAltPressed = true;
+        resetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 3:
+        // ca
+        resetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        resetAltPressed = GetAsyncKeyState(VK_MENU);
+        resetShiftPressed = true;
+        break;
+    case 2:
+        // a
+        resetCtrlPressed = true;
+        resetAltPressed = GetAsyncKeyState(VK_MENU);
+        resetShiftPressed = true;
+        break;
+    case 1:
+        // c
+        resetAltPressed = true;
+        resetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        resetShiftPressed = true;
+        break;
+    default:
+        resetAltPressed = true;
+        resetCtrlPressed = true;
+        resetShiftPressed = true;
+
+    }
+    if(GetAsyncKeyState(MapVirtualKey(resetKeycode,2)) && resetCtrlPressed && resetAltPressed && resetShiftPressed)
+    {
         dmgMeter->Reset();
         resetGraph();
+        qDebug() << "Successful Reset through shortcut.";
     }
-    //Toggle Combat Mode On/Off
 
-    //Save Log
+    // Toggle Combat Mode
+    bool combatmodeCtrlPressed, combatmodeAltPressed, combatmodeShiftPressed;
+    // ctrl:1; alt:2; shift:4
+    switch (combatmodeMod)
+    {
+    case 7:
+        // cas
+        combatmodeCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        combatmodeAltPressed = GetAsyncKeyState(VK_MENU);
+        combatmodeShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 6:
+        // as
+        combatmodeCtrlPressed = true;
+        combatmodeAltPressed = GetAsyncKeyState(VK_MENU);
+        combatmodeShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 5:
+        // cs
+        combatmodeCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        combatmodeAltPressed = true;
+        combatmodeShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 4:
+        // s
+        combatmodeCtrlPressed = true;
+        combatmodeAltPressed = true;
+        combatmodeShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 3:
+        // ca
+        combatmodeCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        combatmodeAltPressed = GetAsyncKeyState(VK_MENU);
+        combatmodeShiftPressed = true;
+        break;
+    case 2:
+        // a
+        combatmodeCtrlPressed = true;
+        combatmodeAltPressed = GetAsyncKeyState(VK_MENU);
+        combatmodeShiftPressed = true;
+        break;
+    case 1:
+        // c
+        combatmodeAltPressed = true;
+        combatmodeCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        combatmodeShiftPressed = true;
+        break;
+    default:
+        combatmodeAltPressed = true;
+        combatmodeCtrlPressed = true;
+        combatmodeShiftPressed = true;
 
+    }
+    if(GetAsyncKeyState(MapVirtualKey(combatmodeKeycode,2)) && combatmodeCtrlPressed && combatmodeAltPressed && combatmodeShiftPressed)
+    {
+        //action_combatMode();
+        //openCombatModeWindow();
 
+        //action_resetCombatMode()
 
-    //Admin Menu
-    if(is_admin){
-        if(GetAsyncKeyState(VK_UP)){
+        qDebug() << "Successful CombatMode Toggle through shortcut. (without code)";
+    }
+
+    // Save Log
+    bool savelogCtrlPressed, savelogAltPressed, savelogShiftPressed;
+    // ctrl:1; alt:2; shift:4
+    switch (savelogMod)
+    {
+    case 7:
+        // cas
+        savelogCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        savelogAltPressed = GetAsyncKeyState(VK_MENU);
+        savelogShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 6:
+        // as
+        savelogCtrlPressed = true;
+        savelogAltPressed = GetAsyncKeyState(VK_MENU);
+        savelogShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 5:
+        // cs
+        savelogCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        savelogAltPressed = true;
+        savelogShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 4:
+        // s
+        savelogCtrlPressed = true;
+        savelogAltPressed = true;
+        savelogShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 3:
+        // ca
+        savelogCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        savelogAltPressed = GetAsyncKeyState(VK_MENU);
+        savelogShiftPressed = true;
+        break;
+    case 2:
+        // a
+        savelogCtrlPressed = true;
+        savelogAltPressed = GetAsyncKeyState(VK_MENU);
+        savelogShiftPressed = true;
+        break;
+    case 1:
+        // c
+        savelogAltPressed = true;
+        savelogCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        savelogShiftPressed = true;
+        break;
+    default:
+        savelogAltPressed = true;
+        savelogCtrlPressed = true;
+        savelogShiftPressed = true;
+
+    }
+    if(GetAsyncKeyState(MapVirtualKey(savelogKeycode,2)) && savelogCtrlPressed && savelogAltPressed && savelogShiftPressed)
+    {
+        writeAll();
+        qDebug() << "Successful LogSave through shortcut.";
+    }
+
+    // Admin Menu
+    if(is_admin)
+    {
+        // globalReset
+        bool globalresetCtrlPressed, globalresetAltPressed, globalresetShiftPressed;
+        // ctrl:1; alt:2; shift:4
+        switch (globalresetMod)
+        {
+        case 7:
+            // cas
+            globalresetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+            globalresetAltPressed = GetAsyncKeyState(VK_MENU);
+            globalresetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+            break;
+        case 6:
+            // as
+            globalresetCtrlPressed = true;
+            globalresetAltPressed = GetAsyncKeyState(VK_MENU);
+            globalresetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+            break;
+        case 5:
+            // cs
+            globalresetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+            globalresetAltPressed = true;
+            globalresetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+            break;
+        case 4:
+            // s
+            globalresetCtrlPressed = true;
+            globalresetAltPressed = true;
+            globalresetShiftPressed = GetAsyncKeyState(VK_SHIFT);
+            break;
+        case 3:
+            // ca
+            globalresetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+            globalresetAltPressed = GetAsyncKeyState(VK_MENU);
+            globalresetShiftPressed = true;
+            break;
+        case 2:
+            // a
+            globalresetCtrlPressed = true;
+            globalresetAltPressed = GetAsyncKeyState(VK_MENU);
+            globalresetShiftPressed = true;
+            break;
+        case 1:
+            // c
+            globalresetAltPressed = true;
+            globalresetCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+            globalresetShiftPressed = true;
+            break;
+        default:
+            globalresetAltPressed = true;
+            globalresetCtrlPressed = true;
+            globalresetShiftPressed = true;
+
+        }
+        if(GetAsyncKeyState(MapVirtualKey(globalresetKeycode,2)) && globalresetCtrlPressed && globalresetAltPressed && globalresetShiftPressed)
+        {
             SendResetEchoRequest();
+            qDebug() << "Successful GlobalReset through shortcut.";
         }
     }
 }

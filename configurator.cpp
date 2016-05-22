@@ -2,6 +2,7 @@
 #include "ui_configurator.h"
 #include "settings.h"
 #include "mainwindow.h"
+#include <global.h>
 
 using namespace GW2;
 
@@ -157,4 +158,96 @@ void Configurator::on_shortcut1_pressed()
 void Configurator::listentoKeys()
 {
 
+}
+
+void GW2::Configurator::on_seqEditCombatMode_editingFinished()
+{
+    // getting string from sequenceedit and converting it to array
+    QString combatmodeValPre = ui->seqEditCombatMode->keySequence().toString().toLower();
+    QString combatmodeVal = combatmodeValPre.left(combatmodeValPre.indexOf(","));
+    QStringList combatmodeValArray = combatmodeVal.split('+');
+
+    // find keycode
+    QString combatmodeKeycodeString = combatmodeValArray[combatmodeValArray.length()-1];
+    char combatmodeKeycodeChar = combatmodeKeycodeString.data()->toLatin1();
+    combatmodeKeycode = VkKeyScan(combatmodeKeycodeChar);
+
+    // find modificator (ctrl:1; alt:2; shift:4)
+    combatmodeMod=0;
+    for (int i=0; i<combatmodeValArray.length(); i++)
+    {
+        QString tmpstring = combatmodeValArray[i];
+        if (tmpstring.indexOf("ctrl")>=0) combatmodeMod+=1;
+        if (tmpstring.indexOf("alt")>=0) combatmodeMod+=2;
+        if (tmpstring.indexOf("shift")>=0) combatmodeMod+=4;
+    }
+}
+
+void GW2::Configurator::on_seqEditReset_editingFinished()
+{
+    // getting string from sequenceedit and converting it to array
+    QString resetValPre = ui->seqEditReset->keySequence().toString().toLower();
+    QString resetVal = resetValPre.left(resetValPre.indexOf(","));
+    QStringList resetValArray = resetVal.split('+');
+
+    // find keycode
+    QString resetKeycodeString = resetValArray[resetValArray.length()-1];
+    char resetKeycodeChar = resetKeycodeString.data()->toLatin1();
+    resetKeycode = VkKeyScan(resetKeycodeChar);
+
+    // find modificator (ctrl:1; alt:2; shift:4)
+    resetMod=0;
+    for (int i=0; i<resetValArray.length(); i++)
+    {
+        QString tmpstring = resetValArray[i];
+        if (tmpstring.indexOf("ctrl")>=0) resetMod+=1;
+        if (tmpstring.indexOf("alt")>=0) resetMod+=2;
+        if (tmpstring.indexOf("shift")>=0) resetMod+=4;
+    }
+}
+
+void GW2::Configurator::on_seqEditGlobalReset_editingFinished()
+{
+    // getting string from sequenceedit and converting it to array
+    QString globalresetValPre = ui->seqEditGlobalReset->keySequence().toString().toLower();
+    QString globalresetVal = globalresetValPre.left(globalresetValPre.indexOf(","));
+    QStringList globalresetValArray = globalresetVal.split('+');
+
+    // find keycode
+    QString globalresetKeycodeString = globalresetValArray[globalresetValArray.length()-1];
+    char globalresetKeycodeChar = globalresetKeycodeString.data()->toLatin1();
+    globalresetKeycode = VkKeyScan(globalresetKeycodeChar);
+
+    // find modificator (ctrl:1; alt:2; shift:4)
+    globalresetMod=0;
+    for (int i=0; i<globalresetValArray.length(); i++)
+    {
+        QString tmpstring = globalresetValArray[i];
+        if (tmpstring.indexOf("ctrl")>=0) globalresetMod+=1;
+        if (tmpstring.indexOf("alt")>=0) globalresetMod+=2;
+        if (tmpstring.indexOf("shift")>=0) globalresetMod+=4;
+    }
+}
+
+void GW2::Configurator::on_seqEditSave_editingFinished()
+{
+    // getting string from sequenceedit and converting it to array
+    QString savelogValPre = ui->seqEditSave->keySequence().toString().toLower();
+    QString savelogVal = savelogValPre.left(savelogValPre.indexOf(","));
+    QStringList savelogValArray = savelogVal.split('+');
+
+    // find keycode
+    QString savelogKeycodeString = savelogValArray[savelogValArray.length()-1];
+    char savelogKeycodeChar = savelogKeycodeString.data()->toLatin1();
+    savelogKeycode = VkKeyScan(savelogKeycodeChar);
+
+    // find modificator (ctrl:1; alt:2; shift:4)
+    savelogMod=0;
+    for (int i=0; i<savelogValArray.length(); i++)
+    {
+        QString tmpstring = savelogValArray[i];
+        if (tmpstring.indexOf("ctrl")>=0) savelogMod+=1;
+        if (tmpstring.indexOf("alt")>=0) savelogMod+=2;
+        if (tmpstring.indexOf("shift")>=0) savelogMod+=4;
+    }
 }

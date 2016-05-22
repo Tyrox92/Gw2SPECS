@@ -93,8 +93,8 @@ color: #8BB2DA;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>312</width>
-        <height>198</height>
+        <width>187</width>
+        <height>182</height>
        </rect>
       </property>
       <attribute name="label">
@@ -285,8 +285,8 @@ color: #8BB2DA;</string>
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>312</width>
-        <height>198</height>
+        <width>303</width>
+        <height>96</height>
        </rect>
       </property>
       <attribute name="label">
@@ -377,15 +377,60 @@ color: #8BB2DA;</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>329</width>
-        <height>181</height>
+        <y>-54</y>
+        <width>295</width>
+        <height>252</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Accuracy Settings</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBoxSecondsInCombat">
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>3</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelShortcut2">
+         <property name="text">
+          <string>Reset Shortcut</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QKeySequenceEdit" name="seqEditReset"/>
+       </item>
+       <item row="8" column="1">
+        <widget class="QKeySequenceEdit" name="seqEditSave"/>
+       </item>
+       <item row="6" column="1">
+        <widget class="QKeySequenceEdit" name="seqEditGlobalReset"/>
+       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="labelConsideredLines">
          <property name="font">
@@ -595,46 +640,27 @@ color: #8BB2DA;</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QComboBox" name="comboBoxSecondsInCombat">
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>11</pointsize>
-           <weight>9</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <item>
-          <property name="text">
-           <string>2</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>3</string>
-          </property>
-         </item>
-        </widget>
+       <item row="4" column="1">
+        <widget class="QKeySequenceEdit" name="seqEditCombatMode"/>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="labelShortcut1">
          <property name="text">
-          <string>Reset Shortcut (default: UP)</string>
+          <string>Toggle CombatMode</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="shortcut1">
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelShortcut3">
          <property name="text">
-          <string>Click to change...</string>
+          <string>GlobalReset Shortcurt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="labelShortcut4">
+         <property name="text">
+          <string>Save Log Shortcut</string>
          </property>
         </widget>
        </item>
