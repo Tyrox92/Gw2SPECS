@@ -394,7 +394,7 @@
      <x>10</x>
      <y>10</y>
      <width>261</width>
-     <height>203</height>
+     <height>211</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
@@ -495,20 +495,7 @@
     <property name="sizeConstraint">
      <enum>QLayout::SetDefaultConstraint</enum>
     </property>
-    <item row="8" column="0">
-     <widget class="QCheckBox" name="checkBoxPerDmg">
-      <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
-      </property>
-      <property name="text">
-       <string>Percental Damage</string>
-      </property>
-      <property name="checked">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
+    <item row="6" column="0">
      <widget class="QCheckBox" name="checkBox5sDPS">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:14px;</string>
@@ -521,40 +508,20 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255,255,255);font-size:20px</string>
-      </property>
-      <property name="text">
-       <string>Player Bar Settings</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QCheckBox" name="checkBoxProfColors">
+    <item row="9" column="0">
+     <widget class="QCheckBox" name="checkBoxPerDmg">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:14px;</string>
       </property>
       <property name="text">
-       <string>Show Profession</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QCheckBox" name="checkBoxName">
-      <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
-      </property>
-      <property name="text">
-       <string>Show Name</string>
+       <string>Percental Damage</string>
       </property>
       <property name="checked">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
+    <item row="4" column="0">
      <widget class="QCheckBox" name="checkBoxDPS">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:14px;</string>
@@ -567,7 +534,30 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
+    <item row="3" column="0">
+     <widget class="QCheckBox" name="checkBoxName">
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>Show Name</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="checkBoxProfColors">
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>Show Profession</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
      <widget class="QCheckBox" name="checkBoxDamage">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:14px;</string>
@@ -580,7 +570,7 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="0">
+    <item row="8" column="0">
      <widget class="QCheckBox" name="checkBoxPosition">
       <property name="enabled">
        <bool>true</bool>
@@ -596,17 +586,7 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="0">
-     <widget class="QCheckBox" name="checkBoxCDPS">
-      <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
-      </property>
-      <property name="text">
-       <string>(Show CondiDPS)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
+    <item row="7" column="0">
      <widget class="QLabel" name="groupOnly">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:16px;</string>
@@ -617,6 +597,16 @@
      </widget>
     </item>
     <item row="10" column="0">
+     <widget class="QCheckBox" name="checkBoxCDPS">
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>(Show CondiDPS)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
      <widget class="QCheckBox" name="checkBoxCDamage">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:14px;</string>
@@ -626,7 +616,17 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="0">
+    <item row="13" column="0">
+     <widget class="QCheckBox" name="checkBoxActivity">
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>(Show Activity)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
      <widget class="QCheckBox" name="checkBoxCPerDmg">
       <property name="styleSheet">
        <string notr="true">color:white;font-size:14px;</string>
@@ -636,13 +636,13 @@
       </property>
      </widget>
     </item>
-    <item row="12" column="0">
-     <widget class="QCheckBox" name="checkBoxActivity">
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_3">
       <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
+       <string notr="true">color: rgb(255,255,255);font-size:20px</string>
       </property>
       <property name="text">
-       <string>(Show Activity)</string>
+       <string>Player Bar Settings</string>
       </property>
      </widget>
     </item>
@@ -654,11 +654,11 @@
      <x>580</x>
      <y>10</y>
      <width>281</width>
-     <height>191</height>
+     <height>211</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="0">
+    <item row="4" column="0">
      <widget class="QLabel" name="label_4">
       <property name="styleSheet">
        <string notr="true">color: rgb(255,255,255);font-size:20px</string>
@@ -668,20 +668,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QCheckBox" name="checkBoxGraphShow">
-      <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
-      </property>
-      <property name="text">
-       <string>Show Graph</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
+    <item row="6" column="0">
      <widget class="QCheckBox" name="checkBoxGraphAvgDPS">
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -697,7 +684,7 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
+    <item row="7" column="0">
      <widget class="QCheckBox" name="checkBoxGraphAvgGroupDPS">
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -713,39 +700,7 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QCheckBox" name="checkBoxGraphAvgCDPS">
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
-      </property>
-      <property name="text">
-       <string>Average CondiDPS</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QCheckBox" name="checkBoxGraph5sDPS">
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color:white;font-size:14px;</string>
-      </property>
-      <property name="text">
-       <string>Last5sDPS</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
+    <item row="10" column="0">
      <widget class="QCheckBox" name="checkBoxGraphRealDPS">
       <property name="enabled">
        <bool>true</bool>
@@ -764,13 +719,58 @@
       </property>
      </widget>
     </item>
+    <item row="8" column="0">
+     <widget class="QCheckBox" name="checkBoxGraphAvgCDPS">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>Average CondiDPS</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QCheckBox" name="checkBoxGraph5sDPS">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>Last5sDPS</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QCheckBox" name="checkBoxGraphShow">
+      <property name="styleSheet">
+       <string notr="true">color:white;font-size:14px;</string>
+      </property>
+      <property name="text">
+       <string>Show Graph</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="widget_5" native="true">
    <property name="geometry">
     <rect>
      <x>580</x>
-     <y>210</y>
+     <y>230</y>
      <width>281</width>
      <height>141</height>
     </rect>
