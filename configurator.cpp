@@ -144,22 +144,6 @@ void Configurator::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void Configurator::on_shortcut1_pressed()
-{
-    // change button label
-    // trigger listen mode
-
-    listentoKeys();
-
-    // set shortcut
-    // set new button label
-}
-
-void Configurator::listentoKeys()
-{
-
-}
-
 void GW2::Configurator::on_seqEditCombatMode_editingFinished()
 {
     // getting string from sequenceedit and converting it to array

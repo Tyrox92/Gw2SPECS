@@ -24,8 +24,6 @@ namespace GW2
 
     private slots:
         void RestoreDefaults();
-        void on_shortcut1_pressed();
-        void listentoKeys();
         void on_seqEditCombatMode_editingFinished();
         void on_seqEditReset_editingFinished();
         void on_seqEditGlobalReset_editingFinished();

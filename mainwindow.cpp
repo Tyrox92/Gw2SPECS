@@ -2103,6 +2103,7 @@ void GW2::MainWindow::checkKeyState(){
     {
         writeAll();
         qDebug() << "Successful LogSave through shortcut.";
+        // Implement MessageBox / Dialog to show User that files have been saved
     }
 
     // Admin Menu
