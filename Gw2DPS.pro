@@ -74,6 +74,6 @@ RESOURCES += \
 
 RC_FILE = specs.rc
 
-TRANSLATIONS+=  languages/gw2specs_en.ts
-TRANSLATIONS+=  languages/gw2specs_de.ts
-TRANSLATIONS+=  languages/gw2specs_fr.ts
+TRANSLATIONS+=  languages/gw2specs_English.ts
+TRANSLATIONS+=  languages/gw2specs_Deutsch.ts
+TRANSLATIONS+=  languages/gw2specs_Francais.ts
