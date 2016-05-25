@@ -2049,7 +2049,7 @@ void GW2::MainWindow::checkKeyState(){
     switch (savelogMod)
     {
     case 7:
-        // case
+        // cas
         savelogCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
         savelogAltPressed = GetAsyncKeyState(VK_MENU);
         savelogShiftPressed = GetAsyncKeyState(VK_SHIFT);
