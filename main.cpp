@@ -38,6 +38,7 @@ int savelogMod;
 SHORT savelogKeycode;
 int globalresetMod;
 SHORT globalresetKeycode;
+bool combatModeToggleState;
 
 int main(int argc, char *argv[])
 {

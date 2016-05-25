@@ -165,6 +165,7 @@ void GW2::Configurator::on_seqEditCombatMode_editingFinished()
         if (tmpstring.indexOf("alt")>=0) combatmodeMod+=2;
         if (tmpstring.indexOf("shift")>=0) combatmodeMod+=4;
     }
+    combatModeToggleState = 0;
 }
 
 void GW2::Configurator::on_seqEditReset_editingFinished()

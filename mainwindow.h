@@ -327,6 +327,7 @@ private slots:
     void openCombatModeWindow();
     void validateAdmin();
     void checkKeyState();
+    void toggleCombatMode(bool);
 };
 
 }

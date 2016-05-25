@@ -35,6 +35,7 @@ extern int savelogMod;
 extern SHORT savelogKeycode;
 extern int globalresetMod;
 extern SHORT globalresetKeycode;
+extern bool combatModeToggleState;
 
 
 

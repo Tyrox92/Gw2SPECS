@@ -276,6 +276,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->toolBar->setVisible(displayToolbar);
 
     EnableTransparency(displayOpacity);
+    combatModeToggleState = 1;
 
     // setting labels (in)visible
     labellegendname->setVisible(displayName);
@@ -2038,12 +2039,8 @@ void GW2::MainWindow::checkKeyState(){
     }
     if(GetAsyncKeyState(MapVirtualKey(combatmodeKeycode,2)) && combatmodeCtrlPressed && combatmodeAltPressed && combatmodeShiftPressed)
     {
-        //action_combatMode();
-        //openCombatModeWindow();
-
-        //action_resetCombatMode()
-
-        qDebug() << "Successful CombatMode Toggle through shortcut. (without code)";
+        toggleCombatMode(combatModeToggleState);
+        qDebug() << "Successful CombatMode Toggle through shortcut.";
     }
 
     // Save Log
@@ -2052,7 +2049,7 @@ void GW2::MainWindow::checkKeyState(){
     switch (savelogMod)
     {
     case 7:
-        // cas
+        // case
         savelogCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
         savelogAltPressed = GetAsyncKeyState(VK_MENU);
         savelogShiftPressed = GetAsyncKeyState(VK_SHIFT);
@@ -2169,3 +2166,14 @@ void GW2::MainWindow::checkKeyState(){
         }
     }
 }
+
+void GW2::MainWindow::toggleCombatMode(bool toggleState){
+    if(toggleState){
+        action_combatMode();
+        combatModeToggleState = 0;
+    }else{
+        action_resetCombatMode();
+        combatModeToggleState = 1;
+    }
+}
+
