@@ -161,6 +161,9 @@ public:
     static const QString s_Version;
     static const QString s_protocolVersion;
 
+    //Default Shortcuts
+    static const QString shortcut_reset;
+
 private:
     Settings();
 };

@@ -39,6 +39,7 @@ SHORT savelogKeycode;
 int globalresetMod;
 SHORT globalresetKeycode;
 bool combatModeToggleState;
+bool shotcutsdisabled;
 
 int main(int argc, char *argv[])
 {

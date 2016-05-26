@@ -350,6 +350,15 @@ void GW2::MainWindow::CheckForOldVerison()
 
 void GW2::MainWindow::StartupPref()
 {
+    //If nothing set set to Default
+    if(m_Configurator.ui->seqEditCombatMode->keySequence().toString() == ""){
+        m_Configurator.ui->seqEditCombatMode->setKeySequence(QKeySequence(Settings::shortcut_reset));
+        qDebug() << "Reset Shortcut is Empty - Setting Default to " << m_Configurator.ui->seqEditCombatMode->keySequence().toString();
+    }
+
+    // get this from saved settings later
+    shotcutsdisabled = 0;
+
     // for differentiating label sizes in different languages
     QSettings settings("Gw2SPECS");
     settings.beginGroup("comboBoxLanguage");
@@ -523,9 +532,9 @@ void GW2::MainWindow::StartupPref()
 
     labellegendname->setStyleSheet("color:white;background:none;/*background-color:red;min-width:7.07em;*/font: 87 10pt \"DINPro-Black\";");
     labellegenddmg->setStyleSheet("color:white;background:none;/*background-color:green;min-width:2.44em;*/font: 87 10pt \"DINPro-Black\";");
-    if (lang == "fr") {
+    if (lang == "Francais") {
         labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.2em;min-width:3.2em;font: 87 10pt \"DINPro-Black\";");
-    } else if (lang == "de") {
+    } else if (lang == "Deutsch") {
         labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.82em;min-width:3.82em;font: 87 10pt \"DINPro-Black\";");
     } else {
         labellegendper->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
@@ -547,9 +556,9 @@ void GW2::MainWindow::StartupPref()
         // styling labels
         labelname[n]->setStyleSheet("color:white;background:none;/*background-color:red;min-width:7.07em;*/font: 87 10pt \"DINPro-Black\";");
         labeldmg[n]->setStyleSheet("color:white;background:none;/*background-color:green;min-width:2.44em;*/font: 87 10pt \"DINPro-Black\";");
-        if (lang == "fr") {
+        if (lang == "Francais") {
             labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.2em;min-width:3.2em;font: 87 10pt \"DINPro-Black\";");
-        } else if (lang == "de") {
+        } else if (lang == "Deutsch") {
             labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:3.82em;min-width:3.82em;font: 87 10pt \"DINPro-Black\";");
         } else {
             labelper[n]->setStyleSheet("color:white;background:none;/*background-color:blue;*/max-width:2.32em;min-width:2.32em;font: 87 10pt \"DINPro-Black\";");
@@ -1346,7 +1355,7 @@ void MainWindow::UpdateTimer(void)
     // Always on top fix for Menues
     myMenu.raise();
     miscMenu->raise();
-    checkKeyState();
+    if (!shotcutsdisabled) checkKeyState();
 
     if (is_connected)
     {
