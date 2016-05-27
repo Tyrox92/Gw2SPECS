@@ -28,6 +28,7 @@ namespace GW2
         void on_seqEditReset_editingFinished();
         void on_seqEditGlobalReset_editingFinished();
         void on_seqEditSave_editingFinished();
+        void on_seqEditOpacity_editingFinished();
 
     private:
 

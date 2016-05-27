@@ -53,6 +53,13 @@ Configurator::Configurator(QWidget *parent) :
     Settings::ReadSettings(ui->comboBoxUpdates);
     Settings::ReadSettings(ui->comboBoxSecondsInCombat);
     Settings::ReadSettings(ui->comboBoxConsideredLines);
+
+    Settings::ReadSettings(ui->checkBoxShortcutDisable);
+    Settings::ReadSettings(ui->seqEditCombatMode);
+    Settings::ReadSettings(ui->seqEditGlobalReset);
+    Settings::ReadSettings(ui->seqEditReset);
+    Settings::ReadSettings(ui->seqEditSave);
+    Settings::ReadSettings(ui->seqEditOpacity);
 }
 
 Configurator::~Configurator()
@@ -87,6 +94,13 @@ Configurator::~Configurator()
     Settings::WriteSettings(ui->comboBoxUpdates);
     Settings::WriteSettings(ui->comboBoxSecondsInCombat);
     Settings::WriteSettings(ui->comboBoxConsideredLines);
+
+    Settings::WriteSettings(ui->checkBoxShortcutDisable);
+    Settings::WriteSettings(ui->seqEditCombatMode);
+    Settings::WriteSettings(ui->seqEditGlobalReset);
+    Settings::WriteSettings(ui->seqEditReset);
+    Settings::WriteSettings(ui->seqEditSave);
+    Settings::WriteSettings(ui->seqEditOpacity);
 
     delete ui;
 }
@@ -124,6 +138,18 @@ void Configurator::RestoreDefaults()
     ui->comboBoxUpdates->setCurrentIndex(0);
     ui->comboBoxSecondsInCombat->setCurrentIndex(0);
     ui->comboBoxConsideredLines->setCurrentIndex(0);
+
+    ui->checkBoxShortcutDisable->setChecked(true);
+    ui->seqEditCombatMode->setKeySequence(QKeySequence(Settings::shortcut_combatmode));
+    ui->seqEditGlobalReset->setKeySequence(QKeySequence(Settings::shortcut_globalreset));
+    ui->seqEditReset->setKeySequence(QKeySequence(Settings::shortcut_reset));
+    ui->seqEditSave->setKeySequence(QKeySequence(Settings::shortcut_savelog));
+    ui->seqEditOpacity->setKeySequence(QKeySequence(Settings::shortcut_opacity));
+    on_seqEditCombatMode_editingFinished();
+    on_seqEditGlobalReset_editingFinished();
+    on_seqEditReset_editingFinished();
+    on_seqEditSave_editingFinished();
+    on_seqEditOpacity_editingFinished();
 }
 
 // Give movement access to Configurator
@@ -146,6 +172,11 @@ void Configurator::mousePressEvent(QMouseEvent *event)
 
 void GW2::Configurator::on_seqEditCombatMode_editingFinished()
 {
+    // setting default if empty
+    if(ui->seqEditCombatMode->keySequence().toString() == ""){
+        ui->seqEditCombatMode->setKeySequence(QKeySequence(Settings::shortcut_combatmode));
+    }
+
     // getting string from sequenceedit and converting it to array
     QString combatmodeValPre = ui->seqEditCombatMode->keySequence().toString().toLower();
     QString combatmodeVal = combatmodeValPre.left(combatmodeValPre.indexOf(","));
@@ -170,6 +201,11 @@ void GW2::Configurator::on_seqEditCombatMode_editingFinished()
 
 void GW2::Configurator::on_seqEditReset_editingFinished()
 {
+    // setting default if empty
+    if(ui->seqEditReset->keySequence().toString() == ""){
+        ui->seqEditReset->setKeySequence(QKeySequence(Settings::shortcut_reset));
+    }
+
     // getting string from sequenceedit and converting it to array
     QString resetValPre = ui->seqEditReset->keySequence().toString().toLower();
     QString resetVal = resetValPre.left(resetValPre.indexOf(","));
@@ -193,6 +229,11 @@ void GW2::Configurator::on_seqEditReset_editingFinished()
 
 void GW2::Configurator::on_seqEditGlobalReset_editingFinished()
 {
+    // setting default if empty
+    if(ui->seqEditGlobalReset->keySequence().toString() == ""){
+        ui->seqEditGlobalReset->setKeySequence(QKeySequence(Settings::shortcut_globalreset));
+    }
+
     // getting string from sequenceedit and converting it to array
     QString globalresetValPre = ui->seqEditGlobalReset->keySequence().toString().toLower();
     QString globalresetVal = globalresetValPre.left(globalresetValPre.indexOf(","));
@@ -216,6 +257,11 @@ void GW2::Configurator::on_seqEditGlobalReset_editingFinished()
 
 void GW2::Configurator::on_seqEditSave_editingFinished()
 {
+    // setting default if empty
+    if(ui->seqEditSave->keySequence().toString() == ""){
+        ui->seqEditSave->setKeySequence(QKeySequence(Settings::shortcut_savelog));
+    }
+
     // getting string from sequenceedit and converting it to array
     QString savelogValPre = ui->seqEditSave->keySequence().toString().toLower();
     QString savelogVal = savelogValPre.left(savelogValPre.indexOf(","));
@@ -234,5 +280,33 @@ void GW2::Configurator::on_seqEditSave_editingFinished()
         if (tmpstring.indexOf("ctrl")>=0) savelogMod+=1;
         if (tmpstring.indexOf("alt")>=0) savelogMod+=2;
         if (tmpstring.indexOf("shift")>=0) savelogMod+=4;
+    }
+}
+
+void GW2::Configurator::on_seqEditOpacity_editingFinished()
+{
+    // setting default if empty
+    if(ui->seqEditOpacity->keySequence().toString() == ""){
+        ui->seqEditOpacity->setKeySequence(QKeySequence(Settings::shortcut_opacity));
+    }
+
+    // getting string from sequenceedit and converting it to array
+    QString opacityValPre = ui->seqEditOpacity->keySequence().toString().toLower();
+    QString opacityVal = opacityValPre.left(opacityValPre.indexOf(","));
+    QStringList opacityValArray = opacityVal.split('+');
+
+    // find keycode
+    QString opacityKeycodeString = opacityValArray[opacityValArray.length()-1];
+    char opacityKeycodeChar = opacityKeycodeString.data()->toLatin1();
+    opacityKeycode = VkKeyScan(opacityKeycodeChar);
+
+    // find modificator (ctrl:1; alt:2; shift:4)
+    opacityMod=0;
+    for (int i=0; i<opacityValArray.length(); i++)
+    {
+        QString tmpstring = opacityValArray[i];
+        if (tmpstring.indexOf("ctrl")>=0) opacityMod+=1;
+        if (tmpstring.indexOf("alt")>=0) opacityMod+=2;
+        if (tmpstring.indexOf("shift")>=0) opacityMod+=4;
     }
 }

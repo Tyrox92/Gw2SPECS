@@ -30,14 +30,17 @@ unsigned long m_MyProfession;
 unsigned long countCombat;
 int updateCounter;
 QString combatCourse;
-int resetMod;
 SHORT resetKeycode;
-int combatmodeMod;
+int resetMod;
 SHORT combatmodeKeycode;
-int savelogMod;
+int combatmodeMod;
 SHORT savelogKeycode;
-int globalresetMod;
+int savelogMod;
 SHORT globalresetKeycode;
+int globalresetMod;
+SHORT opacityKeycode;
+int opacityMod;
+
 bool combatModeToggleState;
 bool shotcutsdisabled;
 

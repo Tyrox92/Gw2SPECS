@@ -8,6 +8,7 @@
 #include <QSettings>
 #include <QCheckBox>
 #include <QDebug>
+#include <QKeySequenceEdit>
 
 
 inline static QString ReadNameSettings(void);
@@ -163,6 +164,10 @@ public:
 
     //Default Shortcuts
     static const QString shortcut_reset;
+    static const QString shortcut_combatmode;
+    static const QString shortcut_globalreset;
+    static const QString shortcut_savelog;
+    static const QString shortcut_opacity;
 
 private:
     Settings();
@@ -308,7 +313,36 @@ inline void Settings::WriteSettings(QCheckBox* checkBox)
     WriteSettings<QWidget>(checkBox);
 }
 
+/**************************************************
+*                                                 *
+*               Template KeySequence              *
+*                                                 *
+***************************************************/
 
+template <>
+inline void Settings::ReadSettings(QKeySequenceEdit* keySequenceEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(keySequenceEdit->objectName());
+
+    if (settings.value("shortcut").toString()!="") {
+        keySequenceEdit->setKeySequence(QKeySequence(settings.value("shortcut").toString()));
+    }
+    settings.endGroup();
+
+    ReadSettings<QWidget>(keySequenceEdit);
+}
+
+template <>
+inline void Settings::WriteSettings(QKeySequenceEdit* keySequenceEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(keySequenceEdit->objectName());
+    settings.setValue("shortcut", keySequenceEdit->keySequence().toString());
+    settings.endGroup();
+
+    WriteSettings<QWidget>(keySequenceEdit);
+}
 
 template <typename WidgetType>
 void Settings::ReadSettings(WidgetType* /*widget*/)

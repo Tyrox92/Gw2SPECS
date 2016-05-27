@@ -218,6 +218,19 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->comboBoxSecondsInCombat);
     Settings::ReadSettings(uiConfig->comboBoxConsideredLines);
 
+    Settings::ReadSettings(uiConfig->checkBoxShortcutDisable);
+    Settings::ReadSettings(uiConfig->seqEditCombatMode);
+    Settings::ReadSettings(uiConfig->seqEditGlobalReset);
+    Settings::ReadSettings(uiConfig->seqEditReset);
+    Settings::ReadSettings(uiConfig->seqEditSave);
+    Settings::ReadSettings(uiConfig->seqEditOpacity);
+
+    m_Configurator.on_seqEditCombatMode_editingFinished();
+    m_Configurator.on_seqEditGlobalReset_editingFinished();
+    m_Configurator.on_seqEditReset_editingFinished();
+    m_Configurator.on_seqEditSave_editingFinished();
+    m_Configurator.on_seqEditOpacity_editingFinished();
+
     // Start screenshot timer from separate thread
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
     uiConfig->comboBoxScreenshots->setCurrentIndex((uiConfig->comboBoxScreenshots->currentIndex() + 1) % uiConfig->comboBoxScreenshots->count());
@@ -248,6 +261,8 @@ MainWindow::MainWindow(QWidget *parent) :
     displayGraphAvDPS=uiConfig->checkBoxGraphAvgDPS->isChecked();
     displayGraphAvCDPS=uiConfig->checkBoxGraphAvgCDPS->isChecked();
     displayGraphAvGDPS=uiConfig->checkBoxGraphAvgGroupDPS->isChecked();
+    // disbale shortcuts
+    shotcutsdisabled=uiConfig->checkBoxShortcutDisable->isChecked();
 
     // name
     MyName = ReadNameSettings();
@@ -350,12 +365,6 @@ void GW2::MainWindow::CheckForOldVerison()
 
 void GW2::MainWindow::StartupPref()
 {
-    //If nothing set set to Default
-    if(m_Configurator.ui->seqEditCombatMode->keySequence().toString() == ""){
-        m_Configurator.ui->seqEditCombatMode->setKeySequence(QKeySequence(Settings::shortcut_reset));
-        qDebug() << "Reset Shortcut is Empty - Setting Default to " << m_Configurator.ui->seqEditCombatMode->keySequence().toString();
-    }
-
     // get this from saved settings later
     shotcutsdisabled = 0;
 
@@ -2112,6 +2121,72 @@ void GW2::MainWindow::checkKeyState(){
         // Implement MessageBox / Dialog to show User that files have been saved
     }
 
+    // Toggle Opacity
+    bool opacityCtrlPressed, opacityAltPressed, opacityShiftPressed;
+    // ctrl:1; alt:2; shift:4
+    switch (opacityMod)
+    {
+    case 7:
+        // cas
+        opacityCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        opacityAltPressed = GetAsyncKeyState(VK_MENU);
+        opacityShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 6:
+        // as
+        opacityCtrlPressed = true;
+        opacityAltPressed = GetAsyncKeyState(VK_MENU);
+        opacityShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 5:
+        // cs
+        opacityCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        opacityAltPressed = true;
+        opacityShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 4:
+        // s
+        opacityCtrlPressed = true;
+        opacityAltPressed = true;
+        opacityShiftPressed = GetAsyncKeyState(VK_SHIFT);
+        break;
+    case 3:
+        // ca
+        opacityCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        opacityAltPressed = GetAsyncKeyState(VK_MENU);
+        opacityShiftPressed = true;
+        break;
+    case 2:
+        // a
+        opacityCtrlPressed = true;
+        opacityAltPressed = GetAsyncKeyState(VK_MENU);
+        opacityShiftPressed = true;
+        break;
+    case 1:
+        // c
+        opacityAltPressed = true;
+        opacityCtrlPressed = GetAsyncKeyState(VK_LCONTROL);
+        opacityShiftPressed = true;
+        break;
+    default:
+        opacityAltPressed = true;
+        opacityCtrlPressed = true;
+        opacityShiftPressed = true;
+
+    }
+    if(GetAsyncKeyState(MapVirtualKey(opacityKeycode,2)) && opacityCtrlPressed && opacityAltPressed && opacityShiftPressed)
+    {
+        // toggle code goes here
+        if (displayOpacity==1) {
+            m_Configurator.ui->checkBoxOpacity->setChecked(false);
+        } else {
+            m_Configurator.ui->checkBoxOpacity->setChecked(true);
+        }
+        //EnableTransparency(displayOpacity);
+        qDebug() << "Successful Opacity Toggle through shortcut.";
+    }
+
+
     // Admin Menu
     if(is_admin)
     {
@@ -2185,4 +2260,3 @@ void GW2::MainWindow::toggleCombatMode(bool toggleState){
         combatModeToggleState = 1;
     }
 }
-
