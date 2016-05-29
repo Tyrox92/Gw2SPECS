@@ -6,43 +6,119 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>192</width>
-    <height>157</height>
+    <width>216</width>
+    <height>207</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#startserver {
+	background-color: rgba(32, 43, 47, 60%);
+}
+QLabel {
+	background-color: rgba(32, 43, 47, 0%);
+	color: rgb(255, 255, 255);
+}
+QLineEdit {
+    background-color: #202B2F;
+	color: #FFFFFF;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: beige;
+    font: bold 10px;
+}
+
+</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="5" column="0">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>PushButton</string>
-     </property>
-    </widget>
-   </item>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
    <item row="2" column="0">
-    <widget class="QLineEdit" name="lineEdit"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLineEdit" name="lineEdit_2"/>
-   </item>
-   <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>TextLabel</string>
+      <string>Port</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_2">
+   <item row="7" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton {
+    background-color: #8BB2DA;
+
+    font: bold 12px;
+    padding: 6px;
+}
+QPushButton#pushButton:pressed {
+    background-color: rgb(197,216,236);
+	border-style: inset;
+ 
+}</string>
+     </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>Start</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLineEdit" name="lineEditAuth">
+     <property name="styleSheet">
+      <string notr="true">border-radius:0px;
+border:1px solid #fff;</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QKeySequenceEdit" name="keySequenceEdit"/>
+    <widget class="QLabel" name="label_3">
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Leelawadee UI&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Start Server</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLineEdit" name="lineEditPort">
+     <property name="styleSheet">
+      <string notr="true">border-radius:0px;
+border:1px solid #fff;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" rowspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>AuthCode
+(Leave empty for random)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="Line" name="line">
+     <property name="styleSheet">
+      <string notr="true">background-color:#fff</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

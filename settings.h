@@ -174,34 +174,6 @@ private:
 };
 
 
-
-
-/*
-    template <>
-    inline void Settings::ReadSettings(QLineEdit* InputName)
-    {
-        QSettings settings(s_Product);
-
-        settings.beginGroup(InputName->objectName());
-        InputName->setText(settings.value("text"));
-        settings.endGroup();
-
-        ReadSettings<QWidget>(InputName);
-    }
-
-    template <>
-    inline void Settings::WriteSettings(QLineEdit* InputName)
-    {
-        QSettings settings(s_Product);
-        settings.beginGroup(InputName->objectName());
-        settings.setValue("text",InputName->text());
-        settings.endGroup();
-
-        WriteSettings<QWidget>(InputName);
-    }
-*/
-
-
 /**************************************************
 *                                                 *
 *               Template Widget                   *
@@ -224,6 +196,33 @@ inline void Settings::WriteSettings(QWidget* widget)
     settings.beginGroup(widget->objectName());
     settings.setValue("geometry", widget->saveGeometry());
     settings.endGroup();
+}
+
+/**************************************************
+*                                                 *
+*               Template lineEdit                 *
+*                                                 *
+***************************************************/
+template <>
+inline void Settings::ReadSettings(QLineEdit* lineEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(lineEdit->objectName());
+    lineEdit->setText(settings.value("text").toString());
+    settings.endGroup();
+
+    ReadSettings<QWidget>(lineEdit);
+}
+
+template <>
+inline void Settings::WriteSettings(QLineEdit* lineEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(lineEdit->objectName());
+    settings.setValue("text",lineEdit->text());
+    settings.endGroup();
+
+    WriteSettings<QWidget>(lineEdit);
 }
 
 /**************************************************

@@ -139,7 +139,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(uiAuth->authMe,SIGNAL(pressed()),this,SLOT(validateAdmin()));
 
 
-    //serverStart->setIcon(":/startServer");
+    serverStart->setIcon(QIcon(":/startServer"));
     serverStart->setIconVisibleInMenu(true);
     QObject::connect(serverStart, SIGNAL(triggered()), &m_startServer, SLOT(exec()));
 

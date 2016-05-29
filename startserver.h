@@ -19,6 +19,9 @@ namespace GW2
 
     //private slots:
 
+    private slots:
+        void on_pushButton_clicked();
+
     private:
         Ui::startserver *ui;
         friend class MainWindow;

@@ -44,11 +44,11 @@ public:
         QString time;
         QMenu myMenu;
         QMenu *miscMenu = new QMenu(MainWindow::tr("Miscellaneous"), this);
-        QAction *serverStart = myMenu.addAction(MainWindow::tr("Start Server"));
         QAction *resetData = myMenu.addAction(MainWindow::tr("Reset"));
         QAction *auth = myMenu.addAction(MainWindow::tr("Authenticate"));
         QAction *combatMode = myMenu.addAction(MainWindow::tr("CombatMode"));
         QAction *connectServer = myMenu.addAction(MainWindow::tr("Connect"));
+        QAction *serverStart = myMenu.addAction(MainWindow::tr("Start Server"));
         QAction *saveToFile = myMenu.addAction(MainWindow::tr("Save File"));
         QAction *options = myMenu.addAction(MainWindow::tr("Options"));
         QAction *exitSeparator = new QAction(this);

@@ -19,5 +19,6 @@
         <file>saveIcon.png</file>
         <file>combatMode.png</file>
         <file>auth.png</file>
+        <file>startServer.png</file>
     </qresource>
 </RCC>
