@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>885</width>
-    <height>493</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,7 +25,18 @@
    <string>Configuration</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(32, 43, 47);</string>
+   <string notr="true">QWidget { background-color: rgba(32, 43, 47, 100%); }
+QWidget#widget { background-color: rgba(32, 43, 47, 0%); }
+QLabel {  background-color: rgba(32, 43, 47, 0%); color: rgb(255, 255, 255); text-align:center;}
+QLineEdit {
+    background-color: #202B2F;
+	color: #FFFFFF;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: beige;
+    font: bold 14px;
+}</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
@@ -34,63 +45,584 @@
    <bool>false</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout_6">
-   <item row="2" column="0" colspan="3">
-    <widget class="QPushButton" name="pushButtonReset">
+   <item row="1" column="5" alignment="Qt::AlignTop">
+    <widget class="QWidget" name="widget_5" native="true">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color:white;font-size:16px;</string>
-     </property>
-     <property name="text">
-      <string>Restore defaults</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="3" colspan="3">
-    <widget class="QPushButton" name="pushButtonReset_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color:white;font-size:16px;</string>
-     </property>
-     <property name="text">
-      <string>Close</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="5">
-    <widget class="QLabel" name="labelVersion">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="minimumSize">
       <size>
-       <width>0</width>
+       <width>265</width>
        <height>0</height>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:white;font-size:16px;</string>
+      <string notr="true"/>
      </property>
-     <property name="text">
-      <string>version</string>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="3" column="0">
+       <widget class="QLabel" name="labelShortcut2">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Reset Shortcut</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QKeySequenceEdit" name="seqEditSave">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QLabel" name="labelShortcut3">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>GlobalReset Shortcurt</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QKeySequenceEdit" name="seqEditCombatMode">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="Button">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="Button">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="Button">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Base">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Window">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>32</red>
+              <green>43</green>
+              <blue>47</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelShortcut1">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Toggle CombatMode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="labelShortcut4">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Save Log Shortcut</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QKeySequenceEdit" name="seqEditReset">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QKeySequenceEdit" name="seqEditGlobalReset">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="labelShortcut5">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Toggle Opacity</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="2">
+       <widget class="QKeySequenceEdit" name="seqEditOpacity">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QCheckBox" name="checkBoxShortcutDisable">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Disable all shortcuts</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QLabel" name="label_5">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
+        </property>
+        <property name="text">
+         <string>Rebind Hotkeys</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="5" alignment="Qt::AlignTop">
+    <widget class="QWidget" name="widget_4" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     <property name="minimumSize">
+      <size>
+       <width>265</width>
+       <height>0</height>
+      </size>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
+        </property>
+        <property name="text">
+         <string>Graph Settings</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="checkBoxGraphAvgDPS">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Average PersDPS</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QCheckBox" name="checkBoxGraphAvgGroupDPS">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Average GrDPS</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QCheckBox" name="checkBoxGraphRealDPS">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blue Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show RealDPS</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QCheckBox" name="checkBoxGraphAvgCDPS">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Average CondiDPS</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="checkBoxGraph5sDPS">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Last5sDPS</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="checkBoxGraphShow">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show Graph</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="4" rowspan="2">
+    <widget class="QWidget" name="widget_7" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>1</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(0,0,0,0.2)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="2" colspan="2" alignment="Qt::AlignTop">
+    <widget class="QWidget" name="widget_3" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>265</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::NoContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="checkBoxDPS">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show DPS</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QCheckBox" name="checkBox5sDPS">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show Last5sDPS</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QCheckBox" name="checkBoxPerDmg">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Percental Damage</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QCheckBox" name="checkBoxPosition">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show Position</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="checkBoxDamage">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show Damage</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBoxProfColors">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show Profession</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBoxName">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>Show Name</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="groupOnly">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:16px;margin:10px 0px 5px -5px</string>
+        </property>
+        <property name="text">
+         <string>Group only:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
+        </property>
+        <property name="text">
+         <string>Player Bar Settings</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QCheckBox" name="checkBoxCDamage">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>(Show CondiDmg)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QCheckBox" name="checkBoxCDPS">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>(Show CondiDPS)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="0">
+       <widget class="QCheckBox" name="checkBoxActivity">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>(Show Activity)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QCheckBox" name="checkBoxCPerDmg">
+        <property name="styleSheet">
+         <string notr="true">color:white;font-size:14px;</string>
+        </property>
+        <property name="text">
+         <string>(Percental Condi)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="2">
+    <widget class="QWidget" name="widget_6" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>1</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(0,0,0,0.2)</string>
      </property>
     </widget>
    </item>
@@ -394,554 +926,63 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="5" alignment="Qt::AlignTop">
-    <widget class="QWidget" name="widget_4" native="true">
+   <item row="2" column="0" colspan="3">
+    <widget class="QPushButton" name="pushButtonReset">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:16px;</string>
+     </property>
+     <property name="text">
+      <string>Restore defaults</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3" colspan="3">
+    <widget class="QPushButton" name="pushButtonReset_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:16px;</string>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="5">
+    <widget class="QLabel" name="labelVersion">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="minimumSize">
       <size>
-       <width>265</width>
-       <height>0</height>
-      </size>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_4">
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
-        </property>
-        <property name="text">
-         <string>Graph Settings</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QCheckBox" name="checkBoxGraphAvgDPS">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Average PersDPS</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QCheckBox" name="checkBoxGraphAvgGroupDPS">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Average GrDPS</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
-       <widget class="QCheckBox" name="checkBoxGraphRealDPS">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blue Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show RealDPS</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QCheckBox" name="checkBoxGraphAvgCDPS">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Average CondiDPS</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QCheckBox" name="checkBoxGraph5sDPS">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Last5sDPS</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QCheckBox" name="checkBoxGraphShow">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show Graph</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="5" alignment="Qt::AlignTop">
-    <widget class="QWidget" name="widget_5" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>265</width>
-       <height>0</height>
-      </size>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="3" column="0">
-       <widget class="QLabel" name="labelShortcut2">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Reset Shortcut</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QKeySequenceEdit" name="seqEditSave">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
-QLineEdit:hover{background-color:transparent;}</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="QLabel" name="labelShortcut3">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>GlobalReset Shortcurt</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QKeySequenceEdit" name="seqEditCombatMode">
-        <property name="palette">
-         <palette>
-          <active>
-           <colorrole role="Button">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Base">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </active>
-          <inactive>
-           <colorrole role="Button">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Base">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </inactive>
-          <disabled>
-           <colorrole role="Button">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Base">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Window">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>32</red>
-              <green>43</green>
-              <blue>47</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </disabled>
-         </palette>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
-QLineEdit:hover{background-color:transparent;}
-</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="labelShortcut1">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Toggle CombatMode</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="labelShortcut4">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Save Log Shortcut</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QKeySequenceEdit" name="seqEditReset">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
-QLineEdit:hover{background-color:transparent;}</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QKeySequenceEdit" name="seqEditGlobalReset">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
-QLineEdit:hover{background-color:transparent;}</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="labelShortcut5">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Toggle Opacity</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="2">
-       <widget class="QKeySequenceEdit" name="seqEditOpacity">
-        <property name="styleSheet">
-         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
-QLineEdit:hover{background-color:transparent;}</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="3">
-       <widget class="QCheckBox" name="checkBoxShortcutDisable">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Disable all shortcuts</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QLabel" name="label_5">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
-        </property>
-        <property name="text">
-         <string>Rebind Hotkeys</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="2" rowspan="2" colspan="2" alignment="Qt::AlignTop">
-    <widget class="QWidget" name="widget_3" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>265</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color:white;font-size:16px;</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <item row="4" column="0">
-       <widget class="QCheckBox" name="checkBoxDPS">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show DPS</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QCheckBox" name="checkBox5sDPS">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show Last5sDPS</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QCheckBox" name="checkBoxPerDmg">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Percental Damage</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QCheckBox" name="checkBoxPosition">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show Position</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QCheckBox" name="checkBoxDamage">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show Damage</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBoxProfColors">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show Profession</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="checkBoxName">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>Show Name</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="groupOnly">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:16px;margin:10px 0px 5px -5px</string>
-        </property>
-        <property name="text">
-         <string>Group only:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
-        </property>
-        <property name="text">
-         <string>Player Bar Settings</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="0">
-       <widget class="QCheckBox" name="checkBoxCDamage">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>(Show CondiDmg)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
-       <widget class="QCheckBox" name="checkBoxCDPS">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>(Show CondiDPS)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="13" column="0">
-       <widget class="QCheckBox" name="checkBoxActivity">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>(Show Activity)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="0">
-       <widget class="QCheckBox" name="checkBoxCPerDmg">
-        <property name="styleSheet">
-         <string notr="true">color:white;font-size:14px;</string>
-        </property>
-        <property name="text">
-         <string>(Percental Condi)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1" rowspan="2">
-    <widget class="QWidget" name="widget_6" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>1</width>
-       <height>0</height>
-      </size>
+     <property name="text">
+      <string>version</string>
      </property>
-     <property name="styleSheet">
-      <string notr="true">background: rgba(0,0,0,0.2)</string>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="4" rowspan="2">
-    <widget class="QWidget" name="widget_7" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>1</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background: rgba(0,0,0,0.2)</string>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
