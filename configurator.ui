@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>885</width>
-    <height>466</height>
+    <height>493</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -298,9 +298,12 @@
          <bool>false</bool>
         </property>
         <property name="currentText">
-         <string>10</string>
+         <string>16</string>
         </property>
         <property name="currentIndex">
+         <number>3</number>
+        </property>
+        <property name="modelColumn">
          <number>0</number>
         </property>
         <item>
@@ -642,7 +645,8 @@
       <item row="5" column="2">
        <widget class="QKeySequenceEdit" name="seqEditSave">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
       </item>
@@ -750,8 +754,8 @@
          </palette>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLineEdit{color: rgb(255, 255, 255);}
-QLineEdit:hover{background:transparent;}</string>
+         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
       </item>
@@ -778,14 +782,16 @@ QLineEdit:hover{background:transparent;}</string>
       <item row="3" column="2">
        <widget class="QKeySequenceEdit" name="seqEditReset">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
       </item>
       <item row="4" column="2">
        <widget class="QKeySequenceEdit" name="seqEditGlobalReset">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
       </item>
@@ -802,7 +808,8 @@ QLineEdit:hover{background:transparent;}</string>
       <item row="6" column="2">
        <widget class="QKeySequenceEdit" name="seqEditOpacity">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
       </item>
