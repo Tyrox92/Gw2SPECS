@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>207</width>
-    <height>178</height>
+    <width>283</width>
+    <height>194</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,16 +40,25 @@ QLineEdit {
    <property name="bottomMargin">
     <number>25</number>
    </property>
-   <property name="spacing">
+   <property name="horizontalSpacing">
     <number>0</number>
    </property>
-   <item row="3" column="0">
+   <property name="verticalSpacing">
+    <number>10</number>
+   </property>
+   <item row="3" column="0" alignment="Qt::AlignTop">
     <widget class="QLineEdit" name="authCode">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:14px;</string>
+     </property>
+     <property name="maxLength">
+      <number>5</number>
      </property>
     </widget>
    </item>
@@ -61,13 +70,8 @@ QLineEdit {
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>16</pointsize>
-      </font>
-     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color:white;font-size:20px;margin:0px 0px 5px -5px</string>
      </property>
      <property name="text">
       <string>Authentication</string>
@@ -102,14 +106,12 @@ QPushButton:pressed{
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>7</pointsize>
-      </font>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:14px;</string>
      </property>
      <property name="text">
       <string>Insert the  AuthCode that you
-got from the Server to verify yourself</string>
+got from the Server to verify yourself.</string>
      </property>
     </widget>
    </item>
