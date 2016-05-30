@@ -42,13 +42,8 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color:white;font-size:16px;</string>
      </property>
      <property name="text">
       <string>Restore defaults</string>
@@ -63,13 +58,8 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color:white;font-size:16px;</string>
      </property>
      <property name="text">
       <string>Close</string>
@@ -90,15 +80,8 @@
        <height>0</height>
       </size>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color:white;font-size:16px;</string>
      </property>
      <property name="text">
       <string>version</string>
@@ -192,7 +175,7 @@
       <item row="6" column="0">
        <widget class="QComboBox" name="comboBoxLanguage">
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <item>
          <property name="text">
@@ -231,17 +214,8 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="3" column="2" colspan="2">
        <widget class="QComboBox" name="comboBoxSecondsInCombat">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -260,17 +234,8 @@
       </item>
       <item row="4" column="0" colspan="2">
        <widget class="QLabel" name="labelConsideredLines">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="text">
          <string># of Lines in Combat Log</string>
@@ -282,17 +247,8 @@
       </item>
       <item row="4" column="2" colspan="2">
        <widget class="QComboBox" name="comboBoxConsideredLines">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="editable">
          <bool>false</bool>
@@ -345,17 +301,8 @@
       </item>
       <item row="3" column="0" colspan="2">
        <widget class="QLabel" name="labelSecondsInCombat">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="text">
          <string>Seconds in combat</string>
@@ -367,17 +314,8 @@
       </item>
       <item row="2" column="0" colspan="2">
        <widget class="QLabel" name="labelUpdates">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="text">
          <string>Updates per second</string>
@@ -389,17 +327,8 @@
       </item>
       <item row="1" column="0" colspan="2">
        <widget class="QLabel" name="labelScreenshots">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="text">
          <string>Screenshots per second</string>
@@ -411,17 +340,8 @@
       </item>
       <item row="2" column="2" colspan="2">
        <widget class="QComboBox" name="comboBoxUpdates">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -435,17 +355,8 @@
       </item>
       <item row="1" column="2" colspan="2">
        <widget class="QComboBox" name="comboBoxScreenshots">
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>11</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-         </font>
-        </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color:white;font-size:14px;</string>
         </property>
         <property name="currentText">
          <string>15</string>
@@ -470,7 +381,7 @@
         </item>
        </widget>
       </item>
-      <item row="0" column="0" colspan="2">
+      <item row="0" column="0" colspan="4">
        <widget class="QLabel" name="label_2">
         <property name="styleSheet">
          <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
@@ -622,16 +533,6 @@
       </size>
      </property>
      <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0" colspan="2">
-       <widget class="QLabel" name="label_5">
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
-        </property>
-        <property name="text">
-         <string>Rebind Hotkeys</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
        <widget class="QLabel" name="labelShortcut2">
         <property name="styleSheet">
@@ -645,7 +546,7 @@
       <item row="5" column="2">
        <widget class="QKeySequenceEdit" name="seqEditSave">
         <property name="styleSheet">
-         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
 QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
@@ -754,8 +655,9 @@ QLineEdit:hover{background-color:transparent;}</string>
          </palette>
         </property>
         <property name="styleSheet">
-         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
-QLineEdit:hover{background-color:transparent;}</string>
+         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
+QLineEdit:hover{background-color:transparent;}
+</string>
         </property>
        </widget>
       </item>
@@ -782,7 +684,7 @@ QLineEdit:hover{background-color:transparent;}</string>
       <item row="3" column="2">
        <widget class="QKeySequenceEdit" name="seqEditReset">
         <property name="styleSheet">
-         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
 QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
@@ -790,7 +692,7 @@ QLineEdit:hover{background-color:transparent;}</string>
       <item row="4" column="2">
        <widget class="QKeySequenceEdit" name="seqEditGlobalReset">
         <property name="styleSheet">
-         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
 QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
@@ -808,7 +710,7 @@ QLineEdit:hover{background-color:transparent;}</string>
       <item row="6" column="2">
        <widget class="QKeySequenceEdit" name="seqEditOpacity">
         <property name="styleSheet">
-         <string notr="true">QLineEdit{color: rgb(255, 255, 255); background-color:transparent;}
+         <string notr="true">QLineEdit{color:white;font-size:14px; background-color:transparent;}
 QLineEdit:hover{background-color:transparent;}</string>
         </property>
        </widget>
@@ -823,6 +725,16 @@ QLineEdit:hover{background-color:transparent;}</string>
         </property>
         <property name="checked">
          <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QLabel" name="label_5">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255,255,255);font-size:20px;margin:0px 0px 5px -5px</string>
+        </property>
+        <property name="text">
+         <string>Rebind Hotkeys</string>
         </property>
        </widget>
       </item>

@@ -137,7 +137,7 @@ void Configurator::RestoreDefaults()
     ui->comboBoxScreenshots->setCurrentIndex(0);
     ui->comboBoxUpdates->setCurrentIndex(0);
     ui->comboBoxSecondsInCombat->setCurrentIndex(0);
-    ui->comboBoxConsideredLines->setCurrentIndex(0);
+    ui->comboBoxConsideredLines->setCurrentIndex(3);
 
     ui->checkBoxShortcutDisable->setChecked(true);
     ui->seqEditCombatMode->setKeySequence(QKeySequence(Settings::shortcut_combatmode));
