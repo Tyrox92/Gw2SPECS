@@ -222,11 +222,7 @@ void DmgMeter::EvaluateLine(const QString& params)
             m_healing+=dmg;
         }
     }
-    if (dmg > m_MaxDmg)
-    {
-        // New max dmg found, set it as max dmg
-        m_MaxDmg=dmg;
-    }
+
 
 #ifdef DMGMETER_DEBUG
     if (dmg < 100)
@@ -251,7 +247,15 @@ void DmgMeter::EvaluateLine(const QString& params)
             // Evaluation starts, configure timer and start
             StartEvaluation();
         }
+        //Add Each hit as realDPS
         m_realDps += dmg;
+
+        //Evaluate Highest Hit
+        if (dmg > m_MaxDmg)
+        {
+            // New max dmg found, set it as max dmg
+            m_MaxDmg=dmg;
+        }
     }
     if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
 }
