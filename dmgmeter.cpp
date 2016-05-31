@@ -251,9 +251,9 @@ void DmgMeter::EvaluateLine(const QString& params)
             // Evaluation starts, configure timer and start
             StartEvaluation();
         }
+        m_realDps += dmg;
     }
     if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
-    m_realDps += dmg;
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)
