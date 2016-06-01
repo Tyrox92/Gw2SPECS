@@ -1411,6 +1411,7 @@ void MainWindow::UpdateTimer(void)
         SetForegroundWindow(winHandle);
         ShowWindow(winHandle, SW_HIDE);
         SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
+        SetWindowPos(winHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW|SWP_NOSIZE|SWP_NOMOVE);
         ShowWindow(winHandle, SW_SHOW);
         action_widgetMode();
         fixOnTopCount++;
@@ -1764,7 +1765,8 @@ void GW2::MainWindow::action_widgetMode(){
 //        this->setAttribute(Qt::WA_NoBackground, false);
 //        this->setAutoFillBackground(true);
     }
-    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    //Removed Qt::StayOnTopHint
+    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint  | Qt::X11BypassWindowManagerHint);
 
     // is this nescessary?
     //this->close();
