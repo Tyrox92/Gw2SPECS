@@ -28,16 +28,20 @@ extern unsigned long m_MyProfession;
 extern unsigned long countCombat;
 extern QString combatCourse;
 extern int updateCounter;
-extern SHORT resetKeycode;
 extern int resetMod;
-extern SHORT combatmodeKeycode;
 extern int combatmodeMod;
-extern SHORT savelogKeycode;
 extern int savelogMod;
-extern SHORT globalresetKeycode;
 extern int globalresetMod;
-extern SHORT opacityKeycode;
 extern int opacityMod;
+
+#ifdef Q_OS_WIN
+extern SHORT resetKeycode;
+extern SHORT combatmodeKeycode;
+extern SHORT savelogKeycode;
+extern SHORT globalresetKeycode;
+extern SHORT opacityKeycode;
+#endif
+
 extern bool combatModeToggleState;
 extern bool shotcutsdisabled;
 

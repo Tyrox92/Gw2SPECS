@@ -22,7 +22,9 @@
 #include <QMenu>
 #include <QProgressBar>
 #include "qcustomplot.h"
+#ifdef Q_OS_WIN
 #include "mumblelink.h"
+#endif
 #include "dmgmeter.h"
 #include "authenticate.h"
 #include "startserver.h"
@@ -61,8 +63,9 @@ public:
         int m_msecs;
         QList<int> _kc;
         int _pos;
-
+        #ifdef Q_OS_WIN
         MumbleLink mL;
+        #endif
         Configurator m_Configurator;
 
 protected:
@@ -91,7 +94,9 @@ private:
     firstStart m_firstStart;
     authenticate m_authenticate;
     startserver m_startServer;
+    #ifdef Q_OS_WIN
     CombatMode m_combatMode;
+    #endif
     connectionfailed m_connectionfailed;
     saveLog m_saveLog;
     updateCheck m_updateCheck;

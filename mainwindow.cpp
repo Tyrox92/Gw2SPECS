@@ -19,7 +19,9 @@
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
+#ifdef Q_OS_WIN
 #include <qt_windows.h>
+#endif
 #include "authenticate.h"
 #include "ui_authenticate.h"
 #include "startserver.h"
@@ -35,7 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_firstStart(this),
     m_authenticate(this),
     m_startServer(this),
+    #ifdef Q_OS_WIN
     m_combatMode(this),
+    #endif
     m_connectionfailed(this),
     m_saveLog(this),
     m_updateCheck(this),
@@ -119,10 +123,12 @@ MainWindow::MainWindow(QWidget *parent) :
     exitSeparator->setSeparator(true);
     myMenu.addAction(exitSeparator);
 
+    #ifdef Q_OS_WIN
     combatMode->setIcon(QIcon(":/combatMode"));
     combatMode->setIconVisibleInMenu(true);
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(openCombatModeWindow()));
+    #endif
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
@@ -644,8 +650,10 @@ void GW2::MainWindow::CheckForUpdate()
 
 void MainWindow::Initialize()
 {
+    #ifdef Q_OS_WIN
     mL.initLink();
     mL.updateMumble();
+    #endif
     if (HostIP != "" && (is_connected == false))
     {
         socket = new QTcpSocket(this);
@@ -1392,7 +1400,9 @@ void MainWindow::UpdateTimer(void)
 
     // "defaultName;defaultProfession"
     QString myLoggedInChar = "0;0";
+    #ifdef Q_OS_WIN
     myLoggedInChar = mL.getIdent();
+    #endif
     m_MyProfession = myLoggedInChar.split(";")[1].toInt();
 
     // only get name from MumbleAPI if no name is set manually
@@ -1778,13 +1788,13 @@ void GW2::MainWindow::action_widgetMode(){
         this->setAttribute(Qt::WA_TranslucentBackground,false);
 
     }
-    //Removed Qt::StayOnTopHint
-    this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint  | Qt::X11BypassWindowManagerHint);
+
     #ifdef Q_OS_WIN
         qDebug()<<" Current OS is Windows. Win API will be used to stay on top!";
+        this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint  | Qt::X11BypassWindowManagerHint);
     #else
         qDebug()<< "Other OS detected.";
-        this->setWindowFlags(Qt::WindowStaysOnTopHint);
+        this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint  | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
     #endif
     this->activateWindow();
     this->setFocus();
@@ -1811,9 +1821,9 @@ void GW2::MainWindow::action_resetCombatMode(){
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
+    m_combatMode.close();
     #endif
     action_widgetMode();
-    m_combatMode.close();
     qDebug()<<"CombatMode Deactivated";
 }
 
