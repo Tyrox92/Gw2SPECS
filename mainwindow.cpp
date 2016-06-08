@@ -15,7 +15,7 @@
 #include "ui_combatmode.h"
 #include "ui_connectionfailed.h"
 #include "ui_savelog.h"
-#include "ui_updateCheck.h"
+#include "ui_updatecheck.h"
 #include <QtNetwork>
 #include <QUrl>
 #include <qcustomplot.h>
