@@ -1761,24 +1761,15 @@ void GW2::MainWindow::action_widgetMode(){
         this->setAttribute(Qt::WA_TranslucentBackground,true);
     }else{
         this->setAttribute(Qt::WA_TranslucentBackground,false);
-//        this->setAttribute(Qt::WA_NoSystemBackground,false);
-//        this->setAttribute(Qt::WA_NoBackground, false);
-//        this->setAutoFillBackground(true);
+
     }
     //Removed Qt::StayOnTopHint
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint  | Qt::X11BypassWindowManagerHint);
-
-    // is this nescessary?
-    //this->close();
-    //this->update();
-//    QPainter painter(this);
-//    painter.end();
-//    RenderFlags renderflags = RenderFlags(DrawWindowBackground);
-//    this->render(this, renderflags);
-//    this->repaint();
-//    qApp->processEvents();
-
-
+    #ifdef Q_OS_WIN
+        qDebug()<<" WINDOWS DETECTED!";
+    #else
+        qDebug()<< "Shine bright like a diamond";
+    #endif
     this->activateWindow();
     this->setFocus();
     this->show();
