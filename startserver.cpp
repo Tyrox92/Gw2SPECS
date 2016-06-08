@@ -37,7 +37,16 @@ void GW2::startserver::on_pushButton_clicked()
     QString portvalue = ui->lineEditPort->text();
     QString authvalue = ui->lineEditAuth->text();
 
+    #ifdef Q_OS_WIN
     QString command = "gw2specs_server.exe";
+    #elif defined(Q_OS_LINUX)
+    QString command = "gw2specs_server";
+    #elif defined(Q_OS_MACX)
+    QString command = "gw2specs_server.dmg"
+    #else
+        qDebug()<< "You are using a weird OS";
+    #error "Something went completely wrong. Please contact Tyrox.1352"
+    #endif
     QStringList parameters;
     parameters << "-p" << portvalue << "-a" << authvalue;
     QProcess *server = new QProcess(this);

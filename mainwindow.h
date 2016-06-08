@@ -46,7 +46,9 @@ public:
         QMenu *miscMenu = new QMenu(MainWindow::tr("Miscellaneous"), this);
         QAction *resetData = myMenu.addAction(MainWindow::tr("Reset"));
         QAction *auth = myMenu.addAction(MainWindow::tr("Authenticate"));
+        #ifdef Q_OS_WIN
         QAction *combatMode = myMenu.addAction(MainWindow::tr("CombatMode"));
+        #endif
         QAction *connectServer = myMenu.addAction(MainWindow::tr("Connect"));
         QAction *serverStart = myMenu.addAction(MainWindow::tr("Start Server"));
         QAction *saveToFile = myMenu.addAction(MainWindow::tr("Save File"));

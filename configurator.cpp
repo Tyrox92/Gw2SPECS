@@ -139,17 +139,21 @@ void Configurator::RestoreDefaults()
     ui->comboBoxSecondsInCombat->setCurrentIndex(0);
     ui->comboBoxConsideredLines->setCurrentIndex(3);
 
+    // Only needed and set when using windows.
+    #ifdef Q_OS_WIN
     ui->checkBoxShortcutDisable->setChecked(true);
     ui->seqEditCombatMode->setKeySequence(QKeySequence(Settings::shortcut_combatmode));
     ui->seqEditGlobalReset->setKeySequence(QKeySequence(Settings::shortcut_globalreset));
     ui->seqEditReset->setKeySequence(QKeySequence(Settings::shortcut_reset));
     ui->seqEditSave->setKeySequence(QKeySequence(Settings::shortcut_savelog));
     ui->seqEditOpacity->setKeySequence(QKeySequence(Settings::shortcut_opacity));
+
     on_seqEditCombatMode_editingFinished();
     on_seqEditGlobalReset_editingFinished();
     on_seqEditReset_editingFinished();
     on_seqEditSave_editingFinished();
     on_seqEditOpacity_editingFinished();
+    #endif
 }
 
 // Give movement access to Configurator
@@ -170,6 +174,10 @@ void Configurator::mousePressEvent(QMouseEvent *event)
     }
 }
 
+// This functions only need to be loaded when the OS is Windows. Otherwise there will be errors since the
+// Key-Capture is a Windows API function.
+
+#ifdef Q_OS_WIN
 void GW2::Configurator::on_seqEditCombatMode_editingFinished()
 {
     // setting default if empty
@@ -310,3 +318,4 @@ void GW2::Configurator::on_seqEditOpacity_editingFinished()
         if (tmpstring.indexOf("shift")>=0) opacityMod+=4;
     }
 }
+#endif

@@ -2,7 +2,9 @@
 #define STARTSERVER_H
 
 #include <QDialog>
-#include <windows.h>
+#ifdef Q_OS_WIN
+    #include <windows.h>
+#endif
 
 namespace Ui {
 class startserver;

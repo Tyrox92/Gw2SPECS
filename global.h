@@ -1,7 +1,8 @@
 #include <QString>
 #include <QTcpSocket>
-#include <windows.h>
-
+#ifdef Q_OS_WIN
+    #include <windows.h>
+#endif
 
 #ifndef _GLOBALS_H
 #define _GLOBALS_H

@@ -13,13 +13,14 @@
 #include <locale>
 #include <stdint.h>
 #include <string>
+#ifdef Q_OS_WIN
 #include <Windows.h>
-
+#endif
 namespace GW2 {
 
     class MumbleLink {
     public:
-        #ifdef _WIN32
+        #ifdef Q_OS_WIN
             #include <windows.h>
         #else
             #include <sys/mman.h>
@@ -28,7 +29,7 @@ namespace GW2 {
 
 
         struct LinkedMem {
-        #ifdef _WIN32
+        #ifdef Q_OS_WIN
             UINT32	uiVersion;
             DWORD	uiTick;
         #else
@@ -43,7 +44,7 @@ namespace GW2 {
             float	fCameraFront[3];
             float	fCameraTop[3];
             wchar_t	identity[256];
-        #ifdef _WIN32
+        #ifdef Q_OS_WIN
             UINT32	context_len;
         #else
             uint32_t context_len;

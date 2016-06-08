@@ -24,12 +24,14 @@ namespace GW2
 
     private slots:
         void RestoreDefaults();
+        //This Functions are working on Windows.
+        #ifdef Q_OS_WIN
         void on_seqEditCombatMode_editingFinished();
         void on_seqEditReset_editingFinished();
         void on_seqEditGlobalReset_editingFinished();
         void on_seqEditSave_editingFinished();
         void on_seqEditOpacity_editingFinished();
-
+        #endif
     private:
 
         QPoint m_dragPosition;

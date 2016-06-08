@@ -225,11 +225,15 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings::ReadSettings(uiConfig->seqEditSave);
     Settings::ReadSettings(uiConfig->seqEditOpacity);
 
+    // Only need those in Windows
+
+    #ifdef Q_OS_WIN
     m_Configurator.on_seqEditCombatMode_editingFinished();
     m_Configurator.on_seqEditGlobalReset_editingFinished();
     m_Configurator.on_seqEditReset_editingFinished();
     m_Configurator.on_seqEditSave_editingFinished();
     m_Configurator.on_seqEditOpacity_editingFinished();
+    #endif
 
     // Start screenshot timer from separate thread
     const int oldIndex = uiConfig->comboBoxScreenshots->currentIndex();
@@ -365,6 +369,12 @@ void GW2::MainWindow::CheckForOldVerison()
 
 void GW2::MainWindow::StartupPref()
 {
+    #ifdef Q_OS_WIN
+        qDebug()<< "Everything fine sir. I love you.";
+    #else
+        m_Configurator.ui->widget_5->hide();
+    #endif
+
     // get this from saved settings later
     shotcutsdisabled = 0;
 
@@ -1364,8 +1374,9 @@ void MainWindow::UpdateTimer(void)
     // Always on top fix for Menues
     myMenu.raise();
     miscMenu->raise();
+    #ifdef Q_OS_WIN
     if (!shotcutsdisabled) checkKeyState();
-
+    #endif
     if (is_connected)
     {
         ui->actionConnect->setIcon(QIcon(":/connected"));
@@ -1407,12 +1418,16 @@ void MainWindow::UpdateTimer(void)
     realTimeDataSlot(m_Dps,c,AvgDPS,m_msecs,m_5sDPS,m_realDps);
     m_realDps=0;
     if(fixOnTopCount<1){
+        //Windows Only Function to set Window always on top without focus.
+        #ifdef Q_OS_WIN
         HWND winHandle  = (HWND)winId();
         SetForegroundWindow(winHandle);
         ShowWindow(winHandle, SW_HIDE);
         SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_NOACTIVATE | WS_EX_APPWINDOW);
         SetWindowPos(winHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_SHOWWINDOW|SWP_NOSIZE|SWP_NOMOVE);
         ShowWindow(winHandle, SW_SHOW);
+        #endif
+
         action_widgetMode();
         fixOnTopCount++;
     }
@@ -1766,9 +1781,10 @@ void GW2::MainWindow::action_widgetMode(){
     //Removed Qt::StayOnTopHint
     this->setWindowFlags(Qt::Widget | Qt::FramelessWindowHint  | Qt::X11BypassWindowManagerHint);
     #ifdef Q_OS_WIN
-        qDebug()<<" WINDOWS DETECTED!";
+        qDebug()<<" Current OS is Windows. Win API will be used to stay on top!";
     #else
-        qDebug()<< "Shine bright like a diamond";
+        qDebug()<< "Other OS detected.";
+        this->setWindowFlags(Qt::WindowStaysOnTopHint);
     #endif
     this->activateWindow();
     this->setFocus();
@@ -1776,22 +1792,26 @@ void GW2::MainWindow::action_widgetMode(){
 }
 
 void GW2::MainWindow::action_combatMode(){
-    //Make click-through
+    //Make click-through - Windows only
+    #ifdef Q_OS_WIN
     HWND winHandle  = (HWND)winId();
     SetForegroundWindow(winHandle);
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE)| WS_EX_APPWINDOW | WS_EX_NOACTIVATE | WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
+    #endif
     action_widgetMode();
     qDebug()<< "CombatMode Activated";
 }
 
 void GW2::MainWindow::action_resetCombatMode(){
+    #ifdef Q_OS_WIN
     HWND winHandle  = (HWND)winId();
     SetForegroundWindow(winHandle);
     ShowWindow(winHandle, SW_HIDE);
     SetWindowLong(winHandle, GWL_EXSTYLE, GetWindowLong(winHandle, GWL_EXSTYLE) & ~WS_EX_TRANSPARENT);
     ShowWindow(winHandle, SW_SHOW);
+    #endif
     action_widgetMode();
     m_combatMode.close();
     qDebug()<<"CombatMode Deactivated";
@@ -1936,6 +1956,7 @@ void GW2::MainWindow::checkKeyState(){
     // Standard Actions
 
     // Reset
+    #ifdef Q_OS_WIN
     bool resetCtrlPressed, resetAltPressed, resetShiftPressed;
     // ctrl:1; alt:2; shift:4
     switch (resetMod)
@@ -2242,6 +2263,7 @@ void GW2::MainWindow::checkKeyState(){
             qDebug() << "Successful GlobalReset through shortcut.";
         }
     }
+    #endif
 }
 
 void GW2::MainWindow::toggleCombatMode(bool toggleState){
