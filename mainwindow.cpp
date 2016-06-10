@@ -26,6 +26,8 @@
 #include "ui_authenticate.h"
 #include "startserver.h"
 #include "ui_startserver.h"
+#include "showhighlightedpopup.h"
+#include "ui_showhighlightedpopup.h"
 
 using namespace GW2;
 
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MyDialog(this),
     m_firstStart(this),
     m_authenticate(this),
+    m_highlightpopup(this),
     m_startServer(this),
     #ifdef Q_OS_WIN
     m_combatMode(this),
@@ -129,6 +132,21 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(action_combatMode()));
     QObject::connect(combatMode, SIGNAL(triggered()), this, SLOT(openCombatModeWindow()));
     #endif
+
+    //Get Width & Height of current Desktop
+    QRect rec = QApplication::desktop()->screenGeometry();
+    int desktopWidth = rec.width();
+    int desktopHeight = rec.height();
+
+    //Set Default Margin (Space right and bottom)
+    int margin = 25;
+
+    // Math where the Popup should move to
+    int posx = desktopWidth - margin - m_highlightpopup.width();
+    int posy = desktopHeight - margin - m_highlightpopup.height();
+
+    //Move the Popup-Window to the desired area
+    m_highlightpopup.move(posx,posy);
 
     exitMenu->setIcon(QIcon(":/Exit"));
     exitMenu->setIconVisibleInMenu(true);
@@ -1384,6 +1402,15 @@ void MainWindow::UpdateTimer(void)
     miscMenu->raise();
     #ifdef Q_OS_WIN
     if (!shotcutsdisabled) checkKeyState();
+    //Hide Popup after 3 Seconds
+    if(popupTimer == 1){
+        popupCountdown++;
+    }
+    if(popupCountdown == 3){
+        popupTimer = 0;
+        popupCountdown = 0;
+        m_highlightpopup.hide();
+    }
     #endif
     if (is_connected)
     {
@@ -2024,6 +2051,12 @@ void GW2::MainWindow::checkKeyState(){
         dmgMeter->Reset();
         resetGraph();
         qDebug() << "Successful Reset through shortcut.";
+
+        // Show Popup
+        m_highlightpopup.ui->label->setText("Reset finished");
+        m_highlightpopup.show();
+        popupTimer = 1;
+        m_highlightpopup.doNotFocus();
     }
 
     // Toggle Combat Mode
@@ -2141,6 +2174,12 @@ void GW2::MainWindow::checkKeyState(){
     if(GetAsyncKeyState(MapVirtualKey(savelogKeycode,2)) && savelogCtrlPressed && savelogAltPressed && savelogShiftPressed)
     {
         writeAll();
+
+        // Show Popup
+        m_highlightpopup.ui->label->setText("Log has been saved");
+        m_highlightpopup.show();
+        popupTimer = 1;
+        m_highlightpopup.doNotFocus();
         qDebug() << "Successful LogSave through shortcut.";
         // Implement MessageBox / Dialog to show User that files have been saved
     }
@@ -2203,9 +2242,14 @@ void GW2::MainWindow::checkKeyState(){
         // toggle code goes here
         if (displayOpacity==1) {
             m_Configurator.ui->checkBoxOpacity->setChecked(false);
+            m_highlightpopup.ui->label->setText("Opacity has been disabled");
         } else {
             m_Configurator.ui->checkBoxOpacity->setChecked(true);
+            m_highlightpopup.ui->label->setText("Opacity is enabled");
         }
+        m_highlightpopup.show();
+        popupTimer = 1;
+        m_highlightpopup.doNotFocus();
         //EnableTransparency(displayOpacity);
         qDebug() << "Successful Opacity Toggle through shortcut.";
     }
@@ -2270,6 +2314,11 @@ void GW2::MainWindow::checkKeyState(){
         if(GetAsyncKeyState(MapVirtualKey(globalresetKeycode,2)) && globalresetCtrlPressed && globalresetAltPressed && globalresetShiftPressed)
         {
             SendResetEchoRequest();
+            // Show Popup
+            m_highlightpopup.ui->label->setText("Successfull Global Reset");
+            m_highlightpopup.show();
+            popupTimer = 1;
+            m_highlightpopup.doNotFocus();
             qDebug() << "Successful GlobalReset through shortcut.";
         }
     }
@@ -2280,8 +2329,15 @@ void GW2::MainWindow::toggleCombatMode(bool toggleState){
     if(toggleState){
         action_combatMode();
         combatModeToggleState = 0;
+        m_highlightpopup.ui->label->setText("CombatMode is now active");
     }else{
         action_resetCombatMode();
         combatModeToggleState = 1;
+        m_highlightpopup.ui->label->setText("CombatMode has been disabled");
     }
+    // Show Popup
+
+    m_highlightpopup.show();
+    popupTimer = 1;
+    m_highlightpopup.doNotFocus();
 }

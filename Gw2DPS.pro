@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     savelog.cpp \
     updatecheck.cpp \
     authenticate.cpp \
-    startserver.cpp
+    startserver.cpp \
+    showhighlightedpopup.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -56,7 +57,8 @@ HEADERS  += mainwindow.h \
     savelog.h \
     updatecheck.h \
     authenticate.h \
-    startserver.h
+    startserver.h \
+    showhighlightedpopup.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
@@ -67,7 +69,8 @@ FORMS    += mainwindow.ui \
     savelog.ui \
     updatecheck.ui \
     authenticate.ui \
-    startserver.ui
+    startserver.ui \
+    showhighlightedpopup.ui
 
 RESOURCES += \
     Icons/Icons.qrc

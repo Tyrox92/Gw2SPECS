@@ -28,6 +28,7 @@
 #include "dmgmeter.h"
 #include "authenticate.h"
 #include "startserver.h"
+#include "showhighlightedpopup.h"
 
 namespace Ui
 {
@@ -59,7 +60,6 @@ public:
         QAction *exitMenu = myMenu.addAction(MainWindow::tr("Exit"));
 
         QAction *autoReset = miscMenu->addAction(MainWindow::tr("Auto-Reset On")); //Toggle
-
         int m_msecs;
         QList<int> _kc;
         int _pos;
@@ -89,7 +89,7 @@ private:
     Ui::MainWindow *ui;
     QThread m_ScreenRecorderThread;
     DmgMeter* dmgMeter;
-
+    showhighlightedpopup m_highlightpopup;
     MyDialog m_MyDialog;
     firstStart m_firstStart;
     authenticate m_authenticate;
@@ -266,6 +266,9 @@ private:
     QPushButton *download;
     QPushButton *changelog;
     QString m_Time;
+
+    int popupTimer = 0;
+    int popupCountdown = 0;
 
 
 private slots:
