@@ -8,6 +8,7 @@
 #include <QSettings>
 #include <QCheckBox>
 #include <QDebug>
+#include <QKeySequenceEdit>
 
 
 inline static QString ReadNameSettings(void);
@@ -26,7 +27,6 @@ inline static void WriteToolbarSettings(QString);
 
 inline static QString ReadGraphSettings(void);
 inline static void WriteGraphSettings(QString);
-
 
 inline QString Read1stRun(void)
 {
@@ -160,38 +160,18 @@ public:
 
     static const QString s_Product;
     static const QString s_Version;
+    static const QString s_protocolVersion;
+
+    //Default Shortcuts
+    static const QString shortcut_reset;
+    static const QString shortcut_combatmode;
+    static const QString shortcut_globalreset;
+    static const QString shortcut_savelog;
+    static const QString shortcut_opacity;
 
 private:
     Settings();
 };
-
-
-
-
-/*
-    template <>
-    inline void Settings::ReadSettings(QLineEdit* InputName)
-    {
-        QSettings settings(s_Product);
-
-        settings.beginGroup(InputName->objectName());
-        InputName->setText(settings.value("text"));
-        settings.endGroup();
-
-        ReadSettings<QWidget>(InputName);
-    }
-
-    template <>
-    inline void Settings::WriteSettings(QLineEdit* InputName)
-    {
-        QSettings settings(s_Product);
-        settings.beginGroup(InputName->objectName());
-        settings.setValue("text",InputName->text());
-        settings.endGroup();
-
-        WriteSettings<QWidget>(InputName);
-    }
-*/
 
 
 /**************************************************
@@ -220,6 +200,33 @@ inline void Settings::WriteSettings(QWidget* widget)
 
 /**************************************************
 *                                                 *
+*               Template lineEdit                 *
+*                                                 *
+***************************************************/
+template <>
+inline void Settings::ReadSettings(QLineEdit* lineEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(lineEdit->objectName());
+    lineEdit->setText(settings.value("text").toString());
+    settings.endGroup();
+
+    ReadSettings<QWidget>(lineEdit);
+}
+
+template <>
+inline void Settings::WriteSettings(QLineEdit* lineEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(lineEdit->objectName());
+    settings.setValue("text",lineEdit->text());
+    settings.endGroup();
+
+    WriteSettings<QWidget>(lineEdit);
+}
+
+/**************************************************
+*                                                 *
 *               Template Combobox                 *
 *                                                 *
 ***************************************************/
@@ -229,7 +236,7 @@ inline void Settings::ReadSettings(QComboBox* comboBox)
 {
     QSettings settings("Gw2SPECS");
     settings.beginGroup(comboBox->objectName());
-    comboBox->setCurrentIndex(settings.value("currentIndex").toInt());
+    comboBox->setCurrentText(settings.value("currentText").toString());
     settings.endGroup();
 
     ReadSettings<QWidget>(comboBox);
@@ -240,7 +247,7 @@ inline void Settings::WriteSettings(QComboBox* comboBox)
 {
     QSettings settings("Gw2SPECS");
     settings.beginGroup(comboBox->objectName());
-    settings.setValue("currentIndex", comboBox->currentIndex());
+    settings.setValue("currentText", comboBox->currentText());
     settings.endGroup();
 
     WriteSettings<QWidget>(comboBox);
@@ -305,7 +312,36 @@ inline void Settings::WriteSettings(QCheckBox* checkBox)
     WriteSettings<QWidget>(checkBox);
 }
 
+/**************************************************
+*                                                 *
+*               Template KeySequence              *
+*                                                 *
+***************************************************/
 
+template <>
+inline void Settings::ReadSettings(QKeySequenceEdit* keySequenceEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(keySequenceEdit->objectName());
+
+    if (settings.value("shortcut").toString()!="") {
+        keySequenceEdit->setKeySequence(QKeySequence(settings.value("shortcut").toString()));
+    }
+    settings.endGroup();
+
+    ReadSettings<QWidget>(keySequenceEdit);
+}
+
+template <>
+inline void Settings::WriteSettings(QKeySequenceEdit* keySequenceEdit)
+{
+    QSettings settings("Gw2SPECS");
+    settings.beginGroup(keySequenceEdit->objectName());
+    settings.setValue("shortcut", keySequenceEdit->keySequence().toString());
+    settings.endGroup();
+
+    WriteSettings<QWidget>(keySequenceEdit);
+}
 
 template <typename WidgetType>
 void Settings::ReadSettings(WidgetType* /*widget*/)

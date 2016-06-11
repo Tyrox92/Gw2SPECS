@@ -12,11 +12,23 @@
 #include <QTime>
 #include <QMouseEvent>
 #include "mydialog.h"
+#include "firststart.h"
+#include "combatmode.h"
+#include "connectionfailed.h"
+#include "savelog.h"
+#include "updatecheck.h"
 #include <QLabel>
 #include <QPoint>
 #include <QMenu>
 #include <QProgressBar>
 #include "qcustomplot.h"
+#ifdef Q_OS_WIN
+#include "mumblelink.h"
+#endif
+#include "dmgmeter.h"
+#include "authenticate.h"
+#include "startserver.h"
+#include "showhighlightedpopup.h"
 
 namespace Ui
 {
@@ -34,24 +46,27 @@ public:
     ~MainWindow();
         QString time;
         QMenu myMenu;
-        QMenu *miscMenu = new QMenu("Miscellaneous", this);
-
-        QAction *resetData = myMenu.addAction("Reset");
-        QAction *combatMode = myMenu.addAction("CombatMode");
-        QAction *connectServer = myMenu.addAction("Connect");
-        QAction *saveToFile = myMenu.addAction("Save File");
-        QAction *options = myMenu.addAction("Options");        
+        QMenu *miscMenu = new QMenu(MainWindow::tr("Miscellaneous"), this);
+        QAction *resetData = myMenu.addAction(MainWindow::tr("Reset"));
+        QAction *auth = myMenu.addAction(MainWindow::tr("Authenticate"));
+        #ifdef Q_OS_WIN
+        QAction *combatMode = myMenu.addAction(MainWindow::tr("CombatMode"));
+        #endif
+        QAction *connectServer = myMenu.addAction(MainWindow::tr("Connect"));
+        QAction *serverStart = myMenu.addAction(MainWindow::tr("Start Server"));
+        QAction *saveToFile = myMenu.addAction(MainWindow::tr("Save File"));
+        QAction *options = myMenu.addAction(MainWindow::tr("Options"));
         QAction *exitSeparator = new QAction(this);
-        QAction *exitMenu = myMenu.addAction("Exit");
+        QAction *exitMenu = myMenu.addAction(MainWindow::tr("Exit"));
 
-        QAction *autoReset = miscMenu->addAction("Auto-Reset On"); //Toggle
-
+        QAction *autoReset = miscMenu->addAction(MainWindow::tr("Auto-Reset On")); //Toggle
         int m_msecs;
         QList<int> _kc;
         int _pos;
-        QDialog *combatDialog = new QDialog();
-        QPushButton *resetCombatMode = new QPushButton();
-
+        #ifdef Q_OS_WIN
+        MumbleLink mL;
+        #endif
+        Configurator m_Configurator;
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
@@ -73,56 +88,67 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QThread m_ScreenRecorderThread;
-    Configurator m_Configurator;
+    DmgMeter* dmgMeter;
+    showhighlightedpopup m_highlightpopup;
     MyDialog m_MyDialog;
+    firstStart m_firstStart;
+    authenticate m_authenticate;
+    startserver m_startServer;
+    #ifdef Q_OS_WIN
+    CombatMode m_combatMode;
+    #endif
+    connectionfailed m_connectionfailed;
+    saveLog m_saveLog;
+    updateCheck m_updateCheck;
     QPoint m_dragPosition;
     int fixOnTopCount;
+    QString myAuth;
 
     QTcpSocket *socket;
 
+    QString MyAuthCode;
     QString MyName;
     QString HostIP;
     int HostPort;
 
-    char PosName[10][15];
+    QStringList firstArray;         // 1 slot per player (max 10) and every slot hast all infos
+    QStringList secondArray[10];    // 2 dimensional array with same data like firstArray but splitted further more
+
+    int Admin[1];
+    QString PosName[10];
+    int resetrequestsent = 0;
+
     int PosDPS[10];
     long PosDmg[10];
     int PosAct[10];
     int PosProf[10];
-    int PosrDPS[10];
-
-    char SlotName[10][15];
-    int SlotDPS[10];
-    long SlotDmg[10];
-    int SlotAct[10];
-    int SlotProf[10];
-    int SlotrDPS[10];
-
+    int Pos5sDPS[10];
 
     long GrpDmg;
     int GrpDPS;
     int AvgDPS;
 
-
     int GrprDPS;
     int AvgrDPS;
-
 
     QByteArray incData;
     int incDataSize;
     char incData2[800];
 
-    int CurrentPos;
-    int CurrentMeta;
-
     char writeBuff[128];
+    char writeAuthCode[128];
+    char writeprotocolVersion[128];
+    char writeValAdmin[128];
+    int is_startup;
     bool is_connected;
+    bool is_admin;
 
     //SPECS Settings
     bool displayToolbar;
     bool displayDetails;
     bool displayExtraDetails;
     bool displayOpacity;
+    bool displayOBS;
 
     // solo settings
     bool displayProfColor;
@@ -234,16 +260,21 @@ private:
     QLabel* labelact [10] = {labelact_0,labelact_1,labelact_2,labelact_3,labelact_4,labelact_5,labelact_6,labelact_7,labelact_8,labelact_9};
     QLabel* label5sdps [10] = {label5sdps_0,label5sdps_1,label5sdps_2,label5sdps_3,label5sdps_4,label5sdps_5,label5sdps_6,label5sdps_7,label5sdps_8,label5sdps_9};
 
-    char tmp1[20];
+    QString tmp1;
     QTimer update_Timer;
     void CheckForUpdate();
     QPushButton *download;
     QPushButton *changelog;
     QString m_Time;
 
+    int popupTimer = 0;
+    int popupCountdown = 0;
+
+
 private slots:
     void UpdateTime(int);
     void SendClientInfo();
+    void SendResetEchoRequest();
     void UpdateTimer();
     void UpdateGroupLabels();
     void UpdatePersonalLabels();
@@ -259,6 +290,7 @@ private slots:
     void ShowDetailsChanged();
     void ShowExtraDetailsChanged();
     void ShowOpacityChanged();
+    void ShowOBSChanged();
 
     void ProfSettingsChanged();
     void NameChanged();
@@ -268,7 +300,6 @@ private slots:
     void CPerDmgChanged();
     void CDPSChanged();
     void FiveSecRealDPSChanged();
-    void ProfChanged(QString);
     void PositionChanged();
     void PerDmgChanged();
     void ActivityChanged();
@@ -282,13 +313,14 @@ private slots:
 
     void CheckForOldVerison();
     void CheckFirstRun();
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    void downloadLink();
+    void changelogLink();
     void writeFile(QString);
     void on_actionActionSave_triggered();
     void updateCombatCourse();
     void writeCsv();
     void writeTxt();
+    void writeAll();
     void ShowContextMenu(const QPoint& pos);
     void ShowContextMenuDetails(const QPoint& pos);
     void ShowContextMenuGraph(const QPoint& pos);
@@ -296,12 +328,16 @@ private slots:
     bool resetAutomatic(bool);
     //bool hideunhideToolbar(bool toggled);
     void realTimeDataSlot(int dps,int cdps,int avgdps,int msecs,int m_5sDPS, int m_realDps);
-    void runMe();
+    void initializeGraph();
     void resetGraph();
-    void action_fixOnTop();
+    void action_widgetMode(); // Switch between OBS and "Normal" Version
     void keyPressEvent( QKeyEvent * event );
     void action_combatMode();
     void action_resetCombatMode();
+    void openCombatModeWindow();
+    void validateAdmin();
+    void checkKeyState();
+    void toggleCombatMode(bool);
 };
 
 }

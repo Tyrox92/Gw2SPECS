@@ -1,9 +1,10 @@
-# GW2DPS
-Based on JaxnX, modified by Kozzy.5974, DoM.8396 & Tyrox.1352
+# GW2SPECS
+Based on JaxnX, modified by DoM.8396, Kozzy.5974, Syphdias.5467 & Tyrox.1352
 
-What makes it legal : It does not offend the Terms of Service of Guild Wars 2. It does not read from game memory. Instead it uses Computer Vision techniques to read out numbers presented in the combat log by taking screenshots of the chat block periodically, converting pixels of the image into numbers and using the converted numbers for dmg / dps calculation. The whole process happens in real time.
+## Safe to use?
+After reading the Gw2 ToS and discussing it within the Team we do believe that Gw2SPECS does not in any way offend the terms set in place set by ArenaNet in the User License Agreement. We are not changing or modifying any operation of Guild Wars 2. We function entirely separate from the Guild Wars 2 Game Client Process. Neither Guildwars 2 nor Gw2SPECS.exe know of each others existence. Instead, it uses Computer Vision Techniques to read out numbers presented in the combat log by taking screenshots of the chat block periodically, searching for and finally converting pixels of the image into numbers and using the converted numbers for Damage calculation. Gw2SPECS does not interact with the game in any way. When recognizing pixels, we are looking on the Desktop. This is why we require the game to run in Windowed Fullscreen. Again, we are using pixel recognition of your DESKTOP, not the game client. That means you could record you combat log and, even without Guild Wars 2 being open, let Gw2SPECS run over the video. If it recognizes our predefined Pixels it will start counting, as it is not bound to the game client.
 
-Settings for correct measuring : 
+## Settings for correct measuring : 
  - Options/Graphics Options: 
     - Interface Size=Normal
     - Resolution=Windowed Fullscreen
@@ -18,7 +19,7 @@ Settings for correct measuring :
 
 Compiled in Qt Creator written in C++
 
-Your name can only be 10 characters long.
+Your name can only be 19 characters long.
 Get IP from Server Hoster.
 
 Don't mess up configurations within the tool.
@@ -30,6 +31,5 @@ To make it work:
  - timestamps: off
  - Combat-Log active
  
-Download Link: Server & Client
-Windows: http://gw2dps.com/download
-Mac: Can't compile it at the moment. If it works without any big issues after we tried it, find the link here.
+## Download Link: Server & Client
+http://www.gw2specs.com/downloads

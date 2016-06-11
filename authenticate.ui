@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>authenticate</class>
+ <widget class="QDialog" name="authenticate">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>283</width>
+    <height>194</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget { background-color: rgba(32, 43, 47, 60%); }
+QWidget#widget { background-color: rgba(32, 43, 47, 0%); }
+QLabel {  background-color: rgba(32, 43, 47, 0%); color: rgb(255, 255, 255); text-align:center;}
+QLineEdit {
+    background-color: #202B2F;
+	color: #FFFFFF;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: beige;
+    font: bold 10px;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>25</number>
+   </property>
+   <property name="topMargin">
+    <number>25</number>
+   </property>
+   <property name="rightMargin">
+    <number>25</number>
+   </property>
+   <property name="bottomMargin">
+    <number>25</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>0</number>
+   </property>
+   <property name="verticalSpacing">
+    <number>10</number>
+   </property>
+   <item row="3" column="0" alignment="Qt::AlignTop">
+    <widget class="QLineEdit" name="authCode">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:14px;</string>
+     </property>
+     <property name="maxLength">
+      <number>5</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:20px;margin:0px 0px 5px -5px</string>
+     </property>
+     <property name="text">
+      <string>Authentication</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QPushButton" name="authMe">
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+    background-color: #8BB2DA;
+    font: bold 12px;
+    min-width: 10em;
+    padding: 6px;
+}
+QPushButton:pressed{
+    background-color: rgb(197,216,236);
+	border-style: inset;
+ 
+}</string>
+     </property>
+     <property name="text">
+      <string>Authenticate</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:white;font-size:14px;</string>
+     </property>
+     <property name="text">
+      <string>Insert the  AuthCode that you
+got from the Server to verify yourself.</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

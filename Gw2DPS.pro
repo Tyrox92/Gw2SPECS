@@ -28,7 +28,15 @@ SOURCES += main.cpp\
     settings.cpp \
     mydialog.cpp \
     global.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    firststart.cpp \
+    combatmode.cpp \
+    connectionfailed.cpp \
+    savelog.cpp \
+    updatecheck.cpp \
+    authenticate.cpp \
+    startserver.cpp \
+    showhighlightedpopup.cpp
 
 HEADERS  += mainwindow.h \
     imagereader.h \
@@ -41,13 +49,34 @@ HEADERS  += mainwindow.h \
     settings.h \
     global.h \
     mydialog.h \
-    qcustomplot.h
+    qcustomplot.h \
+    mumblelink.h \
+    firststart.h \
+    combatmode.h \
+    connectionfailed.h \
+    savelog.h \
+    updatecheck.h \
+    authenticate.h \
+    startserver.h \
+    showhighlightedpopup.h
 
 FORMS    += mainwindow.ui \
     configurator.ui \
-    mydialog.ui
+    mydialog.ui \
+    firststart.ui \
+    combatmode.ui \
+    connectionfailed.ui \
+    savelog.ui \
+    updatecheck.ui \
+    authenticate.ui \
+    startserver.ui \
+    showhighlightedpopup.ui
 
 RESOURCES += \
     Icons/Icons.qrc
 
 RC_FILE = specs.rc
+
+TRANSLATIONS+=  languages/gw2specs_English.ts
+TRANSLATIONS+=  languages/gw2specs_Deutsch.ts
+TRANSLATIONS+=  languages/gw2specs_Francais.ts

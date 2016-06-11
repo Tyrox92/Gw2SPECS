@@ -17,55 +17,66 @@ MyDialog::MyDialog(QWidget *parent) :
     ui->InputName->setText(ReadNameSettings());
     ui->InputIP->setText(ReadIPSettings());
     ui->InputPort->setText(ReadPortSettings());
-    Settings::ReadSettings(ui->professionComboBox);
+
+    QRegExp nameRx("^[^;|*#]*$");
+    QValidator *nameVal = new QRegExpValidator(nameRx, this);
+    ui->InputName->setValidator(nameVal);
 }
 
 MyDialog::~MyDialog()
 {
-    Settings::WriteSettings(ui->professionComboBox);
-    if (ui->InputName->text().length()>0) delete ui;
+    delete ui;
 }
+
+void MyDialog::reject(){
+    qDebug()<<"Connect has been rejected by pressing 'ESC'...";
+    QDialog::reject();
+}
+
 
 void MyDialog::on_pushButton_clicked()
 {
 
-    if (ui->InputName->text().length()>0)
+    if (ui->InputName->text().length()>=0)
     {
         WriteNameSettings(ui->InputName->text());
-        accept();
     }
     if (ui->InputIP->text().length()>0)
     {
         WriteIPSettings(ui->InputIP->text());
-        accept();
     }
     if (ui->InputPort->text().length()>0)
     {
         WritePortSettings(ui->InputPort->text());
-        accept();
     }
-}
-
-int MyDialog::getProfession()
-{
-    return ui->professionComboBox->currentIndex();
+    accept();
 }
 
 QString MyDialog::getName()
 {
-    return ui->InputName->text();
+    return ui->InputName->text().trimmed();
 }
 
 
 QString MyDialog::getIP()
 {
-    return ui->InputIP->text();
+    QRegExp whitespace("\\s");
+    QString delwhitespace = ui->InputIP->text().trimmed();
+    while (delwhitespace.contains(whitespace)) {
+        delwhitespace = delwhitespace.left(delwhitespace.indexOf(whitespace)) + delwhitespace.right(delwhitespace.length()-delwhitespace.indexOf(whitespace)-1);
+    }
+    return delwhitespace;
 }
 
 
 QString MyDialog::getPort()
 {
-    return ui->InputPort->text();
+    QRegExp whitespace("\\s");
+    QString delwhitespace = ui->InputPort->text().trimmed();
+    while (delwhitespace.contains(whitespace)) {
+        delwhitespace = delwhitespace.left(delwhitespace.indexOf(whitespace)) + delwhitespace.right(delwhitespace.length()-delwhitespace.indexOf(whitespace)-1);
+    }
+    return delwhitespace;
 }
 
 #endif

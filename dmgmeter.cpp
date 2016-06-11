@@ -85,6 +85,7 @@ void DmgMeter::Reset()
     m_Dmg = 0;
     m_Dps = 0;
     m_MaxDmg = 0;
+    m_healing = 0;
     m_ElapsedTimeSinceCombatInMsec = 0;
     OffCombatTimeInMsec=0;
     m_IsActive=0;
@@ -216,12 +217,12 @@ void DmgMeter::EvaluateLine(const QString& params)
         {
             m_condiDmg+=dmg;
         }
+        if (LastColor==5)
+        {
+            m_healing+=dmg;
+        }
     }
-    if (dmg > m_MaxDmg)
-    {
-        // New max dmg found, set it as max dmg
-        m_MaxDmg=dmg;
-    }
+
 
 #ifdef DMGMETER_DEBUG
     if (dmg < 100)
@@ -231,24 +232,32 @@ void DmgMeter::EvaluateLine(const QString& params)
     }
 #endif // DMGMETER_DEBUG
 
-    if (LastColor!=4)  //not timestamp color
+    if (LastColor!=4 && LastColor!=5)  //not timestamp color and healing
     {
-    m_Dmg += dmg;
-    LastDmg=dmg;
-    //Adding Each Damage Value done between seconds into the txtFileExport
-    //combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
-    combatCourse+="+"+QString::number(dmg)+"\r\n";
-    //qDebug() << "Adding value : " << dmg;
-    m_TimeSinceEvaluation.start();
+        m_Dmg += dmg;
+        LastDmg=dmg;
+        //Adding Each Damage Value done between seconds into the txtFileExport
+        //combatCourse+="..   |  ?   |  ?  | +"+QString::number(dmg)+ "\r\n";
+        combatCourse+="+"+QString::number(dmg)+"\r\n";
+        //qDebug() << "Adding value : " << dmg;
+        m_TimeSinceEvaluation.start();
 
-    if (!m_IsActive)
-    {
-        // Evaluation starts, configure timer and start
-        StartEvaluation();
+        if (!m_IsActive)
+        {
+            // Evaluation starts, configure timer and start
+            StartEvaluation();
+        }
+        //Add Each hit as realDPS
+        m_realDps += dmg;
+
+        //Evaluate Highest Hit
+        if (dmg > m_MaxDmg)
+        {
+            // New max dmg found, set it as max dmg
+            m_MaxDmg=dmg;
+        }
     }
-    }
-   if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
-   m_realDps += dmg;
+    if (LastColor==4) qDebug() << "Skipping TimeStamp value : " << dmg;
 }
 
 int DmgMeter::ComputeDmg(const QString& dmgStr)

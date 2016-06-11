@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CombatMode</class>
+ <widget class="QDialog" name="CombatMode">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>455</width>
+    <height>117</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gw2SPECS CombatMode</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+	background-color: rgba(32, 43, 47, 60%);
+}
+QWidget#widget {
+	background-color: rgba(32, 43, 47, 0%);
+}
+QLabel {
+	background-color: rgba(32, 43, 47, 0%);
+	color: rgb(255, 255, 255);
+}
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Welcome to Gw2SPECS CombatMode
+Please minimize this window so it cannot interfere anymore.
+ Gw2SPECS is no longer clickable and all clicks fall through on the window behind
+If you want to end CombatMode simply click the Button below!
+Enjoy.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" alignment="Qt::AlignTop">
+    <widget class="QPushButton" name="minimizeButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>49</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>49</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#minimizeButton {
+    background-color: transparent;
+    font: bold 12px;
+    min-width: 10em;
+    padding: 6px;
+	color: #FFF;
+	max-width: 35px;
+	min-width: 35px;
+	width: 35px;
+}
+QPushButton#minimizeButton:pressed {
+	border-style: inset;
+ }</string>
+     </property>
+     <property name="text">
+      <string>¯</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QPushButton" name="buttonResetCombatMode">
+     <property name="minimumSize">
+      <size>
+       <width>154</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#buttonResetCombatMode {
+    background-color: #8BB2DA;
+    font: bold 12px;
+    min-width: 10em;
+    padding: 6px;
+}
+QPushButton#buttonResetCombatMode:pressed {
+    background-color: rgb(197,216,236);
+	border-style: inset;
+ 
+}</string>
+     </property>
+     <property name="text">
+      <string>Reset CombatMode</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>minimizeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>CombatMode</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>181</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>58</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
