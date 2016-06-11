@@ -1147,7 +1147,7 @@ void MainWindow::ready2Read()
 
     myAuth = m_authenticate.getAuthCode();
 
-    qDebug() << "incDataString " << incDataString;
+    qDebug() << "incDataString(raw)" << incDataString;
 
     if(incDataString[0] == '*' && incDataString[1] == '*' && incDataString[2] == '*'){
         qDebug()<< "Strange Value found: " << incDataString;;
@@ -1159,6 +1159,13 @@ void MainWindow::ready2Read()
             qDebug() << "This seems weird: " << incDataString;
         }
     }else {
+        // this will cut away a additiona package fom the server in case there is one; this will prevent a crash
+        // i.e. "|0||Name;0;0;0;0;0||0||Name;0;0;0;0;0||0||Name;0;0;0;0;0|" -> "|0||No logged in character;0;0;0;0;0|"
+        if (incDataString.indexOf(incDataString.left(3),3)>0) {
+            incDataString = incDataString.left(incDataString.indexOf(incDataString.left(3),3));
+            qDebug() << "Additional Data received; incDataString was cut to " << incDataString;
+        }
+
         QString userData = incDataString.mid(1, incDataString.size()-2);
         firstArray = userData.split("||");
         for (i=0; i < firstArray.length(); i++) {
