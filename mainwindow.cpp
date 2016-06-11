@@ -2060,7 +2060,7 @@ void GW2::MainWindow::checkKeyState(){
         qDebug() << "Successful Reset through shortcut.";
 
         // Show Popup
-        m_highlightpopup.ui->label->setText("Reset finished");
+        m_highlightpopup.ui->label->setText(MainWindow::tr("Reset finished"));
         m_highlightpopup.show();
         popupTimer = 1;
         m_highlightpopup.doNotFocus();
@@ -2183,7 +2183,7 @@ void GW2::MainWindow::checkKeyState(){
         writeAll();
 
         // Show Popup
-        m_highlightpopup.ui->label->setText("Log has been saved");
+        m_highlightpopup.ui->label->setText(MainWindow::tr("Log has been saved"));
         m_highlightpopup.show();
         popupTimer = 1;
         m_highlightpopup.doNotFocus();
@@ -2249,10 +2249,10 @@ void GW2::MainWindow::checkKeyState(){
         // toggle code goes here
         if (displayOpacity==1) {
             m_Configurator.ui->checkBoxOpacity->setChecked(false);
-            m_highlightpopup.ui->label->setText("Opacity has been disabled");
+            m_highlightpopup.ui->label->setText(MainWindow::tr("Opacity has been disabled"));
         } else {
             m_Configurator.ui->checkBoxOpacity->setChecked(true);
-            m_highlightpopup.ui->label->setText("Opacity is enabled");
+            m_highlightpopup.ui->label->setText(MainWindow::tr("Opacity is enabled"));
         }
         m_highlightpopup.show();
         popupTimer = 1;
@@ -2322,7 +2322,7 @@ void GW2::MainWindow::checkKeyState(){
         {
             SendResetEchoRequest();
             // Show Popup
-            m_highlightpopup.ui->label->setText("Successfull Global Reset");
+            m_highlightpopup.ui->label->setText(MainWindow::tr("Successfull Global Reset"));
             m_highlightpopup.show();
             popupTimer = 1;
             m_highlightpopup.doNotFocus();
@@ -2336,11 +2336,11 @@ void GW2::MainWindow::toggleCombatMode(bool toggleState){
     if(toggleState){
         action_combatMode();
         combatModeToggleState = 0;
-        m_highlightpopup.ui->label->setText("CombatMode is now active");
+        m_highlightpopup.ui->label->setText(MainWindow::tr("CombatMode is now active"));
     }else{
         action_resetCombatMode();
         combatModeToggleState = 1;
-        m_highlightpopup.ui->label->setText("CombatMode has been disabled");
+        m_highlightpopup.ui->label->setText(MainWindow::tr("CombatMode has been disabled"));
     }
     // Show Popup
 
