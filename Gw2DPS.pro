@@ -9,12 +9,12 @@ QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-#CONFIG += c++11
+CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 QMAKE_CXXFLAGS_WARN_ON += -Wno-reorder
 TARGET = Gw2SPECS
 TEMPLATE = app
-
+CONFIG-=app_bundle
 
 SOURCES += main.cpp\
         mainwindow.cpp \

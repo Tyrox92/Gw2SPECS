@@ -10,6 +10,7 @@
 #include <QSizeGrip>
 #include <QToolBar>
 #include <QToolButton>
+#include <math.h>
 #include "ui_mydialog.h"
 #include "ui_firststart.h"
 #include "ui_combatmode.h"
@@ -1378,7 +1379,7 @@ void MainWindow::UpdatePersonalLabels()
     c3=m_Dps;
     c4=m_Dmg;
     c1=c2*c3;
-    if (m_Dmg>0)c=round(c1/c4);else c=0;
+    if (m_Dmg>0) c=round(c1/c4); else c=0;
     Label1 = ui->condiDPS;
     Label1->setText(QString::number(c));
     //Personal Max Damage Value
