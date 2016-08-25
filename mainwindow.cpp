@@ -659,6 +659,7 @@ void GW2::MainWindow::CheckForUpdate()
             //Connect Functions to Buttons when clicked
             QObject::connect(uiUpdateCheck->download, SIGNAL(pressed()),this,SLOT(downloadLink()));
             QObject::connect(uiUpdateCheck->changelog, SIGNAL(pressed()),this,SLOT(changelogLink()));
+            QObject::connect(uiUpdateCheck->remindLater, SIGNAL(pressed()),this,SLOT(close()));
 
             //Open updateCheck
             m_updateCheck.exec();
