@@ -156,7 +156,7 @@ void DmgMeter::ComputeDps()
     const double elapsedSecsSinceCombat = elapsedTimeSinceCombat / 1000.0f;
     const double elapsedSecsSinceEvaluation = m_TimeSinceEvaluation.elapsed() / 1000.0f;
     m_Dps = elapsedSecsSinceCombat == 0.0 ? m_Dmg : m_Dmg / elapsedSecsSinceCombat; // Prevent division by zero
-    if (m_Dps>999999) m_Dps = 1;
+
 //    if (updateCounter<5) updateCounter++;     //5sec for recent DPS update
 //        else
 //            {

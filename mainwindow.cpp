@@ -1311,11 +1311,7 @@ void MainWindow::SendClientInfo(void)
         if (is_connected)  //connected and semi-handshaked
         {
             //Failsafe Checks
-            if (m_Dps>99999) m_Dps = 1;
-            if (m_Dmg>999999999) m_Dmg = 1;
             if (m_Activity>100) m_Activity = 1;
-            if (m_5sDPS>99999) m_5sDPS = 1;
-            if (m_realDps>99999)m_realDps =1;
             sprintf(writeBuff, "|%s;%lu;%lu;%lu;%lu;%lu|", tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
             socket->write(writeBuff);
 
