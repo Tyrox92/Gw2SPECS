@@ -57,6 +57,7 @@ public:
         QAction *saveToFile = myMenu.addAction(MainWindow::tr("Save File"));
         QAction *options = myMenu.addAction(MainWindow::tr("Options"));
         QAction *exitSeparator = new QAction(this);
+        QAction *donate = myMenu.addAction(MainWindow::tr("Donate"));
         QAction *exitMenu = myMenu.addAction(MainWindow::tr("Exit"));
 
         QAction *autoReset = miscMenu->addAction(MainWindow::tr("Auto-Reset On")); //Toggle
@@ -338,6 +339,7 @@ private slots:
     void validateAdmin();
     void checkKeyState();
     void toggleCombatMode(bool);
+    void goToDonate();
 };
 
 }

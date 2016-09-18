@@ -192,6 +192,10 @@ MainWindow::MainWindow(QWidget *parent) :
     options->setIconVisibleInMenu(true);
     QObject::connect(options, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
 
+    donate->setIcon(QIcon(":/donate"));
+    donate->setIconVisibleInMenu(true);
+    QObject::connect(donate, SIGNAL(triggered()), this, SLOT(goToDonate()));
+
     myMenu.addMenu(miscMenu);
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -2344,4 +2348,9 @@ void GW2::MainWindow::toggleCombatMode(bool toggleState){
     m_highlightpopup.show();
     popupTimer = 1;
     m_highlightpopup.doNotFocus();
+}
+
+void GW2::MainWindow::goToDonate(){
+    QString link = "https://www.paypal.me/gw2dps";
+    QDesktopServices::openUrl(QUrl(link));
 }
