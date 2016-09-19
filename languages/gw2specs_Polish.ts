@@ -15,7 +15,11 @@ Please minimize this window so it cannot interfere anymore.
  Gw2SPECS is no longer clickable and all clicks fall through on the window behind
 If you want to end CombatMode simply click the Button below!
 Enjoy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Witaj w Gw2SPECS Combat Mode
+Zminimalizuj okno.
+Gw2SPECS jest nieklikalne i wszystkie kliknięcia dotyczą okna pod nakładką.
+Aby zakończyć CombatMode naduś przycisk poniżej.
+Ciesz się.</translation>
     </message>
     <message>
         <location filename="../combatmode.ui" line="78"/>
@@ -25,7 +29,7 @@ Enjoy.</source>
     <message>
         <location filename="../combatmode.ui" line="104"/>
         <source>Reset CombatMode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zresetuj CombatMode</translation>
     </message>
 </context>
 <context>
@@ -33,193 +37,194 @@ Enjoy.</source>
     <message>
         <location filename="../configurator.ui" line="25"/>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="72"/>
         <source>Reset Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Resetowanie skrót</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="89"/>
         <source>GlobalReset Shortcurt</source>
-        <translation type="unfinished"></translation>
+        <translation>Globalny Reset skrót</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="221"/>
         <source>Toggle CombatMode</source>
-        <translation type="unfinished"></translation>
+        <translation>Przełącz tryb bojowy</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="231"/>
         <source>Save Log Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz log Skrót</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="255"/>
         <location filename="../configurator.ui" line="693"/>
         <source>Toggle Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz przezroczystość</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="272"/>
         <source>Disable all shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłącz wszystkie skróty</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="285"/>
         <source>Rebind Hotkeys</source>
-        <translation type="unfinished"></translation>
+        <translation>zestaw skróty</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="313"/>
         <source>Graph Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia wykresu</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="320"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Green Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zielony wykres&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="326"/>
         <source>Average PersDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Śr. PersDPS
+</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="336"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Yellow Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Żółty wykres&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="342"/>
         <source>Average GrDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Śr. GrpDPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="355"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Blue Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Niebieski wykres&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="361"/>
         <source>Show RealDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż RealDPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="371"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Purple Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fioletowy wykres&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="377"/>
         <source>Average CondiDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Śr. CondiDPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="387"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Red Graph&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Czerwony wykres&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="393"/>
         <source>Last5sDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Last5sDPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="406"/>
         <source>Show Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż wykres</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="468"/>
         <source>Show DPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż DPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="481"/>
         <source>Show Last5sDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż Last5sDPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="494"/>
         <source>Percental Damage</source>
-        <translation type="unfinished"></translation>
+        <translation>Procentowe obrażenia</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="510"/>
         <source>Show Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż pozycję</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="523"/>
         <source>Show Damage</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż obrażenia</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="536"/>
         <source>Show Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż profesję</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="546"/>
         <source>Show Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż nazwe</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="559"/>
         <source>Group only:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tylko grupa:</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="569"/>
         <source>Player Bar Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia paska gracza</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="579"/>
         <source>(Show CondiDmg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż CondiDMG</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="589"/>
         <source>(Show CondiDPS)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż CondiDPS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="599"/>
         <source>(Show Activity)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż aktywność</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="609"/>
         <source>(Percental Condi)</source>
-        <translation type="unfinished"></translation>
+        <translation>Procentowe Condi</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="650"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Generał</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="660"/>
         <source>Show Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż pasek narzędzi</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="673"/>
         <source>Show Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż detale</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="683"/>
         <source>Show Additional Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż dodatkowe detale</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="703"/>
         <source>Enable OBS Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz tryb OBS</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="714"/>
@@ -269,7 +274,7 @@ Enjoy.</source>
     <message>
         <location filename="../configurator.ui" line="793"/>
         <source># of Lines in Combat Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilość linii w Combat Logu</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="809"/>
@@ -311,17 +316,17 @@ Enjoy.</source>
     <message>
         <location filename="../configurator.ui" line="860"/>
         <source>Seconds in combat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekundy w walce</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="873"/>
         <source>Updates per second</source>
-        <translation type="unfinished"></translation>
+        <translation>Odświeżenia na sekundę</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="886"/>
         <source>Screenshots per second</source>
-        <translation type="unfinished"></translation>
+        <translation>Screenshoty na sekundę</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="903"/>
@@ -342,22 +347,22 @@ Enjoy.</source>
     <message>
         <location filename="../configurator.ui" line="942"/>
         <source>Accuracy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia precyzji</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="961"/>
         <source>Restore defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć ustawienia podstawowe</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="977"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <location filename="../configurator.ui" line="999"/>
         <source>version</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja</translation>
     </message>
 </context>
 <context>
@@ -365,17 +370,17 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.cpp" line="557"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="558"/>
         <source>Damage</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrażenia</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="559"/>
         <source>%Dmg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="560"/>
@@ -387,61 +392,61 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.cpp" line="561"/>
         <source>5sDPS</source>
-        <translation></translation>
+        <translation>5sDPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="714"/>
         <source>Connection to </source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd łączenia z</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="714"/>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation>.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1427"/>
         <location filename="../mainwindow.cpp" line="1790"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozłącz</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1433"/>
         <location filename="../mainwindow.cpp" line="1796"/>
         <location filename="../mainwindow.h" line="55"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1448"/>
         <source>No logged in character</source>
-        <translation type="unfinished"></translation>
+        <translation>Postać niezalogowana</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1676"/>
         <source>Personal Data
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dane osobiste</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1679"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1680"/>
         <source>Hitcounter</source>
-        <translation type="unfinished"></translation>
+        <translation>Licznik uderzeń</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1681"/>
         <source>Highest Hit</source>
-        <translation type="unfinished"></translation>
+        <translation>Najsilniejsze uderzenie</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1682"/>
         <source>CritChance</source>
-        <translation type="unfinished"></translation>
+        <translation>Szansa na krytyka</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1685"/>
@@ -451,48 +456,49 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.cpp" line="1687"/>
         <source>CondiDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>CondiDPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1688"/>
         <source>CondiDMG</source>
-        <translation type="unfinished"></translation>
+        <translation>CondiDMG</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1694"/>
         <source>*            Group Info             *
 </source>
-        <translation type="unfinished"></translation>
+        <translation>*            Informacje grupy             *
+</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1698"/>
         <source>AvgDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Śr. DPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1699"/>
         <source>GroupDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupowy DPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1700"/>
         <source>GroupDMG</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupowy DMG</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1735"/>
         <source> Time(hh:mm:ss) </source>
-        <translation type="unfinished"></translation>
+        <translation>Czas(gg:mm:ss)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1735"/>
         <source>  AvgDPS  </source>
-        <translation type="unfinished"></translation>
+        <translation>Śr. DPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1735"/>
         <source>  RealDPS  </source>
-        <translation type="unfinished"></translation>
+        <translation>RealDPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1735"/>
@@ -503,62 +509,62 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.cpp" line="1806"/>
         <source>Auto Reset Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczny reset Wył.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1812"/>
         <source>Auto Reset On</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczny reset Wł.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2064"/>
         <source>Reset finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset zakończony</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2187"/>
         <source>Log has been saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Log został zapisany</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2253"/>
         <source>Opacity has been disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Przezroczystość jest Wyłączona</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2256"/>
         <source>Opacity is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Przezroczystość jest włączona</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2326"/>
         <source>Successfull Global Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawidłowy reset całkowity.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2340"/>
         <source>CombatMode is now active</source>
-        <translation type="unfinished"></translation>
+        <translation>CombatMode jest aktywny</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="2344"/>
         <source>CombatMode has been disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>CombatMode został wyłączony</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="49"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Różne</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="50"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="51"/>
         <source>Authenticate</source>
-        <translation type="unfinished"></translation>
+        <translation>Zauntetyfikuj</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="53"/>
@@ -568,32 +574,32 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.h" line="56"/>
         <source>Start Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz serwer</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="57"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz plik</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="58"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="60"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Donato</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="61"/>
         <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjście</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="63"/>
         <source>Auto-Reset On</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczny Reset Wł.</translation>
     </message>
 </context>
 <context>
@@ -606,17 +612,17 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.ui" line="339"/>
         <source>Reset Everyone</source>
-        <translation type="unfinished"></translation>
+        <translation>Każdy zresetować</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="423"/>
         <source>Avg DPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Śr. DPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="469"/>
         <source>Grp DMG</source>
-        <translation type="unfinished"></translation>
+        <translation>Grp. DMG</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="551"/>
@@ -635,12 +641,12 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.ui" line="581"/>
         <source>Grp DPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Grp. DPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="610"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="723"/>
@@ -650,12 +656,12 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.ui" line="825"/>
         <source>Highest Hit</source>
-        <translation type="unfinished"></translation>
+        <translation>Najmocniejsze uderzenie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="873"/>
         <source>Condi DPS</source>
-        <translation type="unfinished"></translation>
+        <translation>Condi DPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="899"/>
@@ -672,123 +678,123 @@ Enjoy.</source>
     <message>
         <location filename="../mainwindow.ui" line="902"/>
         <source>RealDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>RealDPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="928"/>
         <source>Crit %</source>
-        <translation type="unfinished"></translation>
+        <translation>Kryt%</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="957"/>
         <source>Condi DMG</source>
-        <translation type="unfinished"></translation>
+        <translation>Condi DMG</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1152"/>
         <source>5sDPS</source>
-        <translation type="unfinished"></translation>
+        <translation>5sDPS</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1242"/>
         <source>Healing</source>
-        <translation type="unfinished"></translation>
+        <translation>Leczenie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1896"/>
         <source>Auto reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczny reset</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1899"/>
         <source>Reset automatically after leaving combat</source>
-        <translation type="unfinished"></translation>
+        <translation>Resetuj automatycznie po opuszczeniu walki</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1917"/>
         <location filename="../mainwindow.ui" line="1920"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1932"/>
         <source>Enable transparency</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz przezroczystość</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1935"/>
         <source>Enable transparency mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz tryb przezroczystości</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1944"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1947"/>
         <source>Visit website for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Odwiedź stronę, aby uzyskać pomoc</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1956"/>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1959"/>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Skonfiguruj</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1968"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1971"/>
         <source>Exit DPS Meter</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłącz DPS Meter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1984"/>
         <source>ShrinkUI</source>
-        <translation type="unfinished"></translation>
+        <translation>Przytnij UI</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1987"/>
         <source>Shrink UI to toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Przytnij UI do paska narzędzi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1999"/>
         <source>actionGroupDetails</source>
-        <translation type="unfinished"></translation>
+        <translation>Detale grupy</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2002"/>
         <source>Player/Group Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Gracz/Detale grupy </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2011"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2014"/>
         <source>Connect to Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz z serwerem</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2023"/>
         <source>actionSave</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="2026"/>
         <source>Save Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz dane</translation>
     </message>
 </context>
 <context>
@@ -796,23 +802,24 @@ Enjoy.</source>
     <message>
         <location filename="../mydialog.ui" line="32"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz</translation>
     </message>
     <message>
         <location filename="../mydialog.ui" line="72"/>
         <source>Connect to Host</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz z Hostem</translation>
     </message>
     <message>
         <location filename="../mydialog.ui" line="132"/>
         <source>Your Name (max 19 chars)
 Leave empty for Character Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Twoja nazwa (max 19 liter)
+Zostaw puste dla nazwy postaci</translation>
     </message>
     <message>
         <location filename="../mydialog.ui" line="149"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../mydialog.ui" line="181"/>
@@ -822,12 +829,12 @@ Leave empty for Character Name</source>
     <message>
         <location filename="../mydialog.ui" line="197"/>
         <source>Host IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Hosta</translation>
     </message>
     <message>
         <location filename="../mydialog.ui" line="236"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Login</translation>
     </message>
 </context>
 <context>
@@ -840,18 +847,20 @@ Leave empty for Character Name</source>
     <message>
         <location filename="../authenticate.ui" line="77"/>
         <source>Authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Autentykacja</translation>
     </message>
     <message>
         <location filename="../authenticate.ui" line="97"/>
         <source>Authenticate</source>
-        <translation type="unfinished"></translation>
+        <translation>Zauntetyfikuj</translation>
     </message>
     <message>
         <location filename="../authenticate.ui" line="113"/>
         <source>Insert the  AuthCode that you
 got from the Server to verify yourself.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadź Kod Autoryzacji, który
+ otrzymałeś z serwera, aby potwierdzić
+tożsamość.</translation>
     </message>
 </context>
 <context>
@@ -869,7 +878,7 @@ got from the Server to verify yourself.</source>
     <message>
         <location filename="../connectionfailed.ui" line="106"/>
         <source>Error: Connection failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd: Problem z połączeniem</translation>
     </message>
 </context>
 <context>
@@ -877,7 +886,7 @@ got from the Server to verify yourself.</source>
     <message>
         <location filename="../firststart.ui" line="14"/>
         <source>Welcome to Gw2SPECS!</source>
-        <translation type="unfinished"></translation>
+        <translation>Witaj w Gw2SPECS!</translation>
     </message>
     <message>
         <location filename="../firststart.ui" line="26"/>
@@ -898,12 +907,28 @@ Please set up the following options in your Guild Wars 2:
  Have fun!
  
  If you need more information please visit gw2specs.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Witaj w Gw2SPECS!
+Ustaw takie opcje w Guild Wars 2:
+
+ - Opcje/Graficzne Opcje: Rozmiar Interfejsu = Mały / Normalny
+ - Opcje/Graficzne Opcje: Rozdzielczość = Pełny ekran w oknie
+ - Opcje czatu: Rozmiar tekstu = Średni
+ - Opcje czatu: Rozmiar tekstu = Średni
+ - Opcje czatu: Rozmiar tekstu = Wyłącz znaczniki czasu
+ - Opcje czatu/Opcje walki: Włącz tylko:
+   • Wychodzące obrażenia Buffów
+   • Wychodzące obrażenia
+   • Wychodzące złagodzone obrażenia
+
+Upewnij się, że czat wyświetla więcej niż 12 linii i zawsze jest widoczny
+Dobrej zabawy !
+
+Jeśli potrzebujesz więcej informacji wejdź na gw2specs.com</translation>
     </message>
     <message>
         <location filename="../firststart.ui" line="55"/>
         <source>Ok, I understood</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak, zrozumiałem</translation>
     </message>
 </context>
 <context>
@@ -939,7 +964,7 @@ Please set up the following options in your Guild Wars 2:
     <message>
         <location filename="../showhighlightedpopup.ui" line="26"/>
         <source>Shortcut has been pressed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrót został naciśnięty</translation>
     </message>
 </context>
 <context>
@@ -952,23 +977,24 @@ Please set up the following options in your Guild Wars 2:
     <message>
         <location filename="../startserver.ui" line="52"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../startserver.ui" line="72"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../startserver.ui" line="90"/>
         <source>Start Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz serwer</translation>
     </message>
     <message>
         <location filename="../startserver.ui" line="108"/>
         <source>AuthCode
 (Leave empty for random)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kod Autoryzacji 
+(Zostaw puste dla losowego)</translation>
     </message>
 </context>
 <context>
@@ -987,32 +1013,32 @@ Please set up the following options in your Guild Wars 2:
     <message>
         <location filename="../updatecheck.ui" line="73"/>
         <source>Current Version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualna wersja:</translation>
     </message>
     <message>
         <location filename="../updatecheck.ui" line="121"/>
         <source>New Version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowa wersja:</translation>
     </message>
     <message>
         <location filename="../updatecheck.ui" line="153"/>
         <source>A new Version of Gw2SPECS is available! Please update!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowa wersja Gw2SPECS jest dostępna! Proszę zaktualizuj!</translation>
     </message>
     <message>
         <location filename="../updatecheck.ui" line="160"/>
         <source>Change Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmiany</translation>
     </message>
     <message>
         <location filename="../updatecheck.ui" line="167"/>
         <source>Remind Later</source>
-        <translation type="unfinished"></translation>
+        <translation>Przypomnij później</translation>
     </message>
     <message>
         <location filename="../updatecheck.ui" line="180"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobierz</translation>
     </message>
 </context>
 </TS>
