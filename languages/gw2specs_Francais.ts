@@ -40,17 +40,17 @@ Amusez-vous.</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="941"/>
+        <location filename="../configurator.ui" line="961"/>
         <source>Restore defaults</source>
         <translation>Restaurer les paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="979"/>
+        <location filename="../configurator.ui" line="999"/>
         <source>version</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="957"/>
+        <location filename="../configurator.ui" line="977"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
@@ -260,90 +260,110 @@ Amusez-vous.</translation>
         <translation>DPS des 5 dernières secondes</translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="922"/>
+        <location filename="../configurator.ui" line="729"/>
+        <source>Russian</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="734"/>
+        <source>Italian</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="739"/>
+        <source>Polish</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="744"/>
+        <source>Chinese</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../configurator.ui" line="942"/>
         <source>Accuracy Settings</source>
         <translation>Options de précision</translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="866"/>
+        <location filename="../configurator.ui" line="886"/>
         <source>Screenshots per second</source>
         <translation>Captures d&apos;écran par seconde</translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="894"/>
-        <location filename="../configurator.ui" line="901"/>
+        <location filename="../configurator.ui" line="914"/>
+        <location filename="../configurator.ui" line="921"/>
         <source>15</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="819"/>
-        <location filename="../configurator.ui" line="906"/>
+        <location filename="../configurator.ui" line="839"/>
+        <location filename="../configurator.ui" line="926"/>
         <source>20</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="911"/>
+        <location filename="../configurator.ui" line="931"/>
         <source>25</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="883"/>
+        <location filename="../configurator.ui" line="903"/>
         <source>1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="757"/>
+        <location filename="../configurator.ui" line="777"/>
         <source>2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="762"/>
+        <location filename="../configurator.ui" line="782"/>
         <source>3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="840"/>
+        <location filename="../configurator.ui" line="860"/>
         <source>Seconds in combat</source>
         <translation>Secondes en combat</translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="799"/>
+        <location filename="../configurator.ui" line="819"/>
         <source>10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="804"/>
+        <location filename="../configurator.ui" line="824"/>
         <source>12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="809"/>
+        <location filename="../configurator.ui" line="829"/>
         <source>14</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="789"/>
-        <location filename="../configurator.ui" line="814"/>
+        <location filename="../configurator.ui" line="809"/>
+        <location filename="../configurator.ui" line="834"/>
         <source>16</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="824"/>
+        <location filename="../configurator.ui" line="844"/>
         <source>24</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="829"/>
+        <location filename="../configurator.ui" line="849"/>
         <source>27</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="773"/>
+        <location filename="../configurator.ui" line="793"/>
         <source># of Lines in Combat Log</source>
         <translation>Nombre de lignes du log de combat</translation>
     </message>
     <message>
-        <location filename="../configurator.ui" line="853"/>
+        <location filename="../configurator.ui" line="873"/>
         <source>Updates per second</source>
         <translation>M.à.j. par seconde</translation>
     </message>
@@ -351,39 +371,39 @@ Amusez-vous.</translation>
 <context>
     <name>GW2::MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="553"/>
+        <location filename="../mainwindow.cpp" line="557"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="554"/>
+        <location filename="../mainwindow.cpp" line="558"/>
         <source>Damage</source>
         <translation>Dégâts</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="555"/>
+        <location filename="../mainwindow.cpp" line="559"/>
         <source>%Dmg</source>
         <translation>%Dégât</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="556"/>
-        <location filename="../mainwindow.cpp" line="1676"/>
-        <location filename="../mainwindow.cpp" line="1885"/>
+        <location filename="../mainwindow.cpp" line="560"/>
+        <location filename="../mainwindow.cpp" line="1684"/>
+        <location filename="../mainwindow.cpp" line="1893"/>
         <source>DPS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="557"/>
+        <location filename="../mainwindow.cpp" line="561"/>
         <source>5sDPS</source>
         <translation>5s DPS</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="714"/>
         <source>Connection to </source>
         <translation>Connexion à</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="714"/>
         <source> failed</source>
         <translation> échoué</translation>
     </message>
@@ -404,136 +424,136 @@ Amusez-vous.</translation>
         <translation type="vanished">Déconnecté</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1419"/>
-        <location filename="../mainwindow.cpp" line="1782"/>
+        <location filename="../mainwindow.cpp" line="1427"/>
+        <location filename="../mainwindow.cpp" line="1790"/>
         <source>Disconnect</source>
         <translation>Se déconnecter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1425"/>
-        <location filename="../mainwindow.cpp" line="1788"/>
+        <location filename="../mainwindow.cpp" line="1433"/>
+        <location filename="../mainwindow.cpp" line="1796"/>
         <location filename="../mainwindow.h" line="55"/>
         <source>Connect</source>
         <translation>Se connecter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1440"/>
+        <location filename="../mainwindow.cpp" line="1448"/>
         <source>No logged in character</source>
         <translation>Aucun personnage connecté</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1671"/>
+        <location filename="../mainwindow.cpp" line="1679"/>
         <source>Time</source>
         <translation>Temps</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1672"/>
+        <location filename="../mainwindow.cpp" line="1680"/>
         <source>Hitcounter</source>
         <translation>Compteur de coups</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1673"/>
+        <location filename="../mainwindow.cpp" line="1681"/>
         <source>Highest Hit</source>
         <translation>Plus grand coup</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1674"/>
+        <location filename="../mainwindow.cpp" line="1682"/>
         <source>CritChance</source>
         <translation>CritChance</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1677"/>
+        <location filename="../mainwindow.cpp" line="1685"/>
         <source>DMG</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1679"/>
+        <location filename="../mainwindow.cpp" line="1687"/>
         <source>CondiDPS</source>
         <translation>DPS par altérations</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1680"/>
+        <location filename="../mainwindow.cpp" line="1688"/>
         <source>CondiDMG</source>
         <translation>DMG par altérations</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1690"/>
+        <location filename="../mainwindow.cpp" line="1698"/>
         <source>AvgDPS</source>
         <translation>DPS moyen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1691"/>
+        <location filename="../mainwindow.cpp" line="1699"/>
         <source>GroupDPS</source>
         <translation>DPS du groupe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1692"/>
+        <location filename="../mainwindow.cpp" line="1700"/>
         <source>GroupDMG</source>
         <translation>DMG du groupe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1727"/>
+        <location filename="../mainwindow.cpp" line="1735"/>
         <source> Time(hh:mm:ss) </source>
         <translation>Temps (hh:mm:ss)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1727"/>
+        <location filename="../mainwindow.cpp" line="1735"/>
         <source>  AvgDPS  </source>
         <translation>DPS moyen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1727"/>
+        <location filename="../mainwindow.cpp" line="1735"/>
         <source>  RealDPS  </source>
         <translation>DPS réel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1727"/>
+        <location filename="../mainwindow.cpp" line="2064"/>
+        <source>Reset finished</source>
+        <translation>Réinitialiser a été réalisée</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="2187"/>
+        <source>Log has been saved</source>
+        <translation>Connectez-vous Soumis</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="2253"/>
+        <source>Opacity has been disabled</source>
+        <translation>Opacité est désactivé</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="2256"/>
+        <source>Opacity is enabled</source>
+        <translation>Opacité est activé</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="2326"/>
+        <source>Successfull Global Reset</source>
+        <translation>La réinitialisation mondiale a réussi</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="2340"/>
+        <source>CombatMode is now active</source>
+        <translation>CombatMode est pas actif</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="2344"/>
+        <source>CombatMode has been disabled</source>
+        <translation>CombatMode a été désactivé</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1806"/>
+        <source>Auto Reset Off</source>
+        <translation>R.à.Z. automatique désacativée</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1735"/>
         <source>  DMG
 </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="2056"/>
-        <source>Reset finished</source>
-        <translation>Réinitialiser a été réalisée</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="2179"/>
-        <source>Log has been saved</source>
-        <translation>Connectez-vous Soumis</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="2245"/>
-        <source>Opacity has been disabled</source>
-        <translation>Opacité est désactivé</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="2248"/>
-        <source>Opacity is enabled</source>
-        <translation>Opacité est activé</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="2318"/>
-        <source>Successfull Global Reset</source>
-        <translation>La réinitialisation mondiale a réussi</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="2332"/>
-        <source>CombatMode is now active</source>
-        <translation>CombatMode est pas actif</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="2336"/>
-        <source>CombatMode has been disabled</source>
-        <translation>CombatMode a été désactivé</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1798"/>
-        <source>Auto Reset Off</source>
-        <translation>R.à.Z. automatique désacativée</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1804"/>
+        <location filename="../mainwindow.cpp" line="1812"/>
         <source>Auto Reset On</source>
         <translation>R.à.Z. automatique activée</translation>
     </message>
@@ -574,11 +594,16 @@ Amusez-vous.</translation>
     </message>
     <message>
         <location filename="../mainwindow.h" line="60"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.h" line="61"/>
         <source>Exit</source>
         <translation>Sortir</translation>
     </message>
     <message>
-        <location filename="../mainwindow.h" line="62"/>
+        <location filename="../mainwindow.h" line="63"/>
         <source>Auto-Reset On</source>
         <translation>R.à.Z. automatique activée</translation>
     </message>

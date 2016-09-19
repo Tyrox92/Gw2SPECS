@@ -193,6 +193,10 @@ MainWindow::MainWindow(QWidget *parent) :
     options->setIconVisibleInMenu(true);
     QObject::connect(options, SIGNAL(triggered()), &m_Configurator, SLOT(exec()));
 
+    donate->setIcon(QIcon(":/donate"));
+    donate->setIconVisibleInMenu(true);
+    QObject::connect(donate, SIGNAL(triggered()), this, SLOT(goToDonate()));
+
     myMenu.addMenu(miscMenu);
 
     ui->scrollArea->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -660,6 +664,7 @@ void GW2::MainWindow::CheckForUpdate()
             //Connect Functions to Buttons when clicked
             QObject::connect(uiUpdateCheck->download, SIGNAL(pressed()),this,SLOT(downloadLink()));
             QObject::connect(uiUpdateCheck->changelog, SIGNAL(pressed()),this,SLOT(changelogLink()));
+            QObject::connect(uiUpdateCheck->remindLater, SIGNAL(pressed()),this,SLOT(close()));
 
             //Open updateCheck
             m_updateCheck.exec();
@@ -1311,11 +1316,7 @@ void MainWindow::SendClientInfo(void)
         if (is_connected)  //connected and semi-handshaked
         {
             //Failsafe Checks
-            if (m_Dps>99999) m_Dps = 1;
-            if (m_Dmg>999999999) m_Dmg = 1;
             if (m_Activity>100) m_Activity = 1;
-            if (m_5sDPS>99999) m_5sDPS = 1;
-            if (m_realDps>99999)m_realDps =1;
             sprintf(writeBuff, "|%s;%lu;%lu;%lu;%lu;%lu|", tmp2, m_Dps, m_Dmg, m_Activity, m_MyProfession, m_5sDPS);
             socket->write(writeBuff);
 
@@ -2348,4 +2349,9 @@ void GW2::MainWindow::toggleCombatMode(bool toggleState){
     m_highlightpopup.show();
     popupTimer = 1;
     m_highlightpopup.doNotFocus();
+}
+
+void GW2::MainWindow::goToDonate(){
+    QString link = "https://www.paypal.me/gw2dps";
+    QDesktopServices::openUrl(QUrl(link));
 }

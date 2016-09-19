@@ -80,3 +80,7 @@ RC_FILE = specs.rc
 TRANSLATIONS+=  languages/gw2specs_English.ts
 TRANSLATIONS+=  languages/gw2specs_Deutsch.ts
 TRANSLATIONS+=  languages/gw2specs_Francais.ts
+TRANSLATIONS+=  languages/gw2specs_Russian.ts
+TRANSLATIONS+=  languages/gw2specs_Italian.ts
+TRANSLATIONS+=  languages/gw2specs_Polish.ts
+TRANSLATIONS+=  languages/gw2specs_Chinese.ts

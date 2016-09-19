@@ -724,6 +724,26 @@ QLineEdit {
           <string>Francais</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Russian</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Italian</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Polish</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Chinese</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>

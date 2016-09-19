@@ -20,5 +20,6 @@
         <file>combatMode.png</file>
         <file>auth.png</file>
         <file>startServer.png</file>
+        <file>donate.png</file>
     </qresource>
 </RCC>
